@@ -1,0 +1,69 @@
+package callbacks
+
+import "encoding/xml"
+
+// 自动生成的回调结构，按需修改, 生成方式: make callback doc=微信文档地址url
+// 文档: https://work.weixin.qq.com/api/doc/90001/90143/90376#新增部门事件
+
+func init() {
+    // 添加可解析的回调事件
+    supportCallback(EventChangeContactCreateParty{})
+}
+
+// XML was generated 2021-10-09 14:46:10 by insomnia on Insomnia.lan.
+type EventChangeContactCreateParty struct {
+    XMLName    xml.Name `xml:"xml"`
+    Text       string   `xml:",chardata"`
+    ToUserName struct {
+        Text string `xml:",chardata"`
+    } `xml:"ToUserName"`
+    FromUserName struct {
+        Text string `xml:",chardata"`
+    } `xml:"FromUserName"`
+    CreateTime struct {
+        Text string `xml:",chardata"`
+    } `xml:"CreateTime"`
+    MsgType struct {
+        Text string `xml:",chardata"`
+    } `xml:"MsgType"`
+    Event struct {
+        Text string `xml:",chardata"`
+    } `xml:"Event"`
+    ChangeType struct {
+        Text string `xml:",chardata"`
+    } `xml:"ChangeType"`
+    ID struct {
+        Text string `xml:",chardata"`
+    } `xml:"Id"`
+    Name struct {
+        Text string `xml:",chardata"`
+    } `xml:"Name"`
+    ParentId struct {
+        Text string `xml:",chardata"`
+    } `xml:"ParentId"`
+    Order struct {
+        Text string `xml:",chardata"`
+    } `xml:"Order"`
+}
+
+func (EventChangeContactCreateParty) GetMessageType() string {
+    return "event"
+}
+
+func (EventChangeContactCreateParty) GetEventType() string {
+    return "change_contact"
+}
+
+func (EventChangeContactCreateParty) GetChangeType() string {
+    return "create_party"
+}
+
+func (m EventChangeContactCreateParty) GetTypeKey() string {
+    return m.GetMessageType() + ":" + m.GetEventType() + ":" + m.GetChangeType()
+}
+
+func (EventChangeContactCreateParty) ParseFromXml(data []byte) (CallBackExtraInfoInterface, error) {
+    var temp EventChangeContactCreateParty
+    err := xml.Unmarshal(data, &temp)
+    return temp, err
+}

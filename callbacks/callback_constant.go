@@ -1,0 +1,139 @@
+package callbacks
+
+// MessageType 消息类型
+type MessageType string
+
+// MessageTypeText 文本消息
+const MessageTypeText MessageType = "text"
+
+// MessageTypeImage 图片消息
+const MessageTypeImage MessageType = "image"
+
+// MessageTypeVoice 语音消息
+const MessageTypeVoice MessageType = "voice"
+
+// MessageTypeVideo 视频消息
+const MessageTypeVideo MessageType = "video"
+
+// MessageTypeLocation 位置消息
+const MessageTypeLocation MessageType = "location"
+
+// MessageTypeLink 链接消息
+const MessageTypeLink MessageType = "link"
+
+// MessageTypeEvent 事件消息
+const MessageTypeEvent MessageType = "event"
+
+// 没有明确指定消息类型，都视为第三方应用事件
+const MessageTypeThird MessageType = "third"
+
+// EventType 事件类型
+type EventType string
+
+// EventTypeChangeExternalContact 企业客户事件
+const EventTypeChangeExternalContact EventType = "change_external_contact"
+
+// EventTypeChangeExternalTag 标签事件
+const EventTypeChangeExternalTag EventType = "change_external_tag"
+
+// EventTypeChangeContact 通讯录变更事件
+const EventTypeChangeContact EventType = "change_contact"
+
+// EventTypeChangeExternalChat 客户群变更事件
+const EventTypeChangeExternalChat EventType = "change_external_chat"
+
+// EventTypeSysApprovalChange 审批申请状态变化回调通知
+const EventTypeSysApprovalChange EventType = "sys_approval_change"
+
+// 应用管理员变更通知
+const EventTypeChangeAppAdmin EventType = "change_app_admin"
+
+// 推送suite_ticket
+const InfoTypeSuiteTicket EventType = "suite_ticket"
+
+// 企业注册完成回调事件（即企业成功安装第三方应用事件）
+const InfoTypeRegisterCorp EventType = "register_corp"
+
+// 企业授权成功通知
+const InfoTypeCreateAuth EventType = "create_auth"
+
+// 变更授权通知
+const InfoTypeChangeAuth EventType = "change_auth"
+
+// 取消授权通知：注意，服务商收到取消授权事件后，应当确保删除该企业所有相关的数据。
+const InfoTypeCancelAuth EventType = "cancel_auth"
+
+// 成员通知事件、部门通知事件、标签通知事件
+const InfoTypeChangeContact EventType = "change_contact"
+
+// 共享应用事件：授权成功通知
+const InfoTypeShareAgentChange EventType = "share_agent_change"
+
+// 企业客户事件
+const InfoTypeChangeExternalContact EventType = "change_external_contact"
+
+// 客户群变更事件
+const InfoTypeChangeExternalChat EventType = "change_external_chat"
+
+// 标签事件
+const InfoTypeChangeExternalTag EventType = "change_external_tag"
+
+// ChangeType 变更类型
+type ChangeType string
+
+// ChangeTypeAddExternalContact 添加企业客户事件
+const ChangeTypeAddExternalContact ChangeType = "add_external_contact"
+
+// ChangeTypeCreateUser 新增员工
+const ChangeTypeCreateUser ChangeType = "create_user"
+
+// ChangeTypeDelUser 删除员工事件
+const ChangeTypeDelUser ChangeType = "delete_user"
+
+// ChangeTypeUpdateUser 更新员工事件
+const ChangeTypeUpdateUser ChangeType = "update_user"
+
+// ChangeTypeEditExternalContact 编辑企业客户事件
+const ChangeTypeEditExternalContact ChangeType = "edit_external_contact"
+
+// ChangeTypeAddHalfExternalContact 外部联系人免验证添加成员事件
+const ChangeTypeAddHalfExternalContact ChangeType = "add_half_external_contact"
+
+// ChangeTypeDelExternalContact 删除企业客户事件
+const ChangeTypeDelExternalContact ChangeType = "del_external_contact"
+
+// ChangeTypeDelFollowUser 删除跟进成员事件
+const ChangeTypeDelFollowUser ChangeType = "del_follow_user"
+
+// ChangeTypeTransferFail 客户接替失败事件
+const ChangeTypeTransferFail ChangeType = "transfer_fail"
+
+// ChangeTypeCreateParty 添加部门事件
+const ChangeTypeCreateParty ChangeType = "create_party"
+
+// ChangeTypeUpdateParty 更新部门事件
+const ChangeTypeUpdateParty ChangeType = "update_party"
+
+// ChangeTypeDeleteParty 删除部门事件
+const ChangeTypeDeleteParty ChangeType = "delete_party"
+
+// ChangeTypeCreateTag 添加标签事件
+const ChangeTypeCreateTag ChangeType = "create"
+
+// ChangeTypeUpdateTag 更新标签事件
+const ChangeTypeUpdateTag ChangeType = "update"
+
+// ChangeTypeDeleteTag 删除标签事件
+const ChangeTypeDeleteTag ChangeType = "delete"
+
+// ChangeTypeCreateChat 创建群聊
+const ChangeTypeCreateChat ChangeType = "create"
+
+// ChangeTypeUpdateChat 群聊更新事件
+const ChangeTypeUpdateChat ChangeType = "update"
+
+// ChangeTypeDismissChat 客户群解散事件
+const ChangeTypeDismissChat ChangeType = "dismiss"
+
+// ChangeTypeMsgAuditApproved 添加外部联系人同意进行聊天内容存档时，回调该事件。
+const ChangeTypeMsgAuditApproved = "msg_audit_approved"

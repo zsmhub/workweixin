@@ -1,0 +1,37 @@
+package callbacks
+
+import "encoding/xml"
+
+// 自动生成的回调结构，按需修改, 生成方式: make callback doc=微信文档地址url
+// 文档: {{ .DocUrl }}
+
+func init() {
+    //添加可解析的回调事件
+    supportCallback({{ .StructName }}{})
+}
+
+{{ .StructStr }}
+
+func ({{ .StructName }}) GetMessageType() string {
+    return "{{ .MsgType }}"
+}
+
+func ({{ .StructName }}) GetEventType() string {
+    return "{{ .EventType }}"
+}
+
+func ({{ .StructName }}) GetChangeType() string {
+    return "{{ .ChangeType }}"
+}
+
+
+func (m {{ .StructName }}) GetTypeKey() string {
+    return m.GetMessageType() + ":" + m.GetEventType() + ":" +m.GetChangeType()
+}
+
+
+func ({{ .StructName }}) ParseFromXml(data []byte) (CallBackExtraInfoInterface,error) {
+    var temp {{ .StructName }}
+    err := xml.Unmarshal(data, &temp)
+    return temp, err
+}

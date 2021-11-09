@@ -1,0 +1,72 @@
+package apis
+
+import (
+    "encoding/json"
+    {{if (index . 0).IsGet }}
+    "fmt"
+    "net/url"
+    {{end}}
+)
+
+// 自动生成的文件, 生成方式: make api doc=微信文档地址url
+// 可自行修改生成的文件,以满足开发需求
+
+{{ range .}}
+// Req{{ .StructName }} {{ .Name }}请求
+// 文档：{{ .DocURL }}#{{ .Name }}
+
+{{ .ReqCode }}
+{{if .IsGet }}
+var _ urlValuer = Req{{ .StructName }}{}
+func (x Req{{ .StructName }}) intoURLValues() url.Values {
+    var ret url.Values = make(map[string][]string)
+
+    var vals map[string]interface{}
+    jsonBytes, _ := json.Marshal(x)
+    _ = json.Unmarshal(jsonBytes, &vals)
+
+    for k, v := range vals {
+        ret.Add(k, fmt.Sprintf("%v", v))
+    }
+    return ret
+}
+{{else}}
+var _ bodyer = Req{{ .StructName }}{}
+func (x Req{{ .StructName }}) intoBody() ([]byte, error) {
+	result, err := json.Marshal(x)
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}
+{{end}}
+
+// Resp{{ .StructName }} {{ .Name }}响应
+// 文档：{{ .DocURL }}#{{ .Name }}
+{{ .RespCode }}
+var _ bodyer = Resp{{ .StructName }}{}
+func (x Resp{{ .StructName }}) intoBody() ([]byte, error) {
+	result, err := json.Marshal(x)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// exec{{ .StructName }} {{ .Name }}
+// 文档：{{ .DocURL }}#{{ .Name }}
+func (c *ApiClient) Exec{{ .StructName }}(req Req{{ .StructName }}) (Resp{{ .StructName }}, error) {
+	var resp Resp{{ .StructName }}
+	err := c.executeWXApi{{ .MethodCaml }}("{{ .URL }}", req, &resp, true)
+	if err != nil {
+		return Resp{{ .StructName }}{}, err
+	}
+	if bizErr := resp.TryIntoErr(); bizErr != nil {
+		return Resp{{ .StructName }}{}, bizErr
+	}
+
+	return resp, nil
+}
+
+{{end}}
