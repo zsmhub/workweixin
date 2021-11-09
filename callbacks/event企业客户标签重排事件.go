@@ -7,58 +7,58 @@ import "encoding/xml"
 // https://open.work.weixin.qq.com/api/doc/90000/90135/92130#企业客户标签重排事件
 
 func init() {
-    // 添加可解析的回调事件
-    supportCallback(EventChangeExternalTagShuffle{})
+	// 添加可解析的回调事件
+	supportCallback(EventChangeExternalTagShuffle{})
 }
 
 // XML was generated 2021-09-15 18:04:51 by chenjianlin on JZTech-chenjianlin.lan.
 type EventChangeExternalTagShuffle struct {
-    XMLName    xml.Name `xml:"xml"`
-    Text       string   `xml:",chardata"`
-    ToUserName struct {
-        Text string `xml:",chardata"`
-    } `xml:"ToUserName"`
-    FromUserName struct {
-        Text string `xml:",chardata"`
-    } `xml:"FromUserName"`
-    CreateTime struct {
-        Text string `xml:",chardata"`
-    } `xml:"CreateTime"`
-    MsgType struct {
-        Text string `xml:",chardata"`
-    } `xml:"MsgType"`
-    Event struct {
-        Text string `xml:",chardata"`
-    } `xml:"Event"`
-    ID struct {
-        Text string `xml:",chardata"`
-    } `xml:"Id"`
-    StrategyId struct {
-        Text string `xml:",chardata"`
-    } `xml:"StrategyId"`
-    ChangeType struct {
-        Text string `xml:",chardata"`
-    } `xml:"ChangeType"`
+	XMLName    xml.Name `xml:"xml"`
+	Text       string   `xml:",chardata"`
+	ToUserName struct {
+		Text string `xml:",chardata"`
+	} `xml:"ToUserName"`
+	FromUserName struct {
+		Text string `xml:",chardata"`
+	} `xml:"FromUserName"`
+	CreateTime struct {
+		Text string `xml:",chardata"`
+	} `xml:"CreateTime"`
+	MsgType struct {
+		Text string `xml:",chardata"`
+	} `xml:"MsgType"`
+	Event struct {
+		Text string `xml:",chardata"`
+	} `xml:"Event"`
+	ID struct {
+		Text string `xml:",chardata"`
+	} `xml:"Id"`
+	StrategyId struct {
+		Text string `xml:",chardata"`
+	} `xml:"StrategyId"`
+	ChangeType struct {
+		Text string `xml:",chardata"`
+	} `xml:"ChangeType"`
 }
 
 func (EventChangeExternalTagShuffle) GetMessageType() string {
-    return "event"
+	return "event"
 }
 
 func (EventChangeExternalTagShuffle) GetEventType() string {
-    return "change_external_tag"
+	return "change_external_tag"
 }
 
 func (EventChangeExternalTagShuffle) GetChangeType() string {
-    return "shuffle"
+	return "shuffle"
 }
 
 func (m EventChangeExternalTagShuffle) GetTypeKey() string {
-    return m.GetMessageType() + ":" + m.GetEventType() + ":" + m.GetChangeType()
+	return m.GetMessageType() + ":" + m.GetEventType() + ":" + m.GetChangeType()
 }
 
 func (EventChangeExternalTagShuffle) ParseFromXml(data []byte) (CallBackExtraInfoInterface, error) {
-    var temp EventChangeExternalTagShuffle
-    err := xml.Unmarshal(data, &temp)
-    return temp, err
+	var temp EventChangeExternalTagShuffle
+	err := xml.Unmarshal(data, &temp)
+	return temp, err
 }

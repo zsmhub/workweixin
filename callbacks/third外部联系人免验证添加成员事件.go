@@ -7,61 +7,61 @@ import "encoding/xml"
 // https://open.work.weixin.qq.com/api/doc/90001/90143/92277#外部联系人免验证添加成员事件
 
 func init() {
-    // 添加可解析的回调事件
-    supportCallback(ThirdChangeExternalContactAddHalfExternalContact{})
+	// 添加可解析的回调事件
+	supportCallback(ThirdChangeExternalContactAddHalfExternalContact{})
 }
 
 // XML was generated 2021-09-15 18:06:41 by chenjianlin on JZTech-chenjianlin.lan.
 type ThirdChangeExternalContactAddHalfExternalContact struct {
-    XMLName xml.Name `xml:"xml"`
-    Text    string   `xml:",chardata"`
-    SuiteId struct {
-        Text string `xml:",chardata"`
-    } `xml:"SuiteId"`
-    AuthCorpId struct {
-        Text string `xml:",chardata"`
-    } `xml:"AuthCorpId"`
-    InfoType struct {
-        Text string `xml:",chardata"`
-    } `xml:"InfoType"`
-    TimeStamp struct {
-        Text string `xml:",chardata"`
-    } `xml:"TimeStamp"`
-    ChangeType struct {
-        Text string `xml:",chardata"`
-    } `xml:"ChangeType"`
-    UserID struct {
-        Text string `xml:",chardata"`
-    } `xml:"UserID"`
-    ExternalUserID struct {
-        Text string `xml:",chardata"`
-    } `xml:"ExternalUserID"`
-    State struct {
-        Text string `xml:",chardata"`
-    } `xml:"State"`
-    WelcomeCode struct {
-        Text string `xml:",chardata"`
-    } `xml:"WelcomeCode"`
+	XMLName xml.Name `xml:"xml"`
+	Text    string   `xml:",chardata"`
+	SuiteId struct {
+		Text string `xml:",chardata"`
+	} `xml:"SuiteId"`
+	AuthCorpId struct {
+		Text string `xml:",chardata"`
+	} `xml:"AuthCorpId"`
+	InfoType struct {
+		Text string `xml:",chardata"`
+	} `xml:"InfoType"`
+	TimeStamp struct {
+		Text string `xml:",chardata"`
+	} `xml:"TimeStamp"`
+	ChangeType struct {
+		Text string `xml:",chardata"`
+	} `xml:"ChangeType"`
+	UserID struct {
+		Text string `xml:",chardata"`
+	} `xml:"UserID"`
+	ExternalUserID struct {
+		Text string `xml:",chardata"`
+	} `xml:"ExternalUserID"`
+	State struct {
+		Text string `xml:",chardata"`
+	} `xml:"State"`
+	WelcomeCode struct {
+		Text string `xml:",chardata"`
+	} `xml:"WelcomeCode"`
 }
 
 func (ThirdChangeExternalContactAddHalfExternalContact) GetMessageType() string {
-    return "third"
+	return "third"
 }
 
 func (ThirdChangeExternalContactAddHalfExternalContact) GetEventType() string {
-    return "change_external_contact"
+	return "change_external_contact"
 }
 
 func (ThirdChangeExternalContactAddHalfExternalContact) GetChangeType() string {
-    return "add_half_external_contact"
+	return "add_half_external_contact"
 }
 
 func (m ThirdChangeExternalContactAddHalfExternalContact) GetTypeKey() string {
-    return m.GetMessageType() + ":" + m.GetEventType() + ":" + m.GetChangeType()
+	return m.GetMessageType() + ":" + m.GetEventType() + ":" + m.GetChangeType()
 }
 
 func (ThirdChangeExternalContactAddHalfExternalContact) ParseFromXml(data []byte) (CallBackExtraInfoInterface, error) {
-    var temp ThirdChangeExternalContactAddHalfExternalContact
-    err := xml.Unmarshal(data, &temp)
-    return temp, err
+	var temp ThirdChangeExternalContactAddHalfExternalContact
+	err := xml.Unmarshal(data, &temp)
+	return temp, err
 }

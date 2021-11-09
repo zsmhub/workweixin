@@ -6,61 +6,61 @@ import "encoding/xml"
 // 文档: https://open.work.weixin.qq.com/api/doc/90001/90143/92655#新增部门事件
 
 func init() {
-    // 添加可解析的回调事件
-    supportCallback(ThirdChangeContactCreateParty{})
+	// 添加可解析的回调事件
+	supportCallback(ThirdChangeContactCreateParty{})
 }
 
 // XML was generated 2021-10-30 09:21:09 by insomnia on Insomnia.lan.
 type ThirdChangeContactCreateParty struct {
-    XMLName xml.Name `xml:"xml"`
-    Text    string   `xml:",chardata"`
-    SuiteId struct {
-        Text string `xml:",chardata"`
-    } `xml:"SuiteId"`
-    AuthCorpId struct {
-        Text string `xml:",chardata"`
-    } `xml:"AuthCorpId"`
-    InfoType struct {
-        Text string `xml:",chardata"`
-    } `xml:"InfoType"`
-    TimeStamp struct {
-        Text string `xml:",chardata"`
-    } `xml:"TimeStamp"`
-    ChangeType struct {
-        Text string `xml:",chardata"`
-    } `xml:"ChangeType"`
-    ID struct {
-        Text string `xml:",chardata"`
-    } `xml:"Id"`
-    Name struct {
-        Text string `xml:",chardata"`
-    } `xml:"Name"`
-    ParentId struct {
-        Text string `xml:",chardata"`
-    } `xml:"ParentId"`
-    Order struct {
-        Text string `xml:",chardata"`
-    } `xml:"Order"`
+	XMLName xml.Name `xml:"xml"`
+	Text    string   `xml:",chardata"`
+	SuiteId struct {
+		Text string `xml:",chardata"`
+	} `xml:"SuiteId"`
+	AuthCorpId struct {
+		Text string `xml:",chardata"`
+	} `xml:"AuthCorpId"`
+	InfoType struct {
+		Text string `xml:",chardata"`
+	} `xml:"InfoType"`
+	TimeStamp struct {
+		Text string `xml:",chardata"`
+	} `xml:"TimeStamp"`
+	ChangeType struct {
+		Text string `xml:",chardata"`
+	} `xml:"ChangeType"`
+	ID struct {
+		Text string `xml:",chardata"`
+	} `xml:"Id"`
+	Name struct {
+		Text string `xml:",chardata"`
+	} `xml:"Name"`
+	ParentId struct {
+		Text string `xml:",chardata"`
+	} `xml:"ParentId"`
+	Order struct {
+		Text string `xml:",chardata"`
+	} `xml:"Order"`
 }
 
 func (ThirdChangeContactCreateParty) GetMessageType() string {
-    return "third"
+	return "third"
 }
 
 func (ThirdChangeContactCreateParty) GetEventType() string {
-    return "change_contact"
+	return "change_contact"
 }
 
 func (ThirdChangeContactCreateParty) GetChangeType() string {
-    return "create_party"
+	return "create_party"
 }
 
 func (m ThirdChangeContactCreateParty) GetTypeKey() string {
-    return m.GetMessageType() + ":" + m.GetEventType() + ":" + m.GetChangeType()
+	return m.GetMessageType() + ":" + m.GetEventType() + ":" + m.GetChangeType()
 }
 
 func (ThirdChangeContactCreateParty) ParseFromXml(data []byte) (CallBackExtraInfoInterface, error) {
-    var temp ThirdChangeContactCreateParty
-    err := xml.Unmarshal(data, &temp)
-    return temp, err
+	var temp ThirdChangeContactCreateParty
+	err := xml.Unmarshal(data, &temp)
+	return temp, err
 }

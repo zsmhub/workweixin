@@ -6,79 +6,79 @@ import "encoding/xml"
 // 文档: https://work.weixin.qq.com/api/doc/90001/90143/90376#模板卡片事件推送
 
 func init() {
-    // 添加可解析的回调事件
-    supportCallback(EventTemplateCardEvent{})
+	// 添加可解析的回调事件
+	supportCallback(EventTemplateCardEvent{})
 }
 
 // XML was generated 2021-10-09 14:46:10 by insomnia on Insomnia.lan.
 type EventTemplateCardEvent struct {
-    XMLName    xml.Name `xml:"xml"`
-    Text       string   `xml:",chardata"`
-    ToUserName struct {
-        Text string `xml:",chardata"`
-    } `xml:"ToUserName"`
-    FromUserName struct {
-        Text string `xml:",chardata"`
-    } `xml:"FromUserName"`
-    CreateTime struct {
-        Text string `xml:",chardata"`
-    } `xml:"CreateTime"`
-    MsgType struct {
-        Text string `xml:",chardata"`
-    } `xml:"MsgType"`
-    Event struct {
-        Text string `xml:",chardata"`
-    } `xml:"Event"`
-    EventKey struct {
-        Text string `xml:",chardata"`
-    } `xml:"EventKey"`
-    TaskId struct {
-        Text string `xml:",chardata"`
-    } `xml:"TaskId"`
-    CardType struct {
-        Text string `xml:",chardata"`
-    } `xml:"CardType"`
-    ResponseCode struct {
-        Text string `xml:",chardata"`
-    } `xml:"ResponseCode"`
-    AgentID struct {
-        Text string `xml:",chardata"`
-    } `xml:"AgentID"`
-    SelectedItems struct {
-        Text         string `xml:",chardata"`
-        SelectedItem []struct {
-            Text        string `xml:",chardata"`
-            QuestionKey struct {
-                Text string `xml:",chardata"`
-            } `xml:"QuestionKey"`
-            OptionIds struct {
-                Text     string `xml:",chardata"`
-                OptionId []struct {
-                    Text string `xml:",chardata"`
-                } `xml:"OptionId"`
-            } `xml:"OptionIds"`
-        } `xml:"SelectedItem"`
-    } `xml:"SelectedItems"`
+	XMLName    xml.Name `xml:"xml"`
+	Text       string   `xml:",chardata"`
+	ToUserName struct {
+		Text string `xml:",chardata"`
+	} `xml:"ToUserName"`
+	FromUserName struct {
+		Text string `xml:",chardata"`
+	} `xml:"FromUserName"`
+	CreateTime struct {
+		Text string `xml:",chardata"`
+	} `xml:"CreateTime"`
+	MsgType struct {
+		Text string `xml:",chardata"`
+	} `xml:"MsgType"`
+	Event struct {
+		Text string `xml:",chardata"`
+	} `xml:"Event"`
+	EventKey struct {
+		Text string `xml:",chardata"`
+	} `xml:"EventKey"`
+	TaskId struct {
+		Text string `xml:",chardata"`
+	} `xml:"TaskId"`
+	CardType struct {
+		Text string `xml:",chardata"`
+	} `xml:"CardType"`
+	ResponseCode struct {
+		Text string `xml:",chardata"`
+	} `xml:"ResponseCode"`
+	AgentID struct {
+		Text string `xml:",chardata"`
+	} `xml:"AgentID"`
+	SelectedItems struct {
+		Text         string `xml:",chardata"`
+		SelectedItem []struct {
+			Text        string `xml:",chardata"`
+			QuestionKey struct {
+				Text string `xml:",chardata"`
+			} `xml:"QuestionKey"`
+			OptionIds struct {
+				Text     string `xml:",chardata"`
+				OptionId []struct {
+					Text string `xml:",chardata"`
+				} `xml:"OptionId"`
+			} `xml:"OptionIds"`
+		} `xml:"SelectedItem"`
+	} `xml:"SelectedItems"`
 }
 
 func (EventTemplateCardEvent) GetMessageType() string {
-    return "event"
+	return "event"
 }
 
 func (EventTemplateCardEvent) GetEventType() string {
-    return "template_card_event"
+	return "template_card_event"
 }
 
 func (EventTemplateCardEvent) GetChangeType() string {
-    return ""
+	return ""
 }
 
 func (m EventTemplateCardEvent) GetTypeKey() string {
-    return m.GetMessageType() + ":" + m.GetEventType() + ":" + m.GetChangeType()
+	return m.GetMessageType() + ":" + m.GetEventType() + ":" + m.GetChangeType()
 }
 
 func (EventTemplateCardEvent) ParseFromXml(data []byte) (CallBackExtraInfoInterface, error) {
-    var temp EventTemplateCardEvent
-    err := xml.Unmarshal(data, &temp)
-    return temp, err
+	var temp EventTemplateCardEvent
+	err := xml.Unmarshal(data, &temp)
+	return temp, err
 }

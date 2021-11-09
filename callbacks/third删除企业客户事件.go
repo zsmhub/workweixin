@@ -7,58 +7,58 @@ import "encoding/xml"
 // https://open.work.weixin.qq.com/api/doc/90001/90143/92277#删除企业客户事件
 
 func init() {
-    // 添加可解析的回调事件
-    supportCallback(ThirdChangeExternalContactDelExternalContact{})
+	// 添加可解析的回调事件
+	supportCallback(ThirdChangeExternalContactDelExternalContact{})
 }
 
 // XML was generated 2021-09-15 18:06:41 by chenjianlin on JZTech-chenjianlin.lan.
 type ThirdChangeExternalContactDelExternalContact struct {
-    XMLName xml.Name `xml:"xml"`
-    Text    string   `xml:",chardata"`
-    SuiteId struct {
-        Text string `xml:",chardata"`
-    } `xml:"SuiteId"`
-    AuthCorpId struct {
-        Text string `xml:",chardata"`
-    } `xml:"AuthCorpId"`
-    InfoType struct {
-        Text string `xml:",chardata"`
-    } `xml:"InfoType"`
-    TimeStamp struct {
-        Text string `xml:",chardata"`
-    } `xml:"TimeStamp"`
-    ChangeType struct {
-        Text string `xml:",chardata"`
-    } `xml:"ChangeType"`
-    UserID struct {
-        Text string `xml:",chardata"`
-    } `xml:"UserID"`
-    ExternalUserID struct {
-        Text string `xml:",chardata"`
-    } `xml:"ExternalUserID"`
-    Source struct {
-        Text string `xml:",chardata"`
-    } `xml:"Source"`
+	XMLName xml.Name `xml:"xml"`
+	Text    string   `xml:",chardata"`
+	SuiteId struct {
+		Text string `xml:",chardata"`
+	} `xml:"SuiteId"`
+	AuthCorpId struct {
+		Text string `xml:",chardata"`
+	} `xml:"AuthCorpId"`
+	InfoType struct {
+		Text string `xml:",chardata"`
+	} `xml:"InfoType"`
+	TimeStamp struct {
+		Text string `xml:",chardata"`
+	} `xml:"TimeStamp"`
+	ChangeType struct {
+		Text string `xml:",chardata"`
+	} `xml:"ChangeType"`
+	UserID struct {
+		Text string `xml:",chardata"`
+	} `xml:"UserID"`
+	ExternalUserID struct {
+		Text string `xml:",chardata"`
+	} `xml:"ExternalUserID"`
+	Source struct {
+		Text string `xml:",chardata"`
+	} `xml:"Source"`
 }
 
 func (ThirdChangeExternalContactDelExternalContact) GetMessageType() string {
-    return "third"
+	return "third"
 }
 
 func (ThirdChangeExternalContactDelExternalContact) GetEventType() string {
-    return "change_external_contact"
+	return "change_external_contact"
 }
 
 func (ThirdChangeExternalContactDelExternalContact) GetChangeType() string {
-    return "del_external_contact"
+	return "del_external_contact"
 }
 
 func (m ThirdChangeExternalContactDelExternalContact) GetTypeKey() string {
-    return m.GetMessageType() + ":" + m.GetEventType() + ":" + m.GetChangeType()
+	return m.GetMessageType() + ":" + m.GetEventType() + ":" + m.GetChangeType()
 }
 
 func (ThirdChangeExternalContactDelExternalContact) ParseFromXml(data []byte) (CallBackExtraInfoInterface, error) {
-    var temp ThirdChangeExternalContactDelExternalContact
-    err := xml.Unmarshal(data, &temp)
-    return temp, err
+	var temp ThirdChangeExternalContactDelExternalContact
+	err := xml.Unmarshal(data, &temp)
+	return temp, err
 }

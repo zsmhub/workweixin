@@ -1,8 +1,8 @@
 package apis
 
 import (
-    "encoding/json"
-    "errors"
+	"encoding/json"
+	"errors"
 )
 
 // 自动生成的文件, 生成方式: make api doc=微信文档地址url
@@ -12,77 +12,77 @@ import (
 // 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92707#获取客户群详情
 
 type ReqGetGroupchat struct {
-    // ChatID 客户群ID，必填
-    ChatID string `json:"chat_id"`
-    // NeedName 是否需要返回群成员的名字<code>group_chat.member_list.name</code>。0-不返回；1-返回。默认不返回
-    NeedName int `json:"need_name"`
+	// ChatID 客户群ID，必填
+	ChatID string `json:"chat_id"`
+	// NeedName 是否需要返回群成员的名字<code>group_chat.member_list.name</code>。0-不返回；1-返回。默认不返回
+	NeedName int `json:"need_name"`
 }
 
 var _ bodyer = ReqGetGroupchat{}
 
 func (x ReqGetGroupchat) intoBody() ([]byte, error) {
-    result, err := json.Marshal(x)
-    if err != nil {
-        return nil, err
-    }
+	result, err := json.Marshal(x)
+	if err != nil {
+		return nil, err
+	}
 
-    return result, nil
+	return result, nil
 }
 
 // RespGetGroupchat 获取客户群详情响应
 // 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92707#获取客户群详情
 
 type RespGetGroupchat struct {
-    CommonResp
-    GroupChat struct {
-        AdminList []struct {
-            Userid string `json:"userid"`
-        } `json:"admin_list"`
-        ChatID     string `json:"chat_id"`
-        CreateTime int    `json:"create_time"`
-        MemberList []struct {
-            GroupNickname string `json:"group_nickname"`
-            Invitor       struct {
-                Userid string `json:"userid"`
-            } `json:"invitor"`
-            JoinScene int    `json:"join_scene"`
-            JoinTime  int    `json:"join_time"`
-            Name      string `json:"name"`
-            Type      int    `json:"type"`
-            Unionid   string `json:"unionid"`
-            Userid    string `json:"userid"`
-        } `json:"member_list"`
-        Name   string `json:"name"`
-        Notice string `json:"notice"`
-        Owner  string `json:"owner"`
-    } `json:"group_chat"`
+	CommonResp
+	GroupChat struct {
+		AdminList []struct {
+			Userid string `json:"userid"`
+		} `json:"admin_list"`
+		ChatID     string `json:"chat_id"`
+		CreateTime int    `json:"create_time"`
+		MemberList []struct {
+			GroupNickname string `json:"group_nickname"`
+			Invitor       struct {
+				Userid string `json:"userid"`
+			} `json:"invitor"`
+			JoinScene int    `json:"join_scene"`
+			JoinTime  int    `json:"join_time"`
+			Name      string `json:"name"`
+			Type      int    `json:"type"`
+			Unionid   string `json:"unionid"`
+			Userid    string `json:"userid"`
+		} `json:"member_list"`
+		Name   string `json:"name"`
+		Notice string `json:"notice"`
+		Owner  string `json:"owner"`
+	} `json:"group_chat"`
 }
 
 var _ bodyer = RespGetGroupchat{}
 
 func (x RespGetGroupchat) intoBody() ([]byte, error) {
-    result, err := json.Marshal(x)
-    if err != nil {
-        return nil, err
-    }
-    return result, nil
+	result, err := json.Marshal(x)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // execGetGroupchat 获取客户群详情
 // 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92707#获取客户群详情
 func (c *ApiClient) ExecGetGroupchat(req ReqGetGroupchat) (RespGetGroupchat, error) {
-    var resp RespGetGroupchat
-    err := c.executeWXApiPost("/cgi-bin/externalcontact/groupchat/get", req, &resp, true)
-    if err != nil {
-        return RespGetGroupchat{}, err
-    }
-    if bizErr := resp.TryIntoErr(); bizErr != nil {
-        apiError, _ := bizErr.(*ClientError)
-        if apiError.Code == ErrCode60011 {
-            return RespGetGroupchat{}, errors.New("该群非您所在企业的成员创建的，无法访问群信息")
-        }
-        return RespGetGroupchat{}, bizErr
-    }
+	var resp RespGetGroupchat
+	err := c.executeWXApiPost("/cgi-bin/externalcontact/groupchat/get", req, &resp, true)
+	if err != nil {
+		return RespGetGroupchat{}, err
+	}
+	if bizErr := resp.TryIntoErr(); bizErr != nil {
+		apiError, _ := bizErr.(*ClientError)
+		if apiError.Code == ErrCode60011 {
+			return RespGetGroupchat{}, errors.New("该群非您所在企业的成员创建的，无法访问群信息")
+		}
+		return RespGetGroupchat{}, bizErr
+	}
 
-    return resp, nil
+	return resp, nil
 }

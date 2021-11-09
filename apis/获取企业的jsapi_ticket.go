@@ -9,26 +9,26 @@ type JsAPITicketReq struct{}
 var _ urlValuer = JsAPITicketReq{}
 
 func (x JsAPITicketReq) intoURLValues() url.Values {
-    return url.Values{}
+	return url.Values{}
 }
 
 type JsAPITicketResp struct {
-    CommonResp
+	CommonResp
 
-    Ticket        string `json:"ticket"`
-    ExpiresInSecs int64  `json:"expires_in"`
+	Ticket        string `json:"ticket"`
+	ExpiresInSecs int64  `json:"expires_in"`
 }
 
 // ExecGetJSAPITicket 获取企业的jsapi_ticket
 func (c *ApiClient) ExecGetJSAPITicket(req JsAPITicketReq) (JsAPITicketResp, error) {
-    var resp JsAPITicketResp
-    err := c.executeWXApiGet("/cgi-bin/get_jsapi_ticket", req, &resp, true)
-    if err != nil {
-        return JsAPITicketResp{}, err
-    }
-    if bizErr := resp.TryIntoErr(); bizErr != nil {
-        return JsAPITicketResp{}, bizErr
-    }
+	var resp JsAPITicketResp
+	err := c.executeWXApiGet("/cgi-bin/get_jsapi_ticket", req, &resp, true)
+	if err != nil {
+		return JsAPITicketResp{}, err
+	}
+	if bizErr := resp.TryIntoErr(); bizErr != nil {
+		return JsAPITicketResp{}, bizErr
+	}
 
-    return resp, nil
+	return resp, nil
 }

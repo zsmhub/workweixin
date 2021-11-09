@@ -6,70 +6,70 @@ import "encoding/xml"
 // 文档: https://work.weixin.qq.com/api/doc/90001/90143/90376#弹出微信相册发图器的事件推送
 
 func init() {
-    // 添加可解析的回调事件
-    supportCallback(EventPicWeixin{})
+	// 添加可解析的回调事件
+	supportCallback(EventPicWeixin{})
 }
 
 // XML was generated 2021-10-09 14:46:10 by insomnia on Insomnia.lan.
 type EventPicWeixin struct {
-    XMLName    xml.Name `xml:"xml"`
-    Text       string   `xml:",chardata"`
-    ToUserName struct {
-        Text string `xml:",chardata"`
-    } `xml:"ToUserName"`
-    FromUserName struct {
-        Text string `xml:",chardata"`
-    } `xml:"FromUserName"`
-    CreateTime struct {
-        Text string `xml:",chardata"`
-    } `xml:"CreateTime"`
-    MsgType struct {
-        Text string `xml:",chardata"`
-    } `xml:"MsgType"`
-    Event struct {
-        Text string `xml:",chardata"`
-    } `xml:"Event"`
-    EventKey struct {
-        Text string `xml:",chardata"`
-    } `xml:"EventKey"`
-    SendPicsInfo struct {
-        Text  string `xml:",chardata"`
-        Count struct {
-            Text string `xml:",chardata"`
-        } `xml:"Count"`
-        PicList struct {
-            Text string `xml:",chardata"`
-            Item struct {
-                Text      string `xml:",chardata"`
-                PicMd5Sum struct {
-                    Text string `xml:",chardata"`
-                } `xml:"PicMd5Sum"`
-            } `xml:"item"`
-        } `xml:"PicList"`
-    } `xml:"SendPicsInfo"`
-    AgentID struct {
-        Text string `xml:",chardata"`
-    } `xml:"AgentID"`
+	XMLName    xml.Name `xml:"xml"`
+	Text       string   `xml:",chardata"`
+	ToUserName struct {
+		Text string `xml:",chardata"`
+	} `xml:"ToUserName"`
+	FromUserName struct {
+		Text string `xml:",chardata"`
+	} `xml:"FromUserName"`
+	CreateTime struct {
+		Text string `xml:",chardata"`
+	} `xml:"CreateTime"`
+	MsgType struct {
+		Text string `xml:",chardata"`
+	} `xml:"MsgType"`
+	Event struct {
+		Text string `xml:",chardata"`
+	} `xml:"Event"`
+	EventKey struct {
+		Text string `xml:",chardata"`
+	} `xml:"EventKey"`
+	SendPicsInfo struct {
+		Text  string `xml:",chardata"`
+		Count struct {
+			Text string `xml:",chardata"`
+		} `xml:"Count"`
+		PicList struct {
+			Text string `xml:",chardata"`
+			Item struct {
+				Text      string `xml:",chardata"`
+				PicMd5Sum struct {
+					Text string `xml:",chardata"`
+				} `xml:"PicMd5Sum"`
+			} `xml:"item"`
+		} `xml:"PicList"`
+	} `xml:"SendPicsInfo"`
+	AgentID struct {
+		Text string `xml:",chardata"`
+	} `xml:"AgentID"`
 }
 
 func (EventPicWeixin) GetMessageType() string {
-    return "event"
+	return "event"
 }
 
 func (EventPicWeixin) GetEventType() string {
-    return "pic_weixin"
+	return "pic_weixin"
 }
 
 func (EventPicWeixin) GetChangeType() string {
-    return ""
+	return ""
 }
 
 func (m EventPicWeixin) GetTypeKey() string {
-    return m.GetMessageType() + ":" + m.GetEventType() + ":" + m.GetChangeType()
+	return m.GetMessageType() + ":" + m.GetEventType() + ":" + m.GetChangeType()
 }
 
 func (EventPicWeixin) ParseFromXml(data []byte) (CallBackExtraInfoInterface, error) {
-    var temp EventPicWeixin
-    err := xml.Unmarshal(data, &temp)
-    return temp, err
+	var temp EventPicWeixin
+	err := xml.Unmarshal(data, &temp)
+	return temp, err
 }

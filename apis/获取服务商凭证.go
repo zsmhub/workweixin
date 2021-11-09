@@ -1,7 +1,7 @@
 package apis
 
 import (
-    "encoding/json"
+	"encoding/json"
 )
 
 // 自动生成的文件, 生成方式: make api doc=微信文档地址url
@@ -11,54 +11,54 @@ import (
 // 文档：https://work.weixin.qq.com/api/doc/90001/90143/91200#获取服务商凭证
 
 type ReqGetProviderTokenService struct {
-    // Corpid 服务商的corpid，必填
-    Corpid string `json:"corpid"`
-    // ProviderSecret 服务商的secret，在服务商管理后台可见，必填
-    ProviderSecret string `json:"provider_secret"`
+	// Corpid 服务商的corpid，必填
+	Corpid string `json:"corpid"`
+	// ProviderSecret 服务商的secret，在服务商管理后台可见，必填
+	ProviderSecret string `json:"provider_secret"`
 }
 
 var _ bodyer = ReqGetProviderTokenService{}
 
 func (x ReqGetProviderTokenService) intoBody() ([]byte, error) {
-    result, err := json.Marshal(x)
-    if err != nil {
-        return nil, err
-    }
+	result, err := json.Marshal(x)
+	if err != nil {
+		return nil, err
+	}
 
-    return result, nil
+	return result, nil
 }
 
 // RespGetProviderTokenService 获取服务商凭证响应
 // 文档：https://work.weixin.qq.com/api/doc/90001/90143/91200#获取服务商凭证
 
 type RespGetProviderTokenService struct {
-    CommonResp
+	CommonResp
 
-    ExpiresIn           int    `json:"expires_in"`
-    ProviderAccessToken string `json:"provider_access_token"`
+	ExpiresIn           int    `json:"expires_in"`
+	ProviderAccessToken string `json:"provider_access_token"`
 }
 
 var _ bodyer = RespGetProviderTokenService{}
 
 func (x RespGetProviderTokenService) intoBody() ([]byte, error) {
-    result, err := json.Marshal(x)
-    if err != nil {
-        return nil, err
-    }
-    return result, nil
+	result, err := json.Marshal(x)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // execGetProviderTokenService 获取服务商凭证
 // 文档：https://work.weixin.qq.com/api/doc/90001/90143/91200#获取服务商凭证
 func (c *ApiClient) ExecGetProviderTokenService(req ReqGetProviderTokenService) (RespGetProviderTokenService, error) {
-    var resp RespGetProviderTokenService
-    err := c.executeWXApiPost("/cgi-bin/service/get_provider_token", req, &resp, false)
-    if err != nil {
-        return RespGetProviderTokenService{}, err
-    }
-    if bizErr := resp.TryIntoErr(); bizErr != nil {
-        return RespGetProviderTokenService{}, bizErr
-    }
+	var resp RespGetProviderTokenService
+	err := c.executeWXApiPost("/cgi-bin/service/get_provider_token", req, &resp, false)
+	if err != nil {
+		return RespGetProviderTokenService{}, err
+	}
+	if bizErr := resp.TryIntoErr(); bizErr != nil {
+		return RespGetProviderTokenService{}, bizErr
+	}
 
-    return resp, nil
+	return resp, nil
 }

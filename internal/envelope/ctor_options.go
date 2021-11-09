@@ -1,33 +1,33 @@
 package envelope
 
 import (
-    "io"
+	"io"
 )
 
 type ProcessorOption interface {
-    applyTo(x *Processor)
+	applyTo(x *Processor)
 }
 
 type customEntropySource struct {
-    inner io.Reader
+	inner io.Reader
 }
 
 func WithEntropySource(e io.Reader) ProcessorOption {
-    return &customEntropySource{inner: e}
+	return &customEntropySource{inner: e}
 }
 
 func (o *customEntropySource) applyTo(x *Processor) {
-    x.entropySource = o.inner
+	x.entropySource = o.inner
 }
 
 type customTimeSource struct {
-    inner TimeSource
+	inner TimeSource
 }
 
 func WithTimeSource(t TimeSource) ProcessorOption {
-    return &customTimeSource{inner: t}
+	return &customTimeSource{inner: t}
 }
 
 func (o *customTimeSource) applyTo(x *Processor) {
-    x.timeSource = o.inner
+	x.timeSource = o.inner
 }

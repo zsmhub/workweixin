@@ -1,7 +1,7 @@
 package apis
 
 import (
-    "encoding/json"
+	"encoding/json"
 )
 
 // 自动生成的文件, 生成方式: make api doc=微信文档地址url
@@ -11,61 +11,61 @@ import (
 // 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92694#修改客户备注信息
 
 type ReqRemarkExternalcontact struct {
-    // Description 此用户对外部联系人的描述，最多150个字符
-    Description string `json:"description"`
-    // ExternalUserid 外部联系人userid，必填
-    ExternalUserid string `json:"external_userid"`
-    // Remark 此用户对外部联系人的备注，最多20个字符
-    Remark string `json:"remark"`
-    // RemarkCompany 此用户对外部联系人备注的所属公司名称，最多20个字符
-    RemarkCompany string `json:"remark_company"`
-    // RemarkMobiles 此用户对外部联系人备注的手机号
-    RemarkMobiles []string `json:"remark_mobiles"`
-    // RemarkPicMediaid 备注图片的mediaid，
-    RemarkPicMediaid string `json:"remark_pic_mediaid"`
-    // Userid 企业成员的userid，必填
-    Userid string `json:"userid"`
+	// Description 此用户对外部联系人的描述，最多150个字符
+	Description string `json:"description"`
+	// ExternalUserid 外部联系人userid，必填
+	ExternalUserid string `json:"external_userid"`
+	// Remark 此用户对外部联系人的备注，最多20个字符
+	Remark string `json:"remark"`
+	// RemarkCompany 此用户对外部联系人备注的所属公司名称，最多20个字符
+	RemarkCompany string `json:"remark_company"`
+	// RemarkMobiles 此用户对外部联系人备注的手机号
+	RemarkMobiles []string `json:"remark_mobiles"`
+	// RemarkPicMediaid 备注图片的mediaid，
+	RemarkPicMediaid string `json:"remark_pic_mediaid"`
+	// Userid 企业成员的userid，必填
+	Userid string `json:"userid"`
 }
 
 var _ bodyer = ReqRemarkExternalcontact{}
 
 func (x ReqRemarkExternalcontact) intoBody() ([]byte, error) {
-    result, err := json.Marshal(x)
-    if err != nil {
-        return nil, err
-    }
+	result, err := json.Marshal(x)
+	if err != nil {
+		return nil, err
+	}
 
-    return result, nil
+	return result, nil
 }
 
 // RespRemarkExternalcontact 修改客户备注信息响应
 // 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92694#修改客户备注信息
 
 type RespRemarkExternalcontact struct {
-    CommonResp
+	CommonResp
 }
 
 var _ bodyer = RespRemarkExternalcontact{}
 
 func (x RespRemarkExternalcontact) intoBody() ([]byte, error) {
-    result, err := json.Marshal(x)
-    if err != nil {
-        return nil, err
-    }
-    return result, nil
+	result, err := json.Marshal(x)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
 }
 
 // execRemarkExternalcontact 修改客户备注信息
 // 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92694#修改客户备注信息
 func (c *ApiClient) ExecRemarkExternalcontact(req ReqRemarkExternalcontact) (RespRemarkExternalcontact, error) {
-    var resp RespRemarkExternalcontact
-    err := c.executeWXApiPost("/cgi-bin/externalcontact/remark", req, &resp, true)
-    if err != nil {
-        return RespRemarkExternalcontact{}, err
-    }
-    if bizErr := resp.TryIntoErr(); bizErr != nil {
-        return RespRemarkExternalcontact{}, bizErr
-    }
+	var resp RespRemarkExternalcontact
+	err := c.executeWXApiPost("/cgi-bin/externalcontact/remark", req, &resp, true)
+	if err != nil {
+		return RespRemarkExternalcontact{}, err
+	}
+	if bizErr := resp.TryIntoErr(); bizErr != nil {
+		return RespRemarkExternalcontact{}, bizErr
+	}
 
-    return resp, nil
+	return resp, nil
 }

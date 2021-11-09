@@ -6,67 +6,67 @@ import "encoding/xml"
 // 文档: https://work.weixin.qq.com/api/doc/90001/90143/90376#标签成员变更事件
 
 func init() {
-    // 添加可解析的回调事件
-    supportCallback(EventChangeContactUpdateTag{})
+	// 添加可解析的回调事件
+	supportCallback(EventChangeContactUpdateTag{})
 }
 
 // XML was generated 2021-10-09 14:46:10 by insomnia on Insomnia.lan.
 type EventChangeContactUpdateTag struct {
-    XMLName    xml.Name `xml:"xml"`
-    Text       string   `xml:",chardata"`
-    ToUserName struct {
-        Text string `xml:",chardata"`
-    } `xml:"ToUserName"`
-    FromUserName struct {
-        Text string `xml:",chardata"`
-    } `xml:"FromUserName"`
-    CreateTime struct {
-        Text string `xml:",chardata"`
-    } `xml:"CreateTime"`
-    MsgType struct {
-        Text string `xml:",chardata"`
-    } `xml:"MsgType"`
-    Event struct {
-        Text string `xml:",chardata"`
-    } `xml:"Event"`
-    ChangeType struct {
-        Text string `xml:",chardata"`
-    } `xml:"ChangeType"`
-    TagId struct {
-        Text string `xml:",chardata"`
-    } `xml:"TagId"`
-    AddUserItems struct {
-        Text string `xml:",chardata"`
-    } `xml:"AddUserItems"`
-    DelUserItems struct {
-        Text string `xml:",chardata"`
-    } `xml:"DelUserItems"`
-    AddPartyItems struct {
-        Text string `xml:",chardata"`
-    } `xml:"AddPartyItems"`
-    DelPartyItems struct {
-        Text string `xml:",chardata"`
-    } `xml:"DelPartyItems"`
+	XMLName    xml.Name `xml:"xml"`
+	Text       string   `xml:",chardata"`
+	ToUserName struct {
+		Text string `xml:",chardata"`
+	} `xml:"ToUserName"`
+	FromUserName struct {
+		Text string `xml:",chardata"`
+	} `xml:"FromUserName"`
+	CreateTime struct {
+		Text string `xml:",chardata"`
+	} `xml:"CreateTime"`
+	MsgType struct {
+		Text string `xml:",chardata"`
+	} `xml:"MsgType"`
+	Event struct {
+		Text string `xml:",chardata"`
+	} `xml:"Event"`
+	ChangeType struct {
+		Text string `xml:",chardata"`
+	} `xml:"ChangeType"`
+	TagId struct {
+		Text string `xml:",chardata"`
+	} `xml:"TagId"`
+	AddUserItems struct {
+		Text string `xml:",chardata"`
+	} `xml:"AddUserItems"`
+	DelUserItems struct {
+		Text string `xml:",chardata"`
+	} `xml:"DelUserItems"`
+	AddPartyItems struct {
+		Text string `xml:",chardata"`
+	} `xml:"AddPartyItems"`
+	DelPartyItems struct {
+		Text string `xml:",chardata"`
+	} `xml:"DelPartyItems"`
 }
 
 func (EventChangeContactUpdateTag) GetMessageType() string {
-    return "event"
+	return "event"
 }
 
 func (EventChangeContactUpdateTag) GetEventType() string {
-    return "change_contact"
+	return "change_contact"
 }
 
 func (EventChangeContactUpdateTag) GetChangeType() string {
-    return "update_tag"
+	return "update_tag"
 }
 
 func (m EventChangeContactUpdateTag) GetTypeKey() string {
-    return m.GetMessageType() + ":" + m.GetEventType() + ":" + m.GetChangeType()
+	return m.GetMessageType() + ":" + m.GetEventType() + ":" + m.GetChangeType()
 }
 
 func (EventChangeContactUpdateTag) ParseFromXml(data []byte) (CallBackExtraInfoInterface, error) {
-    var temp EventChangeContactUpdateTag
-    err := xml.Unmarshal(data, &temp)
-    return temp, err
+	var temp EventChangeContactUpdateTag
+	err := xml.Unmarshal(data, &temp)
+	return temp, err
 }

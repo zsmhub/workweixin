@@ -1,11 +1,11 @@
 package envelope
 
 import (
-    "time"
+	"time"
 )
 
 type TimeSource interface {
-    GetCurrentTimestamp() time.Time
+	GetCurrentTimestamp() time.Time
 }
 
 type DefaultTimeSource struct{}
@@ -13,5 +13,5 @@ type DefaultTimeSource struct{}
 var _ TimeSource = DefaultTimeSource{}
 
 func (DefaultTimeSource) GetCurrentTimestamp() time.Time {
-    return time.Now()
+	return time.Now()
 }

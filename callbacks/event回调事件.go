@@ -6,49 +6,49 @@ import "encoding/xml"
 // 文档: https://work.weixin.qq.com/api/doc/90001/90143/94699#回调事件
 
 func init() {
-    // 添加可解析的回调事件
-    supportCallback(EventKfMsgOrEvent{})
+	// 添加可解析的回调事件
+	supportCallback(EventKfMsgOrEvent{})
 }
 
 // XML was generated 2021-11-03 09:58:48 by insomnia on Insomnia.lan.
 type EventKfMsgOrEvent struct {
-    XMLName    xml.Name `xml:"xml"`
-    Text       string   `xml:",chardata"`
-    ToUserName struct {
-        Text string `xml:",chardata"`
-    } `xml:"ToUserName"`
-    CreateTime struct {
-        Text string `xml:",chardata"`
-    } `xml:"CreateTime"`
-    MsgType struct {
-        Text string `xml:",chardata"`
-    } `xml:"MsgType"`
-    Event struct {
-        Text string `xml:",chardata"`
-    } `xml:"Event"`
-    Token struct {
-        Text string `xml:",chardata"`
-    } `xml:"Token"`
+	XMLName    xml.Name `xml:"xml"`
+	Text       string   `xml:",chardata"`
+	ToUserName struct {
+		Text string `xml:",chardata"`
+	} `xml:"ToUserName"`
+	CreateTime struct {
+		Text string `xml:",chardata"`
+	} `xml:"CreateTime"`
+	MsgType struct {
+		Text string `xml:",chardata"`
+	} `xml:"MsgType"`
+	Event struct {
+		Text string `xml:",chardata"`
+	} `xml:"Event"`
+	Token struct {
+		Text string `xml:",chardata"`
+	} `xml:"Token"`
 }
 
 func (EventKfMsgOrEvent) GetMessageType() string {
-    return "event"
+	return "event"
 }
 
 func (EventKfMsgOrEvent) GetEventType() string {
-    return "kf_msg_or_event"
+	return "kf_msg_or_event"
 }
 
 func (EventKfMsgOrEvent) GetChangeType() string {
-    return ""
+	return ""
 }
 
 func (m EventKfMsgOrEvent) GetTypeKey() string {
-    return m.GetMessageType() + ":" + m.GetEventType() + ":" + m.GetChangeType()
+	return m.GetMessageType() + ":" + m.GetEventType() + ":" + m.GetChangeType()
 }
 
 func (EventKfMsgOrEvent) ParseFromXml(data []byte) (CallBackExtraInfoInterface, error) {
-    var temp EventKfMsgOrEvent
-    err := xml.Unmarshal(data, &temp)
-    return temp, err
+	var temp EventKfMsgOrEvent
+	err := xml.Unmarshal(data, &temp)
+	return temp, err
 }
