@@ -113,6 +113,30 @@ if err != nil {
     }
     return nil, err
 }
+
+// 推送消息到第三方应用
+apiClient, err := workweixin.Sdk.GetAuthCorpAPPClient(v.CorpId)
+if err != nil {
+    fmt.Println(err)
+}
+reqSentMessageCard := apis.ReqSentMessageCard{
+    ToUser:  v.InstallUserId,
+    MsgType: "news",
+    AgentId: v.AgentId,
+    News: apis.ReqSentMessageCardNewsBody{
+        Articles: []apis.ReqSentMessageCardNewsArticleBody{
+            {
+                Title:       "新模块【xxx】已上线",
+                Description: "快进入【管理后台】把它配置到你的【侧边栏】中！",
+                Url:         "https://xxx",
+                UrlImg:      "https://xxx/workbench-config.jpg",
+            },
+        },
+    },
+}
+if _, err = apiClient.ExecSentMessageCard(reqSentMessageCard); err != nil {
+    fmt.Println(err)
+}
 ```
 
 ### 如果部署到K8S多个副本
