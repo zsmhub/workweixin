@@ -11,7 +11,6 @@ func init() {
 	supportCallback(ThirdChangeExternalTagCreate{})
 }
 
-// XML was generated 2021-09-15 18:06:41 by chenjianlin on JZTech-chenjianlin.lan.
 type ThirdChangeExternalTagCreate struct {
 	XMLName xml.Name `xml:"xml"`
 	Text    string   `xml:",chardata"`

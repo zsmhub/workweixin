@@ -10,7 +10,6 @@ func init() {
 	supportCallback(EventKfMsgOrEvent{})
 }
 
-// XML was generated 2021-11-03 09:58:48 by insomnia on Insomnia.lan.
 type EventKfMsgOrEvent struct {
 	XMLName    xml.Name `xml:"xml"`
 	Text       string   `xml:",chardata"`

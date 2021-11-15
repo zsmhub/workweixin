@@ -10,7 +10,6 @@ func init() {
 	supportCallback(EventScancodePush{})
 }
 
-// XML was generated 2021-10-09 14:46:10 by insomnia on Insomnia.lan.
 type EventScancodePush struct {
 	XMLName    xml.Name `xml:"xml"`
 	Text       string   `xml:",chardata"`

@@ -10,7 +10,6 @@ func init() {
 	supportCallback(ThirdChangeContactDeleteUser{})
 }
 
-// XML was generated 2021-10-30 09:20:04 by insomnia on Insomnia.lan.
 type ThirdChangeContactDeleteUser struct {
 	XMLName xml.Name `xml:"xml"`
 	Text    string   `xml:",chardata"`

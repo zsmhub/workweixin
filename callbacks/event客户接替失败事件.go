@@ -11,7 +11,6 @@ func init() {
 	supportCallback(EventChangeExternalContactTransferFail{})
 }
 
-// XML was generated 2021-09-15 18:04:51 by chenjianlin on JZTech-chenjianlin.lan.
 type EventChangeExternalContactTransferFail struct {
 	XMLName    xml.Name `xml:"xml"`
 	Text       string   `xml:",chardata"`

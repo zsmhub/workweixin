@@ -11,7 +11,6 @@ func init() {
 	supportCallback(ThirdCreateAuth{})
 }
 
-// XML was generated 2021-09-16 10:49:54 by chenjianlin on JZTech-chenjianlin.lan.
 type ThirdCreateAuth struct {
 	XMLName xml.Name `xml:"xml"`
 	Text    string   `xml:",chardata"`

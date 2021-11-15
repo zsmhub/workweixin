@@ -10,7 +10,6 @@ func init() {
 	supportCallback(EventChangeAppAdmin{})
 }
 
-// XML was generated 2021-10-09 14:52:26 by insomnia on Insomnia.lan.
 type EventChangeAppAdmin struct {
 	XMLName    xml.Name `xml:"xml"`
 	Text       string   `xml:",chardata"`

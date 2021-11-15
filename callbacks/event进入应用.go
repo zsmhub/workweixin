@@ -10,7 +10,6 @@ func init() {
 	supportCallback(EventEnterAgent{})
 }
 
-// XML was generated 2021-10-09 14:46:10 by insomnia on Insomnia.lan.
 type EventEnterAgent struct {
 	XMLName    xml.Name `xml:"xml"`
 	Text       string   `xml:",chardata"`

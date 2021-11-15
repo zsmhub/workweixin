@@ -11,7 +11,6 @@ func init() {
 	supportCallback(ThirdChangeExternalChatDismiss{})
 }
 
-// XML was generated 2021-09-15 18:06:41 by chenjianlin on JZTech-chenjianlin.lan.
 type ThirdChangeExternalChatDismiss struct {
 	XMLName xml.Name `xml:"xml"`
 	Text    string   `xml:",chardata"`

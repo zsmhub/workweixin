@@ -10,7 +10,6 @@ func init() {
 	supportCallback(ThirdChangeContactUpdateTag{})
 }
 
-// XML was generated 2021-10-30 09:24:08 by insomnia on Insomnia.lan.
 type ThirdChangeContactUpdateTag struct {
 	XMLName xml.Name `xml:"xml"`
 	Text    string   `xml:",chardata"`

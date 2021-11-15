@@ -10,7 +10,6 @@ func init() {
 	supportCallback(ThirdRegisterCorp{})
 }
 
-// XML was generated 2021-10-30 16:40:37 by insomnia on Insomnia.lan.
 type ThirdRegisterCorp struct {
 	XMLName       xml.Name `xml:"xml"`
 	Text          string   `xml:",chardata"`

@@ -10,7 +10,6 @@ func init() {
 	supportCallback(Text{})
 }
 
-// XML was generated 2021-11-01 20:28:46 by insomnia on Insomnia.lan.
 type Text struct {
 	XMLName    xml.Name `xml:"xml"`
 	Text       string   `xml:",chardata"`
