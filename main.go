@@ -2,6 +2,7 @@ package workweixin
 
 import (
 	"errors"
+	"fmt"
 	"gitlab.ydjdev.com/ydjai/workweixin/apis"
 	"gitlab.ydjdev.com/ydjai/workweixin/callbacks"
 	"sync"
@@ -54,37 +55,26 @@ func (s *sdk) NewThirdAppApiClient(corpId, appSuiteID, appSuiteSecret, appSuiteT
 	return
 }
 
-// 授权企业API客户端初始化
-func (s *sdk) NewAuthCorpApiClient(corpId, companyPermanentCode string, agentId int, thirdAppClient *apis.ApiClient) {
+// 授权企业API客户端初始化，非单体服务则需使用广播通知多个pod做处理
+func (s *sdk) NewAuthCorpApiClient(corpId, companyPermanentCode string, agentId int) {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
-	s.AuthCorpsClient[corpId] = apis.NewAuthCorpApiClient(corpId, companyPermanentCode, agentId, thirdAppClient)
-
-	// todo 如果部署到K8S多个副本上，此处需要将新增企业信息存在缓存和数据库中，便于其他实例获取新增的企业API客户端
-
+	s.AuthCorpsClient[corpId] = apis.NewAuthCorpApiClient(corpId, companyPermanentCode, agentId, s.ThirdAppClient)
 	return
 }
 
 // 获取授权企业客户端
 func (s *sdk) GetAuthCorpAPPClient(corpId string) (*apis.ApiClient, error) {
 	s.mutex.RLock()
-	defer s.mutex.RUnlock()
-
-	// 从内存取数
 	if v, ok := s.AuthCorpsClient[corpId]; ok {
+		s.mutex.RUnlock()
 		return v, nil
 	}
-
-	// todo 如果部署到K8S多个副本上，此处需要先读取缓存的企业数据，再读取数据库中的企业数据
-
-	// 从缓存取数
-
-	// 从数据库取数
-
-	return nil, errors.New("corpid不存在")
+	s.mutex.RUnlock()
+	return nil, errors.New(fmt.Sprintf("corpid不存在：%s", corpId))
 }
 
-// 移除授权企业
+// 移除授权企业，非单体服务则需使用广播通知多个pod做处理
 func (s *sdk) RemoveAuthCorp(corpId string) {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()

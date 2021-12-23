@@ -142,4 +142,4 @@ if _, err = apiClient.ExecSentMessageCard(reqSentMessageCard); err != nil {
 ### 如果部署到K8S多个副本
 
 1. 可以将 access_token 的刷新代码抽离出来，用一个定时任务单独处理，并存在缓存中，提供给多个K8S副本读取 access_token。
-2. 项目运行中，会有新的企业安装我们的第三方应用，此时多个K8S副本需要同步新的企业数据并实例化，避免 sdk 调用失败。
+2. 项目运行中，会有新的企业安装我们的第三方应用，此时多个K8S副本需要使用`广播`同步新的企业数据并实例化，避免 sdk 调用失败。
