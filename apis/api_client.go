@@ -29,7 +29,7 @@ type ApiClient struct {
 	jsapiTicket            *token
 	jsapiTicketAgentConfig *token
 
-	ThirdAppClient *ApiClient // 第三方应用client，用于授权企业API客户端获取suite_token
+	ThirdAppClient *ApiClient // 第三方应用client，用于授权企业API客户端获取suite_token，目前用于获取企业凭证接口
 }
 
 // 服务商API客户端初始化
