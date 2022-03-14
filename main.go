@@ -56,11 +56,15 @@ func (s *sdk) NewThirdAppApiClient(corpId, appSuiteID, appSuiteSecret, appSuiteT
 }
 
 // 授权企业API客户端初始化，非单体服务则需使用广播通知多个pod做处理
-func (s *sdk) NewAuthCorpApiClient(corpId, companyPermanentCode string, agentId int) {
+func (s *sdk) NewAuthCorpApiClient(corpId, companyPermanentCode string, agentId int) error {
+	if s.ThirdAppClient == nil {
+		return errors.New("sdk.ThirdAppClient还未初始化")
+	}
+	apiClient := apis.NewAuthCorpApiClient(corpId, companyPermanentCode, agentId, s.ThirdAppClient)
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
-	s.AuthCorpsClient[corpId] = apis.NewAuthCorpApiClient(corpId, companyPermanentCode, agentId, s.ThirdAppClient)
-	return
+	s.AuthCorpsClient[corpId] = apiClient
+	return nil
 }
 
 // 获取授权企业客户端
@@ -71,6 +75,27 @@ func (s *sdk) GetAuthCorpAPPClient(corpId string) (*apis.ApiClient, error) {
 		return v, nil
 	}
 	s.mutex.RUnlock()
+
+	// todo 此处可以自行加一段代码，从数据库取数
+	/*dbData := db.GetCorpData(corpId)
+	if dbData.Id > 0 {
+		if !dbData.AuthStatus {
+			return nil, fmt.Errorf("该企业已取消授权：%s", corpId)
+		}
+		if err := s.NewAuthCorpApiClient(dbData.CorpId, dbData.PermanentCode, dbData.AgentId); err != nil {
+			return nil, err
+		}
+		s.mutex.RLock()
+		if v, ok := s.AuthCorpsClient[corpId]; ok {
+			s.mutex.RUnlock()
+			return v, nil
+		}
+		s.mutex.RUnlock()
+	} else {
+		// 企业不存在或数据库请求异常
+		return nil, fmt.Errorf("该企业不存在：%s", corpId)
+	}*/
+
 	return nil, errors.New(fmt.Sprintf("corpid不存在：%s", corpId))
 }
 

@@ -93,10 +93,12 @@ func InitApiHandler() error {
     suiteTicket := "xxx" // 从数据库等地方获取已得到的suite_ticket
     workweixin.Sdk.NewThirdAppApiClient(config.CorpId, config.AppSuiteId, config.AppSuiteSecret, suiteTicket)
 
-    // 授权企业API客户端初始化
+    // 授权企业API客户端初始化（此段代码也可以考虑注释掉，由用户主动触发）
     authCorpList := xxx.GetAuthCorpList() // 从数据库获取已授权企业
     for _, corp := range authCorpList {
-        workweixin.Sdk.NewAuthCorpApiClient(corp.CorpId, corp.PermanentCode, workweixin.Sdk.ThirdAppClient)
+        if err := workweixin.Sdk.NewAuthCorpApiClient(corp.CorpId, corp.PermanentCode, workweixin.Sdk.ThirdAppClient); err != nil {
+            return err
+        }
     }
 
     return nil
