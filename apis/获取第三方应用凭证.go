@@ -8,7 +8,7 @@ import (
 // 修改生成的文件,以满足开发需求
 
 // ReqGetSuiteTokenService 获取第三方应用凭证请求
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/90600#获取第三方应用凭证
+// 文档：https://developer.work.weixin.qq.com/document/path/90600#获取第三方应用凭证
 
 type ReqGetSuiteTokenService struct {
 	// SuiteID 以ww或wx开头应用id（对应于旧的以tj开头的套件id），必填
@@ -31,7 +31,7 @@ func (x ReqGetSuiteTokenService) intoBody() ([]byte, error) {
 }
 
 // RespGetSuiteTokenService 获取第三方应用凭证响应
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/90600#获取第三方应用凭证
+// 文档：https://developer.work.weixin.qq.com/document/path/90600#获取第三方应用凭证
 
 type RespGetSuiteTokenService struct {
 	CommonResp
@@ -50,7 +50,7 @@ func (x RespGetSuiteTokenService) intoBody() ([]byte, error) {
 }
 
 // execGetSuiteTokenService 获取第三方应用凭证
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/90600#获取第三方应用凭证
+// 文档：https://developer.work.weixin.qq.com/document/path/90600#获取第三方应用凭证
 func (c *ApiClient) ExecGetSuiteTokenService(req ReqGetSuiteTokenService) (RespGetSuiteTokenService, error) {
 	var resp RespGetSuiteTokenService
 	err := c.executeWXApiPost("/cgi-bin/service/get_suite_token", req, &resp, false)

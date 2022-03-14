@@ -8,7 +8,7 @@ import (
 // 修改生成的文件,以满足开发需求
 
 // ReqGetCorpTokenService 获取企业凭证请求
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/90605#获取企业凭证
+// 文档：https://developer.work.weixin.qq.com/document/path/90605#获取企业凭证
 
 const PathGetCorpToken = "/cgi-bin/service/get_corp_token"
 
@@ -31,7 +31,7 @@ func (x ReqGetCorpTokenService) intoBody() ([]byte, error) {
 }
 
 // RespGetCorpTokenService 获取企业凭证响应
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/90605#获取企业凭证
+// 文档：https://developer.work.weixin.qq.com/document/path/90605#获取企业凭证
 
 type RespGetCorpTokenService struct {
 	AccessToken string `json:"access_token"`
@@ -50,7 +50,7 @@ func (x RespGetCorpTokenService) intoBody() ([]byte, error) {
 }
 
 // execGetCorpTokenService 获取企业凭证
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/90605#获取企业凭证
+// 文档：https://developer.work.weixin.qq.com/document/path/90605#获取企业凭证
 func (c *ApiClient) ExecGetCorpTokenService(req ReqGetCorpTokenService) (RespGetCorpTokenService, error) {
 	var resp RespGetCorpTokenService
 	// 注意：此接口是授权企业客户端调用的，但是需要的 access_token 是第三方应用的 suite_access_token

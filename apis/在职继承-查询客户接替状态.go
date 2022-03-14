@@ -57,7 +57,7 @@ func (x RespTransferResultExternalcontact) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execTransferResultExternalcontact 查询客户接替状态
+// execTransferResultExternalcontact 在职继承-查询客户接替状态
 // 文档：https://developer.work.weixin.qq.com/document/path/94097#查询客户接替状态
 func (c *ApiClient) ExecTransferResultExternalcontact(req ReqTransferResultExternalcontact) (RespTransferResultExternalcontact, error) {
 	var resp RespTransferResultExternalcontact

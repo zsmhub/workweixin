@@ -2,7 +2,7 @@ package apis
 
 import "net/url"
 
-// 文档：https://work.weixin.qq.com/api/doc/90001/90144/90539#获取应用的jsapi_ticket
+// 文档：https://developer.work.weixin.qq.com/document/path/90539#获取应用的jsapi_ticket
 
 type JsAPITicketAgentConfigReq struct{}
 

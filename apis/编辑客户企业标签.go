@@ -8,7 +8,7 @@ import (
 // 修改生成的文件,以满足开发需求
 
 // ReqMarkTagExternalcontact 编辑客户企业标签请求
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92697#编辑客户企业标签
+// 文档：https://developer.work.weixin.qq.com/document/path/92697#编辑客户企业标签
 
 type ReqMarkTagExternalcontact struct {
 	// AddTag 要标记的标签列表
@@ -33,7 +33,7 @@ func (x ReqMarkTagExternalcontact) intoBody() ([]byte, error) {
 }
 
 // RespMarkTagExternalcontact 编辑客户企业标签响应
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92697#编辑客户企业标签
+// 文档：https://developer.work.weixin.qq.com/document/path/92697#编辑客户企业标签
 
 type RespMarkTagExternalcontact struct {
 	CommonResp
@@ -50,7 +50,7 @@ func (x RespMarkTagExternalcontact) intoBody() ([]byte, error) {
 }
 
 // execMarkTagExternalcontact 编辑客户企业标签
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92697#编辑客户企业标签
+// 文档：https://developer.work.weixin.qq.com/document/path/92697#编辑客户企业标签
 func (c *ApiClient) ExecMarkTagExternalcontact(req ReqMarkTagExternalcontact) (RespMarkTagExternalcontact, error) {
 	var resp RespMarkTagExternalcontact
 	err := c.executeWXApiPost("/cgi-bin/externalcontact/mark_tag", req, &resp, true)

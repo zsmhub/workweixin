@@ -11,7 +11,7 @@ import (
 // 可自行修改生成的文件,以满足开发需求
 
 // ReqGetuserinfo3RdService 获取访问用户身份请求
-// 文档：https://work.weixin.qq.com/api/doc/90001/90143/91121#获取访问用户身份
+// 文档：https://developer.work.weixin.qq.com/document/path/91121#获取访问用户身份
 
 type ReqGetuserinfo3RdService struct {
 	// Code 通过成员授权获取到的code，最大为512字节。每次成员授权带上的code将不一样，code只能使用一次，5分钟未被使用自动过期。，必填
@@ -34,7 +34,7 @@ func (x ReqGetuserinfo3RdService) intoURLValues() url.Values {
 }
 
 // RespGetuserinfo3RdService 获取访问用户身份响应
-// 文档：https://work.weixin.qq.com/api/doc/90001/90143/91121#获取访问用户身份
+// 文档：https://developer.work.weixin.qq.com/document/path/91121#获取访问用户身份
 
 type RespGetuserinfo3RdService struct {
 	CommonResp
@@ -57,7 +57,7 @@ func (x RespGetuserinfo3RdService) intoBody() ([]byte, error) {
 }
 
 // execGetuserinfo3RdService 获取访问用户身份
-// 文档：https://work.weixin.qq.com/api/doc/90001/90143/91121#获取访问用户身份
+// 文档：https://developer.work.weixin.qq.com/document/path/91121#获取访问用户身份
 func (c *ApiClient) ExecGetuserinfo3RdService(req ReqGetuserinfo3RdService) (RespGetuserinfo3RdService, error) {
 	var resp RespGetuserinfo3RdService
 	err := c.executeWXApiGet("/cgi-bin/service/getuserinfo3rd", req, &resp, true)

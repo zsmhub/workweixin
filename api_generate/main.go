@@ -127,6 +127,7 @@ func main() {
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `：`, `:`)
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `: </strong>`, `:</strong>`)
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `:</strong>`, `</strong>`)
+		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `（<strong>HTTPS</strong>）`, `(<strong>HTTPS</strong>)`) // 兼容中文括号
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求方式</strong>POST(<strong>HTTPS</strong>)`, `<strong>请求方式</strong>POST<strong>HTTPS</strong>`)
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求方式</strong>GET(<strong>HTTPS</strong>)`, `<strong>请求方式</strong>GET<strong>HTTPS</strong>`)
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求方式</strong>:<strong>POST</strong>(<strong>HTTPS</strong>)`, `<strong>请求方式</strong>POST<strong>HTTPS</strong>`)

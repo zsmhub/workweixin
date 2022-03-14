@@ -8,7 +8,7 @@ import (
 // 可自行修改生成的文件,以满足开发需求
 
 // ReqGetProviderTokenService 获取服务商凭证请求
-// 文档：https://work.weixin.qq.com/api/doc/90001/90143/91200#获取服务商凭证
+// 文档：https://developer.work.weixin.qq.com/document/path/91200#获取服务商凭证
 
 type ReqGetProviderTokenService struct {
 	// Corpid 服务商的corpid，必填
@@ -29,7 +29,7 @@ func (x ReqGetProviderTokenService) intoBody() ([]byte, error) {
 }
 
 // RespGetProviderTokenService 获取服务商凭证响应
-// 文档：https://work.weixin.qq.com/api/doc/90001/90143/91200#获取服务商凭证
+// 文档：https://developer.work.weixin.qq.com/document/path/91200#获取服务商凭证
 
 type RespGetProviderTokenService struct {
 	CommonResp
@@ -49,7 +49,7 @@ func (x RespGetProviderTokenService) intoBody() ([]byte, error) {
 }
 
 // execGetProviderTokenService 获取服务商凭证
-// 文档：https://work.weixin.qq.com/api/doc/90001/90143/91200#获取服务商凭证
+// 文档：https://developer.work.weixin.qq.com/document/path/91200#获取服务商凭证
 func (c *ApiClient) ExecGetProviderTokenService(req ReqGetProviderTokenService) (RespGetProviderTokenService, error) {
 	var resp RespGetProviderTokenService
 	err := c.executeWXApiPost("/cgi-bin/service/get_provider_token", req, &resp, false)

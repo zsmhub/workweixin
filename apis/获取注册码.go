@@ -8,7 +8,7 @@ import (
 // 可自行修改生成的文件,以满足开发需求
 
 // ReqGetRegisterCodeService 获取注册码请求
-// 文档：https://work.weixin.qq.com/api/doc/90001/90143/90581#获取注册码
+// 文档：https://developer.work.weixin.qq.com/document/path/90581#获取注册码
 
 type ReqGetRegisterCodeService struct {
 	// AdminMobile 管理员手机号
@@ -37,7 +37,7 @@ func (x ReqGetRegisterCodeService) intoBody() ([]byte, error) {
 }
 
 // RespGetRegisterCodeService 获取注册码响应
-// 文档：https://work.weixin.qq.com/api/doc/90001/90143/90581#获取注册码
+// 文档：https://developer.work.weixin.qq.com/document/path/90581#获取注册码
 
 type RespGetRegisterCodeService struct {
 	CommonResp
@@ -56,7 +56,7 @@ func (x RespGetRegisterCodeService) intoBody() ([]byte, error) {
 }
 
 // execGetRegisterCodeService 获取注册码
-// 文档：https://work.weixin.qq.com/api/doc/90001/90143/90581#获取注册码
+// 文档：https://developer.work.weixin.qq.com/document/path/90581#获取注册码
 func (c *ApiClient) ExecGetRegisterCodeService(req ReqGetRegisterCodeService) (RespGetRegisterCodeService, error) {
 	var resp RespGetRegisterCodeService
 	err := c.executeWXApiPost("/cgi-bin/service/get_register_code", req, &resp, true)

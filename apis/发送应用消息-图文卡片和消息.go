@@ -9,7 +9,7 @@ import (
 // 可自行修改生成的文件,以满足开发需求
 
 // ReqSentMessage 接口定义请求
-// 文档：https://work.weixin.qq.com/api/doc/90001/90143/90372#接口定义
+// 文档：https://developer.work.weixin.qq.com/document/path/90372#接口定义
 
 // 文本卡片
 type ReqSentMessageCardTextBody struct {
@@ -57,7 +57,7 @@ func (x ReqSentMessageCard) intoBody() ([]byte, error) {
 }
 
 // RespSentMessage 接口定义响应
-// 文档：https://work.weixin.qq.com/api/doc/90001/90143/90372#接口定义
+// 文档：https://developer.work.weixin.qq.com/document/path/90372#接口定义
 
 type RespSentMessageCard struct {
 	CommonResp
@@ -69,7 +69,7 @@ type RespSentMessageCard struct {
 }
 
 // execSentMessage 接口定义
-// 文档：https://work.weixin.qq.com/api/doc/90001/90143/90372#接口定义
+// 文档：https://developer.work.weixin.qq.com/document/path/90372#接口定义
 func (c *ApiClient) ExecSentMessageCard(req ReqSentMessageCard) (RespSentMessageCard, error) {
 	var resp RespSentMessageCard
 	err := c.executeWXApiPost("/cgi-bin/message/send", req, &resp, true)

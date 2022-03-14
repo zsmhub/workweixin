@@ -8,7 +8,7 @@ import (
 // 可自行修改生成的文件,以满足开发需求
 
 // ReqGetAuthInfoService 获取企业授权信息请求
-// 文档：https://work.weixin.qq.com/api/doc/90001/90143/90604#获取企业授权信息
+// 文档：https://developer.work.weixin.qq.com/document/path/90604#获取企业授权信息
 
 type ReqGetAuthInfoService struct {
 	// AuthCorpid 授权方corpid，必填
@@ -29,7 +29,7 @@ func (x ReqGetAuthInfoService) intoBody() ([]byte, error) {
 }
 
 // RespGetAuthInfoService 获取企业授权信息响应
-// 文档：https://work.weixin.qq.com/api/doc/90001/90143/90604#获取企业授权信息
+// 文档：https://developer.work.weixin.qq.com/document/path/90604#获取企业授权信息
 
 type RespGetAuthInfoService struct {
 	AuthCorpInfo struct {
@@ -87,7 +87,7 @@ func (x RespGetAuthInfoService) intoBody() ([]byte, error) {
 }
 
 // execGetAuthInfoService 获取企业授权信息
-// 文档：https://work.weixin.qq.com/api/doc/90001/90143/90604#获取企业授权信息
+// 文档：https://developer.work.weixin.qq.com/document/path/90604#获取企业授权信息
 func (c *ApiClient) ExecGetAuthInfoService(req ReqGetAuthInfoService) (RespGetAuthInfoService, error) {
 	var resp RespGetAuthInfoService
 	err := c.executeWXApiPost("/cgi-bin/service/get_auth_info", req, &resp, true)

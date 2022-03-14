@@ -11,7 +11,7 @@ import (
 // 可自行修改生成的文件,以满足开发需求
 
 // ReqGetUser 读取成员请求
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/90332#读取成员
+// 文档：https://developer.work.weixin.qq.com/document/path/90332#读取成员
 
 type ReqGetUser struct {
 	// Userid 成员UserID。对应管理端的帐号，企业内必须唯一。不区分大小写，长度为1~64个字节，必填
@@ -34,7 +34,7 @@ func (x ReqGetUser) intoURLValues() url.Values {
 }
 
 // RespGetUser 读取成员响应
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/90332#读取成员
+// 文档：https://developer.work.weixin.qq.com/document/path/90332#读取成员
 
 type RespGetUser struct {
 	Address    string `json:"address"`
@@ -106,7 +106,7 @@ func (x RespGetUser) intoBody() ([]byte, error) {
 }
 
 // execGetUser 读取成员
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/90332#读取成员
+// 文档：https://developer.work.weixin.qq.com/document/path/90332#读取成员
 func (c *ApiClient) ExecGetUser(req ReqGetUser) (RespGetUser, error) {
 	var resp RespGetUser
 	err := c.executeWXApiGet("/cgi-bin/user/get", req, &resp, true)

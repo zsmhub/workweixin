@@ -2,7 +2,7 @@ package callbacks
 
 import "encoding/xml"
 
-// 文档: https://work.weixin.qq.com/api/doc/90001/90143/90376#成员关注及取消关注事件
+// 文档: https://developer.work.weixin.qq.com/document/path/90376#成员关注及取消关注事件
 
 func init() {
 	// 添加可解析的回调事件

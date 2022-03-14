@@ -8,7 +8,7 @@ import (
 // 修改生成的文件,以满足开发需求
 
 // ReqGetGroupchat 获取客户群详情请求
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92707#获取客户群详情
+// 文档：https://developer.work.weixin.qq.com/document/path/92707#获取客户群详情
 
 type ReqGetGroupchat struct {
 	// ChatID 客户群ID，必填
@@ -29,7 +29,7 @@ func (x ReqGetGroupchat) intoBody() ([]byte, error) {
 }
 
 // RespGetGroupchat 获取客户群详情响应
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92707#获取客户群详情
+// 文档：https://developer.work.weixin.qq.com/document/path/92707#获取客户群详情
 
 type RespGetGroupchat struct {
 	CommonResp
@@ -68,7 +68,7 @@ func (x RespGetGroupchat) intoBody() ([]byte, error) {
 }
 
 // execGetGroupchat 获取客户群详情
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92707#获取客户群详情
+// 文档：https://developer.work.weixin.qq.com/document/path/92707#获取客户群详情
 func (c *ApiClient) ExecGetGroupchat(req ReqGetGroupchat) (RespGetGroupchat, error) {
 	var resp RespGetGroupchat
 	err := c.executeWXApiPost("/cgi-bin/externalcontact/groupchat/get", req, &resp, true)

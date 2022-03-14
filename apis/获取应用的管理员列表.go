@@ -8,7 +8,7 @@ import (
 // 可自行修改生成的文件,以满足开发需求
 
 // ReqGetAdminListService 获取应用的管理员列表请求
-// 文档：https://work.weixin.qq.com/api/doc/90001/90143/90606#获取应用的管理员列表
+// 文档：https://developer.work.weixin.qq.com/document/path/90606#获取应用的管理员列表
 
 type ReqGetAdminListService struct {
 	// Agentid 授权方安装的应用agentid，必填
@@ -29,7 +29,7 @@ func (x ReqGetAdminListService) intoBody() ([]byte, error) {
 }
 
 // RespGetAdminListService 获取应用的管理员列表响应
-// 文档：https://work.weixin.qq.com/api/doc/90001/90143/90606#获取应用的管理员列表
+// 文档：https://developer.work.weixin.qq.com/document/path/90606#获取应用的管理员列表
 
 type RespGetAdminListService struct {
 	Admin []struct {
@@ -51,7 +51,7 @@ func (x RespGetAdminListService) intoBody() ([]byte, error) {
 }
 
 // execGetAdminListService 获取应用的管理员列表
-// 文档：https://work.weixin.qq.com/api/doc/90001/90143/90606#获取应用的管理员列表
+// 文档：https://developer.work.weixin.qq.com/document/path/90606#获取应用的管理员列表
 func (c *ApiClient) ExecGetAdminListService(req ReqGetAdminListService) (RespGetAdminListService, error) {
 	var resp RespGetAdminListService
 	err := c.executeWXApiPost("/cgi-bin/service/get_admin_list", req, &resp, true)

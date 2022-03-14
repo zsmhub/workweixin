@@ -56,7 +56,7 @@ func (x RespTransferCustomerExternalcontact) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execTransferCustomerExternalcontact 分配在职成员的客户
+// execTransferCustomerExternalcontact 在职继承-分配在职成员的客户
 // 文档：https://developer.work.weixin.qq.com/document/path/94096#分配在职成员的客户
 func (c *ApiClient) ExecTransferCustomerExternalcontact(req ReqTransferCustomerExternalcontact) (RespTransferCustomerExternalcontact, error) {
 	var resp RespTransferCustomerExternalcontact

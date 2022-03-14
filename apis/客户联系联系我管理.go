@@ -8,7 +8,7 @@ import (
 // 修改生成的文件,以满足开发需求
 
 // ReqAddContactWayExternalcontact 配置客户联系「联系我」方式请求
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92577#配置客户联系「联系我」方式
+// 文档：https://developer.work.weixin.qq.com/document/path/92577#配置客户联系「联系我」方式
 
 type (
 	AddContactWayConclusions struct {
@@ -81,7 +81,7 @@ func (x ReqAddContactWayExternalcontact) intoBody() ([]byte, error) {
 }
 
 // RespAddContactWayExternalcontact 配置客户联系「联系我」方式响应
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92577#配置客户联系「联系我」方式
+// 文档：https://developer.work.weixin.qq.com/document/path/92577#配置客户联系「联系我」方式
 
 type RespAddContactWayExternalcontact struct {
 	ConfigID string `json:"config_id"`
@@ -100,7 +100,7 @@ func (x RespAddContactWayExternalcontact) intoBody() ([]byte, error) {
 }
 
 // execAddContactWayExternalcontact 配置客户联系「联系我」方式
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92577#配置客户联系「联系我」方式
+// 文档：https://developer.work.weixin.qq.com/document/path/92577#配置客户联系「联系我」方式
 func (c *ApiClient) ExecAddContactWayExternalcontact(req ReqAddContactWayExternalcontact) (RespAddContactWayExternalcontact, error) {
 	var resp RespAddContactWayExternalcontact
 	err := c.executeWXApiPost("/cgi-bin/externalcontact/add_contact_way", req, &resp, true)
@@ -115,7 +115,7 @@ func (c *ApiClient) ExecAddContactWayExternalcontact(req ReqAddContactWayExterna
 }
 
 // ReqGetContactWayExternalcontact 获取企业已配置的「联系我」方式请求
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92577#获取企业已配置的「联系我」方式
+// 文档：https://developer.work.weixin.qq.com/document/path/92577#获取企业已配置的「联系我」方式
 
 type ReqGetContactWayExternalcontact struct {
 	// ConfigID 联系方式的配置id，必填
@@ -134,7 +134,7 @@ func (x ReqGetContactWayExternalcontact) intoBody() ([]byte, error) {
 }
 
 // RespGetContactWayExternalcontact 获取企业已配置的「联系我」方式响应
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92577#获取企业已配置的「联系我」方式
+// 文档：https://developer.work.weixin.qq.com/document/path/92577#获取企业已配置的「联系我」方式
 
 type RespGetContactWayExternalcontact struct {
 	ContactWay struct {
@@ -187,7 +187,7 @@ func (x RespGetContactWayExternalcontact) intoBody() ([]byte, error) {
 }
 
 // execGetContactWayExternalcontact 获取企业已配置的「联系我」方式
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92577#获取企业已配置的「联系我」方式
+// 文档：https://developer.work.weixin.qq.com/document/path/92577#获取企业已配置的「联系我」方式
 func (c *ApiClient) ExecGetContactWayExternalcontact(req ReqGetContactWayExternalcontact) (RespGetContactWayExternalcontact, error) {
 	var resp RespGetContactWayExternalcontact
 	err := c.executeWXApiPost("/cgi-bin/externalcontact/get_contact_way", req, &resp, true)
@@ -202,7 +202,7 @@ func (c *ApiClient) ExecGetContactWayExternalcontact(req ReqGetContactWayExterna
 }
 
 // ReqListContactWayExternalcontact 获取企业已配置的「联系我」列表请求
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92577#获取企业已配置的「联系我」列表
+// 文档：https://developer.work.weixin.qq.com/document/path/92577#获取企业已配置的「联系我」列表
 
 type ReqListContactWayExternalcontact struct {
 	// Cursor 分页查询使用的游标，为上次请求返回的 <code>next_cursor</code>
@@ -227,7 +227,7 @@ func (x ReqListContactWayExternalcontact) intoBody() ([]byte, error) {
 }
 
 // RespListContactWayExternalcontact 获取企业已配置的「联系我」列表响应
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92577#获取企业已配置的「联系我」列表
+// 文档：https://developer.work.weixin.qq.com/document/path/92577#获取企业已配置的「联系我」列表
 
 type RespListContactWayExternalcontact struct {
 	ContactWay []struct {
@@ -248,7 +248,7 @@ func (x RespListContactWayExternalcontact) intoBody() ([]byte, error) {
 }
 
 // execListContactWayExternalcontact 获取企业已配置的「联系我」列表
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92577#获取企业已配置的「联系我」列表
+// 文档：https://developer.work.weixin.qq.com/document/path/92577#获取企业已配置的「联系我」列表
 func (c *ApiClient) ExecListContactWayExternalcontact(req ReqListContactWayExternalcontact) (RespListContactWayExternalcontact, error) {
 	var resp RespListContactWayExternalcontact
 	err := c.executeWXApiPost("/cgi-bin/externalcontact/list_contact_way", req, &resp, true)
@@ -263,7 +263,7 @@ func (c *ApiClient) ExecListContactWayExternalcontact(req ReqListContactWayExter
 }
 
 // ReqUpdateContactWayExternalcontact 更新企业已配置的「联系我」方式请求
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92577#更新企业已配置的「联系我」方式
+// 文档：https://developer.work.weixin.qq.com/document/path/92577#更新企业已配置的「联系我」方式
 
 type ReqUpdateContactWayExternalcontact struct {
 	// ChatExpiresIn 临时会话有效期，以秒为单位，该参数仅在临时会话模式下有效
@@ -301,7 +301,7 @@ func (x ReqUpdateContactWayExternalcontact) intoBody() ([]byte, error) {
 }
 
 // RespUpdateContactWayExternalcontact 更新企业已配置的「联系我」方式响应
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92577#更新企业已配置的「联系我」方式
+// 文档：https://developer.work.weixin.qq.com/document/path/92577#更新企业已配置的「联系我」方式
 
 type RespUpdateContactWayExternalcontact struct {
 	CommonResp
@@ -318,7 +318,7 @@ func (x RespUpdateContactWayExternalcontact) intoBody() ([]byte, error) {
 }
 
 // execUpdateContactWayExternalcontact 更新企业已配置的「联系我」方式
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92577#更新企业已配置的「联系我」方式
+// 文档：https://developer.work.weixin.qq.com/document/path/92577#更新企业已配置的「联系我」方式
 func (c *ApiClient) ExecUpdateContactWayExternalcontact(req ReqUpdateContactWayExternalcontact) (RespUpdateContactWayExternalcontact, error) {
 	var resp RespUpdateContactWayExternalcontact
 	err := c.executeWXApiPost("/cgi-bin/externalcontact/update_contact_way", req, &resp, true)
@@ -333,7 +333,7 @@ func (c *ApiClient) ExecUpdateContactWayExternalcontact(req ReqUpdateContactWayE
 }
 
 // ReqDelContactWayExternalcontact 删除企业已配置的「联系我」方式请求
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92577#删除企业已配置的「联系我」方式
+// 文档：https://developer.work.weixin.qq.com/document/path/92577#删除企业已配置的「联系我」方式
 
 type ReqDelContactWayExternalcontact struct {
 	// ConfigID 企业联系方式的配置id，必填
@@ -352,7 +352,7 @@ func (x ReqDelContactWayExternalcontact) intoBody() ([]byte, error) {
 }
 
 // RespDelContactWayExternalcontact 删除企业已配置的「联系我」方式响应
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92577#删除企业已配置的「联系我」方式
+// 文档：https://developer.work.weixin.qq.com/document/path/92577#删除企业已配置的「联系我」方式
 
 type RespDelContactWayExternalcontact struct {
 	CommonResp
@@ -369,7 +369,7 @@ func (x RespDelContactWayExternalcontact) intoBody() ([]byte, error) {
 }
 
 // execDelContactWayExternalcontact 删除企业已配置的「联系我」方式
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92577#删除企业已配置的「联系我」方式
+// 文档：https://developer.work.weixin.qq.com/document/path/92577#删除企业已配置的「联系我」方式
 func (c *ApiClient) ExecDelContactWayExternalcontact(req ReqDelContactWayExternalcontact) (RespDelContactWayExternalcontact, error) {
 	var resp RespDelContactWayExternalcontact
 	err := c.executeWXApiPost("/cgi-bin/externalcontact/del_contact_way", req, &resp, true)
@@ -384,7 +384,7 @@ func (c *ApiClient) ExecDelContactWayExternalcontact(req ReqDelContactWayExterna
 }
 
 // ReqCloseTempChatExternalcontact 结束临时会话请求
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92577#结束临时会话
+// 文档：https://developer.work.weixin.qq.com/document/path/92577#结束临时会话
 
 type ReqCloseTempChatExternalcontact struct {
 	// ExternalUserid 客户的外部联系人userid，必填
@@ -405,7 +405,7 @@ func (x ReqCloseTempChatExternalcontact) intoBody() ([]byte, error) {
 }
 
 // RespCloseTempChatExternalcontact 结束临时会话响应
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92577#结束临时会话
+// 文档：https://developer.work.weixin.qq.com/document/path/92577#结束临时会话
 
 type RespCloseTempChatExternalcontact struct {
 	CommonResp
@@ -422,7 +422,7 @@ func (x RespCloseTempChatExternalcontact) intoBody() ([]byte, error) {
 }
 
 // execCloseTempChatExternalcontact 结束临时会话
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92577#结束临时会话
+// 文档：https://developer.work.weixin.qq.com/document/path/92577#结束临时会话
 func (c *ApiClient) ExecCloseTempChatExternalcontact(req ReqCloseTempChatExternalcontact) (RespCloseTempChatExternalcontact, error) {
 	var resp RespCloseTempChatExternalcontact
 	err := c.executeWXApiPost("/cgi-bin/externalcontact/close_temp_chat", req, &resp, true)

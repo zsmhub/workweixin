@@ -8,7 +8,7 @@ import (
 // 修改生成的文件,以满足开发需求
 
 // ReqGetByUserBatch 批量获取客户详情请求
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/93010#批量获取客户详情
+// 文档：https://developer.work.weixin.qq.com/document/path/93010#批量获取客户详情
 
 type ReqGetByUserBatch struct {
 	// Cursor 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填
@@ -31,7 +31,7 @@ func (x ReqGetByUserBatch) intoBody() ([]byte, error) {
 }
 
 // RespGetByUserBatch 批量获取客户详情响应
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/93010#批量获取客户详情
+// 文档：https://developer.work.weixin.qq.com/document/path/93010#批量获取客户详情
 
 type RespGetByUserBatch struct {
 	CommonResp
@@ -76,6 +76,9 @@ type RespGetByUserBatch struct {
 			State          string   `json:"state"`
 			TagID          []string `json:"tag_id"`
 			Userid         string   `json:"userid"`
+			WechatChannels struct {
+				Nickname string `json:"nickname"`
+			} `json:"wechat_channels"`
 		} `json:"follow_info"`
 	} `json:"external_contact_list"`
 	NextCursor string `json:"next_cursor"`
@@ -92,7 +95,7 @@ func (x RespGetByUserBatch) intoBody() ([]byte, error) {
 }
 
 // execGetByUserBatch 批量获取客户详情
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/93010#批量获取客户详情
+// 文档：https://developer.work.weixin.qq.com/document/path/93010#批量获取客户详情
 func (c *ApiClient) ExecGetByUserBatch(req ReqGetByUserBatch) (RespGetByUserBatch, error) {
 	var resp RespGetByUserBatch
 	err := c.executeWXApiPost("/cgi-bin/externalcontact/batch/get_by_user", req, &resp, true)

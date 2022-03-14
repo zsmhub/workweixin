@@ -11,7 +11,7 @@ import (
 // 修改生成的文件,以满足开发需求
 
 // ReqGetCorpTagListExternalcontact 获取企业标签库请求
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92696#获取企业标签库
+// 文档：https://developer.work.weixin.qq.com/document/path/92696#获取企业标签库
 
 type ReqGetCorpTagListExternalcontact struct {
 	// GroupID 要查询的标签组id，返回该标签组以及其下的所有标签信息
@@ -36,7 +36,7 @@ func (x ReqGetCorpTagListExternalcontact) intoURLValues() url.Values {
 }
 
 // RespGetCorpTagListExternalcontact 获取企业标签库响应
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92696#获取企业标签库
+// 文档：https://developer.work.weixin.qq.com/document/path/92696#获取企业标签库
 
 type RespGetCorpTagListExternalcontact struct {
 	CommonResp
@@ -67,7 +67,7 @@ func (x RespGetCorpTagListExternalcontact) intoBody() ([]byte, error) {
 }
 
 // execGetCorpTagListExternalcontact 获取企业标签库
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92696#获取企业标签库
+// 文档：https://developer.work.weixin.qq.com/document/path/92696#获取企业标签库
 func (c *ApiClient) ExecGetCorpTagListExternalcontact(req ReqGetCorpTagListExternalcontact) (RespGetCorpTagListExternalcontact, error) {
 	var resp RespGetCorpTagListExternalcontact
 	err := c.executeWXApiGet("/cgi-bin/externalcontact/get_corp_tag_list", req, &resp, true)
@@ -82,7 +82,7 @@ func (c *ApiClient) ExecGetCorpTagListExternalcontact(req ReqGetCorpTagListExter
 }
 
 // ReqAddCorpTagExternalcontact 添加企业客户标签请求
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92696#添加企业客户标签
+// 文档：https://developer.work.weixin.qq.com/document/path/92696#添加企业客户标签
 
 type (
 	AddCorpTag struct {
@@ -123,7 +123,7 @@ func (x ReqAddCorpTagExternalcontact) intoURLValues() url.Values {
 }
 
 // RespAddCorpTagExternalcontact 添加企业客户标签响应
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92696#添加企业客户标签
+// 文档：https://developer.work.weixin.qq.com/document/path/92696#添加企业客户标签
 
 type RespAddCorpTagExternalcontact struct {
 	CommonResp
@@ -152,7 +152,7 @@ func (x RespAddCorpTagExternalcontact) intoBody() ([]byte, error) {
 }
 
 // execAddCorpTagExternalcontact 添加企业客户标签
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92696#添加企业客户标签
+// 文档：https://developer.work.weixin.qq.com/document/path/92696#添加企业客户标签
 func (c *ApiClient) ExecAddCorpTagExternalcontact(req ReqAddCorpTagExternalcontact) (RespAddCorpTagExternalcontact, error) {
 	var resp RespAddCorpTagExternalcontact
 	err := c.executeWXApiGet("/cgi-bin/externalcontact/add_corp_tag", req, &resp, true)
@@ -167,7 +167,7 @@ func (c *ApiClient) ExecAddCorpTagExternalcontact(req ReqAddCorpTagExternalconta
 }
 
 // ReqEditCorpTagExternalcontact 编辑企业客户标签请求
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92696#编辑企业客户标签
+// 文档：https://developer.work.weixin.qq.com/document/path/92696#编辑企业客户标签
 
 type ReqEditCorpTagExternalcontact struct {
 	// Agentid 授权方安装的应用agentid。<strong>仅旧的第三方多应用套件需要填此参数</strong>
@@ -196,7 +196,7 @@ func (x ReqEditCorpTagExternalcontact) intoURLValues() url.Values {
 }
 
 // RespEditCorpTagExternalcontact 编辑企业客户标签响应
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92696#编辑企业客户标签
+// 文档：https://developer.work.weixin.qq.com/document/path/92696#编辑企业客户标签
 
 type RespEditCorpTagExternalcontact struct {
 	CommonResp
@@ -213,7 +213,7 @@ func (x RespEditCorpTagExternalcontact) intoBody() ([]byte, error) {
 }
 
 // execEditCorpTagExternalcontact 编辑企业客户标签
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92696#编辑企业客户标签
+// 文档：https://developer.work.weixin.qq.com/document/path/92696#编辑企业客户标签
 func (c *ApiClient) ExecEditCorpTagExternalcontact(req ReqEditCorpTagExternalcontact) (RespEditCorpTagExternalcontact, error) {
 	var resp RespEditCorpTagExternalcontact
 	err := c.executeWXApiGet("/cgi-bin/externalcontact/edit_corp_tag", req, &resp, true)
@@ -228,7 +228,7 @@ func (c *ApiClient) ExecEditCorpTagExternalcontact(req ReqEditCorpTagExternalcon
 }
 
 // ReqDelCorpTagExternalcontact 删除企业客户标签请求
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92696#删除企业客户标签
+// 文档：https://developer.work.weixin.qq.com/document/path/92696#删除企业客户标签
 
 type ReqDelCorpTagExternalcontact struct {
 	// Agentid 授权方安装的应用agentid。<strong>仅旧的第三方多应用套件需要填此参数</strong>
@@ -255,7 +255,7 @@ func (x ReqDelCorpTagExternalcontact) intoURLValues() url.Values {
 }
 
 // RespDelCorpTagExternalcontact 删除企业客户标签响应
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92696#删除企业客户标签
+// 文档：https://developer.work.weixin.qq.com/document/path/92696#删除企业客户标签
 
 type RespDelCorpTagExternalcontact struct {
 	CommonResp
@@ -272,7 +272,7 @@ func (x RespDelCorpTagExternalcontact) intoBody() ([]byte, error) {
 }
 
 // execDelCorpTagExternalcontact 删除企业客户标签
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92696#删除企业客户标签
+// 文档：https://developer.work.weixin.qq.com/document/path/92696#删除企业客户标签
 func (c *ApiClient) ExecDelCorpTagExternalcontact(req ReqDelCorpTagExternalcontact) (RespDelCorpTagExternalcontact, error) {
 	var resp RespDelCorpTagExternalcontact
 	err := c.executeWXApiGet("/cgi-bin/externalcontact/del_corp_tag", req, &resp, true)

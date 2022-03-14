@@ -7,7 +7,7 @@ type CommonResp struct {
 
 // IsOK 响应体是否为一次成功请求的响应
 //
-// 实现依据: https://work.weixin.qq.com/api/doc#10013
+// 实现依据: https://developer.work.weixin.qq.com/document/10013
 //
 // > 企业微信所有接口，返回包里都有errcode、errmsg。（除部分旧接口只有在失败时才会返回errcode，但没什么影响，因为结构体中errcode默认值为0，即默认成功）
 // > 开发者需根据errcode是否为0判断是否调用成功(errcode意义请见全局错误码)。

@@ -11,7 +11,7 @@ import (
 // 修改生成的文件,以满足开发需求
 
 // ReqListExternalcontact 获取客户列表请求
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92264#获取客户列表
+// 文档：https://developer.work.weixin.qq.com/document/path/92264#获取客户列表
 
 type ReqListExternalcontact struct {
 	// Userid 企业成员的userid，必填
@@ -34,7 +34,7 @@ func (x ReqListExternalcontact) intoURLValues() url.Values {
 }
 
 // RespListExternalcontact 获取客户列表响应
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92264#获取客户列表
+// 文档：https://developer.work.weixin.qq.com/document/path/92264#获取客户列表
 
 type RespListExternalcontact struct {
 	CommonResp
@@ -52,7 +52,7 @@ func (x RespListExternalcontact) intoBody() ([]byte, error) {
 }
 
 // execListExternalcontact 获取客户列表
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92264#获取客户列表
+// 文档：https://developer.work.weixin.qq.com/document/path/92264#获取客户列表
 func (c *ApiClient) ExecListExternalcontact(req ReqListExternalcontact) (RespListExternalcontact, error) {
 	var resp RespListExternalcontact
 	err := c.executeWXApiGet("/cgi-bin/externalcontact/list", req, &resp, true)

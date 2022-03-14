@@ -8,7 +8,7 @@ import (
 // 可自行修改生成的文件,以满足开发需求
 
 // ReqRemarkExternalcontact 修改客户备注信息请求
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92694#修改客户备注信息
+// 文档：https://developer.work.weixin.qq.com/document/path/92694#修改客户备注信息
 
 type ReqRemarkExternalcontact struct {
 	// Description 此用户对外部联系人的描述，最多150个字符
@@ -39,7 +39,7 @@ func (x ReqRemarkExternalcontact) intoBody() ([]byte, error) {
 }
 
 // RespRemarkExternalcontact 修改客户备注信息响应
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92694#修改客户备注信息
+// 文档：https://developer.work.weixin.qq.com/document/path/92694#修改客户备注信息
 
 type RespRemarkExternalcontact struct {
 	CommonResp
@@ -56,7 +56,7 @@ func (x RespRemarkExternalcontact) intoBody() ([]byte, error) {
 }
 
 // execRemarkExternalcontact 修改客户备注信息
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92694#修改客户备注信息
+// 文档：https://developer.work.weixin.qq.com/document/path/92694#修改客户备注信息
 func (c *ApiClient) ExecRemarkExternalcontact(req ReqRemarkExternalcontact) (RespRemarkExternalcontact, error) {
 	var resp RespRemarkExternalcontact
 	err := c.executeWXApiPost("/cgi-bin/externalcontact/remark", req, &resp, true)

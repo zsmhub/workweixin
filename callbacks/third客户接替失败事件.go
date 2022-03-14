@@ -4,7 +4,7 @@ import "encoding/xml"
 
 // 自动生成的回调结构,按需修改
 // 文档地址
-// https://open.work.weixin.qq.com/api/doc/90001/90143/92277#客户接替失败事件
+// https://developer.work.weixin.qq.com/document/path/92277#客户接替失败事件
 
 func init() {
 	// 添加可解析的回调事件

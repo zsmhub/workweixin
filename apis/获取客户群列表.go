@@ -8,7 +8,7 @@ import (
 // 修改生成的文件,以满足开发需求
 
 // ReqListGroupchat 获取客户群列表请求
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/93414#获取客户群列表
+// 文档：https://developer.work.weixin.qq.com/document/path/93414#获取客户群列表
 
 type (
 	GroupchatOwnerFilter struct {
@@ -39,7 +39,7 @@ func (x ReqListGroupchat) intoBody() ([]byte, error) {
 }
 
 // RespListGroupchat 获取客户群列表响应
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/93414#获取客户群列表
+// 文档：https://developer.work.weixin.qq.com/document/path/93414#获取客户群列表
 
 type RespListGroupchat struct {
 	CommonResp
@@ -61,7 +61,7 @@ func (x RespListGroupchat) intoBody() ([]byte, error) {
 }
 
 // execListGroupchat 获取客户群列表
-// 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/93414#获取客户群列表
+// 文档：https://developer.work.weixin.qq.com/document/path/93414#获取客户群列表
 func (c *ApiClient) ExecListGroupchat(req ReqListGroupchat) (RespListGroupchat, error) {
 	var resp RespListGroupchat
 	err := c.executeWXApiPost("/cgi-bin/externalcontact/groupchat/list", req, &resp, true)

@@ -8,7 +8,7 @@ import (
 // 可自行修改生成的文件,以满足开发需求
 
 // ReqAddMsgTemplateExternalcontact 创建企业群发请求
-// 文档：https://work.weixin.qq.com/api/doc/90001/90143/92698#创建企业群发
+// 文档：https://developer.work.weixin.qq.com/document/path/92698#创建企业群发
 
 type (
 	AddMsgTemplateText struct {
@@ -88,7 +88,7 @@ func (x ReqAddMsgTemplateExternalcontact) intoBody() ([]byte, error) {
 }
 
 // RespAddMsgTemplateExternalcontact 创建企业群发响应
-// 文档：https://work.weixin.qq.com/api/doc/90001/90143/92698#创建企业群发
+// 文档：https://developer.work.weixin.qq.com/document/path/92698#创建企业群发
 
 type RespAddMsgTemplateExternalcontact struct {
 	CommonResp
@@ -107,7 +107,7 @@ func (x RespAddMsgTemplateExternalcontact) intoBody() ([]byte, error) {
 }
 
 // execAddMsgTemplateExternalcontact 创建企业群发
-// 文档：https://work.weixin.qq.com/api/doc/90001/90143/92698#创建企业群发
+// 文档：https://developer.work.weixin.qq.com/document/path/92698#创建企业群发
 func (c *ApiClient) ExecAddMsgTemplateExternalcontact(req ReqAddMsgTemplateExternalcontact) (RespAddMsgTemplateExternalcontact, error) {
 	var resp RespAddMsgTemplateExternalcontact
 	err := c.executeWXApiPost("/cgi-bin/externalcontact/add_msg_template", req, &resp, true)
