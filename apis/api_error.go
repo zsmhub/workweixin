@@ -14,7 +14,26 @@ type ClientError struct {
 
 var _ error = (*ClientError)(nil)
 
+// 重定义error，转为友好的错误提示
+var (
+	errPrefix  = "企微调用异常："
+	ErrCodeMap = map[ErrCode]string{
+		ErrCodeServiceUnavailable: "系统繁忙",
+		ErrCode40011:              "发送素材过大，请使用链接发送",
+		ErrCode40029:              "登录过期，请点击按钮重新登录",
+		ErrCode40082:              errPrefix + "invalid suite_token",
+		ErrCode41022:              errPrefix + "suite_access_token missing",
+		ErrCode42001:              errPrefix + "access_token已过期",
+		ErrCode42009:              errPrefix + "suite_access_token已过期",
+		ErrCode45033:              "接口并发调用超过限制",
+		ErrCode60011:              "无权限访问",
+	}
+)
+
 func (e *ClientError) Error() string {
+	if errMsg, ok := ErrCodeMap[e.Code]; ok {
+		return errMsg
+	}
 	return fmt.Sprintf(
 		"ClientError { Code: %d, Msg: %#v }",
 		e.Code,
@@ -736,6 +755,9 @@ const ErrCode46003 ErrCode = 46003
 // 排查方法: 需要确认指定的用户存在于通讯录中
 const ErrCode46004 ErrCode = 46004
 
+// ErrCode48001 API功能未授权
+const ErrCode48001 ErrCode = 48001
+
 // ErrCode48002 API接口无权限调用
 // 排查方法: [查看帮助](https://work.weixin.qq.com/api/doc/90000/90139/90313#10649/错误码：48002)
 // API接口无权限调用。请确认：
@@ -834,7 +856,7 @@ const ErrCode60009 ErrCode = 60009
 // 1）创建部门和更新部门时，指定的parentid参数不能是 部门id 或者 子部门id
 const ErrCode60010 ErrCode = 60010
 
-// ErrCode60011 指定的成员/部门/标签参数无权限
+// ErrCode60011 指定的成员/部门/标签参数无权限【可能是企业成员安装了第三方应用，需修改为管理员授权安装】
 // 排查方法: [查看帮助](https://work.weixin.qq.com/api/doc/90000/90139/90313#10649/错误码：60011)
 // 指定的成员/部门/标签参数无权限。请确认：
 // 1) 变更通讯录接口，需要有通讯录编辑权限。
@@ -2194,6 +2216,9 @@ const ErrCode301002 ErrCode = 301002
 // ErrCode301005 不允许删除创建者
 // 排查方法: 创建者不允许从通讯录中删除。如果需要删除该成员，需要先在WEB管理端转移创建者身份。
 const ErrCode301005 ErrCode = 301005
+
+// ErrCode301007 授权企业被解散
+const ErrCode301007 ErrCode = 301007
 
 // ErrCode301012 参数 position 不合法
 // 排查方法: 长度不允许超过128个字符

@@ -14,8 +14,6 @@ import (
 // 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/90332#读取成员
 
 type ReqGetUser struct {
-	// AccessToken 调用接口凭证，必填
-	AccessToken string `json:"access_token"`
 	// Userid 成员UserID。对应管理端的帐号，企业内必须唯一。不区分大小写，长度为1~64个字节，必填
 	Userid string `json:"userid"`
 }

@@ -48,6 +48,9 @@ const EventTypeSysApprovalChange EventType = "sys_approval_change"
 // 应用管理员变更通知
 const EventTypeChangeAppAdmin EventType = "change_app_admin"
 
+// 客服消息类型
+const EventTypeKefuMsgOrEvent EventType = "kf_msg_or_event"
+
 // 推送suite_ticket
 const InfoTypeSuiteTicket EventType = "suite_ticket"
 
@@ -77,6 +80,9 @@ const InfoTypeChangeExternalChat EventType = "change_external_chat"
 
 // 标签事件
 const InfoTypeChangeExternalTag EventType = "change_external_tag"
+
+// 同意授权转换external_userid事件，企微安全升级需要：旧external_userid调整为新external_userid
+const InfoTypeAgreeExternalUseridMigration EventType = "agree_external_userid_migration"
 
 // ChangeType 变更类型
 type ChangeType string

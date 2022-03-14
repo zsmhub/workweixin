@@ -2,7 +2,6 @@ package apis
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"net/url"
 )
@@ -27,6 +26,9 @@ func (x ReqUploadMedia) intoURLValues() url.Values {
 	_ = json.Unmarshal(jsonBytes, &vals)
 
 	for k, v := range vals {
+		if v == nil {
+			continue
+		}
 		ret.Add(k, fmt.Sprintf("%v", v))
 	}
 	return ret
@@ -64,10 +66,6 @@ func (c *ApiClient) ExecUploadMedia(req ReqUploadMedia) (RespUploadMedia, error)
 		return RespUploadMedia{}, err
 	}
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
-		apiError, _ := bizErr.(*ClientError)
-		if apiError.Code == ErrCode40011 {
-			return RespUploadMedia{}, errors.New("发送素材过大，请使用链接发送")
-		}
 		return RespUploadMedia{}, bizErr
 	}
 

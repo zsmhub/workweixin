@@ -2,14 +2,10 @@ package apis
 
 import (
 	"bytes"
-	"fmt"
-	"github.com/go-resty/resty/v2"
 	"github.com/google/uuid"
 	"io"
 	"mime/multipart"
-	"net/url"
 	"os"
-	"path"
 )
 
 const mediaFieldName = "media"
@@ -85,22 +81,17 @@ type UploadMediaResult struct {
 // UploadMedia 上传临时素材
 func (c *ApiClient) UploadTempMedia(req UploadMediaReq) (UploadMediaResult, error) {
 	var result UploadMediaResult
-	restyClient := resty.New()
-
-	urlInfo, err := url.Parse(req.URL)
-	if err != nil {
-		return result, err
-	}
 
 	// 下载文件
-	res, err := restyClient.R().Get(req.URL)
+	_, body, err := FastClient.Get(nil, req.URL)
 	if err != nil {
 		return result, err
 	}
 
-	filename := fmt.Sprintf("%s%s", uuid.New().String(), path.Ext(urlInfo.Path))
+	// 发现带上.gif后缀会导致前端无法引用到聊天窗口，故直接去掉后缀
+	filename := uuid.New().String()
 
-	media, err := NewMediaFromBuffer(filename, res.Body())
+	media, err := NewMediaFromBuffer(filename, body)
 	if err != nil {
 		return result, err
 	}

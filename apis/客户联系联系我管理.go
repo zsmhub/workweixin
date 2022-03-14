@@ -10,29 +10,41 @@ import (
 // ReqAddContactWayExternalcontact 配置客户联系「联系我」方式请求
 // 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92577#配置客户联系「联系我」方式
 
+type (
+	AddContactWayConclusions struct {
+		Image       AddContactWayConclusionsImage       `json:"image"`
+		Link        AddContactWayConclusionsLink        `json:"link"`
+		Miniprogram AddContactWayConclusionsMiniprogram `json:"miniprogram"`
+		Text        AddContactWayConclusionsText        `json:"text"`
+	}
+
+	AddContactWayConclusionsImage struct {
+		MediaID string `json:"media_id"`
+	}
+
+	AddContactWayConclusionsLink struct {
+		Desc   string `json:"desc"`
+		Picurl string `json:"picurl"`
+		Title  string `json:"title"`
+		URL    string `json:"url"`
+	}
+
+	AddContactWayConclusionsMiniprogram struct {
+		Appid      string `json:"appid"`
+		Page       string `json:"page"`
+		PicMediaID string `json:"pic_media_id"`
+		Title      string `json:"title"`
+	}
+
+	AddContactWayConclusionsText struct {
+		Content string `json:"content"`
+	}
+)
+
 type ReqAddContactWayExternalcontact struct {
 	// ChatExpiresIn 临时会话有效期，以秒为单位。该参数仅在is_temp为true时有效，默认为添加好友后24小时，最多为14天
-	ChatExpiresIn int `json:"chat_expires_in"`
-	Conclusions   struct {
-		Image struct {
-			MediaID string `json:"media_id"`
-		} `json:"image"`
-		Link struct {
-			Desc   string `json:"desc"`
-			Picurl string `json:"picurl"`
-			Title  string `json:"title"`
-			URL    string `json:"url"`
-		} `json:"link"`
-		Miniprogram struct {
-			Appid      string `json:"appid"`
-			Page       string `json:"page"`
-			PicMediaID string `json:"pic_media_id"`
-			Title      string `json:"title"`
-		} `json:"miniprogram"`
-		Text struct {
-			Content string `json:"content"`
-		} `json:"text"`
-	} `json:"conclusions"` // 结束语，会话结束时自动发送给客户，可参考“<a href="#15645/结束语定义">结束语定义</a>”，仅在is_temp为true时有效
+	ChatExpiresIn int                      `json:"chat_expires_in"`
+	Conclusions   AddContactWayConclusions `json:"conclusions"` // 结束语，会话结束时自动发送给客户，可参考“<a href="#15645/结束语定义">结束语定义</a>”，仅在is_temp为true时有效
 	// ExpiresIn 临时会话二维码有效期，以秒为单位。该参数仅在is_temp为true时有效，默认7天，最多为14天
 	ExpiresIn int `json:"expires_in"`
 	// IsTemp 是否临时会话模式，true表示使用临时会话模式，默认为false
@@ -255,27 +267,8 @@ func (c *ApiClient) ExecListContactWayExternalcontact(req ReqListContactWayExter
 
 type ReqUpdateContactWayExternalcontact struct {
 	// ChatExpiresIn 临时会话有效期，以秒为单位，该参数仅在临时会话模式下有效
-	ChatExpiresIn int `json:"chat_expires_in"`
-	Conclusions   struct {
-		Image struct {
-			MediaID string `json:"media_id"`
-		} `json:"image"`
-		Link struct {
-			Desc   string `json:"desc"`
-			Picurl string `json:"picurl"`
-			Title  string `json:"title"`
-			URL    string `json:"url"`
-		} `json:"link"`
-		Miniprogram struct {
-			Appid      string `json:"appid"`
-			Page       string `json:"page"`
-			PicMediaID string `json:"pic_media_id"`
-			Title      string `json:"title"`
-		} `json:"miniprogram"`
-		Text struct {
-			Content string `json:"content"`
-		} `json:"text"`
-	} `json:"conclusions"` // 结束语，会话结束时自动发送给客户，可参考“<a href="#15645/结束语定义">结束语定义</a>”，仅临时会话模式（is_temp为true）可设置
+	ChatExpiresIn int                      `json:"chat_expires_in"`
+	Conclusions   AddContactWayConclusions `json:"conclusions"` // 结束语，会话结束时自动发送给客户，可参考“<a href="#15645/结束语定义">结束语定义</a>”，仅临时会话模式（is_temp为true）可设置
 	// ConfigID 企业联系方式的配置id，必填
 	ConfigID string `json:"config_id"`
 	// ExpiresIn 临时会话二维码有效期，以秒为单位，该参数仅在临时会话模式下有效

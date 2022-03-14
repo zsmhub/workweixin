@@ -75,20 +75,30 @@ func main() {
 
 	doc = tmp
 
-	rawHtml, err := doc.Find("#js_doc_apiShow_cnt").Html()
+	titleHtml, err := doc.Find("title").Html()
+	if err != nil {
+		die("failed to get html: %+v\n", err)
+	}
+	titleHtml = titleHtml[:strings.Index(titleHtml, " ")]
+
+	rawHtml, err := doc.Find(".frame_cntHtml").Html()
 	if err != nil {
 		die("failed to get html: %+v\n", err)
 	}
 
 	fmt.Println("开始抓取和生成API代码，文档地址:", docURL)
 
-	rawHtml = regexp.MustCompile(`<h2 id="([0-9a-zA-Z\-_]+)">`).ReplaceAllString(rawHtml, `<h2 class="rawHtmlSection">`)
+	rawHtml = regexp.MustCompile(`<h2 id="([0-9a-zA-Z\-%]+)" data-sign="\w+" data-lines="\w+">`).ReplaceAllString(rawHtml, `<h2 class="rawHtmlSection">`)
+	rawHtml = regexp.MustCompile(`<h2 data-sign="\w+" data-lines="\w+" id="([0-9a-zA-Z\-%]+)">`).ReplaceAllString(rawHtml, `<h2 class="rawHtmlSection">`)
 	rawHtml = regexp.MustCompile(`<h1 id="\w+" class="\w+">`).ReplaceAllString(rawHtml, `<h1 class="rawHtmlSection">`)
 	rawHtmlSections := strings.Split(rawHtml, `<h2 class="rawHtmlSection">`)
 	rawHtmlType := "h2" // 一个页面多个接口
+
 	if len(rawHtmlSections) == 1 {
-		rawHtml = regexp.MustCompile(`<h3 id="([0-9a-zA-Z\-_]+)">`).ReplaceAllString(rawHtml, `<h2 class="rawHtmlSection">`)
-		rawHtml = regexp.MustCompile(`<h4 id="([0-9a-zA-Z\-_]+)">`).ReplaceAllString(rawHtml, `<h2 class="rawHtmlSection">`)
+		rawHtml = regexp.MustCompile(`<h3 id="([0-9a-zA-Z\-%]+)" data-sign="\w+" data-lines="\w+">`).ReplaceAllString(rawHtml, `<h2 class="rawHtmlSection">`)
+		rawHtml = regexp.MustCompile(`<h3 data-sign="\w+" data-lines="\w+" id="([0-9a-zA-Z\-%]+)">`).ReplaceAllString(rawHtml, `<h2 class="rawHtmlSection">`)
+		rawHtml = regexp.MustCompile(`<h4 id="([0-9a-zA-Z\-%]+)" data-sign="\w+" data-lines="\w+">`).ReplaceAllString(rawHtml, `<h2 class="rawHtmlSection">`)
+		rawHtml = regexp.MustCompile(`<h4 data-sign="\w+" data-lines="\w+" id="([0-9a-zA-Z\-%]+)">`).ReplaceAllString(rawHtml, `<h2 class="rawHtmlSection">`)
 		rawHtmlSections = strings.Split(rawHtml, `<h2 class="rawHtmlSection">`)
 
 		if len(rawHtmlSections) == 1 {
@@ -104,12 +114,10 @@ func main() {
 		}
 
 		if rawHtmlType == "h1" {
-			rawHtmlSection = `<h1 class="rawHtmlSection">` + rawHtmlSection
-			apiNameRegexp := regexp.MustCompile(`<h1 class="rawHtmlSection">(.+?)</h1>`)
-			api.FileName = pickSubMatchString(apiNameRegexp.FindStringSubmatch(rawHtmlSection), 2, 1)
+			api.FileName = titleHtml
 		} else {
 			rawHtmlSection = `<h2 class="rawHtmlSection">` + rawHtmlSection
-			apiNameRegexp := regexp.MustCompile(`<a name="(.+?)" class="reference-link"></a>`)
+			apiNameRegexp := regexp.MustCompile(`<a class="anchor" href=".+"></a>(.+?)</h`)
 			api.FileName = pickSubMatchString(apiNameRegexp.FindStringSubmatch(rawHtmlSection), 2, 1)
 		}
 
@@ -132,6 +140,8 @@ func main() {
 			continue
 		}
 
+		re, _ := regexp.Compile("\\<[\\S\\s]+?\\>")
+		api.XmlStr = re.ReplaceAllString(api.XmlStr, "")
 		api.XmlStr = strings.ReplaceAll(api.XmlStr, "&lt;", "<")
 		api.XmlStr = strings.ReplaceAll(api.XmlStr, "&gt;", ">")
 

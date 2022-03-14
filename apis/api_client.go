@@ -1,17 +1,19 @@
 package apis
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/pkg/errors"
-	"log"
+	"github.com/valyala/fasthttp"
+	"io"
+	"mime/multipart"
+	"net/http"
 	"net/url"
 	"sync"
 )
 
 // ApiClient 企业微信客户端
 type ApiClient struct {
-	opts               AppClientOptions
 	CorpId             string // 企业ID
 	CorpProviderSecret string // 企业密钥
 
@@ -34,10 +36,7 @@ type ApiClient struct {
 
 // 服务商API客户端初始化
 func NewProviderApiClient(corpId, corpProviderSecret string) *ApiClient {
-	optionsObj := getDefaultAppOptions()
-
 	c := ApiClient{
-		opts:               optionsObj,
 		CorpId:             corpId,
 		CorpProviderSecret: corpProviderSecret,
 		accessTokenName:    "provider_access_token",
@@ -52,10 +51,7 @@ func NewProviderApiClient(corpId, corpProviderSecret string) *ApiClient {
 
 // 第三方应用API客户端初始化，第一次调用这个接口时，appSuiteTicket为空字符串
 func NewThirdAppApiClient(corpId, appSuiteId, appSuiteSecret, appSuiteTicket string) *ApiClient {
-	optionsObj := getDefaultAppOptions()
-
 	c := ApiClient{
-		opts:            optionsObj,
 		CorpId:          corpId,
 		AppSuiteId:      appSuiteId,
 		AppSuiteSecret:  appSuiteSecret,
@@ -72,10 +68,7 @@ func NewThirdAppApiClient(corpId, appSuiteId, appSuiteSecret, appSuiteTicket str
 
 // 授权企业API客户端初始化
 func NewAuthCorpApiClient(corpId, companyPermanentCode string, AgentId int, thirdAppClient *ApiClient) *ApiClient {
-	optionsObj := getDefaultAppOptions()
-
 	c := ApiClient{
-		opts:                   optionsObj,
 		CorpId:                 corpId,
 		AgentId:                AgentId,
 		CompanyPermanentCode:   companyPermanentCode,
@@ -109,10 +102,9 @@ func (c *ApiClient) composeWXApiURL(path string, req interface{}) *url.URL {
 		values = valuer.intoURLValues()
 	}
 
-	base, err := url.Parse(c.opts.WxAPIHost)
+	base, err := url.Parse(DefaultQYAPIHost)
 	if err != nil {
-		// TODO: error_chain
-		panic(fmt.Sprintf("qyapiHost invalid: host=%s err=%+v", c.opts.WxAPIHost, err))
+		panic(fmt.Sprintf("qyapiHost invalid: host=%s err=%+v", DefaultQYAPIHost, err))
 	}
 
 	base.Path = path
@@ -143,77 +135,89 @@ func (c *ApiClient) executeWXApiGet(path string, req urlValuer, objResp interfac
 	wxUrlWithToken := c.composeWXURLWithToken(path, req, withAccessToken)
 	urlStr := wxUrlWithToken.String()
 
-	commonResp := CommonResp{}
-	resp, err := c.opts.restyCli.R().Get(urlStr)
-	if err != nil {
+	httpReq := fasthttp.AcquireRequest()
+	defer fasthttp.ReleaseRequest(httpReq)
+
+	httpResp := fasthttp.AcquireResponse()
+	defer fasthttp.ReleaseResponse(httpResp)
+
+	httpReq.SetRequestURI(urlStr)
+	httpReq.Header.SetMethod(http.MethodGet)
+
+	if err := FastClient.DoTimeout(httpReq, httpResp, HttpTTL); err != nil {
 		return err
 	}
 
-	bodyResp := resp.Body()
-	if commonResp.ErrCode == ErrCode42001 || commonResp.ErrCode == ErrCode640014 {
-		log.Println("invalid access_token,now retry")
-		return err
-	}
-	err = json.Unmarshal(bodyResp, &objResp)
-	return err
-}
-
-// 微信端接收的参数中一个数组里包含有多种类型，强类型语言无法支持，只能在前端拼接成str直接传到wx
-func (c *ApiClient) executeWXApiJSONPostWithBytesReq(path string, req []byte, objResp interface{}, withAccessToken bool) error {
-	wxUrlWithToken := c.composeWXURLWithToken(path, req, withAccessToken)
-	urlStr := wxUrlWithToken.String()
-
-	// resp, err := c.opts.HTTP.Post(urlStr, "application/json", bytes.NewReader(req))
-	resp, err := c.opts.restyCli.R().
-		SetHeader("Content-Type", "application/json").
-		SetBody(req).
-		Post(urlStr)
-	if err != nil {
-		// TODO: error_chain
-		return err
-	}
-
-	err = json.Unmarshal(resp.Body(), &objResp)
-
-	return err
+	return json.Unmarshal(httpResp.Body(), &objResp)
 }
 
 func (c *ApiClient) executeWXApiPost(path string, req bodyer, objResp interface{}, withAccessToken bool) error {
-	// defer util.FuncTracer("path", path, "req", req, "resp", objResp)()
 	wxUrlWithToken := c.composeWXURLWithToken(path, req, withAccessToken)
 	urlStr := wxUrlWithToken.String()
 
 	body, err := req.intoBody()
 	if err != nil {
-		// TODO: error_chain
 		return err
 	}
 
-	resp, err := c.opts.restyCli.R().
-		SetHeader("Content-Type", "application/json").
-		SetBody(body).
-		Post(urlStr)
-	if err != nil {
-		// TODO: error_chain
+	httpReq := fasthttp.AcquireRequest()
+	defer fasthttp.ReleaseRequest(httpReq)
+
+	httpResp := fasthttp.AcquireResponse()
+	defer fasthttp.ReleaseResponse(httpResp)
+
+	httpReq.SetRequestURI(urlStr)
+	httpReq.Header.SetContentType("application/json")
+	httpReq.SetBody(body)
+	httpReq.Header.SetMethod(http.MethodPost)
+
+	if err := FastClient.DoTimeout(httpReq, httpResp, HttpTTL); err != nil {
 		return err
 	}
 
-	err = json.Unmarshal(resp.Body(), &objResp)
-	return err
-
+	return json.Unmarshal(httpResp.Body(), &objResp)
 }
 
 func (c *ApiClient) executeWXApiMediaUpload(path string, req mediaUploader, objResp interface{}, withAccessToken bool) error {
 	wxUrlWithToken := c.composeWXURLWithToken(path, req, withAccessToken)
+
 	urlStr := wxUrlWithToken.String()
+
 	m := req.getMedia()
-	resp, err := c.opts.restyCli.R().
-		SetFileReader("media", m.filename, m.stream).
-		Post(urlStr)
+
+	httpReq := fasthttp.AcquireRequest()
+	defer fasthttp.ReleaseRequest(httpReq)
+
+	httpResp := fasthttp.AcquireResponse()
+	defer fasthttp.ReleaseResponse(httpResp)
+
+	// 新建一个缓冲，用于存放文件内容
+	bodyBufer := &bytes.Buffer{}
+	// 创建一个multipart文件写入器，方便按照http规定格式写入内容
+	bodyWriter := multipart.NewWriter(bodyBufer)
+	// 从bodyWriter生成fileWriter,并将文件内容写入fileWriter,多个文件可进行多次
+	fileWriter, err := bodyWriter.CreateFormFile("media", m.filename)
 	if err != nil {
-		return errors.WithStack(err)
+		fmt.Println(err.Error())
+		return err
 	}
 
-	err = json.Unmarshal(resp.Body(), &objResp)
-	return err
+	_, err = io.Copy(fileWriter, m.stream)
+	if err != nil {
+		return err
+	}
+
+	// 停止写入
+	_ = bodyWriter.Close()
+
+	httpReq.SetRequestURI(urlStr)
+	httpReq.Header.SetContentType(bodyWriter.FormDataContentType())
+	httpReq.SetBody(bodyBufer.Bytes())
+	httpReq.Header.SetMethod(http.MethodPost)
+
+	if err := FastClient.DoTimeout(httpReq, httpResp, HttpTTL); err != nil {
+		return err
+	}
+
+	return json.Unmarshal(httpResp.Body(), &objResp)
 }

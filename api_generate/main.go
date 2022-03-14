@@ -78,27 +78,26 @@ func main() {
 
 	doc = tmp
 
-	titleHtml, err := doc.Find("#js_doc_preview_title").Html()
+	titleHtml, err := doc.Find("title").Html()
 	if err != nil {
 		die("failed to get html: %+v\n", err)
 	}
-
+	titleHtml = titleHtml[:strings.Index(titleHtml, " ")]
 	savePath = "./apis/" + titleHtml + ".go"
 	fmt.Printf("开始抓取和生成API代码，文档地址:%s，代码保存路径:%s\n", docURL, savePath)
 
-	rawHtml, err := doc.Find("#js_doc_apiShow_cnt").Html()
+	rawHtml, err := doc.Find(".frame_cntHtml").Html()
 	if err != nil {
 		die("failed to get html: %+v\n", err)
 	}
 
 	apis := make([]*Api, 0)
-	rawHtml = regexp.MustCompile(`<h2 id="([0-9a-zA-Z\-_]+)">`).ReplaceAllString(rawHtml, `<h2 class="rawHtmlSection">`)
-	rawHtml = regexp.MustCompile(`<h1 id="\w+" class="\w+">`).ReplaceAllString(rawHtml, `<h1 class="rawHtmlSection">`)
+	rawHtml = regexp.MustCompile(`<h2 id="([0-9a-zA-Z\-%]+)" data-sign="\w+" data-lines="\w+">`).ReplaceAllString(rawHtml, `<h2 class="rawHtmlSection">`)
+	rawHtml = regexp.MustCompile(`<h2 data-sign="\w+" data-lines="\w+" id="([0-9a-zA-Z\-%]+)">`).ReplaceAllString(rawHtml, `<h2 class="rawHtmlSection">`)
 	rawHtmlSections := strings.Split(rawHtml, `<h2 class="rawHtmlSection">`)
 	rawHtmlType := "h2" // 一个页面多个接口
 	if len(rawHtmlSections) == 1 {
 		rawHtmlType = "h1" // 一个页面一个接口
-		rawHtmlSections = strings.Split(rawHtml, `<h1 class="rawHtmlSection">`)
 	}
 	for index, rawHtmlSection := range rawHtmlSections {
 		fmt.Printf("\n\n开始处理第%d个接口\n", index)
@@ -107,12 +106,10 @@ func main() {
 		}
 
 		if rawHtmlType == "h1" {
-			rawHtmlSection = `<h1 class="rawHtmlSection">` + rawHtmlSection
-			apiNameRegexp := regexp.MustCompile(`<h1 class="rawHtmlSection">(.+?)</h1>`)
-			api.Name = pickSubMatchString(apiNameRegexp.FindStringSubmatch(rawHtmlSection), 2, 1)
+			api.Name = titleHtml
 		} else {
 			rawHtmlSection = `<h2 class="rawHtmlSection">` + rawHtmlSection
-			apiNameRegexp := regexp.MustCompile(`<a name="(.+?)" class="reference-link"></a>`)
+			apiNameRegexp := regexp.MustCompile(`<a class="anchor" href=".+"></a>(.+?)</h2>`)
 			api.Name = pickSubMatchString(apiNameRegexp.FindStringSubmatch(rawHtmlSection), 2, 1)
 		}
 
@@ -122,18 +119,18 @@ func main() {
 		}
 		fmt.Printf("%s\n", api.Name)
 
-		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<td style="text-align:left">`, `<td>`)
-		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求方式</strong>:`, `<strong>请求方式:</strong>`)
-		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求包体：</strong>`, `<strong>请求示例：</strong>`)
-		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>返回结果：</strong>`, `<strong>返回结果:</strong>`)
-		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>POST(HTTP)</strong>`, `POST（<strong>HTTPS</strong>）`)
-		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>GET(HTTP)</strong>`, `GET（<strong>HTTPS</strong>）`)
+		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求方式：</strong>`, `<strong>请求方式:</strong>`)
+		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求示例：</strong>`, `<strong>请求示例：</strong>`)
+		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>返回结果 ：</strong>`, `<strong>返回结果:</strong>`)
+		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `"POST(<strong>HTTPS</strong>)`, `POST(<strong>HTTPS</strong>)`)
+		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `"GET(<strong>HTTPS</strong>)`, `GET(<strong>HTTPS</strong>)`)
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `：`, `:`)
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `: </strong>`, `:</strong>`)
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `:</strong>`, `</strong>`)
-		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `请求方式</strong> POST`, `请求方式</strong>POST`)
-		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `请求方式</strong> GET`, `请求方式</strong>GET`)
-
+		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求方式</strong>POST(<strong>HTTPS</strong>)`, `<strong>请求方式</strong>POST<strong>HTTPS</strong>`)
+		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求方式</strong>GET(<strong>HTTPS</strong>)`, `<strong>请求方式</strong>GET<strong>HTTPS</strong>`)
+		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求方式</strong>:<strong>POST</strong>(<strong>HTTPS</strong>)`, `<strong>请求方式</strong>POST<strong>HTTPS</strong>`)
+		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求方式</strong>:<strong>GET</strong>(<strong>HTTPS</strong>)`, `<strong>请求方式</strong>GET<strong>HTTPS</strong>`)
 		// 过滤掉不是接口的节点
 		if !strings.Contains(rawHtmlSection, `<strong>请求方式</strong>`) {
 			fmt.Println("没有请求方式，跳过处理")
@@ -147,7 +144,7 @@ func main() {
 			continue
 		}
 
-		apiMethodRegexp := regexp.MustCompile(`<strong>请求方式</strong>(\w+)（<strong>HTTPS</strong>）`)
+		apiMethodRegexp := regexp.MustCompile(`<strong>请求方式</strong>(\w+)<strong>HTTPS</strong>`)
 		api.Method = pickSubMatchString(apiMethodRegexp.FindStringSubmatch(rawHtmlSection), 2, 1)
 		if strings.ToUpper(api.Method) != "POST" {
 			api.IsGet = true
@@ -201,42 +198,40 @@ func main() {
 		api.MethodCaml = strcase.ToCamel(strings.ToLower(api.Method))
 		api.URL = strings.ReplaceAll(api.URL, "https://qyapi.weixin.qq.com", "")
 
-		// 传入参数，每行有3个字段，利用字段数量来提取
-		if strings.Contains(rawHtmlSection, `<strong>参数说明</strong>`) {
-			fieldsRegexp := regexp.MustCompile(`<tr>\n<td>(.+?)</td>\n<td>(.+?)</td>\n<td>(.+?)</td>\n</tr>`)
-			fields := make([]Field, 0)
-			allMatches := fieldsRegexp.FindAllStringSubmatch(rawHtmlSection, -1)
-			for _, matches := range allMatches {
-				field := Field{
-					Name:       pickSubMatchString(matches, 4, 1),
-					IsRequired: false,
-					Desc:       pickSubMatchString(matches, 4, 3),
-				}
-				if pickSubMatchString(matches, 4, 2) == "是" {
-					field.IsRequired = true
-				}
-				fields = append(fields, field)
-			}
-
-			api.ReqFields = fields
+		// 循环两个table
+		tableTmp, err := goquery.NewDocumentFromReader(bytes.NewBufferString(rawHtmlSection))
+		if err != nil {
+			die("parse document failed: %+v\n", err)
 		}
-
-		// 响应参数，每行有2个字段，利用字段数量来提取
-		if strings.Contains(rawHtmlSection, `<strong>参数说明</strong>`) && len(api.ReqFields) == 0 {
-			fieldsRegexp := regexp.MustCompile(`<tr>\n<td>(.+?)</td>\n<td>(.+?)</td>\n</tr>`)
-			fields := make([]Field, 0)
-			allMatches := fieldsRegexp.FindAllStringSubmatch(rawHtmlSection, -1)
-			for _, matches := range allMatches {
-				field := Field{
-					Name: pickSubMatchString(matches, 3, 1),
-					Desc: pickSubMatchString(matches, 3, 2),
+		tableTmp.Find(".cherry-table-container .cherry-table").Find("tbody").Each(func(i int, s *goquery.Selection) {
+			// 传入参数，每行有3个字段，利用字段数量来提取
+			s.Find("tr").Each(func(i int, ss *goquery.Selection) {
+				var matches []string
+				ss.Find("td").Each(func(i int, sss *goquery.Selection) {
+					content, _ := sss.Html()
+					matches = append(matches, content)
+				})
+				if len(matches) == 3 {
+					var isRequired bool
+					if pickSubMatchString(matches, 3, 1) == "是" {
+						isRequired = true
+					}
+					api.ReqFields = append(api.ReqFields, Field{
+						Name:       pickSubMatchString(matches, 3, 0),
+						Desc:       pickSubMatchString(matches, 3, 2),
+						IsRequired: isRequired,
+					})
 				}
-				fields = append(fields, field)
-			}
 
-			api.RespFields = fields
-		}
-
+				// 响应参数，每行有2个字段，利用字段数量来提取
+				if len(matches) == 2 {
+					api.RespFields = append(api.RespFields, Field{
+						Name: pickSubMatchString(matches, 2, 0),
+						Desc: pickSubMatchString(matches, 2, 1),
+					})
+				}
+			})
+		})
 		apis = append(apis, api)
 		fmt.Printf("第%d个h2完成\n", index)
 	}

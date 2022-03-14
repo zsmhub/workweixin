@@ -34,11 +34,13 @@ func (c *ApiClient) GetToken() (token string, err error) {
 
 // 获取服务商的provider_access_token
 func (c *ApiClient) getProviderAccessToken() (tokenInfo, error) {
-	get, err := c.ExecGetProviderTokenService(ReqGetProviderTokenService{
+	req := ReqGetProviderTokenService{
 		Corpid:         c.CorpId,
 		ProviderSecret: c.CorpProviderSecret,
-	})
+	}
+	get, err := c.ExecGetProviderTokenService(req)
 	if err != nil {
+		log.Printf("provider_access_token: ReqGetProviderTokenService=%+v, err=%+v\n", req, err)
 		return tokenInfo{}, err
 	}
 	return tokenInfo{token: get.ProviderAccessToken, expiresIn: time.Duration(get.ExpiresIn) * time.Second}, nil
@@ -49,12 +51,14 @@ func (c *ApiClient) getSuiteToken() (tokenInfo, error) {
 	if c.AppSuiteTicket == "" {
 		return tokenInfo{}, errors.New("服务商的suite_ticket缺失，app_suite_id:" + c.AppSuiteId)
 	}
-	get, err := c.ExecGetSuiteTokenService(ReqGetSuiteTokenService{
+	req := ReqGetSuiteTokenService{
 		SuiteID:     c.AppSuiteId,
 		SuiteSecret: c.AppSuiteSecret,
 		SuiteTicket: c.AppSuiteTicket,
-	})
+	}
+	get, err := c.ExecGetSuiteTokenService(req)
 	if err != nil {
+		log.Printf("suite_access_token: ReqGetSuiteTokenService=%+v, err=%+v\n", req, err)
 		return tokenInfo{}, err
 	}
 	return tokenInfo{token: get.SuiteAccessToken, expiresIn: time.Duration(get.ExpiresIn) * time.Second}, nil
@@ -70,6 +74,15 @@ func (c *ApiClient) getAuthCorpToken() (tokenInfo, error) {
 		PermanentCode: c.CompanyPermanentCode,
 	})
 	if err != nil {
+		apiError, ok := err.(*ClientError)
+		if ok {
+			if apiError.Code == ErrCode2000002 || apiError.Code == ErrCode301007 || apiError.Code == ErrCode40084 { // 企业已注销，但要等15天后才会收到企业取消授权事件
+				return tokenInfo{}, nil
+			}
+			log.Printf("corp_access_token1: corp_id=%s, permanent_code=%s, err=%+v\n", c.CorpId, c.CompanyPermanentCode, apiError)
+		} else {
+			log.Printf("corp_access_token2: corp_id=%s, permanent_code=%s, err=%+v\n", c.CorpId, c.CompanyPermanentCode, err)
+		}
 		return tokenInfo{}, err
 	}
 	return tokenInfo{token: get.AccessToken, expiresIn: time.Duration(get.ExpiresIn) * time.Second}, nil
@@ -183,37 +196,47 @@ func (t *token) syncToken() error {
 	if err != nil {
 		return err
 	}
+
 	t.mutex.Lock()
 	defer t.mutex.Unlock()
 
 	t.token = get.token
 	t.expiresIn = get.expiresIn
 	t.lastRefresh = time.Now()
+
 	return nil
 }
 
 // 每60分钟刷新一次token（每次获取token时，该token都有2小时有效期）
 func (t *token) tokenRefresher(ctx context.Context) {
-	// refresh per 30m
-	const refreshTimeWindow = 60 * time.Minute
-	const minRefreshDuration = 5 * time.Second
+	const (
+		refreshTimeDuration = 60 * time.Minute
+		minRefreshDuration  = 5 * time.Minute
+	)
 
 	var nextRefreshDuration time.Duration = 0
 	for {
 		select {
+		case <-ctx.Done():
+			return
 		case <-time.After(nextRefreshDuration):
-			retryer := backoff.WithContext(backoff.NewExponentialBackOff(), ctx)
-			if err := backoff.Retry(t.syncToken, retryer); err != nil {
-				log.Println("retry getting access token failed", "err", err)
-				_ = err
+			if err := Retry(t.syncToken); err != nil {
+				log.Printf("retry getting access token failed, err=%+v\n", err)
+				nextRefreshDuration = minRefreshDuration
+			} else {
+				nextRefreshDuration = t.expiresIn - refreshTimeDuration
 			}
 
-			nextRefreshDuration = t.lastRefresh.Add(t.expiresIn - refreshTimeWindow).Sub(t.lastRefresh)
 			if nextRefreshDuration < minRefreshDuration {
 				nextRefreshDuration = minRefreshDuration
 			}
-		case <-ctx.Done():
-			return
 		}
 	}
+}
+
+func Retry(o backoff.Operation) error {
+	ctx, cancelFunc := context.WithTimeout(context.Background(), 1*time.Minute)
+	defer cancelFunc()
+	retryer := backoff.WithContext(backoff.NewExponentialBackOff(), ctx)
+	return backoff.Retry(o, retryer)
 }

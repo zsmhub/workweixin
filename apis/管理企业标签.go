@@ -84,6 +84,16 @@ func (c *ApiClient) ExecGetCorpTagListExternalcontact(req ReqGetCorpTagListExter
 // ReqAddCorpTagExternalcontact 添加企业客户标签请求
 // 文档：https://open.work.weixin.qq.com/api/doc/90001/90143/92696#添加企业客户标签
 
+type (
+	AddCorpTag struct {
+		// Name 添加的标签名称，最长为30个<strong>字符</strong>，必填
+		Name string `json:"name"`
+		// Order 标签组次序值。order值大的排序靠前。有效的值范围是[0, 2^32)
+		// Order 标签次序值。order值大的排序靠前。有效的值范围是[0, 2^32)
+		Order int `json:"order"`
+	}
+)
+
 type ReqAddCorpTagExternalcontact struct {
 	// Agentid 授权方安装的应用agentid。<strong>仅旧的第三方多应用套件需要填此参数</strong>
 	Agentid int `json:"agentid"`
@@ -93,14 +103,8 @@ type ReqAddCorpTagExternalcontact struct {
 	GroupName string `json:"group_name"`
 	// Order 标签组次序值。order值大的排序靠前。有效的值范围是[0, 2^32)
 	// Order 标签次序值。order值大的排序靠前。有效的值范围是[0, 2^32)
-	Order int `json:"order"`
-	Tag   []struct {
-		// Name 添加的标签名称，最长为30个<strong>字符</strong>，必填
-		Name string `json:"name"`
-		// Order 标签组次序值。order值大的排序靠前。有效的值范围是[0, 2^32)
-		// Order 标签次序值。order值大的排序靠前。有效的值范围是[0, 2^32)
-		Order int `json:"order"`
-	} `json:"tag"`
+	Order int          `json:"order"`
+	Tag   []AddCorpTag `json:"tag"`
 }
 
 var _ urlValuer = ReqAddCorpTagExternalcontact{}

@@ -2,7 +2,6 @@ package apis
 
 import (
 	"encoding/json"
-	"errors"
 )
 
 // 自动生成的文件, 生成方式: make api doc=微信文档地址url
@@ -77,10 +76,6 @@ func (c *ApiClient) ExecGetGroupchat(req ReqGetGroupchat) (RespGetGroupchat, err
 		return RespGetGroupchat{}, err
 	}
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
-		apiError, _ := bizErr.(*ClientError)
-		if apiError.Code == ErrCode60011 {
-			return RespGetGroupchat{}, errors.New("该群非您所在企业的成员创建的，无法访问群信息")
-		}
 		return RespGetGroupchat{}, bizErr
 	}
 
