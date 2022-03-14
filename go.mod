@@ -1,4 +1,4 @@
-module gitlab.ydjdev.com/ydjai/workweixin
+module github.com/zsmhub/workweixin
 
 go 1.14
 

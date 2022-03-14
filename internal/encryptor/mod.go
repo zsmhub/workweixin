@@ -7,7 +7,7 @@ import (
 	"encoding/base64"
 	"encoding/binary"
 	"errors"
-	"gitlab.ydjdev.com/ydjai/workweixin/internal/encryptor/pkcs7"
+	"github.com/zsmhub/workweixin/internal/encryptor/pkcs7"
 	"io"
 )
 

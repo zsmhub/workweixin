@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"github.com/PuerkitoBio/goquery"
 	"github.com/miku/zek"
-	"gitlab.ydjdev.com/ydjai/workweixin/callbacks"
+	"github.com/zsmhub/workweixin/callbacks"
 	"html/template"
 	"io/ioutil"
 	"net/http"

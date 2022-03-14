@@ -2,9 +2,9 @@ package callbacks
 
 import (
 	"errors"
-	"gitlab.ydjdev.com/ydjai/workweixin/internal/encryptor"
-	"gitlab.ydjdev.com/ydjai/workweixin/internal/envelope"
-	"gitlab.ydjdev.com/ydjai/workweixin/internal/signature"
+	"github.com/zsmhub/workweixin/internal/encryptor"
+	"github.com/zsmhub/workweixin/internal/envelope"
+	"github.com/zsmhub/workweixin/internal/signature"
 	"io/ioutil"
 	"net/http"
 	"net/url"

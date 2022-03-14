@@ -3,8 +3,8 @@ package workweixin
 import (
 	"errors"
 	"fmt"
-	"gitlab.ydjdev.com/ydjai/workweixin/apis"
-	"gitlab.ydjdev.com/ydjai/workweixin/callbacks"
+	"github.com/zsmhub/workweixin/apis"
+	"github.com/zsmhub/workweixin/callbacks"
 	"sync"
 )
 
