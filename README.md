@@ -96,7 +96,7 @@ func InitApiHandler() error {
     // 授权企业API客户端初始化（此段代码也可以考虑注释掉，由用户主动触发）
     authCorpList := xxx.GetAuthCorpList() // 从数据库获取已授权企业
     for _, corp := range authCorpList {
-        if err := workweixin.Sdk.NewAuthCorpApiClient(corp.CorpId, corp.PermanentCode, workweixin.Sdk.ThirdAppClient); err != nil {
+        if err := workweixin.Sdk.NewAuthCorpApiClient(corp.CorpId, corp.PermanentCode, corp.AgentId); err != nil {
             return err
         }
     }
