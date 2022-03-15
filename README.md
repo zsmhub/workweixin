@@ -9,13 +9,12 @@ Go语言实现企业微信API，a sensible Work Weixin SDK for Go。
 `支持手动生成企业微信新API或新回调代码`
 
 - 生成api代码
-    
-    `make api doc=https://open.work.weixin.qq.com/api/doc/90001/90143/90600`
+
+    `make api doc=https://developer.work.weixin.qq.com/document/path/92264`
 
 - 生成callback代码
 
-    `make callback doc=https://open.work.weixin.qq.com/api/doc/90001/90143/92277`
-
+    `make callback doc=https://developer.work.weixin.qq.com/document/path/90628`
 
 ### sdk 调用示例
 
@@ -62,7 +61,7 @@ func HandleAppPostRequest(c echo.Context) error {
 
     case callbacks.MessageTypeThird: // 第三方应用回调
         switch msg.EventType {
-        
+
             case callbacks.InfoTypeSuiteTicket: // 每十分钟推送一次suite_ticket
                 ticket := msg.Extras.(callbacks.ThirdSuiteTicket).SuiteTicket.Text
                 workweixin.Sdk.ThirdAppClient.RefreshSuiteTicket(ticket)
