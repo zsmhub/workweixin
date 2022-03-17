@@ -11,5 +11,5 @@ require (
 	github.com/miku/zek v0.1.11
 	github.com/pkg/errors v0.9.1
 	github.com/valyala/fasthttp v1.34.0
-	gopkg.in/yaml.v2 v2.2.3 // indirect
+	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
