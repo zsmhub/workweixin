@@ -20,6 +20,8 @@ Go语言实现企业微信API，a sensible Work Weixin SDK for Go。
 
 #### 回调sdk调用示例
 
+[点击查看完整demo](https://github.com/zsmhub/workweixin/blob/master/demo/callback.go)
+
 ```go
 // 企微回调设置初始化
 func InitCallbackHandler() error {
@@ -81,6 +83,8 @@ func HandleAppPostRequest(c echo.Context) error {
 ```
 
 #### api sdk调用示例
+
+[点击查看完整demo](https://github.com/zsmhub/workweixin/blob/master/demo/api.go)
 
 ```go
 // 企微API客户端初始化
