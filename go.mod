@@ -8,8 +8,8 @@ require (
 	github.com/cenkalti/backoff/v4 v4.1.1
 	github.com/google/uuid v1.3.0
 	github.com/iancoleman/strcase v0.2.0
+	github.com/labstack/echo/v4 v4.1.16
 	github.com/miku/zek v0.1.11
 	github.com/pkg/errors v0.9.1
 	github.com/valyala/fasthttp v1.34.0
-	gopkg.in/yaml.v2 v2.4.0 // indirect
 )

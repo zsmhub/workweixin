@@ -103,6 +103,10 @@ func InitApiHandler() error {
     return nil
 }
 
+// 企微后台回调配置URL，申请校验
+workweixin.Sdk.ProviderCallback.EchoTestHandler()
+workweixin.Sdk.AppSuiteCallback.EchoTestHandler()
+
 // 获取企业永久授权码
 resp, err := workweixin.Sdk.ThirdAppClient.ExecGetPermanentCodeService(apis.ReqGetPermanentCodeService{AuthCode: authCode})
 
@@ -142,5 +146,5 @@ if _, err = apiClient.ExecSentMessageCard(reqSentMessageCard); err != nil {
 
 ### 如果部署到K8S多个副本
 
-1. 可以将 access_token 的刷新代码抽离出来，用一个定时任务单独处理，并存在缓存中，提供给多个K8S副本读取 access_token。
-2. 项目运行中，会有新的企业安装我们的第三方应用，此时多个K8S副本需要使用`广播`同步新的企业数据并实例化，避免 sdk 调用失败。
+1. 注意点：项目运行中，会有新的企业安装我们的第三方应用，此时多个K8S副本需要使用`广播`同步新的企业数据并实例化，避免 sdk 调用失败。
+2. 可优化点：可以将 access_token 的刷新代码抽离出来，用一个定时任务单独处理，并存在缓存中，提供给多个K8S副本读取 access_token。避免多个副本都刷新token的情况。
