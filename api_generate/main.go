@@ -39,6 +39,8 @@ type Api struct {
 	RespFields []Field
 }
 
+const AccessTokenName = "access_token"
+
 var docVar = flag.String("doc", "", "微信文档地址")
 
 func main() {
@@ -175,7 +177,7 @@ func main() {
 				getParams := getUrl.Query()
 				var jsonParams []string
 				for k, v := range getParams {
-					if len(v) > 0 {
+					if len(v) > 0 && k != AccessTokenName { // 忽略access_token请求字段
 						jsonParams = append(jsonParams, fmt.Sprintf(`"%s":""`, k))
 					}
 				}
@@ -204,15 +206,22 @@ func main() {
 		if err != nil {
 			die("parse document failed: %+v\n", err)
 		}
+		// 传入参数和响应参数处理
 		tableTmp.Find(".cherry-table-container .cherry-table").Find("tbody").Each(func(i int, s *goquery.Selection) {
-			// 传入参数，每行有3个字段，利用字段数量来提取
 			s.Find("tr").Each(func(i int, ss *goquery.Selection) {
 				var matches []string
 				ss.Find("td").Each(func(i int, sss *goquery.Selection) {
 					content, _ := sss.Html()
 					matches = append(matches, content)
 				})
+
+				// 传入参数，每行有3个字段，利用字段数量来提取
 				if len(matches) == 3 {
+					// 忽略access_token请求字段
+					if pickSubMatchString(matches, 3, 0) == AccessTokenName {
+						return
+					}
+
 					var isRequired bool
 					if pickSubMatchString(matches, 3, 1) == "是" {
 						isRequired = true
