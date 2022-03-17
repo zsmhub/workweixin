@@ -8,7 +8,7 @@ Go语言实现企业微信API，a sensible Work Weixin SDK for Go。
 
 `支持手动生成企业微信新API或新回调代码`
 
-- 生成api代码
+- 生成api代码（tip: 生成GET方式的接口，请求参数的数据类型需要手动调整下）
 
     `make api doc=https://developer.work.weixin.qq.com/document/path/92264`
 
