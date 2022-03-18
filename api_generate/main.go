@@ -309,7 +309,7 @@ func generateStruct(rawJson string, structName string, subStruct bool, fields []
 			}
 			requiredTips := ""
 			jsonFlag := ""
-			if strings.HasPrefix(structName, "req") {
+			if strings.HasPrefix(structName, "Req") {
 				jsonFlag = ",omitempty"
 			}
 			if field.IsRequired {
