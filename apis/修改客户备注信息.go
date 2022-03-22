@@ -12,17 +12,17 @@ import (
 
 type ReqRemarkExternalcontact struct {
 	// Description 此用户对外部联系人的描述，最多150个字符
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 	// ExternalUserid 外部联系人userid，必填
 	ExternalUserid string `json:"external_userid"`
 	// Remark 此用户对外部联系人的备注，最多20个字符
-	Remark string `json:"remark"`
+	Remark string `json:"remark,omitempty"`
 	// RemarkCompany 此用户对外部联系人备注的所属公司名称，最多20个字符
-	RemarkCompany string `json:"remark_company"`
+	RemarkCompany string `json:"remark_company,omitempty"`
 	// RemarkMobiles 此用户对外部联系人备注的手机号
-	RemarkMobiles []string `json:"remark_mobiles"`
+	RemarkMobiles []string `json:"remark_mobiles,omitempty"`
 	// RemarkPicMediaid 备注图片的mediaid，
-	RemarkPicMediaid string `json:"remark_pic_mediaid"`
+	RemarkPicMediaid string `json:"remark_pic_mediaid,omitempty"`
 	// Userid 企业成员的userid，必填
 	Userid string `json:"userid"`
 }

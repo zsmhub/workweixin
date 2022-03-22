@@ -27,6 +27,7 @@ var (
 		ErrCode42009:              errPrefix + "suite_access_token已过期",
 		ErrCode45033:              "接口并发调用超过限制",
 		ErrCode60011:              "无权限访问",
+		ErrCode92002:              "不允许跨企业调用",
 	}
 )
 

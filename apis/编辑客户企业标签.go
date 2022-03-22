@@ -12,11 +12,11 @@ import (
 
 type ReqMarkTagExternalcontact struct {
 	// AddTag 要标记的标签列表
-	AddTag []string `json:"add_tag"`
+	AddTag []string `json:"add_tag,omitempty"`
 	// ExternalUserid 外部联系人userid，必填
 	ExternalUserid string `json:"external_userid"`
 	// RemoveTag 要移除的标签列表
-	RemoveTag []string `json:"remove_tag"`
+	RemoveTag []string `json:"remove_tag,omitempty"`
 	// Userid 添加外部联系人的userid，必填
 	Userid string `json:"userid"`
 }
