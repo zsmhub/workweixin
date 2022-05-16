@@ -197,3 +197,7 @@ if _, err = apiClient.ExecSentMessageCard(reqSentMessageCard); err != nil {
 ### 注意点
 
 - 如果你发现了sdk中，没有某个回调事件或某个api，可以使用一键生成sdk代码命令生成，然后提交下pr
+
+### 参考开源项目
+
+- [OpenSCRM](https://github.com/openscrm/api-server)
