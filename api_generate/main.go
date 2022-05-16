@@ -122,16 +122,18 @@ func main() {
 		fmt.Printf("%s\n", api.Name)
 
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求方式：</strong>`, `<strong>请求方式:</strong>`)
+		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求方式:</strong> `, `<strong>请求方式:</strong>`)
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求示例：</strong>`, `<strong>请求示例：</strong>`)
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>返回结果 ：</strong>`, `<strong>返回结果:</strong>`)
-		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `"POST(<strong>HTTPS</strong>)`, `POST(<strong>HTTPS</strong>)`)
-		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `"GET(<strong>HTTPS</strong>)`, `GET(<strong>HTTPS</strong>)`)
+		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `POST（<strong>HTTPS</strong>）`, `POST(<strong>HTTPS</strong>)`)
+		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `（<strong>HTTPS</strong>）`, `(<strong>HTTPS</strong>)`) // todo
+		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `GET（<strong>HTTPS</strong>）`, `GET(<strong>HTTPS</strong>)`)
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `：`, `:`)
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `: </strong>`, `:</strong>`)
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `:</strong>`, `</strong>`)
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `（<strong>HTTPS</strong>）`, `(<strong>HTTPS</strong>)`) // 兼容中文括号
-		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求方式</strong>POST(<strong>HTTPS</strong>)`, `<strong>请求方式</strong>POST<strong>HTTPS</strong>`)
-		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求方式</strong>GET(<strong>HTTPS</strong>)`, `<strong>请求方式</strong>GET<strong>HTTPS</strong>`)
+		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `POST(<strong>HTTPS</strong>)`, `POST<strong>HTTPS</strong>`)
+		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `GET(<strong>HTTPS</strong>)`, `GET<strong>HTTPS</strong>`)
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求方式</strong>:<strong>POST</strong>(<strong>HTTPS</strong>)`, `<strong>请求方式</strong>POST<strong>HTTPS</strong>`)
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求方式</strong>:<strong>GET</strong>(<strong>HTTPS</strong>)`, `<strong>请求方式</strong>GET<strong>HTTPS</strong>`)
 		// 过滤掉不是接口的节点
@@ -340,7 +342,7 @@ func generateStruct(rawJson string, structName string, subStruct bool, fields []
 				}
 				code = strings.Replace(code,
 					fmt.Sprintf("} `json:\"%s\"`", field.Name),
-					fmt.Sprintf("} `json:\"%s%s\"` //%s%s", field.Name, jsonFlag, requiredTips, field.Desc),
+					fmt.Sprintf("} `json:\"%s%s\"` // %s%s", field.Name, jsonFlag, field.Desc, requiredTips),
 					1,
 				)
 				replacedFields[field.Name] = field
