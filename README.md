@@ -193,3 +193,7 @@ if _, err = apiClient.ExecSentMessageCard(reqSentMessageCard); err != nil {
     fmt.Println(err)
 }
 ```
+
+### 注意点
+
+- 如果你发现了sdk中，没有某个回调事件或某个api，可以使用一键生成sdk代码命令生成，然后提交下pr
