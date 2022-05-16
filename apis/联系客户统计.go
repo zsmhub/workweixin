@@ -8,6 +8,7 @@ import (
 
 type ReqUserBehaviorData struct {
 	Userid    []string `json:"userid"`
+	Partyid   []int    `json:"partyid"`
 	StartTime int64    `json:"start_time"`
 	EndTime   int64    `json:"end_time"`
 }

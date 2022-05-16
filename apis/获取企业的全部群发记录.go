@@ -8,7 +8,7 @@ import (
 // 可自行修改生成的文件,以满足开发需求
 
 // ReqGetGroupmsgListV2Externalcontact 获取群发记录列表请求
-// 文档：https://developer.work.weixin.qq.com/document/path/93338#%E8%8E%B7%E5%8F%96%E4%BC%81%E4%B8%9A%E7%BE%A4%E5%8F%91%E6%88%90%E5%91%98%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C#获取群发记录列表
+// 文档：https://developer.work.weixin.qq.com/document/path/93338#获取群发记录列表
 
 type ReqGetGroupmsgListV2Externalcontact struct {
 	// ChatType 群发任务的类型，默认为single，表示发送给客户，group表示发送给客户群，必填
@@ -39,7 +39,7 @@ func (x ReqGetGroupmsgListV2Externalcontact) intoBody() ([]byte, error) {
 }
 
 // RespGetGroupmsgListV2Externalcontact 获取群发记录列表响应
-// 文档：https://developer.work.weixin.qq.com/document/path/93338#%E8%8E%B7%E5%8F%96%E4%BC%81%E4%B8%9A%E7%BE%A4%E5%8F%91%E6%88%90%E5%91%98%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C#获取群发记录列表
+// 文档：https://developer.work.weixin.qq.com/document/path/93338#获取群发记录列表
 
 type RespGetGroupmsgListV2Externalcontact struct {
 	CommonResp
@@ -99,7 +99,7 @@ type RespGetGroupmsgListV2Externalcontact struct {
 		CreateType int `json:"create_type"`
 		// Creator 群发消息创建者userid，<a href="#15836" rel="nofollow">API接口</a>创建的群发消息不返回该字段
 		Creator string `json:"creator"`
-		// Msgid 企业群发消息的id，可用于<a href="#%E8%8E%B7%E5%8F%96%E4%BC%81%E4%B8%9A%E7%BE%A4%E5%8F%91%E6%88%90%E5%91%98%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C" rel="nofollow">获取企业群发成员执行结果</a>
+		// Msgid 企业群发消息的id，可用于<a href="" rel="nofollow">获取企业群发成员执行结果</a>
 		Msgid string `json:"msgid"`
 		Text  struct {
 			// Content 消息文本内容，最多4000个<strong>字节</strong>
@@ -121,7 +121,7 @@ func (x RespGetGroupmsgListV2Externalcontact) intoBody() ([]byte, error) {
 }
 
 // execGetGroupmsgListV2Externalcontact 获取群发记录列表
-// 文档：https://developer.work.weixin.qq.com/document/path/93338#%E8%8E%B7%E5%8F%96%E4%BC%81%E4%B8%9A%E7%BE%A4%E5%8F%91%E6%88%90%E5%91%98%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C#获取群发记录列表
+// 文档：https://developer.work.weixin.qq.com/document/path/93338#获取群发记录列表
 func (c *ApiClient) ExecGetGroupmsgListV2Externalcontact(req ReqGetGroupmsgListV2Externalcontact) (RespGetGroupmsgListV2Externalcontact, error) {
 	var resp RespGetGroupmsgListV2Externalcontact
 	err := c.executeWXApiPost("/cgi-bin/externalcontact/get_groupmsg_list_v2", req, &resp, true)
@@ -136,7 +136,7 @@ func (c *ApiClient) ExecGetGroupmsgListV2Externalcontact(req ReqGetGroupmsgListV
 }
 
 // ReqGetGroupmsgTaskExternalcontact 获取群发成员发送任务列表请求
-// 文档：https://developer.work.weixin.qq.com/document/path/93338#%E8%8E%B7%E5%8F%96%E4%BC%81%E4%B8%9A%E7%BE%A4%E5%8F%91%E6%88%90%E5%91%98%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C#获取群发成员发送任务列表
+// 文档：https://developer.work.weixin.qq.com/document/path/93338#获取群发成员发送任务列表
 
 type ReqGetGroupmsgTaskExternalcontact struct {
 	// Cursor 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填
@@ -159,7 +159,7 @@ func (x ReqGetGroupmsgTaskExternalcontact) intoBody() ([]byte, error) {
 }
 
 // RespGetGroupmsgTaskExternalcontact 获取群发成员发送任务列表响应
-// 文档：https://developer.work.weixin.qq.com/document/path/93338#%E8%8E%B7%E5%8F%96%E4%BC%81%E4%B8%9A%E7%BE%A4%E5%8F%91%E6%88%90%E5%91%98%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C#获取群发成员发送任务列表
+// 文档：https://developer.work.weixin.qq.com/document/path/93338#获取群发成员发送任务列表
 
 type RespGetGroupmsgTaskExternalcontact struct {
 	CommonResp
@@ -186,7 +186,7 @@ func (x RespGetGroupmsgTaskExternalcontact) intoBody() ([]byte, error) {
 }
 
 // execGetGroupmsgTaskExternalcontact 获取群发成员发送任务列表
-// 文档：https://developer.work.weixin.qq.com/document/path/93338#%E8%8E%B7%E5%8F%96%E4%BC%81%E4%B8%9A%E7%BE%A4%E5%8F%91%E6%88%90%E5%91%98%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C#获取群发成员发送任务列表
+// 文档：https://developer.work.weixin.qq.com/document/path/93338#获取群发成员发送任务列表
 func (c *ApiClient) ExecGetGroupmsgTaskExternalcontact(req ReqGetGroupmsgTaskExternalcontact) (RespGetGroupmsgTaskExternalcontact, error) {
 	var resp RespGetGroupmsgTaskExternalcontact
 	err := c.executeWXApiPost("/cgi-bin/externalcontact/get_groupmsg_task", req, &resp, true)
@@ -201,7 +201,7 @@ func (c *ApiClient) ExecGetGroupmsgTaskExternalcontact(req ReqGetGroupmsgTaskExt
 }
 
 // ReqGetGroupmsgSendResultExternalcontact 获取企业群发成员执行结果请求
-// 文档：https://developer.work.weixin.qq.com/document/path/93338#%E8%8E%B7%E5%8F%96%E4%BC%81%E4%B8%9A%E7%BE%A4%E5%8F%91%E6%88%90%E5%91%98%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C#获取企业群发成员执行结果
+// 文档：https://developer.work.weixin.qq.com/document/path/93338#获取企业群发成员执行结果
 
 type ReqGetGroupmsgSendResultExternalcontact struct {
 	Cursor string `json:"cursor"`
@@ -222,7 +222,7 @@ func (x ReqGetGroupmsgSendResultExternalcontact) intoBody() ([]byte, error) {
 }
 
 // RespGetGroupmsgSendResultExternalcontact 获取企业群发成员执行结果响应
-// 文档：https://developer.work.weixin.qq.com/document/path/93338#%E8%8E%B7%E5%8F%96%E4%BC%81%E4%B8%9A%E7%BE%A4%E5%8F%91%E6%88%90%E5%91%98%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C#获取企业群发成员执行结果
+// 文档：https://developer.work.weixin.qq.com/document/path/93338#获取企业群发成员执行结果
 
 type RespGetGroupmsgSendResultExternalcontact struct {
 	CommonResp
@@ -253,7 +253,7 @@ func (x RespGetGroupmsgSendResultExternalcontact) intoBody() ([]byte, error) {
 }
 
 // execGetGroupmsgSendResultExternalcontact 获取企业群发成员执行结果
-// 文档：https://developer.work.weixin.qq.com/document/path/93338#%E8%8E%B7%E5%8F%96%E4%BC%81%E4%B8%9A%E7%BE%A4%E5%8F%91%E6%88%90%E5%91%98%E6%89%A7%E8%A1%8C%E7%BB%93%E6%9E%9C#获取企业群发成员执行结果
+// 文档：https://developer.work.weixin.qq.com/document/path/93338#获取企业群发成员执行结果
 func (c *ApiClient) ExecGetGroupmsgSendResultExternalcontact(req ReqGetGroupmsgSendResultExternalcontact) (RespGetGroupmsgSendResultExternalcontact, error) {
 	var resp RespGetGroupmsgSendResultExternalcontact
 	err := c.executeWXApiPost("/cgi-bin/externalcontact/get_groupmsg_send_result", req, &resp, true)

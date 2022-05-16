@@ -10,20 +10,34 @@ import (
 	"net/http"
 	"net/url"
 	"sync"
+	"time"
 )
+
+// 标识
+const (
+	Provider      = "provider"       // 第三方服务商
+	ThirdApp      = "third_app"      // 第三方应用
+	CustomizedApp = "customized_app" // 自建应用代开发
+)
+
+// 分布式app_suite_ticket：获取和设置suite_ticket的值，自行实现该接口的具体逻辑，比如使用redis方案【企微服务器每十分钟推送一次suite_ticket】
+type DcsAppSuiteTicket interface {
+	Get(cacheKey string) string                          // 获取suite_ticket
+	Set(cacheKey, suiteTicket string, ttl time.Duration) // 设置suite_ticket
+}
 
 // ApiClient 企业微信客户端
 type ApiClient struct {
 	CorpId             string // 企业ID
 	CorpProviderSecret string // 企业密钥
 
-	// 第三方应用/服务商必填字段
-	AppSuiteId     string // 第三方应用唯一身份标识
-	AppSuiteSecret string // 第三方应用密钥
+	// 第三方应用/代开发必填字段
+	AppSuiteId     string // 应用唯一身份标识
+	AppSuiteSecret string // 应用密钥
 	AppSuiteTicket string // 企业微信服务器会定时（每十分钟）推送ticket。ticket会实时变更，并用于后续接口的调用。
 
 	// 授权企业必填字段
-	CompanyPermanentCode string // 企业授权给第三方应用的永久授权码
+	CompanyPermanentCode string // 企业授权给应用的永久授权码
 	AgentId              int    // 授权方应用id
 
 	accessTokenName        string // token参数名,默认access_token; 第三方应用为suite_access_token；第三方应用服务商为provider_access_token
@@ -31,69 +45,157 @@ type ApiClient struct {
 	jsapiTicket            *token
 	jsapiTicketAgentConfig *token
 
-	ThirdAppClient *ApiClient // 第三方应用client，用于授权企业API客户端获取suite_token，目前用于获取企业凭证接口
+	dcsSuiteTicketCacheKey string            // suite_ticket 缓存key，企微每十分钟更新一次
+	dcsAppSuiteTicket      DcsAppSuiteTicket // 分布式app_suite_ticket
+
+	ThirdAppClient *ApiClient // 第三方应用client，用于授权企业API客户端获取suite_access_token，目前用于第三方应用获取企业凭证接口
+
+	logger Logger
 }
 
-// 服务商API客户端初始化
-func NewProviderApiClient(corpId, corpProviderSecret string) *ApiClient {
+// 第三方服务商API客户端初始化
+func NewProviderApiClient(corpId, corpProviderSecret string, opts Options) *ApiClient {
+	accessTokenName := "provider_access_token"
 	c := ApiClient{
 		CorpId:             corpId,
 		CorpProviderSecret: corpProviderSecret,
-		accessTokenName:    "provider_access_token",
-		accessToken:        &token{mutex: &sync.RWMutex{}},
+		accessTokenName:    accessTokenName,
+		accessToken: &token{
+			mutex:         &sync.RWMutex{},
+			dcsToken:      opts.DcsToken,
+			tokenCacheKey: fmt.Sprintf("%s#%s#%s", Provider, accessTokenName, corpId),
+		},
+		logger: opts.Logger,
+	}
+
+	if c.logger == nil {
+		c.logger = loggerPrint{}
 	}
 
 	c.accessToken.setGetTokenFunc(c.getProviderAccessToken)
-	c.SpawnAccessTokenRefresher()
 
 	return &c
 }
 
 // 第三方应用API客户端初始化，第一次调用这个接口时，appSuiteTicket为空字符串
-func NewThirdAppApiClient(corpId, appSuiteId, appSuiteSecret, appSuiteTicket string) *ApiClient {
+func NewThirdAppApiClient(corpId, appSuiteId, appSuiteSecret, appSuiteTicket string, opts Options) *ApiClient {
+	accessTokenName := "suite_access_token"
 	c := ApiClient{
 		CorpId:          corpId,
 		AppSuiteId:      appSuiteId,
 		AppSuiteSecret:  appSuiteSecret,
 		AppSuiteTicket:  appSuiteTicket,
-		accessTokenName: "suite_access_token",
-		accessToken:     &token{mutex: &sync.RWMutex{}},
+		accessTokenName: accessTokenName,
+		accessToken: &token{
+			mutex:         &sync.RWMutex{},
+			dcsToken:      opts.DcsToken,
+			tokenCacheKey: fmt.Sprintf("%s#%s#%s#%s", ThirdApp, accessTokenName, corpId, appSuiteId),
+		},
+		dcsSuiteTicketCacheKey: fmt.Sprintf("%s#%s#%s#%s", ThirdApp, "suite_ticket", corpId, appSuiteId),
+		dcsAppSuiteTicket:      opts.DcsAppSuiteTicket,
+		logger:                 opts.Logger,
+	}
+
+	if c.logger == nil {
+		c.logger = loggerPrint{}
 	}
 
 	c.accessToken.setGetTokenFunc(c.getSuiteToken)
-	c.SpawnAccessTokenRefresher()
 
 	return &c
 }
 
-// 授权企业API客户端初始化
-func NewAuthCorpApiClient(corpId, companyPermanentCode string, AgentId int, thirdAppClient *ApiClient) *ApiClient {
+// 自建应用代开发API客户端初始化，第一次调用这个接口时，appSuiteTicket为空字符串
+func NewCustomizedApiClient(corpId, appSuiteId, appSuiteSecret, appSuiteTicket string, opts Options) *ApiClient {
+	accessTokenName := "suite_access_token"
 	c := ApiClient{
-		CorpId:                 corpId,
-		AgentId:                AgentId,
-		CompanyPermanentCode:   companyPermanentCode,
-		accessTokenName:        "access_token",
-		accessToken:            &token{mutex: &sync.RWMutex{}},
-		jsapiTicket:            &token{mutex: &sync.RWMutex{}},
-		jsapiTicketAgentConfig: &token{mutex: &sync.RWMutex{}},
-		ThirdAppClient:         thirdAppClient,
+		CorpId:          corpId,
+		AppSuiteId:      appSuiteId,
+		AppSuiteSecret:  appSuiteSecret,
+		AppSuiteTicket:  appSuiteTicket,
+		accessTokenName: accessTokenName,
+		accessToken: &token{
+			mutex:         &sync.RWMutex{},
+			dcsToken:      opts.DcsToken,
+			tokenCacheKey: fmt.Sprintf("%s#%s#%s#%s", CustomizedApp, accessTokenName, corpId, appSuiteId),
+		},
+		dcsSuiteTicketCacheKey: fmt.Sprintf("%s#%s#%s#%s", CustomizedApp, "customized_ticket", corpId, appSuiteId),
+		dcsAppSuiteTicket:      opts.DcsAppSuiteTicket,
+		logger:                 opts.Logger,
+	}
+
+	if c.logger == nil {
+		c.logger = loggerPrint{}
+	}
+
+	c.accessToken.setGetTokenFunc(c.getSuiteToken)
+
+	return &c
+}
+
+// 第三方应用授权企业API客户端初始化
+func NewAuthCorpApiClient(corpId, companyPermanentCode string, AgentId int, thirdAppClient *ApiClient, opts Options) *ApiClient {
+	accessTokenName := "access_token"
+	c := ApiClient{
+		CorpId:               corpId,
+		AgentId:              AgentId,
+		CompanyPermanentCode: companyPermanentCode,
+		accessTokenName:      accessTokenName,
+		accessToken: &token{
+			mutex:         &sync.RWMutex{},
+			dcsToken:      opts.DcsToken,
+			tokenCacheKey: fmt.Sprintf("%s#%s#%s#%s", ThirdApp, accessTokenName, corpId, thirdAppClient.AppSuiteId),
+		},
+		jsapiTicket: &token{
+			mutex:         &sync.RWMutex{},
+			dcsToken:      opts.DcsToken,
+			tokenCacheKey: fmt.Sprintf("%s#%s#%s#%s", ThirdApp, "jsapi_ticket", corpId, thirdAppClient.AppSuiteId),
+		},
+		jsapiTicketAgentConfig: &token{
+			mutex:         &sync.RWMutex{},
+			dcsToken:      opts.DcsToken,
+			tokenCacheKey: fmt.Sprintf("%s#%s#%s#%s", ThirdApp, "jsapi_ticket_agent_config", corpId, thirdAppClient.AppSuiteId),
+		},
+		ThirdAppClient: thirdAppClient,
+		logger:         opts.Logger,
+	}
+
+	if c.logger == nil {
+		c.logger = loggerPrint{}
 	}
 
 	c.accessToken.setGetTokenFunc(c.getAuthCorpToken)
-	c.SpawnAccessTokenRefresher()
 
 	c.jsapiTicket.setGetTokenFunc(c.getJSAPITicket)
-	c.SpawnJSAPITicketRefresher()
 
 	c.jsapiTicketAgentConfig.setGetTokenFunc(c.getJSAPITicketAgentConfig)
-	c.SpawnJSAPITicketAgentConfigRefresher()
 
 	return &c
 }
 
-// 更新suite_ticket
-func (c *ApiClient) RefreshSuiteTicket(ticket string) {
-	c.AppSuiteTicket = ticket
+// 自建应用代开发授权企业API客户端初始化
+func NewCustomizedAuthCorpApiClient(corpId, companyPermanentCode string, AgentId int, customizedAppClient *ApiClient, opts Options) *ApiClient {
+	accessTokenName := "access_token"
+	c := ApiClient{
+		CorpId:               corpId,
+		AgentId:              AgentId,
+		CompanyPermanentCode: companyPermanentCode,
+		accessTokenName:      accessTokenName,
+		accessToken: &token{
+			mutex:         &sync.RWMutex{},
+			dcsToken:      opts.DcsToken,
+			tokenCacheKey: fmt.Sprintf("%s#%s#%s#%s", CustomizedApp, accessTokenName, corpId, customizedAppClient.AppSuiteId),
+		},
+		logger: opts.Logger,
+	}
+
+	if c.logger == nil {
+		c.logger = loggerPrint{}
+	}
+
+	c.accessToken.setGetTokenFunc(c.getCustomizedAuthCorpToken)
+
+	return &c
 }
 
 func (c *ApiClient) composeWXApiURL(path string, req interface{}) *url.URL {
@@ -198,7 +300,7 @@ func (c *ApiClient) executeWXApiMediaUpload(path string, req mediaUploader, objR
 	// 从bodyWriter生成fileWriter,并将文件内容写入fileWriter,多个文件可进行多次
 	fileWriter, err := bodyWriter.CreateFormFile("media", m.filename)
 	if err != nil {
-		fmt.Println(err.Error())
+		c.logger.Error(err.Error())
 		return err
 	}
 

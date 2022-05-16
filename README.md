@@ -1,26 +1,36 @@
-## 企业微信第三方应用开发 go sdk
+## 企业微信第三方服务商 Go SDK
 
-Go语言实现企业微信API，a sensible Work Weixin SDK for Go。
+Go语言实现企业微信SDK，a sensible Work Weixin SDK for Go。
+
+集成了第三方应用sdk和自建应用代开发的sdk，支持一键生成新的sdk，使用简单，扩展灵活。
+
+- 用缓存方案实现分布式 access_token/jsapi_ticket，保证在多个服务中只有一个服务能成功调用企微API请求 access_token/jsapi_ticket，减少API调用次数和服务重启需要重新获取的情况
+- 用缓存方案实现读取/更新suite_ticket，保证多个服务能读取到最新的suite_ticket（suite_ticket每十分钟更新一次）
+- 获取授权企业ApiClient时，支持自定义闭包从数据库等读取企业数据，eg: Sdk.GetThirdAuthCorpApiClient
+- 提供Logger interface：用于自行实现日志记录器，便于收集日志
 
 [点击查看企业微信第三方应用开发博文](https://zsmhub.github.io/post/%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/)
 
-### 自动生成sdk代码命令
+### 一键生成sdk代码命令
 
-`支持手动生成企业微信新API或新回调代码`
+> 注意：一键生成sdk后需手动格式化下代码；部分复杂的页面需要手动整理下sdk，如消息推送>发送应用消息接口。
 
 - 生成api代码（tip: 生成GET方式的接口，请求参数的数据类型需要手动调整下）
 
-    `make api doc=https://developer.work.weixin.qq.com/document/path/92264`
+    `make api doc=https://developer.work.weixin.qq.com/document/path/90600`
 
 - 生成callback代码
 
-    `make callback doc=https://developer.work.weixin.qq.com/document/path/90628`
+    `make callback doc=https://developer.work.weixin.qq.com/document/path/92277`
 
-### sdk 调用示例
+
+### sdk调用示例
+
+**强烈建议去 ./demo 文件夹查看完整示例！**
+
+[点击查看完整demo](https://github.com/zsmhub/workweixin/tree/master/demo)
 
 #### 回调sdk调用示例
-
-[点击查看完整demo](https://github.com/zsmhub/workweixin/blob/master/demo/callback.go)
 
 ```go
 // 企微回调设置初始化
@@ -30,13 +40,18 @@ func InitCallbackHandler() error {
         return err
     }
 
-    // 第三方应用回调解析
-    if err := workweixin.Sdk.NewAppSuiteCallbackHandler(config.AppSuiteCallbackToken, config.AppSuiteCallbackEncodingAESKey); err != nil {
+    // 第三方应用回调解析【可选】
+    if err := workweixin.Sdk.NewThirdAppCallbackHandler(config.AppSuiteCallbackToken, config.AppSuiteCallbackEncodingAESKey); err != nil {
         return err
     }
 
     // 第三方小程序回调解析【可选】
-    if err := workweixin.Sdk.NewMiniSuiteCallbackHandler(config.MiniSuiteCallbackToken, config.MiniSuiteCallbackEncodingAESKey); err != nil {
+    if err := workweixin.Sdk.NewMiniSuiteCaNewThirdMiniCallbackHandlerllbackHandler(config.MiniSuiteCallbackToken, config.MiniSuiteCallbackEncodingAESKey); err != nil {
+        return err
+    }
+
+    // 自建应用代开发回调解析【可选】
+    if err := workweixin.Sdk.NewCustomizedTemplateCallbackHandler(config.CustomizedCallbackToken, config.CustomizedCallbackEncodingAESKey); err != nil {
         return err
     }
 
@@ -47,14 +62,17 @@ func InitCallbackHandler() error {
 workweixin.Sdk.ProviderCallback.GetCallBackMsg(r *http.Request)
 
 // 第三方应用-解析并获取回调信息
-workweixin.Sdk.AppSuiteCallback.GetCallBackMsg(r *http.Request)
+workweixin.Sdk.ThirdAppCallback.GetCallBackMsg(r *http.Request)
 
 // 第三方小程序-解析并获取回调信息
-workweixin.Sdk.MiniSuiteCallback.GetCallBackMsg(r *http.Request)
+workweixin.Sdk.ThirdMiniCallback.GetCallBackMsg(r *http.Request)
+
+// 自建应用代开发--解析并获取回调信息
+workweixin.Sdk.CustomizedTemplateCallback.GetCallBackMsg(r *http.Request)
 
 // 第三方应用回调完整示例
 func HandleAppPostRequest(c echo.Context) error {
-    msg, err := workweixin.Sdk.AppSuiteCallback.GetCallBackMsg(c.Request())
+    msg, err := workweixin.Sdk.ThirdAppCallback.GetCallBackMsg(c.Request())
     if err != nil {
         return err
     }
@@ -65,16 +83,18 @@ func HandleAppPostRequest(c echo.Context) error {
         switch msg.EventType {
 
             case callbacks.InfoTypeSuiteTicket: // 每十分钟推送一次suite_ticket
-                ticket := msg.Extras.(callbacks.ThirdSuiteTicket).SuiteTicket.Text
-                workweixin.Sdk.ThirdAppClient.RefreshSuiteTicket(ticket)
+                extras, ok := msg.Extras.(callbacks.ThirdSuiteTicket)
+                if !ok {
+                    return errors.New("suite_ticket get failed")
+                }
 
-                retryer := backoff.WithContext(backoff.NewExponentialBackOff(), context.Background())
-                err := backoff.Retry(func() error {
-                    // todo 将 suite_ticket 存储在数据库或其他地方
-                    return nil
-                }, retryer)
+                ticket := extras.SuiteTicket.Text
+                workweixin.Sdk.ThirdAppClient.RefreshSuiteTicket(ticket, time.Hour)
 
-                return err
+                // todo: 此处可将 suite_ticket 保存进数据库
+
+                return nil
+
 
     }
 
@@ -84,39 +104,65 @@ func HandleAppPostRequest(c echo.Context) error {
 
 #### api sdk调用示例
 
-[点击查看完整demo](https://github.com/zsmhub/workweixin/blob/master/demo/api.go)
-
 ```go
+import "xxx/workweixin/demo"
+
 // 企微API客户端初始化
 func InitApiHandler() error {
+    // 初始化企微sdk参数
+    workweixin.Sdk.InitOptions(apis.Options{
+        DcsToken:                     demo.DcsTokenByRedis{},
+        DcsAppSuiteTicket:            demo.DcsAppSuiteTicketByRedis{},
+        GetThirdAppAuthCorpFunc:      demo.GetThirdAppAuthCorpToSdk,
+        GetCustomizedAppAuthCorpFunc: demo.GetCustomizedAppAuthCorpToSdk,
+        Logger:                       demo.Logger{},
+    })
+
     // 服务商API客户端初始化
     workweixin.Sdk.NewProviderApiClient(config.CorpId, config.CorpProviderSecret)
 
-    // 第三方应用API客户端初始化
-    suiteTicket := "xxx" // 从数据库等地方获取已得到的suite_ticket
-    workweixin.Sdk.NewThirdAppApiClient(config.CorpId, config.AppSuiteId, config.AppSuiteSecret, suiteTicket)
+    // 第三方应用API客户端初始化【可选】
+    suiteTicket := dao.ConfigDao.GetByUniqueIndex(global.ConfigKeySuiteTicket)
+    workweixin.Sdk.NewThirdAppApiClient(config.CorpId, config.AppSuiteId, config.AppSuiteSecret, suiteTicket.V)
 
-    // 授权企业API客户端初始化（此段代码也可以考虑注释掉，由用户主动触发）
-    authCorpList := xxx.GetAuthCorpList() // 从数据库获取已授权企业
-    for _, corp := range authCorpList {
-        if err := workweixin.Sdk.NewAuthCorpApiClient(corp.CorpId, corp.PermanentCode, corp.AgentId); err != nil {
-            return err
-        }
+    // 自建应用代开发API客户端初始化【可选】
+    customizedTicket := dao.ConfigDao.GetByUniqueIndex(global.ConfigKeyCustomizedTicket)
+    workweixin.Sdk.NewCustomizedApiClient(config.CorpId, config.CustomizedAppSuiteId, config.CustomizedAppSuiteSecret, customizedTicket.V)
+
+    // 由于本地开发环境和预发布无法接收企微回调事件，故需定时刷新suite_ticket
+    if config.IsLocal() || config.IsUat() {
+        go func(suiteTicket, customizedTicket model.Config) {
+            defer recover()
+            ticker := time.NewTicker(10 * time.Minute)
+            defer ticker.Stop()
+            for {
+                // 更新第三方应用ticket
+                _ = suiteTicket.DelCache() // 清除本地缓存
+                suiteTicket = dao.ConfigDao.GetByUniqueIndex(global.ConfigKeySuiteTicket)
+                workweixin.Sdk.ThirdAppClient.RefreshSuiteTicket(suiteTicket.V, 30*time.Minute)
+
+                // 更新自建应用代开发ticket
+                _ = customizedTicket.DelCache() // 清除本地缓存
+                customizedTicket = dao.ConfigDao.GetByUniqueIndex(global.ConfigKeyCustomizedTicket)
+                workweixin.Sdk.CustomizedAppClient.RefreshSuiteTicket(customizedTicket.V, 30*time.Minute)
+
+                <-ticker.C
+            }
+        }(suiteTicket, customizedTicket)
     }
 
     return nil
 }
 
-// 企微后台回调配置URL，申请校验
-workweixin.Sdk.ProviderCallback.EchoTestHandler()
-workweixin.Sdk.AppSuiteCallback.EchoTestHandler()
-
 // 获取企业永久授权码
 resp, err := workweixin.Sdk.ThirdAppClient.ExecGetPermanentCodeService(apis.ReqGetPermanentCodeService{AuthCode: authCode})
 
-// 企微 error code 处理
+// 企微 error code 类型强制转换
 if err != nil {
-    apiError, _ := err.(*apis.ClientError)
+    apiError, ok := err.(*apis.ClientError)
+    if !ok {
+         return nil, errors.New("转换失败，类型有误")
+    }
     if apiError.Code == apis.ErrCode60011 {
         return nil, errors.New("无权限访问")
     }
@@ -124,7 +170,7 @@ if err != nil {
 }
 
 // 推送消息到第三方应用
-apiClient, err := workweixin.Sdk.GetAuthCorpAPPClient(v.CorpId)
+apiClient, err := workweixin.Sdk.GetThirdAuthCorpApiClient(v.CorpId)
 if err != nil {
     fmt.Println(err)
 }
@@ -147,12 +193,3 @@ if _, err = apiClient.ExecSentMessageCard(reqSentMessageCard); err != nil {
     fmt.Println(err)
 }
 ```
-
-### 如果部署到K8S多个副本
-
-1. 注意点：项目运行中，会有新的企业安装我们的第三方应用，此时多个K8S副本需要使用`广播`同步新的企业数据并实例化，避免 sdk 调用失败。
-2. 可优化点：可以将 access_token 的刷新代码抽离出来，用一个定时任务单独处理，并存在缓存中，提供给多个K8S副本读取 access_token。避免多个副本都刷新token的情况。
-
-### 问题
-
-- 部分复杂的页面，需要手动整理代码，如消息推送>发送应用消息接口

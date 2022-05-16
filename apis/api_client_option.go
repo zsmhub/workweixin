@@ -2,6 +2,7 @@ package apis
 
 import (
 	"github.com/valyala/fasthttp"
+	"log"
 	"net"
 	"time"
 )
@@ -28,4 +29,51 @@ func CreateFastHttpClient() fasthttp.Client {
 			}
 		},
 	}
+}
+
+// 需初始化的参数
+type (
+	Options struct {
+		DcsToken                     DcsToken              // 必传参数，如果不传这个参数，会把token存在内存中，仅适用于单体服务！
+		DcsAppSuiteTicket            DcsAppSuiteTicket     // 必传参数，如果不传这个参数，会把ticket存在内存中，仅适用于单体服务！
+		GetThirdAppAuthCorpFunc      GetAuthCorpFromDBFunc // 第三方应用必传参数，用于获取企业数据，如从数据库中取数
+		GetCustomizedAppAuthCorpFunc GetAuthCorpFromDBFunc // 自建应用代开发必传参数，用于获取企业数据，如从数据库中取数
+		Logger                       Logger                // 选传参数，不传则默认将日志直接输出在终端
+	}
+
+	AuthCorp struct {
+		PermanentCode string
+		AgentId       int
+	}
+
+	GetAuthCorpFromDBFunc func(corpId, appSuiteId string) (AuthCorp, error)
+)
+
+// 日志输出接口
+type Logger interface {
+	Info(args ...interface{})
+	Infof(template string, args ...interface{})
+	Error(args ...interface{})
+	Errorf(template string, args ...interface{})
+}
+
+// 默认日志记录器
+type loggerPrint struct{}
+
+var _ Logger = loggerPrint{}
+
+func (loggerPrint) Info(args ...interface{}) {
+	log.Println(args...)
+}
+
+func (loggerPrint) Infof(template string, args ...interface{}) {
+	log.Printf(template, args...)
+}
+
+func (loggerPrint) Error(args ...interface{}) {
+	log.Println(args...)
+}
+
+func (loggerPrint) Errorf(template string, args ...interface{}) {
+	log.Printf(template, args...)
 }

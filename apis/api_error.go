@@ -43,7 +43,7 @@ func (e *ClientError) Error() string {
 }
 
 // ErrCode 错误码类型
-// 全局错误码文档: https://developer.work.weixin.qq.com/document/path/90313
+// 全局错误码文档: https://developer.work.weixin.qq.com/document/path/95390
 
 type ErrCode = int64
 
@@ -739,7 +739,7 @@ const ErrCode45029 ErrCode = 45029
 // 排查方法: 最长64个字节
 const ErrCode45032 ErrCode = 45032
 
-// ErrCode45033 接口并发调用超过限制
+// ErrCode45033 接口并发调用超过限制（某些接口是并发调用数不能超过5个）
 // 排查方法: [查看帮助](https://developer.work.weixin.qq.com/document/path/90313#10649/错误码：45033)
 // 接口并发调用超过限制。出现这种拦截限制，一般是开发者的程序有bug，导致对同一份资源有过高的并发且持续不断的请求，例如对一个media_id一直持续不断请求“获取临时素材”接口。
 const ErrCode45033 ErrCode = 45033
@@ -2686,6 +2686,84 @@ const ErrCode640028 ErrCode = 640028
 // ErrCode640029 只支持下载普通文件，不支持下载文件夹等其他非文件实体类型
 // 排查方法: 检查fileid对应的文件是否为普通文件
 const ErrCode640029 ErrCode = 640029
+
+// 不是license基础帐号
+const ErrCode701001 ErrCode = 701001
+
+// 不合法的license帐号
+const ErrCode701002 = 701002
+
+// 激活码已绑定
+const ErrCode701003 = 701003
+
+// 激活码未绑定
+const ErrCode701004 = 701004
+
+// 无效的license订单
+const ErrCode701005 = 701005
+
+// 不合法的license帐号类型
+const ErrCode701006 = 701006
+
+// 不合法的帐号类型
+const ErrCode701007 = 701007
+
+// 没有合法的有互通license的用户
+const ErrCode701008 = 701008
+
+// 灰度期间，month只能为1个月
+const ErrCode701009 = 701009
+
+// 所有的account_code都非法
+const ErrCode701010 = 701010
+
+// userid已经绑定
+const ErrCode701011 = 701011
+
+// active_code 超过绑定有效期
+const ErrCode701012 = 701012
+
+// 灰度期间只允许续期一次
+const ErrCode701013 = 701013
+
+// 	jobid最多关联100w个userid
+const ErrCode701014 = 701014
+
+// 没有第三方或者代开发授权，不允许下单
+const ErrCode701015 = 701015
+
+// 帐号未激活或者已经过期
+const ErrCode701016 = 701016
+
+// 	帐号30天内迁移过
+const ErrCode701017 = 701017
+
+// 迁移帐号重叠，接收帐号已有相同类型的帐号
+const ErrCode701018 = 701018
+
+// 用户userid非法或者跨企业
+const ErrCode701019 = 701019
+
+// 有重复的userid
+const ErrCode701020 = 701020
+
+// 非法的激活码
+const ErrCode701021 = 701021
+
+// 激活码还在生成中，稍后再试
+const ErrCode701022 = 701022
+
+// 有重复的激活码
+const ErrCode701023 = 701023
+
+// 批量操作全部失败了
+const ErrCode701024 = 701024
+
+// 批量操作传了空列表
+const ErrCode701025 = 701025
+
+// 列表数量超过最大值
+const ErrCode701026 = 701026
 
 // ErrCode844001 非法的output_file_format
 // 排查方法: 判断输出文件格式是否正确

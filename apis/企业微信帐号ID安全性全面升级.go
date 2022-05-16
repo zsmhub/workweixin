@@ -270,3 +270,51 @@ func (c *ApiClient) ExecUnionidToExternalUserid3RdExternalcontact(req ReqUnionid
 
 	return resp, nil
 }
+
+// 自建应用代开发external_userid转换
+// 文档：https://developer.work.weixin.qq.com/document/path/95195
+type ReqExternalcontactToServiceExternalUserid struct {
+	// 明文externalUserId
+	ExternalUserId string `json:"external_userid"`
+}
+
+var _ bodyer = ReqExternalcontactToServiceExternalUserid{}
+
+func (x ReqExternalcontactToServiceExternalUserid) intoBody() ([]byte, error) {
+	result, err := json.Marshal(x)
+	if err != nil {
+		return nil, err
+	}
+
+	return result, nil
+}
+
+type RespExternalcontactToServiceExternalUserid struct {
+	CommonResp
+	// 密文externalUserId
+	ExternalUserid string `json:"external_userid"`
+}
+
+var _ bodyer = RespExternalcontactToServiceExternalUserid{}
+
+func (x RespExternalcontactToServiceExternalUserid) intoBody() ([]byte, error) {
+	result, err := json.Marshal(x)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+// 文档：https://developer.work.weixin.qq.com/document/path/95195
+func (c *ApiClient) ExternalcontactToServiceExternalUserid(req ReqExternalcontactToServiceExternalUserid) (RespExternalcontactToServiceExternalUserid, error) {
+	var resp RespExternalcontactToServiceExternalUserid
+	err := c.executeWXApiPost("/cgi-bin/externalcontact/to_service_external_userid", req, &resp, true)
+	if err != nil {
+		return RespExternalcontactToServiceExternalUserid{}, err
+	}
+	if bizErr := resp.TryIntoErr(); bizErr != nil {
+		return RespExternalcontactToServiceExternalUserid{}, bizErr
+	}
+
+	return resp, nil
+}
