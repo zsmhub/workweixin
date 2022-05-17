@@ -32,7 +32,6 @@ type token struct {
 	tokenCacheKey string
 }
 
-/*** access_token 模块 -begin- ***/
 func (c *ApiClient) GetToken() (token string, err error) {
 	token = c.accessToken.getToken()
 	if token == "" {
