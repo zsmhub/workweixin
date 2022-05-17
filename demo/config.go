@@ -36,7 +36,7 @@ var (
 
 // 调试数据配置
 var (
-	TestSuiteTicket           = "xxx"   // suite_ticket，10分钟刷新一次
+	TestSuiteTicket           = "xxx"   // suite_ticket，每10分钟刷新一次
 	TestAuthCorpId            = "xxx"   // 授权企业corpid
 	TestAuthCorpPermanentCode = "xxx"   // 授权企业永久授权码
 	TestAuthCorpAgentId       = 1000001 // 授权企业agentid

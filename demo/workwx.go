@@ -44,6 +44,10 @@ func (DcsTokenByRedis) Set(cacheKey string, tokenInfo apis.TokenInfo, ttl time.D
 	return err
 }
 
+func (DcsTokenByRedis) Del(cacheKey string) error {
+	return redisDb.Del(ctx, cacheKey).Err()
+}
+
 func (DcsTokenByRedis) Lock(cacheKey string, ttl time.Duration) bool {
 	if ok, _ := redisDb.SetNX(ctx, cacheKey, 1, ttl).Result(); ok {
 		return true

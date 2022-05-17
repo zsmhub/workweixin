@@ -10,7 +10,6 @@ func init() {
 	supportCallback(EventChangeContactCreateUser{})
 }
 
-// XML was generated 2022-05-06 14:38:40 by dzj on dengzhijie.lan.
 type EventChangeContactCreateUser struct {
 	XMLName    xml.Name `xml:"xml"`
 	Text       string   `xml:",chardata"`

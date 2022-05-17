@@ -2,6 +2,7 @@ package apis
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"github.com/cenkalti/backoff/v4"
 	"log"
@@ -13,6 +14,7 @@ import (
 type DcsToken interface {
 	Get(cacheKey string) TokenInfo                                     // 获取access_token
 	Set(cacheKey string, tokenInfo TokenInfo, ttl time.Duration) error // 设置access_token，ttl：缓存生存时间
+	Del(cacheKey string) error                                         // 删除缓存
 	Lock(cacheKey string, ttl time.Duration) bool                      // 加锁，返回成功或失败
 	Unlock(cacheKey string) error                                      // 释放锁
 }
@@ -38,6 +40,29 @@ func (c *ApiClient) GetToken() (token string, err error) {
 		err = errors.New("access_token获取失败，可能原因：配置有误/没有在服务商后台设置IP白名单/企业取消授权")
 		return
 	}
+	return
+}
+
+// 移除不合法或过期的的access_token
+func (c *ApiClient) RemoveToken(httpBody []byte) {
+	var commonResp CommonResp
+	_ = json.Unmarshal(httpBody, &commonResp)
+	if commonResp.IsOK() {
+		return
+	}
+
+	if _, ok := InvalidTokenErrCode[commonResp.ErrCode]; !ok {
+		return
+	}
+
+	c.accessToken.TokenInfo = TokenInfo{}
+
+	if c.accessToken.dcsToken != nil {
+		if err := c.accessToken.dcsToken.Del(c.accessToken.tokenCacheKey); err != nil {
+			c.logger.Errorf("corpid=%s, suiteid=%s, err=%v\n", c.CorpId, c.AppSuiteId, err)
+		}
+	}
+
 	return
 }
 
@@ -180,13 +205,17 @@ func (t *token) getToken() string {
 }
 
 func (t *token) syncToken() error {
-	var tokenInfo TokenInfo
+	var refreshHour int64 = 3600 // access_token刷新时间，至少每小时刷新一次
 
+	if t.Token != "" && t.LastRefresh.Unix()+refreshHour > time.Now().Unix() {
+		return nil
+	}
+
+	var tokenInfo TokenInfo
 	if t.dcsToken != nil {
-		if t.Token == "" {
-			tokenInfo = t.dcsToken.Get(t.tokenCacheKey)
-		}
-		if tokenInfo.Token == "" || tokenInfo.LastRefresh.Unix()+3600 < time.Now().Unix() {
+		tokenInfo = t.dcsToken.Get(t.tokenCacheKey)
+
+		if tokenInfo.Token == "" || tokenInfo.LastRefresh.Unix()+refreshHour <= time.Now().Unix() {
 			lockCacheKey := t.tokenCacheKey + "#lock"
 
 			// 抢锁
@@ -214,16 +243,13 @@ func (t *token) syncToken() error {
 			}
 		}
 	} else {
-		// 兼容方案
-		if t.Token == "" || t.LastRefresh.Unix()+3600 < time.Now().Unix() {
-			get, err := t.getTokenFunc()
-			if err != nil {
-				return err
-			}
-			tokenInfo.Token = get.Token
-			tokenInfo.ExpiresIn = get.ExpiresIn
-			tokenInfo.LastRefresh = time.Now()
+		get, err := t.getTokenFunc()
+		if err != nil {
+			return err
 		}
+		tokenInfo.Token = get.Token
+		tokenInfo.ExpiresIn = get.ExpiresIn
+		tokenInfo.LastRefresh = time.Now()
 	}
 
 	t.mutex.Lock()

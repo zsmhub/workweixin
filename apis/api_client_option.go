@@ -34,8 +34,8 @@ func CreateFastHttpClient() fasthttp.Client {
 // 需初始化的参数
 type (
 	Options struct {
-		DcsToken                     DcsToken              // 必传参数，如果不传这个参数，会把token存在内存中，仅适用于单体服务！
-		DcsAppSuiteTicket            DcsAppSuiteTicket     // 必传参数，如果不传这个参数，会把ticket存在内存中，仅适用于单体服务！
+		DcsToken                     DcsToken              // 选传参数，如果不传这个参数，则只会把 token 存在内存中，这会导致每次重启服务都要重新获取 token 和多个服务需发起多次 token 请求的问题。
+		DcsAppSuiteTicket            DcsAppSuiteTicket     // 选传参数，如果不传这个参数，则只会把 ticket 存在内存中，这会导致每次重启服务都要重新获取 ticket 和多个服务需发起多次 ticket 请求的问题。
 		GetThirdAppAuthCorpFunc      GetAuthCorpFromDBFunc // 第三方应用必传参数，用于获取企业数据，如从数据库中取数
 		GetCustomizedAppAuthCorpFunc GetAuthCorpFromDBFunc // 自建应用代开发必传参数，用于获取企业数据，如从数据库中取数
 		Logger                       Logger                // 选传参数，不传则默认将日志直接输出在终端
