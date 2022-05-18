@@ -45,6 +45,7 @@ type RespGetAuthInfoService struct {
 		Corpid            string `json:"corpid"`
 		SubjectType       int    `json:"subject_type"`
 		VerifiedEndTime   int    `json:"verified_end_time"`
+		Location          string `json:"location"`
 	} `json:"auth_corp_info"`
 	AuthInfo struct {
 		Agent []struct {

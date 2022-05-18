@@ -122,6 +122,13 @@ func (s *sdk) GetThirdAuthCorpApiClient(corpId string) (*apis.ApiClient, error) 
 
 // 第三方应用：移除授权企业，比如企业取消授权时触发
 func (s *sdk) RemoveThirdAuthCorp(corpId string) {
+	apiClient, err := s.GetThirdAuthCorpApiClient(corpId)
+	if err != nil {
+		return
+	}
+
+	apiClient.RemoveToken()
+
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 	delete(s.ThirdAuthCorpsClient, corpId)
@@ -190,6 +197,13 @@ func (s *sdk) GetCustomizedAuthCorpApiClient(corpId string) (*apis.ApiClient, er
 
 // 自建应用代开发：移除授权企业，比如企业取消授权时触发
 func (s *sdk) RemoveCustomizedAuthCorp(corpId string) {
+	apiClient, err := s.GetCustomizedAuthCorpApiClient(corpId)
+	if err != nil {
+		return
+	}
+
+	apiClient.RemoveToken()
+
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 	delete(s.CustomizedAuthCorpsClient, corpId)

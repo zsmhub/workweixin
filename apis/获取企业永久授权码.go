@@ -32,7 +32,6 @@ func (x ReqGetPermanentCodeService) intoBody() ([]byte, error) {
 type RespGetPermanentCodeService struct {
 	AccessToken  string `json:"access_token"`
 	AuthCorpInfo struct {
-		CorpAgentMax      int    `json:"corp_agent_max"`
 		CorpFullName      string `json:"corp_full_name"`
 		CorpIndustry      string `json:"corp_industry"`
 		CorpName          string `json:"corp_name"`

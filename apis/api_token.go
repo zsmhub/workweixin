@@ -43,8 +43,38 @@ func (c *ApiClient) GetToken() (token string, err error) {
 	return
 }
 
+// 移除不合法或失效的的access_token/jsapi_ticket
+func (c *ApiClient) RemoveToken() {
+	if c.accessToken != nil {
+		c.accessToken.TokenInfo = TokenInfo{}
+		if c.accessToken.dcsToken != nil {
+			if err := c.accessToken.dcsToken.Del(c.accessToken.tokenCacheKey); err != nil {
+				c.logger.Errorf("corpid=%s, suiteid=%s, err=%v\n", c.CorpId, c.AppSuiteId, err)
+			}
+		}
+	}
+
+	if c.jsapiTicket != nil {
+		c.jsapiTicket.TokenInfo = TokenInfo{}
+		if c.jsapiTicket.dcsToken != nil {
+			if err := c.jsapiTicket.dcsToken.Del(c.jsapiTicket.tokenCacheKey); err != nil {
+				c.logger.Errorf("corpid=%s, suiteid=%s, err=%v\n", c.CorpId, c.AppSuiteId, err)
+			}
+		}
+	}
+
+	if c.jsapiTicketAgentConfig != nil {
+		c.jsapiTicketAgentConfig.TokenInfo = TokenInfo{}
+		if c.jsapiTicketAgentConfig.dcsToken != nil {
+			if err := c.jsapiTicketAgentConfig.dcsToken.Del(c.jsapiTicketAgentConfig.tokenCacheKey); err != nil {
+				c.logger.Errorf("corpid=%s, suiteid=%s, err=%v\n", c.CorpId, c.AppSuiteId, err)
+			}
+		}
+	}
+}
+
 // 移除不合法或过期的的access_token
-func (c *ApiClient) RemoveToken(httpBody []byte) {
+func (c *ApiClient) RemoveTokenByHttpClient(httpBody []byte) {
 	var commonResp CommonResp
 	_ = json.Unmarshal(httpBody, &commonResp)
 	if commonResp.IsOK() {
@@ -55,13 +85,7 @@ func (c *ApiClient) RemoveToken(httpBody []byte) {
 		return
 	}
 
-	c.accessToken.TokenInfo = TokenInfo{}
-
-	if c.accessToken.dcsToken != nil {
-		if err := c.accessToken.dcsToken.Del(c.accessToken.tokenCacheKey); err != nil {
-			c.logger.Errorf("corpid=%s, suiteid=%s, err=%v\n", c.CorpId, c.AppSuiteId, err)
-		}
-	}
+	c.RemoveToken()
 
 	return
 }
@@ -207,10 +231,6 @@ func (t *token) getToken() string {
 func (t *token) syncToken() error {
 	var refreshHour int64 = 3600 // access_token刷新时间，至少每小时刷新一次
 
-	if t.Token != "" && t.LastRefresh.Unix()+refreshHour > time.Now().Unix() {
-		return nil
-	}
-
 	var tokenInfo TokenInfo
 	if t.dcsToken != nil {
 		tokenInfo = t.dcsToken.Get(t.tokenCacheKey)
@@ -243,13 +263,15 @@ func (t *token) syncToken() error {
 			}
 		}
 	} else {
-		get, err := t.getTokenFunc()
-		if err != nil {
-			return err
+		if t.Token == "" || t.LastRefresh.Unix()+refreshHour <= time.Now().Unix() {
+			get, err := t.getTokenFunc()
+			if err != nil {
+				return err
+			}
+			tokenInfo.Token = get.Token
+			tokenInfo.ExpiresIn = get.ExpiresIn
+			tokenInfo.LastRefresh = time.Now()
 		}
-		tokenInfo.Token = get.Token
-		tokenInfo.ExpiresIn = get.ExpiresIn
-		tokenInfo.LastRefresh = time.Now()
 	}
 
 	t.mutex.Lock()

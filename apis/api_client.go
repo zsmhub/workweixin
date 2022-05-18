@@ -250,7 +250,7 @@ func (c *ApiClient) executeWXApiGet(path string, req urlValuer, objResp interfac
 		return err
 	}
 
-	go c.RemoveToken(httpResp.Body())
+	go c.RemoveTokenByHttpClient(httpResp.Body())
 
 	return json.Unmarshal(httpResp.Body(), &objResp)
 }
@@ -279,7 +279,7 @@ func (c *ApiClient) executeWXApiPost(path string, req bodyer, objResp interface{
 		return err
 	}
 
-	go c.RemoveToken(httpResp.Body())
+	go c.RemoveTokenByHttpClient(httpResp.Body())
 
 	return json.Unmarshal(httpResp.Body(), &objResp)
 }
@@ -325,7 +325,7 @@ func (c *ApiClient) executeWXApiMediaUpload(path string, req mediaUploader, objR
 		return err
 	}
 
-	go c.RemoveToken(httpResp.Body())
+	go c.RemoveTokenByHttpClient(httpResp.Body())
 
 	return json.Unmarshal(httpResp.Body(), &objResp)
 }
