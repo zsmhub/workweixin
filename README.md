@@ -4,10 +4,15 @@ Go语言实现企业微信sdk，a sensible Work Weixin SDK for Go。
 
 以第三方服务商角度整理的sdk，集成了第三方应用sdk和自建应用代开发的sdk，支持一键生成新的sdk，使用简单，扩展灵活。
 
+- 支持一键生成sdk代码，包括api和回调事件
 - 用缓存方案实现分布式 access_token/jsapi_ticket，保证在多个服务中只有一个服务能成功调用企微API请求 access_token/jsapi_ticket，减少API调用次数和服务重启需要重新获取的情况
+    + 缓存方案支持自定义存储，默认内存存储
+    + 默认缓存2小时，主动式触发获取，企业取消授权后支持缓存清理
 - 用缓存方案实现读取/更新suite_ticket，保证多个服务能读取到最新的suite_ticket（suite_ticket每十分钟更新一次）
+    + 缓存方案支持自定义存储，默认内存存储
+- 支持自定义日志存储，提供Logger interface：用于自行实现日志记录器，便于收集日志
+    + 默认 log.Printf 输出
 - 获取授权企业ApiClient时，支持自定义闭包从数据库等读取企业数据，eg: Sdk.GetThirdAuthCorpApiClient
-- 提供Logger interface：用于自行实现日志记录器，便于收集日志
 
 [点击查看企业微信第三方应用开发博文](https://zsmhub.github.io/post/%E5%AE%9E%E6%88%98%E6%A1%88%E4%BE%8B/%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/)
 
