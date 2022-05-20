@@ -15,6 +15,7 @@ import (
 	"strings"
 )
 
+// 生成企微回调事件代码
 type Api struct {
 	DocUrl     string
 	FileName   string

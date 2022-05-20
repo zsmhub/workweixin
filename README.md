@@ -2,7 +2,7 @@
 
 Go语言实现企业微信sdk，a sensible Work Weixin SDK for Go。
 
-以第三方服务商角度整理的sdk，集成了第三方应用sdk和自建应用代开发的sdk，支持一键生成新的sdk，使用简单，扩展灵活。
+以第三方服务商角度整理的sdk，集成了第三方应用sdk和自建应用代开发的sdk，支持一键生成新sdk代码，使用简单，扩展灵活。
 
 - 支持一键生成sdk代码，包括api和回调事件
 - 用缓存方案实现分布式 access_token/jsapi_ticket，保证在多个服务中只有一个服务能成功调用企微API请求 access_token/jsapi_ticket，减少API调用次数和服务重启需要重新获取的情况
@@ -20,11 +20,11 @@ Go语言实现企业微信sdk，a sensible Work Weixin SDK for Go。
 
 > 注意：部分复杂的页面需要手动整理下sdk，如消息推送>发送应用消息接口。
 
-- 生成api代码（tip: 生成GET方式的接口，请求参数的数据类型需要手动调整下）
+- 生成企微api代码（tip: 生成GET方式的接口，请求参数的数据类型需要手动调整下）
 
     `make api doc=https://developer.work.weixin.qq.com/document/path/90600`
 
-- 生成callback代码
+- 生成企微回调事件代码
 
     `make callback doc=https://developer.work.weixin.qq.com/document/path/92277`
 
@@ -35,7 +35,7 @@ Go语言实现企业微信sdk，a sensible Work Weixin SDK for Go。
 
 [点击查看完整demo](https://github.com/zsmhub/workweixin/tree/master/demo)
 
-#### 回调sdk调用示例
+#### 企微回调事件sdk调用示例
 
 ```go
 // 企微回调设置初始化
@@ -107,7 +107,7 @@ func HandleAppPostRequest(c echo.Context) error {
 }
 ```
 
-#### api sdk调用示例
+#### 企微 api sdk 调用示例
 
 ```go
 import "xxx/workweixin/demo"

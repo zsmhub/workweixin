@@ -17,6 +17,7 @@ import (
 	"text/template"
 )
 
+// 生成企微api代码
 type Field struct {
 	Name       string
 	IsRequired bool
