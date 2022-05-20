@@ -229,13 +229,14 @@ func (t *token) getToken() string {
 }
 
 func (t *token) syncToken() error {
-	var refreshHour int64 = 3600 // access_token刷新时间，至少每小时刷新一次
+	var refreshHour int64 = 3600 // access_token刷新时间间隔，单位秒
+	var now = time.Now()
 
 	var tokenInfo TokenInfo
 	if t.dcsToken != nil {
 		tokenInfo = t.dcsToken.Get(t.tokenCacheKey)
 
-		if tokenInfo.Token == "" || tokenInfo.LastRefresh.Unix()+refreshHour <= time.Now().Unix() {
+		if tokenInfo.Token == "" || tokenInfo.LastRefresh.Unix()+refreshHour <= now.Unix() {
 			lockCacheKey := t.tokenCacheKey + "#lock"
 
 			// 抢锁
@@ -251,7 +252,7 @@ func (t *token) syncToken() error {
 
 				tokenInfo.Token = get.Token
 				tokenInfo.ExpiresIn = get.ExpiresIn
-				tokenInfo.LastRefresh = time.Now()
+				tokenInfo.LastRefresh = now
 
 				if err := t.dcsToken.Set(t.tokenCacheKey, tokenInfo, time.Hour*2); err != nil {
 					return err
@@ -263,14 +264,14 @@ func (t *token) syncToken() error {
 			}
 		}
 	} else {
-		if t.Token == "" || t.LastRefresh.Unix()+refreshHour <= time.Now().Unix() {
+		if t.Token == "" || t.LastRefresh.Unix()+refreshHour <= now.Unix() {
 			get, err := t.getTokenFunc()
 			if err != nil {
 				return err
 			}
 			tokenInfo.Token = get.Token
 			tokenInfo.ExpiresIn = get.ExpiresIn
-			tokenInfo.LastRefresh = time.Now()
+			tokenInfo.LastRefresh = now
 		}
 	}
 
