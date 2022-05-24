@@ -44,6 +44,7 @@ type RespGetActiveInfoByUserLicense struct {
 		// Userid 帐号绑定激活的成员userid。返回加密的userid
 		Userid string `json:"userid"`
 	} `json:"active_info_list"` // 帐号列表，同一个userid最多有两个帐号:一个基础帐号与一个互通帐号
+	// ActiveStatus 帐号激活状态。0:未激活、 1:已激活
 	ActiveStatus int `json:"active_status"`
 	CommonResp
 }

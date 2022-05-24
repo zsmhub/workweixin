@@ -12,13 +12,13 @@ import (
 
 type ReqCreateNewOrderLicense struct {
 	AccountCount struct {
-		// BaseCount 基础帐号个数，最多1000000个
+		// BaseCount 基础帐号个数，最多1000000个。(若企业为服务商测试企业，最多购买1000个)
 		BaseCount int `json:"base_count,omitempty"`
-		// ExternalContactCount 互通帐号个数，最多1000000个
+		// ExternalContactCount 互通帐号个数，最多1000000个。(若企业为服务商测试企业，最多购买1000个)
 		ExternalContactCount int `json:"external_contact_count,omitempty"`
 	} `json:"account_count"` // 账号个数详情，基础账号跟互通账号不能同时为0，必填
 	AccountDuration struct {
-		// Months 购买的月数，每个月按照31天计算。最多购买36个月（灰度期间4.11-4.24，最多购买一个月，必填
+		// Months 购买的月数，每个月按照31天计算。最多购买36个月。(若企业为服务商测试企业，最多购买1个月)，必填
 		Months int `json:"months"`
 	} `json:"account_duration"` // 帐号购买时长，必填
 	// BuyerUserid 下单人。服务商企业内成员userid。该userid必须登录过企业微信，并且企业微信已绑定微信。最终也支持由其他人支付，必填

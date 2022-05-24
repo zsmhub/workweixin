@@ -51,6 +51,9 @@ const EventTypeChangeAppAdmin EventType = "change_app_admin"
 // 客服消息类型
 const EventTypeKefuMsgOrEvent EventType = "kf_msg_or_event"
 
+// 接口许可失效通知
+const EventTypeUnlicensedNotify EventType = "unlicensed_notify"
+
 // 推送suite_ticket
 const InfoTypeSuiteTicket EventType = "suite_ticket"
 

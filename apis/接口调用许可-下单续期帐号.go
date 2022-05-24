@@ -16,7 +16,7 @@ type ReqCreateRenewOrderJobLicense struct {
 		Type int `json:"type"`
 		// Userid 续期企业的成员userid。只支持加密的userid，必填
 		Userid string `json:"userid"`
-	} `json:"account_list"` // 必填，续期的帐号列表，每次最多1000个。同一个jobid最多关联1000000个基础账号跟1000000个互通账号
+	} `json:"account_list"` // 续期的帐号列表，每次最多1000个。同一个jobid最多关联1000000个基础账号跟1000000个互通账号，必填
 	// Corpid 企业id，只支持加密的corpid，必填
 	Corpid string `json:"corpid"`
 	// Jobid 任务id，若不传则默认创建一个新任务。若指定第一次调用后拿到jobid，可以通过该接口将jobid关联多个userid
@@ -82,9 +82,9 @@ func (c *ApiClient) ExecCreateRenewOrderJobLicense(req ReqCreateRenewOrderJobLic
 
 type ReqSubmitOrderJobLicense struct {
 	AccountDuration struct {
-		// Months 购买的月数，每个月按照31天计算。最多购买36个月。（灰度期间4.11-4.24，最多续期一个月，同一个用户同一个类型激活码灰度期间只能续期一次）。(若企业为服务商测试企业，每一个激活码最多续期一次)，必填
+		// Months 购买的月数，每个月按照31天计算。最多购买36个月。(若企业为服务商测试企业，每次续期只能续期1个月)，必填
 		Months int `json:"months"`
-	} `json:"account_duration"` // ，必填账号购买时长
+	} `json:"account_duration"` // 账号购买时长，必填
 	// BuyerUserid 下单人。服务商企业内成员userid。该userid必须登录过企业微信，并且企业微信已绑定微信，必填
 	BuyerUserid string `json:"buyer_userid"`
 	// Jobid 任务id，必填

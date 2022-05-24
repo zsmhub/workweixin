@@ -11,7 +11,7 @@ import (
 // 文档：https://developer.work.weixin.qq.com/document/path/95647#获取订单列表
 
 type ReqListOrderLicense struct {
-	// Corpid 企业id，只支持加密的corpid
+	// Corpid 企业id，只支持加密的corpid。若指定corpid且corpid为服务商测试企业，则返回的订单列表为测试订单列表。否则只返回正式订单列表
 	Corpid string `json:"corpid,omitempty"`
 	// Cursor 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填
 	Cursor string `json:"cursor,omitempty"`
