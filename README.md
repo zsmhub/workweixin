@@ -184,6 +184,13 @@ accessToken, err := workweixin.Sdk.ThirdAppClient.GetToken()
 // 获取授权企业access_token
 accessToken, err := apiClient.GetToken()
 
+// 构造oauth2链接
+oauthUrl := workweixin.Sdk.ThirdAppClient.GetThirdOauthUrl(apis.GetThirdOauthUrlReq{
+    RedirectUri: "xxx",
+    Scope:       "xx",
+    State:       "xx",
+})
+
 // 企微 error code 类型强制转换
 if err != nil {
     apiError, ok := err.(*apis.ClientError)

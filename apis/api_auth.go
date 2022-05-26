@@ -20,7 +20,7 @@ type GetThirdOauthUrlReq struct {
 	State       string `json:"state"`        // 重定向后会带上state参数，企业可以填写a-zA-Z0-9的参数值，长度不可超过128个字节
 }
 
-// 构造第三方应用oauth2链接
+// 构造oauth2链接
 func (c *ApiClient) GetThirdOauthUrl(req GetThirdOauthUrlReq) string {
 	ret, _ := url.Parse(authUrlBase)
 	query := ret.Query()
