@@ -167,8 +167,22 @@ func InitApiHandler() error {
     return nil
 }
 
+apiClient, err := workweixin.Sdk.GetThirdAuthCorpApiClient(v.CorpId)
+if err != nil {
+    fmt.Println(err)
+}
+
 // 获取企业永久授权码
 resp, err := workweixin.Sdk.ThirdAppClient.ExecGetPermanentCodeService(apis.ReqGetPermanentCodeService{AuthCode: authCode})
+
+// 获取provider_access_token
+accessToken, err := workweixin.Sdk.ProviderClient.GetToken()
+
+// 获取suite_access_token
+accessToken, err := workweixin.Sdk.ThirdAppClient.GetToken()
+
+// 获取授权企业access_token
+accessToken, err := apiClient.GetToken()
 
 // 企微 error code 类型强制转换
 if err != nil {
@@ -183,10 +197,6 @@ if err != nil {
 }
 
 // 推送消息到第三方应用
-apiClient, err := workweixin.Sdk.GetThirdAuthCorpApiClient(v.CorpId)
-if err != nil {
-    fmt.Println(err)
-}
 reqSentMessageCard := apis.ReqSentMessageCard{
     ToUser:  v.InstallUserId,
     MsgType: "news",
@@ -204,6 +214,42 @@ reqSentMessageCard := apis.ReqSentMessageCard{
 }
 if _, err = apiClient.ExecSentMessageCard(reqSentMessageCard); err != nil {
     fmt.Println(err)
+}
+
+// 帮前端获取 wx.config/wx.agentConfig 的签名配置
+// 步骤1：获取授权企业的jsapi_ticket，wx.config注入的是企业的身份与权限，而wx.agentConfig注入的是应用的身份与权限
+configJsapiTicket, err := apiClient.GetJSAPITicket() // 企业jsapi_ticket
+agentConfigJsapiTicket, err := apiClient.GetJSAPITicketAgentConfig() // 应用的jsapi_ticket接口
+// 步骤2：JS-SDK使用权限签名算法
+func (qyapiRepo) getJsapiTicket(corpId, link, jsapiTicket string, agentId int) form.GetJsapiTicketResp {
+    var (
+        noncestr  = GetRandomString(16)
+        timestamp = time.Now().Unix()
+    )
+    unescapeUrl, _ := url.QueryUnescape(link)
+    signature := Sha1(fmt.Sprintf("jsapi_ticket=%s&noncestr=%s&timestamp=%d&url=%s", jsapiTicket, noncestr, timestamp, unescapeUrl))
+    return form.GetJsapiTicketResp{
+        CorpId:    corpId,
+        Noncestr:  noncestr,
+        Timestamp: timestamp,
+        Signature: signature,
+        AgentId:   int64(agentId),
+    }
+}
+func Sha1(s string) string {
+    h := sha1.New()
+    h.Write([]byte(s))
+    return fmt.Sprintf("%x", h.Sum(nil))
+}
+func GetRandomString(n int) string {
+    rand.Seed(time.Now().UnixNano())
+    str := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+    bytes := []byte(str)
+    var result []byte
+    for i := 0; i < n; i++ {
+        result = append(result, bytes[rand.Intn(len(bytes))])
+    }
+    return string(result)
 }
 ```
 
