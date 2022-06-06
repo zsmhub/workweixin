@@ -54,6 +54,12 @@ const EventTypeKefuMsgOrEvent EventType = "kf_msg_or_event"
 // 接口许可失效通知
 const EventTypeUnlicensedNotify EventType = "unlicensed_notify"
 
+// 接口调用许可-支付成功通知
+const EventTypeLicensePaySuccess EventType = "license_pay_success"
+
+// 接口调用许可-退款结果通知
+const EventTypeLicenseRefund EventType = "license_refund"
+
 // 推送suite_ticket
 const InfoTypeSuiteTicket EventType = "suite_ticket"
 
