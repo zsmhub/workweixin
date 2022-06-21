@@ -74,9 +74,9 @@ func (c *ApiClient) RemoveToken() {
 }
 
 // 移除不合法或过期的的access_token
-func (c *ApiClient) RemoveTokenByHttpClient(httpBody []byte) {
+func (c *ApiClient) RemoveTokenByHttpClient(httpBody string) {
 	var commonResp CommonResp
-	_ = json.Unmarshal(httpBody, &commonResp)
+	_ = json.Unmarshal([]byte(httpBody), &commonResp)
 	if commonResp.IsOK() {
 		return
 	}

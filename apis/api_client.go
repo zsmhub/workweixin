@@ -251,15 +251,16 @@ func (c *ApiClient) executeWXApiGet(path string, req urlValuer, objResp interfac
 	}
 
 	httpBody := httpResp.Body()
+	httpBodyStr := string(httpBody)
 
-	go func(httpBody []byte) {
+	go func() {
 		defer func() {
 			if err := recover(); err != nil {
-				c.logger.Errorf("path=%s, body=%s, err=%v", path, string(httpBody), err)
+				c.logger.Errorf("path=%s, body=%s, err=%v", path, httpBodyStr, err)
 			}
 		}()
-		c.RemoveTokenByHttpClient(httpBody)
-	}(httpBody)
+		c.RemoveTokenByHttpClient(httpBodyStr)
+	}()
 
 	return json.Unmarshal(httpBody, &objResp)
 }
@@ -289,15 +290,16 @@ func (c *ApiClient) executeWXApiPost(path string, req bodyer, objResp interface{
 	}
 
 	httpBody := httpResp.Body()
+	httpBodyStr := string(httpBody)
 
-	go func(httpBody []byte) {
+	go func() {
 		defer func() {
 			if err := recover(); err != nil {
-				c.logger.Errorf("path=%s, body=%s, err=%v", path, string(httpBody), err)
+				c.logger.Errorf("path=%s, body=%s, err=%v", path, httpBodyStr, err)
 			}
 		}()
-		c.RemoveTokenByHttpClient(httpBody)
-	}(httpBody)
+		c.RemoveTokenByHttpClient(httpBodyStr)
+	}()
 
 	return json.Unmarshal(httpBody, &objResp)
 }
@@ -344,15 +346,16 @@ func (c *ApiClient) executeWXApiMediaUpload(path string, req mediaUploader, objR
 	}
 
 	httpBody := httpResp.Body()
+	httpBodyStr := string(httpBody)
 
-	go func(httpBody []byte) {
+	go func() {
 		defer func() {
 			if err := recover(); err != nil {
-				c.logger.Errorf("path=%s, body=%s, err=%v", path, string(httpBody), err)
+				c.logger.Errorf("path=%s, body=%s, err=%v", path, httpBodyStr, err)
 			}
 		}()
-		c.RemoveTokenByHttpClient(httpBody)
-	}(httpBody)
+		c.RemoveTokenByHttpClient(httpBodyStr)
+	}()
 
 	return json.Unmarshal(httpBody, &objResp)
 }
