@@ -225,38 +225,32 @@ if _, err = apiClient.ExecSentMessageCard(reqSentMessageCard); err != nil {
 
 // 帮前端获取 wx.config/wx.agentConfig 的签名配置
 // 步骤1：获取授权企业的jsapi_ticket，wx.config注入的是企业的身份与权限，而wx.agentConfig注入的是应用的身份与权限
-configJsapiTicket, err := apiClient.GetJSAPITicket() // 企业jsapi_ticket
-agentConfigJsapiTicket, err := apiClient.GetJSAPITicketAgentConfig() // 应用的jsapi_ticket接口
 // 步骤2：JS-SDK使用权限签名算法
-func (qyapiRepo) getJsapiTicket(corpId, link, jsapiTicket string, agentId int) form.GetJsapiTicketResp {
-    var (
-        noncestr  = GetRandomString(16)
-        timestamp = time.Now().Unix()
-    )
-    unescapeUrl, _ := url.QueryUnescape(link)
-    signature := Sha1(fmt.Sprintf("jsapi_ticket=%s&noncestr=%s&timestamp=%d&url=%s", jsapiTicket, noncestr, timestamp, unescapeUrl))
-    return form.GetJsapiTicketResp{
-        CorpId:    corpId,
-        Noncestr:  noncestr,
-        Timestamp: timestamp,
-        Signature: signature,
-        AgentId:   int64(agentId),
-    }
+type QyapiGetJssdkConfigResp struct {
+    CorpJsapiTicket apis.GetJsSdkSignResp `json:"corp_jsapi_ticket"`
+    AppJsapiTicket  apis.GetJsSdkSignResp `json:"app_jsapi_ticket"`
 }
-func Sha1(s string) string {
-    h := sha1.New()
-    h.Write([]byte(s))
-    return fmt.Sprintf("%x", h.Sum(nil))
-}
-func GetRandomString(n int) string {
-    rand.Seed(time.Now().UnixNano())
-    str := "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-    bytes := []byte(str)
-    var result []byte
-    for i := 0; i < n; i++ {
-        result = append(result, bytes[rand.Intn(len(bytes))])
+func (qyapiRepo) GetJssdkConfig(req form.QyapiGetJssdkConfigReq) (*QyapiGetJssdkConfigResp, error) {
+    apiClient, err := workweixin.Sdk.GetThirdAuthCorpApiClient(req.CorpId)
+    if err != nil {
+        return nil, err
     }
-    return string(result)
+
+    corpTicket, err := apiClient.GetJSAPITicket()
+    if err != nil {
+        return nil, err
+    }
+
+    appTicket, err := apiClient.GetJSAPITicketAgentConfig()
+    if err != nil {
+        return nil, err
+    }
+
+    agentId := apiClient.AgentId
+    return &QyapiGetJssdkConfigResp{
+        CorpJsapiTicket: apiClient.GetJsSdkSign(req.CorpId, req.Url, corpTicket, 0),
+        AppJsapiTicket:  apiClient.GetJsSdkSign(req.CorpId, req.Url, appTicket, agentId),
+    }, nil
 }
 ```
 
