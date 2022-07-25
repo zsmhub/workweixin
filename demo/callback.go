@@ -97,7 +97,9 @@ func (callbackRepo) HandleCorpPostRequest(c echo.Context) error {
 	}
 
 	go func() {
-		defer recover()
+		defer func() {
+			_ = recover()
+		}()
 
 		switch msg.MsgType {
 
@@ -124,7 +126,9 @@ func (r callbackRepo) HandleAppPostRequest(c echo.Context) error {
 	}
 
 	go func() {
-		defer recover()
+		defer func() {
+			_ = recover()
+		}()
 
 		switch msg.MsgType {
 

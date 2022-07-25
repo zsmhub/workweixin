@@ -86,8 +86,6 @@ func (c *ApiClient) RemoveTokenByHttpClient(httpBody string) {
 	}
 
 	c.RemoveToken()
-
-	return
 }
 
 // GetJSAPITicket 获取 JSAPI_ticket

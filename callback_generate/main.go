@@ -66,7 +66,7 @@ func main() {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		die("non-200 app: %s\n", resp)
+		die("non-200 app: %+v\n", resp)
 	}
 
 	tmp, err := goquery.NewDocumentFromReader(resp.Body)

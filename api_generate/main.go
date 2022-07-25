@@ -71,7 +71,7 @@ func main() {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		die("non-200 app: %s\n", resp)
+		die("non-200 app: %+v\n", resp)
 	}
 
 	tmp, err := goquery.NewDocumentFromReader(resp.Body)
@@ -170,7 +170,7 @@ func main() {
 
 		if strings.Contains(rawHtmlSection, `<strong>请求示例</strong>`) {
 			api.ReqJson = subDoc.Find("pre > code").Eq(0).Text()
-		} else if api.IsGet == false {
+		} else if !api.IsGet {
 			api.ReqJson = subDoc.Find("pre > code").Eq(0).Text()
 		}
 
