@@ -261,3 +261,7 @@ func (qyapiRepo) GetJssdkConfig(req form.QyapiGetJssdkConfigReq) (*QyapiGetJssdk
 ### 参考开源项目
 
 - [OpenSCRM](https://github.com/openscrm/api-server)
+
+### Support
+
+[![JetBrains Logo (Main) logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg "logo")](https://jb.gg/OpenSourceSupport)
