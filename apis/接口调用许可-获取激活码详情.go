@@ -35,7 +35,7 @@ type RespGetActiveInfoByCodeLicense struct {
 	ActiveInfo struct {
 		// ActiveCode 帐号激活码
 		ActiveCode string `json:"active_code"`
-		ActiveTime int    `json:"active_time "`
+		ActiveTime int    `json:"active_time"`
 		// CreateTime 创建时间，订单支付成功后立即创建。激活码必须在创建时间后的365天内激活。
 		CreateTime int `json:"create_time"`
 		// ExpireTime 过期时间。为首次激活绑定的时间加上购买时长。未激活则不返回该字段
@@ -103,7 +103,7 @@ type RespBatchGetActiveInfoByCodeLicense struct {
 	ActiveInfoList []struct {
 		// ActiveCode 帐号激活码
 		ActiveCode string `json:"active_code"`
-		ActiveTime int    `json:"active_time "`
+		ActiveTime int    `json:"active_time"`
 		// CreateTime 创建时间，订单支付成功后立即创建。激活码必须在创建时间后的365天内激活
 		CreateTime int `json:"create_time"`
 		// ExpireTime 过期时间。为首次激活绑定的时间加上购买时长。未激活则不返回该字段
