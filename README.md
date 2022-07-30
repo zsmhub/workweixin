@@ -89,10 +89,8 @@ func HandleAppPostRequest(c echo.Context) error {
     }
 
     switch msg.MsgType {
-
     case callbacks.MessageTypeThird: // 第三方应用回调
         switch msg.EventType {
-
             // 推送suite_ticket，每十分钟推送一次suite_ticket
             case callbacks.InfoTypeSuiteTicket:
                 extras, ok := msg.Extras.(callbacks.ThirdSuiteTicket)
@@ -108,7 +106,7 @@ func HandleAppPostRequest(c echo.Context) error {
             // 企业取消授权通知
             case callbacks.InfoTypeCancelAuth:
                   workweixin.Sdk.RemoveThirdAuthCorp(corpId)
-
+        }
     }
 
     return nil
