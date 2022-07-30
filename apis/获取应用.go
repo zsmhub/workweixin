@@ -15,7 +15,7 @@ import (
 
 type ReqGetAgent struct {
 	// Agentid 应用id，必填
-	Agentid string `json:"agentid"`
+	Agentid int `json:"agentid"`
 }
 
 var _ urlValuer = ReqGetAgent{}
