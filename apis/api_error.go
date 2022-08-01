@@ -44,10 +44,10 @@ func (e *ClientError) Error() string {
 
 // 不合法或过期的 access_token 错误码
 var InvalidTokenErrCode = map[int64]struct{}{
-	ErrCode40014: struct{}{},
-	ErrCode40082: struct{}{},
-	ErrCode42001: struct{}{},
-	ErrCode42009: struct{}{},
+	ErrCode40014: {},
+	ErrCode40082: {},
+	ErrCode42001: {},
+	ErrCode42009: {},
 }
 
 // ErrCode 错误码类型

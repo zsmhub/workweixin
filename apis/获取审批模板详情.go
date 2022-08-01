@@ -11,7 +11,7 @@ import (
 // 文档：https://developer.work.weixin.qq.com/document/path/92631#获取审批模板详情
 
 type ReqGetTemplateDetail struct {
-	//服务商审批模板的唯一标识id。可在“获取审批单据详情”、“审批状态变化回调通知”中获得，也可在服务商后台-应用管理-审批模板的模板编辑页面中获得。
+	// 服务商审批模板的唯一标识id。可在“获取审批单据详情”、“审批状态变化回调通知”中获得，也可在服务商后台-应用管理-审批模板的模板编辑页面中获得。
 	TemplateId string `json:"template_id"`
 }
 
@@ -29,14 +29,14 @@ func (x ReqGetTemplateDetail) intoBody() ([]byte, error) {
 // RespGetTemplateDetail 获取审批模板详情
 // 文档：https://developer.work.weixin.qq.com/document/path/92631#获取审批模板详情
 
-type Property struct { //模板控件属性，包含了模板内控件的各种属性信息
-	Control string     `json:"control"` //控件类型：Text-文本；Textarea-多行文本；Number-数字；Money-金额；Date-日期/日期+时间；Selector-单选/多选；Contact-成员/部门；Tips-说明文字；File-附件；Table-明细；Attendance-假勤控件；Vacation-请假控件
-	Id      string     `json:"id"`      //控件id
-	Title   []struct { //控件名称，若配置了多语言则会包含中英文的控件名称，默认为zh_CN中文
+type Property struct { // 模板控件属性，包含了模板内控件的各种属性信息
+	Control string `json:"control"` // 控件类型：Text-文本；Textarea-多行文本；Number-数字；Money-金额；Date-日期/日期+时间；Selector-单选/多选；Contact-成员/部门；Tips-说明文字；File-附件；Table-明细；Attendance-假勤控件；Vacation-请假控件
+	Id      string `json:"id"`      // 控件id
+	Title   []struct { // 控件名称，若配置了多语言则会包含中英文的控件名称，默认为zh_CN中文
 		Text string `json:"text"`
 		Lang string `json:"lang"`
 	} `json:"title"`
-	Placeholder []struct { //控件说明，向申请者展示的控件填写说明，若配置了多语言则会包含中英文的控件说明，默认为zh_CN中文
+	Placeholder []struct { // 控件说明，向申请者展示的控件填写说明，若配置了多语言则会包含中英文的控件说明，默认为zh_CN中文
 		Text string `json:"text"`
 		Lang string `json:"lang"`
 	} `json:"placeholder"`
@@ -102,11 +102,11 @@ type VacationList struct {
 
 type RespGetTemplateDetail struct {
 	CommonResp
-	TemplateNames []struct { //模板名称，若配置了多语言则会包含中英文的模板名称，默认为zh_CN中文
+	TemplateNames []struct { // 模板名称，若配置了多语言则会包含中英文的模板名称，默认为zh_CN中文
 		Text string `json:"text"`
 		Lang string `json:"lang"`
 	} `json:"template_names"`
-	TemplateContent struct { //模板控件信息
+	TemplateContent struct { // 模板控件信息
 		Controls []struct {
 			Property Property `json:"property"`
 			Config   struct {
