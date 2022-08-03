@@ -44,14 +44,14 @@ func (e *ClientError) Error() string {
 
 // 不合法或过期的 access_token 错误码
 var InvalidTokenErrCode = map[int64]struct{}{
-	ErrCode40014: {},
-	ErrCode40082: {},
-	ErrCode42001: {},
-	ErrCode42009: {},
+	ErrCode40014: struct{}{},
+	ErrCode40082: struct{}{},
+	ErrCode42001: struct{}{},
+	ErrCode42009: struct{}{},
 }
 
 // ErrCode 错误码类型
-// 全局错误码文档: https://developer.work.weixin.qq.com/document/path/95390
+// 全局错误码文档: https://developer.work.weixin.qq.com/document/path/90313
 
 type ErrCode = int64
 
@@ -2579,6 +2579,18 @@ const ErrCode610016 ErrCode = 610016
 // 排查方法: -
 const ErrCode610017 ErrCode = 610017
 
+// 	缺少openkfid
+const ErrCode60251 ErrCode = 60251
+
+// 非法的openkfid
+const ErrCode60252 ErrCode = 60252
+
+// 客服不在接待人员列表中
+const ErrCode60253 ErrCode = 60253
+
+// 设置直属上级数量超过最大数量限制（5个）
+const ErrCode60257 ErrCode = 60257
+
 // ErrCode640001 微盘不存在当前空间
 // 排查方法: 判断spaceid是否填错
 const ErrCode640001 ErrCode = 640001
@@ -2773,6 +2785,81 @@ const ErrCode701025 = 701025
 // 列表数量超过最大值
 const ErrCode701026 = 701026
 
+// 测试企业购买帐号个数超限。
+const ErrCode701027 = 701027
+
+// 测试企业购买月份超限，最多只能购买一个月
+const ErrCode701028 = 701028
+
+// 测试企业只允许续期一次
+const ErrCode701029 = 701029
+
+// 新激活码有效期累加用户绑定的旧激活码有效期超过5年
+const ErrCode701030 = 701030
+
+// 有订单在迁移中，请迁移完成后再下单
+const ErrCode701031 = 701031
+
+// 有订单未支付，请完成后再下单
+const ErrCode701032 = 701032
+
+// 有订单正在生成激活码中，请稍后重试
+const ErrCode701033 = 701033
+
+// 历史企业，需迁移完成后才能购买license订单，可以去服务商管理端购买license订单页面点击主动迁移
+const ErrCode701034 = 701034
+
+// 有正式订单，所以无法添加测试订单
+const ErrCode701035 = 701035
+
+// 有生效中的测试订单，所以无法添加订单
+const ErrCode701036 = 701036
+
+// 存在订单申请退款中
+const ErrCode701037 = 701037
+
+// 民生企业，只允许下单12个月
+const ErrCode701038 = 701038
+
+// 民生企业，只允许下单12个月
+const ErrCode701039 = 701039
+
+// 民生企业，不允许购买数量超过某个限制
+const ErrCode701040 = 701040
+
+// 更新激活码的时候写冲突，请获取激活码最新详情再根据激活码最新情况处理
+const ErrCode701081 = 701081
+
+// 该用户已经激活的情况下，使用新码重新激活的场景，旧码剩余的时长不能超过20天
+const ErrCode701082 = 701082
+
+// 非法的open_corpid
+const ErrCode710000 = 710000
+
+// 代开发应用模版未上线
+const ErrCode842002 = 842002
+
+// 不是代开发应用模版
+const ErrCode842003 = 842003
+
+// 代开发应用模版数量不合法
+const ErrCode842004 = 842004
+
+// 不支持的应用类型
+const ErrCode842005 = 842005
+
 // ErrCode844001 非法的output_file_format
 // 排查方法: 判断输出文件格式是否正确
 const ErrCode844001 ErrCode = 844001
+
+// 最近安装应用时间已超过7天，不再允许拨打公费电话联系管理员
+const ErrCode8844002 ErrCode = 844002
+
+// openid账号类型不是公众号或小程序
+const ErrCode845001 ErrCode = 845001
+
+// openid认证主体和企业认证主体不一致
+const ErrCode845002 ErrCode = 845002
+
+// unionid认证主体和企业认证主体不一致
+const ErrCode845003 ErrCode = 845003
