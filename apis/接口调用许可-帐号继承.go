@@ -10,16 +10,20 @@ import (
 // ReqBatchTransferLicenseLicense 帐号继承请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95673#帐号继承
 
-type ReqBatchTransferLicenseLicense struct {
-	// Corpid 待绑定激活的成员所属企业corpid，只支持加密的corpid，必填
-	Corpid       string `json:"corpid"`
-	TransferList []struct {
+type (
+	ReqBatchTransferLicenseLicense struct {
+		// Corpid 待绑定激活的成员所属企业corpid，只支持加密的corpid，必填
+		Corpid       string             `json:"corpid"`
+		TransferList []TransferListItem `json:"transfer_list"`
+	}
+
+	TransferListItem struct {
 		// HandoverUserid 转移成员的userid。只支持加密的userid，必填
 		HandoverUserid string `json:"handover_userid"`
 		// TakeoverUserid 接收成员的userid。只支持加密的userid，必填
 		TakeoverUserid string `json:"takeover_userid"`
-	} `json:"transfer_list"`
-}
+	}
+)
 
 var _ bodyer = ReqBatchTransferLicenseLicense{}
 

@@ -9,23 +9,28 @@ import (
 
 // ReqCreateNewOrderLicense 下单购买帐号请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95644#下单购买帐号
+type (
+	ReqCreateNewOrderLicense struct {
+		AccountCount    ReqCreateNewOrderLicenseAccountCount `json:"account_count"`    // 账号个数详情，基础账号跟互通账号不能同时为0，必填
+		AccountDuration ReqCreateNewOrderLicenseMonths       `json:"account_duration"` // 帐号购买时长，必填
+		// BuyerUserid 下单人。服务商企业内成员userid。该userid必须登录过企业微信，并且企业微信已绑定微信。最终也支持由其他人支付，必填
+		BuyerUserid string `json:"buyer_userid"`
+		// Corpid 企业id，只支持加密的corpid，必填
+		Corpid string `json:"corpid"`
+	}
 
-type ReqCreateNewOrderLicense struct {
-	AccountCount struct {
+	ReqCreateNewOrderLicenseAccountCount struct {
 		// BaseCount 基础帐号个数，最多1000000个。(若企业为服务商测试企业，最多购买1000个)
 		BaseCount int `json:"base_count,omitempty"`
 		// ExternalContactCount 互通帐号个数，最多1000000个。(若企业为服务商测试企业，最多购买1000个)
 		ExternalContactCount int `json:"external_contact_count,omitempty"`
-	} `json:"account_count"` // 账号个数详情，基础账号跟互通账号不能同时为0，必填
-	AccountDuration struct {
+	}
+
+	ReqCreateNewOrderLicenseMonths struct {
 		// Months 购买的月数，每个月按照31天计算。最多购买36个月。(若企业为服务商测试企业，最多购买1个月)，必填
 		Months int `json:"months"`
-	} `json:"account_duration"` // 帐号购买时长，必填
-	// BuyerUserid 下单人。服务商企业内成员userid。该userid必须登录过企业微信，并且企业微信已绑定微信。最终也支持由其他人支付，必填
-	BuyerUserid string `json:"buyer_userid"`
-	// Corpid 企业id，只支持加密的corpid，必填
-	Corpid string `json:"corpid"`
-}
+	}
+)
 
 var _ bodyer = ReqCreateNewOrderLicense{}
 

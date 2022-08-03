@@ -10,18 +10,22 @@ import (
 // ReqCreateRenewOrderJobLicense 创建续期任务请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95646#创建续期任务
 
-type ReqCreateRenewOrderJobLicense struct {
-	AccountList []struct {
+type (
+	ReqCreateRenewOrderJobLicense struct {
+		AccountList []ReqCreateRenewOrderJobLicenseAccountListItem `json:"account_list"` // 续期的帐号列表，每次最多1000个。同一个jobid最多关联1000000个基础账号跟1000000个互通账号，必填
+		// Corpid 企业id，只支持加密的corpid，必填
+		Corpid string `json:"corpid"`
+		// Jobid 任务id，若不传则默认创建一个新任务。若指定第一次调用后拿到jobid，可以通过该接口将jobid关联多个userid
+		Jobid string `json:"jobid,omitempty"`
+	}
+
+	ReqCreateRenewOrderJobLicenseAccountListItem struct {
 		// Type 续期帐号类型。1:基础帐号，2:互通帐号，必填
 		Type int `json:"type"`
 		// Userid 续期企业的成员userid。只支持加密的userid，必填
 		Userid string `json:"userid"`
-	} `json:"account_list"` // 续期的帐号列表，每次最多1000个。同一个jobid最多关联1000000个基础账号跟1000000个互通账号，必填
-	// Corpid 企业id，只支持加密的corpid，必填
-	Corpid string `json:"corpid"`
-	// Jobid 任务id，若不传则默认创建一个新任务。若指定第一次调用后拿到jobid，可以通过该接口将jobid关联多个userid
-	Jobid string `json:"jobid,omitempty"`
-}
+	}
+)
 
 var _ bodyer = ReqCreateRenewOrderJobLicense{}
 
