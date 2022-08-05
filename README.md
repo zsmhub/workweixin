@@ -30,7 +30,7 @@ go get github.com/zsmhub/workweixin
 
     `make api doc=https://developer.work.weixin.qq.com/document/path/90600`
 
-- 生成企微回调事件代码
+- 生成企微回调事件代码（`如果发现callbacks/callback_constant.go没有这个回调事件的常量定义，则需手动补上`）
 
     `make callback doc=https://developer.work.weixin.qq.com/document/path/92277`
 

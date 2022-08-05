@@ -93,6 +93,9 @@ const InfoTypeChangeExternalTag EventType = "change_external_tag"
 // 同意授权转换external_userid事件，企微安全升级需要：旧external_userid调整为新external_userid
 const InfoTypeAgreeExternalUseridMigration EventType = "agree_external_userid_migration"
 
+// 自动激活回调通知
+const InfoTypeAutoActivate EventType = "auto_activate"
+
 // ChangeType 变更类型
 type ChangeType string
 
