@@ -25,9 +25,22 @@ var (
 		ErrCode41022:              errPrefix + "suite_access_token missing",
 		ErrCode42001:              errPrefix + "access_token已过期",
 		ErrCode42009:              errPrefix + "suite_access_token已过期",
-		ErrCode45033:              "接口并发调用超过限制",
-		ErrCode60011:              "无权限访问",
+		ErrCode45033:              errPrefix + "接口并发调用超过限制",
+		ErrCode60011:              errPrefix + "无权限访问",
 		ErrCode92002:              "不允许跨企业调用",
+		ErrCode701001:             "不是license基础帐号",
+		ErrCode701002:             "不合法的激活码",
+		ErrCode701003:             "该激活码已被绑定过",
+		ErrCode701004:             "激活码未绑定",
+		ErrCode701016:             "帐号未激活或者已经过期",
+		ErrCode701017:             "在职成员30天内仅可将激活码继承给他人1次",
+		ErrCode701018:             "迁移帐号重叠，接收帐号已有相同类型的帐号",
+		ErrCode701021:             "非法的激活码",
+		ErrCode701030:             "激活失败，激活码累加后的有效期不可超过5年",
+		ErrCode701032:             "有订单未支付，请完成后再下单",
+		ErrCode701033:             "有订单正在生成激活码中，请稍后重试",
+		ErrCode701034:             "历史企业需迁移完成后才能购买激活码",
+		ErrCode701082:             "该成员已激活，请在剩余时长不超过20天时再激活",
 	}
 )
 
@@ -2746,7 +2759,7 @@ const ErrCode701012 = 701012
 // 灰度期间只允许续期一次
 const ErrCode701013 = 701013
 
-// 	jobid最多关联100w个userid
+// jobid最多关联100w个userid
 const ErrCode701014 = 701014
 
 // 没有第三方或者代开发授权，不允许下单
@@ -2755,7 +2768,7 @@ const ErrCode701015 = 701015
 // 帐号未激活或者已经过期
 const ErrCode701016 = 701016
 
-// 	帐号30天内迁移过
+// 帐号30天内迁移过
 const ErrCode701017 = 701017
 
 // 迁移帐号重叠，接收帐号已有相同类型的帐号
