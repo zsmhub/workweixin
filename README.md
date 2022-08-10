@@ -252,6 +252,22 @@ func (qyapiRepo) GetJssdkConfig(req form.QyapiGetJssdkConfigReq) (*QyapiGetJssdk
 }
 ```
 
+### 目录结构
+
+```sh
+.
+├── api_generate             一键生成企微API代码
+├── apis                     企业微信API整合
+│   └── api.error.go         全局错误码
+├── callback_generate        一键生成企微回调事件代码
+├── callbacks                企业微信回调事件整合
+│   └── callback_constant.go 回调事件定义
+├── demo                     sdk调用示例
+├── docs                     企业微信相关文档
+├── internal                 第三方库
+└── main.go                  入口文件
+```
+
 ### 注意点
 
 - 如果你发现了sdk中，没有某个回调事件或某个api，可以使用一键生成sdk代码命令生成，然后提交下pr

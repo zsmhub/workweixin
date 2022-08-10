@@ -1,5 +1,11 @@
 package callbacks
 
+// 企微回调消息/事件类型
+// - MsgType: 消息类型，third(自定义的第三方应用事件)，text/image/voice等消息事件， event(其他事件)
+// - EventType: 事件类型，当 MsgType 为 event 时存在
+// - InfoType: 等同于EventType，是企业微信第三方应用的专用字段，此时我们可以自定义 MsgType="third"，InfoType=EventType
+// - ChangeType：变更类型，当 InfoType 为 change_external_contact 时存在
+
 // MessageType 消息类型
 type MessageType string
 
