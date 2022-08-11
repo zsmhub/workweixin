@@ -42,24 +42,27 @@ type Api struct {
 
 const AccessTokenName = "access_token"
 
-var docVar = flag.String("doc", "", "微信文档地址")
+var docVar = flag.String("doc", "", "[必填]微信文档地址")
+var prefixVar = flag.String("prefix", "", "[选填]生成的文件名前缀")
 
 func main() {
 	flag.Parse()
 
-	var docURL, savePath string
+	var docURL, savePath, filePrefix string
 
 	if docVar != nil {
 		docURL = *docVar
 	}
-
 	if docURL == "" {
 		fmt.Println("请输入参数doc(企业微信开发文档地址):")
 		_, _ = fmt.Scanf("%s", &docURL)
 	}
-
 	if docURL == "" {
 		die("必传参数 doc=?")
+	}
+
+	if prefixVar != nil {
+		filePrefix = *prefixVar
 	}
 
 	// get the fresh documentation!
@@ -86,6 +89,9 @@ func main() {
 		die("failed to get html: %+v\n", err)
 	}
 	titleHtml = titleHtml[:strings.Index(titleHtml, " ")]
+	if filePrefix != "" {
+		titleHtml = fmt.Sprintf("%s-%s", filePrefix, titleHtml)
+	}
 	savePath = "./apis/" + titleHtml + ".go"
 	fmt.Printf("开始抓取和生成API代码，文档地址:%s，代码保存路径:%s\n", docURL, savePath)
 
@@ -127,7 +133,6 @@ func main() {
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求示例：</strong>`, `<strong>请求示例：</strong>`)
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>返回结果 ：</strong>`, `<strong>返回结果:</strong>`)
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `POST（<strong>HTTPS</strong>）`, `POST(<strong>HTTPS</strong>)`)
-		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `（<strong>HTTPS</strong>）`, `(<strong>HTTPS</strong>)`) // todo
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `GET（<strong>HTTPS</strong>）`, `GET(<strong>HTTPS</strong>)`)
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `：`, `:`)
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `: </strong>`, `:</strong>`)

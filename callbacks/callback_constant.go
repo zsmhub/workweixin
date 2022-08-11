@@ -33,7 +33,7 @@ const MessageTypeEvent MessageType = "event"
 // 没有明确指定消息类型，都视为第三方应用事件
 const MessageTypeThird MessageType = "third"
 
-// EventType 事件类型
+// EventType 事件类型（InfoType类型也归到EventType）
 type EventType string
 
 // EventTypeChangeExternalContact 企业客户事件
@@ -65,6 +65,63 @@ const EventTypeLicensePaySuccess EventType = "license_pay_success"
 
 // 接口调用许可-退款结果通知
 const EventTypeLicenseRefund EventType = "license_refund"
+
+// 日程-修改日历事件
+const EventTypeModifyCalendar EventType = "modify_calendar"
+
+// 日程-删除日历事件
+const EventTypeDeleteCalendar EventType = "delete_calendar"
+
+// 日程-添加日程事件
+const EventTypeAddSchedule EventType = "add_schedule"
+
+// 日程-修改日程事件
+const EventTypeModifySchedule EventType = "modify_schedule"
+
+// 日程-删除日程事件
+const EventTypeDeleteSchedule EventType = "delete_schedule"
+
+// 直播回调事件
+const EventTypeLivingStatusChange EventType = "living_status_change"
+
+// 微盘容量不足事件
+const EventTypeWedriveInsufficientCapactiy EventType = "wedrive_insufficient_capacity"
+
+// 点击菜单拉取消息的事件推送
+const EventTypeClick EventType = "click"
+
+// 点击菜单跳转链接的事件推送
+const EventTypeView EventType = "view"
+
+// 扫码推事件的事件推送
+const EventTypeScancodePush EventType = "scancode_push"
+
+// 扫码推事件且弹出“消息接收中”提示框的事件推送
+const EventTypeScancodeWaitmsg EventType = "scancode_waitmsg"
+
+// 弹出系统拍照发图的事件推送
+const EventTypePicSysphoto EventType = "pic_sysphoto"
+
+// 弹出拍照或者相册发图的事件推送
+const EventTypePicPhotoOrAlbum EventType = "pic_photo_or_album"
+
+// 弹出微信相册发图器的事件推送
+const EventTypePicWeixin EventType = "pic_weixin"
+
+// 弹出地理位置选择器的事件推送
+const EventTypeLocationSelect EventType = "location_select"
+
+// 审批状态通知事件
+const EventTypeOpenApprovalChange EventType = "open_approval_change"
+
+// 上下游共享应用事件回调
+const EventTypeShareChainChange EventType = "share_chain_change"
+
+// 模板卡片事件推送
+const EventTypeTemplateCardEvent EventType = "template_card_event"
+
+// 通用模板卡片右上角菜单事件推送
+const EventTypeTemplateCardMenuEvent EventType = "template_card_menu_event"
 
 // 推送suite_ticket
 const InfoTypeSuiteTicket EventType = "suite_ticket"
@@ -101,6 +158,9 @@ const InfoTypeAgreeExternalUseridMigration EventType = "agree_external_userid_mi
 
 // 自动激活回调通知
 const InfoTypeAutoActivate EventType = "auto_activate"
+
+// 家校通讯录变更回调
+const InfoTypeChangeSchoolContact EventType = "change_school_contact"
 
 // ChangeType 变更类型
 type ChangeType string
@@ -161,3 +221,36 @@ const ChangeTypeDismissChat ChangeType = "dismiss"
 
 // ChangeTypeMsgAuditApproved 添加外部联系人同意进行聊天内容存档时，回调该事件。
 const ChangeTypeMsgAuditApproved = "msg_audit_approved"
+
+// 家校通讯录变更回调-创建部门事件
+const ChangeTypeCreateDepartment = "create_department"
+
+// 家校通讯录变更回调-更新部门事件
+const ChangeTypeUpdateDepartment = "update_department"
+
+// 家校通讯录变更回调-删除部门事件
+const ChangeTypeDeleteDepartment = "delete_department"
+
+// 家校通讯录变更回调-新增学生事件
+const ChangeTypeCreateStudent = "create_student"
+
+// 家校通讯录变更回调-编辑学生事件
+const ChangeTypeUpdateStudent = "update_student"
+
+// 家校通讯录变更回调-删除学生事件
+const ChangeTypeDeleteStudent = "delete_student"
+
+// 家校通讯录变更回调-新增家长事件
+const ChangeTypeCreateParent = "create_parent"
+
+// 家校通讯录变更回调-编辑家长事件
+const ChangeTypeUpdateParent = "update_parent"
+
+// 家校通讯录变更回调-删除家长事件
+const ChangeTypeDeleteParent = "delete_parent"
+
+// 家校通讯录变更回调-家长关注事件、成员关注事件
+const ChangeTypeSubscribe = "subscribe"
+
+// 家校通讯录变更回调-家长取消关注事件、成员取消关注事件
+const ChangeTypeUnsubscribe = "unsubscribe"

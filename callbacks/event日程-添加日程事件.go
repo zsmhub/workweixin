@@ -2,14 +2,15 @@ package callbacks
 
 import "encoding/xml"
 
-// 文档: https://developer.work.weixin.qq.com/document/path/90376#成员关注及取消关注事件
+// 自动生成的回调结构，按需修改, 生成方式: make callback doc=微信文档地址url
+// 文档: https://developer.work.weixin.qq.com/document/path/93704#添加日程事件
 
 func init() {
 	// 添加可解析的回调事件
-	supportCallback(EventSubscribe{})
+	supportCallback(EventAddSchedule{})
 }
 
-type EventSubscribe struct {
+type EventAddSchedule struct {
 	XMLName    xml.Name `xml:"xml"`
 	Text       string   `xml:",chardata"`
 	ToUserName struct {
@@ -27,29 +28,32 @@ type EventSubscribe struct {
 	Event struct {
 		Text string `xml:",chardata"`
 	} `xml:"Event"`
-	AgentID struct {
+	CalId struct {
 		Text string `xml:",chardata"`
-	} `xml:"AgentID"`
+	} `xml:"CalId"`
+	ScheduleId struct {
+		Text string `xml:",chardata"`
+	} `xml:"ScheduleId"`
 }
 
-func (EventSubscribe) GetMessageType() string {
+func (EventAddSchedule) GetMessageType() string {
 	return "event"
 }
 
-func (EventSubscribe) GetEventType() string {
-	return "subscribe"
+func (EventAddSchedule) GetEventType() string {
+	return "add_schedule"
 }
 
-func (EventSubscribe) GetChangeType() string {
+func (EventAddSchedule) GetChangeType() string {
 	return ""
 }
 
-func (m EventSubscribe) GetTypeKey() string {
+func (m EventAddSchedule) GetTypeKey() string {
 	return m.GetMessageType() + ":" + m.GetEventType() + ":" + m.GetChangeType()
 }
 
-func (EventSubscribe) ParseFromXml(data []byte) (CallBackExtraInfoInterface, error) {
-	var temp EventSubscribe
+func (EventAddSchedule) ParseFromXml(data []byte) (CallBackExtraInfoInterface, error) {
+	var temp EventAddSchedule
 	err := xml.Unmarshal(data, &temp)
 	return temp, err
 }

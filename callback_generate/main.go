@@ -28,23 +28,27 @@ type Api struct {
 	Msg        callbacks.CallbackMessage
 }
 
-var docVar = flag.String("doc", "", "微信文档地址")
+var docVar = flag.String("doc", "", "[必填]微信文档地址")
+var prefixVar = flag.String("prefix", "", "[选填]生成的文件名前缀")
 
 func main() {
 	flag.Parse()
 
-	var docURL, savePath string
+	var docURL, savePath, filePrefix string
 
 	if docVar != nil {
 		docURL = *docVar
 	}
-
 	if docURL == "" {
 		fmt.Println("请输入参数doc(企业微信开发文档地址):")
 		_, _ = fmt.Scanf("%s", &docURL)
 	}
 	if docURL == "" {
 		die("必传参数 doc=?")
+	}
+
+	if prefixVar != nil {
+		filePrefix = *prefixVar
 	}
 
 	tag := strings.Index(docURL, "#")
@@ -126,9 +130,13 @@ func main() {
 			fmt.Println("接口标题为空，跳过处理")
 			continue
 		}
+		api.DocUrl = docURL + "#" + api.FileName
+
+		if filePrefix != "" {
+			api.FileName = fmt.Sprintf("%s-%s", filePrefix, api.FileName)
+		}
 		fmt.Println(api.FileName)
 
-		api.DocUrl = docURL + "#" + api.FileName
 		tmp, err := goquery.NewDocumentFromReader(bytes.NewBufferString(rawHtmlSection))
 		if err != nil {
 			fmt.Println("html解析失败:", err)
@@ -145,6 +153,7 @@ func main() {
 		api.XmlStr = re.ReplaceAllString(api.XmlStr, "")
 		api.XmlStr = strings.ReplaceAll(api.XmlStr, "&lt;", "<")
 		api.XmlStr = strings.ReplaceAll(api.XmlStr, "&gt;", ">")
+		api.XmlStr = strings.ReplaceAll(api.XmlStr, "]]</", "]]></") // 修复官方xml错误
 
 		api.Msg, _ = callbacks.CallbackMessage{}.ParseMessageFromXml([]byte(api.XmlStr))
 
