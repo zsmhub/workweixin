@@ -34,7 +34,6 @@ go get github.com/zsmhub/workweixin
 
     `make callback doc=https://developer.work.weixin.qq.com/document/path/92277 [prefix=生成的文件名前缀]`
 
-
 ### sdk调用示例
 
 **强烈建议去 ./demo 文件夹查看完整示例！**
