@@ -123,6 +123,12 @@ const EventTypeTemplateCardEvent EventType = "template_card_event"
 // 通用模板卡片右上角菜单事件推送
 const EventTypeTemplateCardMenuEvent EventType = "template_card_menu_event"
 
+// 成员关注事件
+const EventTypeSubscribe = "subscribe"
+
+// 成员取消关注事件
+const EventTypeUnsubscribe = "unsubscribe"
+
 // 推送suite_ticket
 const InfoTypeSuiteTicket EventType = "suite_ticket"
 
@@ -249,8 +255,8 @@ const ChangeTypeUpdateParent = "update_parent"
 // 家校通讯录变更回调-删除家长事件
 const ChangeTypeDeleteParent = "delete_parent"
 
-// 家校通讯录变更回调-家长关注事件、成员关注事件
+// 家校通讯录变更回调-家长关注事件
 const ChangeTypeSubscribe = "subscribe"
 
-// 家校通讯录变更回调-家长取消关注事件、成员取消关注事件
+// 家校通讯录变更回调-家长取消关注事件
 const ChangeTypeUnsubscribe = "unsubscribe"
