@@ -32,9 +32,14 @@ type CallbackMessage struct {
 
 	// 额外的信息
 	Extras CallBackExtraInfoInterface
+
+	// 保留原始回调数据，方便排查问题
+	OriginalMessage string
 }
 
 func (m CallbackMessage) ParseMessageFromXml(body []byte) (CallbackMessage, error) {
+	m.OriginalMessage = string(body)
+
 	err := xml.Unmarshal(body, &m)
 	if err != nil {
 		return m, err

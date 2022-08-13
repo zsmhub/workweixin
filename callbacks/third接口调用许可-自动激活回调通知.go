@@ -29,28 +29,25 @@ type ThirdAutoActivate struct {
 		Text string `xml:",chardata"`
 	} `xml:"TimeStamp"`
 	AccountList struct {
-		Text string `xml:",chardata"`
-		Item struct {
-			Text       string `xml:",chardata"`
-			ActiveCode struct {
-				Text string `xml:",chardata"`
-			} `xml:"ActiveCode"`
-			Type struct {
-				Text string `xml:",chardata"`
-			} `xml:"Type"`
-			ExpireTime struct {
-				Text string `xml:",chardata"`
-			} `xml:"ExpireTime"`
-			UserId struct {
-				Text string `xml:",chardata"`
-			} `xml:"UserId"`
-			PreviousStatus struct {
-				Text string `xml:",chardata"`
-			} `xml:"PreviousStatus"`
-			PreviousActiveCode struct {
-				Text string `xml:",chardata"`
-			} `xml:"PreviousActiveCode"`
-		} `xml:"item"`
+		Text       string `xml:",chardata"`
+		ActiveCode struct {
+			Text string `xml:",chardata"`
+		} `xml:"ActiveCode"`
+		Type struct {
+			Text string `xml:",chardata"`
+		} `xml:"Type"`
+		ExpireTime struct {
+			Text string `xml:",chardata"`
+		} `xml:"ExpireTime"`
+		UserId struct {
+			Text string `xml:",chardata"`
+		} `xml:"UserId"`
+		PreviousStatus struct {
+			Text string `xml:",chardata"`
+		} `xml:"PreviousStatus"`
+		PreviousActiveCode struct {
+			Text string `xml:",chardata"`
+		} `xml:"PreviousActiveCode"`
 	} `xml:"AccountList"`
 }
 
