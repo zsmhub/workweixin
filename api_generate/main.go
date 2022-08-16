@@ -40,7 +40,7 @@ type Api struct {
 	RespFields []Field
 }
 
-const AccessTokenName = "access_token"
+var ignoreAccessTokenFields = []string{"access_token", "suite_access_token"}
 
 var docVar = flag.String("doc", "", "[必填]微信文档地址")
 var prefixVar = flag.String("prefix", "", "[选填]生成的文件名前缀")
@@ -89,10 +89,10 @@ func main() {
 		die("failed to get html: %+v\n", err)
 	}
 	titleHtml = titleHtml[:strings.Index(titleHtml, " ")]
+	savePath = fmt.Sprintf("./apis/%s.go", titleHtml)
 	if filePrefix != "" {
-		titleHtml = fmt.Sprintf("%s-%s", filePrefix, titleHtml)
+		savePath = fmt.Sprintf("./apis/%s-%s.go", filePrefix, titleHtml)
 	}
-	savePath = "./apis/" + titleHtml + ".go"
 	fmt.Printf("开始抓取和生成API代码，文档地址:%s，代码保存路径:%s\n", docURL, savePath)
 
 	rawHtml, err := doc.Find(".frame_cntHtml").Html()
@@ -185,7 +185,7 @@ func main() {
 				getParams := getUrl.Query()
 				var jsonParams []string
 				for k, v := range getParams {
-					if len(v) > 0 && k != AccessTokenName { // 忽略access_token请求字段
+					if len(v) > 0 && !inSlice(k, ignoreAccessTokenFields) { // 忽略access_token请求字段
 						jsonParams = append(jsonParams, fmt.Sprintf(`"%s":""`, k))
 					}
 				}
@@ -226,7 +226,7 @@ func main() {
 				// 传入参数，每行有3个字段，利用字段数量来提取
 				if len(matches) == 3 {
 					// 忽略access_token请求字段
-					if pickSubMatchString(matches, 3, 0) == AccessTokenName {
+					if inSlice(pickSubMatchString(matches, 3, 0), ignoreAccessTokenFields) {
 						return
 					}
 
@@ -285,6 +285,7 @@ func pickSubMatchString(matches []string, mustTotal int, pickIndex int) string {
 
 func generateStruct(rawJson string, structName string, subStruct bool, fields []Field) (code string, err error) {
 	if rawJson == "" {
+		code = fmt.Sprintf("type %s struct{}", structName)
 		return
 	}
 	var rawCode []byte
@@ -396,4 +397,15 @@ func generateCode(apis []*Api) (result []byte, err error) {
 	result = buf.Bytes()
 
 	return
+}
+
+func inSlice(find string, slices []string) bool {
+	var isExist bool
+	for _, v := range slices {
+		if v == find {
+			isExist = true
+			break
+		}
+	}
+	return isExist
 }
