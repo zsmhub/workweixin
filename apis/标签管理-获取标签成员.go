@@ -15,7 +15,7 @@ import (
 
 type ReqGetTag struct {
 	// Tagid 标签ID，必填
-	Tagid string `json:"tagid"`
+	Tagid int `json:"tagid"`
 }
 
 var _ urlValuer = ReqGetTag{}
