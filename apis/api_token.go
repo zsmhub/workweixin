@@ -12,8 +12,8 @@ import (
 
 // 分布式access_token：获取和设置access_token的值，自行实现该接口的具体逻辑，比如使用redis方案
 type DcsToken interface {
-	Get(cacheKey string) TokenInfo                                     // 获取access_token
-	Set(cacheKey string, tokenInfo TokenInfo, ttl time.Duration) error // 设置access_token，ttl：缓存生存时间
+	Get(cacheKey string) TokenInfo                                     // 获取缓存
+	Set(cacheKey string, tokenInfo TokenInfo, ttl time.Duration) error // 设置缓存，ttl：缓存生存时间
 	Del(cacheKey string) error                                         // 删除缓存
 	Lock(cacheKey string, ttl time.Duration) bool                      // 加锁，返回成功或失败
 	Unlock(cacheKey string) error                                      // 释放锁
@@ -73,7 +73,6 @@ func (c *ApiClient) RemoveToken() {
 	}
 }
 
-// 移除不合法或过期的的access_token
 func (c *ApiClient) RemoveTokenByHttpClient(httpBody string) {
 	var commonResp CommonResp
 	_ = json.Unmarshal([]byte(httpBody), &commonResp)

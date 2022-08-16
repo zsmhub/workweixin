@@ -54,7 +54,6 @@ func (x RespGetCustomizedCorpTokenService) intoBody() ([]byte, error) {
 // 文档：https://developer.work.weixin.qq.com/document/path/91039
 func (c *ApiClient) ExecGetCustomizedCorpTokenService(req ReqGetCustomizedCorpTokenService) (RespGetCustomizedCorpTokenService, error) {
 	var resp RespGetCustomizedCorpTokenService
-	// 注意：此接口是授权企业客户端调用的，但是需要的 access_token 是第三方应用的 suite_access_token
 	err := c.executeWXApiGet("/cgi-bin/gettoken", req, &resp, false)
 	if err != nil {
 		return RespGetCustomizedCorpTokenService{}, err

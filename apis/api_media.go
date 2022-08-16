@@ -17,7 +17,7 @@ const (
 	MediaTypeFile  = "file"
 )
 
-// Media 欲上传的素材
+// 欲上传的素材
 type Media struct {
 	filename string
 	filesize int64
