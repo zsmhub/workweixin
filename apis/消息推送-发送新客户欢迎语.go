@@ -3,7 +3,6 @@ package apis
 import (
 	"encoding/json"
 
-	"fmt"
 	"net/url"
 )
 
@@ -89,7 +88,7 @@ func (x ReqSendWelcomeMsgExternalcontact) intoURLValues() url.Values {
 	_ = json.Unmarshal(jsonBytes, &vals)
 
 	for k, v := range vals {
-		ret.Add(k, fmt.Sprintf("%v", v))
+		ret.Add(k, StrVal(v))
 	}
 	return ret
 }

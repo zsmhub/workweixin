@@ -6,32 +6,32 @@ import "encoding/xml"
 // 文档: {{ .DocUrl }}
 
 func init() {
-    //添加可解析的回调事件
-    supportCallback({{ .StructName }}{})
+	//添加可解析的回调事件
+	supportCallback({{ .StructName }}{})
 }
 
 {{ .StructStr }}
 
 func ({{ .StructName }}) GetMessageType() string {
-    return "{{ .MsgType }}"
+	return "{{ .MsgType }}"
 }
 
 func ({{ .StructName }}) GetEventType() string {
-    return "{{ .EventType }}"
+	return "{{ .EventType }}"
 }
 
 func ({{ .StructName }}) GetChangeType() string {
-    return "{{ .ChangeType }}"
+	return "{{ .ChangeType }}"
 }
 
 
 func (m {{ .StructName }}) GetTypeKey() string {
-    return m.GetMessageType() + ":" + m.GetEventType() + ":" +m.GetChangeType()
+	return m.GetMessageType() + ":" + m.GetEventType() + ":" +m.GetChangeType()
 }
 
 
 func ({{ .StructName }}) ParseFromXml(data []byte) (CallBackExtraInfoInterface,error) {
-    var temp {{ .StructName }}
-    err := xml.Unmarshal(data, &temp)
-    return temp, err
+	var temp {{ .StructName }}
+	err := xml.Unmarshal(data, &temp)
+	return temp, err
 }

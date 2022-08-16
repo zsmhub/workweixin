@@ -1,11 +1,8 @@
 package apis
 
 import (
-    "encoding/json"
-    {{if (index . 0).IsGet }}
-    "fmt"
-    "net/url"
-    {{end}}
+	"encoding/json"
+	{{if (index . 0).IsGet }}"net/url"{{end}}
 )
 
 // 自动生成的文件, 生成方式: make api doc=微信文档地址url
@@ -19,16 +16,16 @@ import (
 {{if .IsGet }}
 var _ urlValuer = Req{{ .StructName }}{}
 func (x Req{{ .StructName }}) intoURLValues() url.Values {
-    var ret url.Values = make(map[string][]string)
+	var ret url.Values = make(map[string][]string)
 
-    var vals map[string]interface{}
-    jsonBytes, _ := json.Marshal(x)
-    _ = json.Unmarshal(jsonBytes, &vals)
+	var vals map[string]interface{}
+	jsonBytes, _ := json.Marshal(x)
+	_ = json.Unmarshal(jsonBytes, &vals)
 
-    for k, v := range vals {
-        ret.Add(k, fmt.Sprintf("%v", v))
-    }
-    return ret
+	for k, v := range vals {
+		ret.Add(k, StrVal(v))
+	}
+	return ret
 }
 {{else}}
 var _ bodyer = Req{{ .StructName }}{}

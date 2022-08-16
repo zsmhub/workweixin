@@ -2,7 +2,6 @@ package apis
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/url"
 )
 
@@ -29,7 +28,7 @@ func (x ReqUploadMedia) intoURLValues() url.Values {
 		if v == nil {
 			continue
 		}
-		ret.Add(k, fmt.Sprintf("%v", v))
+		ret.Add(k, StrVal(v))
 	}
 	return ret
 }

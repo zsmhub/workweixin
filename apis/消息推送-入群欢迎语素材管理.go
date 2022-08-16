@@ -3,7 +3,6 @@ package apis
 import (
 	"encoding/json"
 
-	"fmt"
 	"net/url"
 )
 
@@ -36,7 +35,7 @@ func (x ReqAddGroupWelcomeTemplate) intoURLValues() url.Values {
 	_ = json.Unmarshal(jsonBytes, &vals)
 
 	for k, v := range vals {
-		ret.Add(k, fmt.Sprintf("%v", v))
+		ret.Add(k, StrVal(v))
 	}
 	return ret
 }
@@ -101,7 +100,7 @@ func (x ReqEditGroupWelcomeTemplate) intoURLValues() url.Values {
 	_ = json.Unmarshal(jsonBytes, &vals)
 
 	for k, v := range vals {
-		ret.Add(k, fmt.Sprintf("%v", v))
+		ret.Add(k, StrVal(v))
 	}
 	return ret
 }
@@ -156,7 +155,7 @@ func (x ReqGetGroupWelcomeTemplate) intoURLValues() url.Values {
 	_ = json.Unmarshal(jsonBytes, &vals)
 
 	for k, v := range vals {
-		ret.Add(k, fmt.Sprintf("%v", v))
+		ret.Add(k, StrVal(v))
 	}
 	return ret
 }
@@ -219,7 +218,7 @@ func (x ReqDelGroupWelcomeTemplate) intoURLValues() url.Values {
 	_ = json.Unmarshal(jsonBytes, &vals)
 
 	for k, v := range vals {
-		ret.Add(k, fmt.Sprintf("%v", v))
+		ret.Add(k, StrVal(v))
 	}
 	return ret
 }
