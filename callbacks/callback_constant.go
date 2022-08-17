@@ -168,6 +168,9 @@ const InfoTypeAutoActivate EventType = "auto_activate"
 // 家校通讯录变更回调
 const InfoTypeChangeSchoolContact EventType = "change_school_contact"
 
+// 重置永久授权码通知
+const InfoTypeRestPermanentCode EventType = "reset_permanent_code"
+
 // ChangeType 变更类型
 type ChangeType string
 
