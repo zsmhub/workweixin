@@ -26,7 +26,6 @@ func (x ReqTransferCustomerResigned) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -65,6 +64,5 @@ func (c *ApiClient) ExecTransferCustomerResigned(req ReqTransferCustomerResigned
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespTransferCustomerResigned{}, bizErr
 	}
-
 	return resp, nil
 }

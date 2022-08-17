@@ -25,7 +25,6 @@ func (x ReqSetoneuserquotaVacation) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -57,6 +56,5 @@ func (c *ApiClient) ExecSetoneuserquotaVacation(req ReqSetoneuserquotaVacation) 
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespSetoneuserquotaVacation{}, bizErr
 	}
-
 	return resp, nil
 }

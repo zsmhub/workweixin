@@ -22,7 +22,6 @@ func (x ReqGetPermanentCodeService) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -111,6 +110,5 @@ func (c *ApiClient) ExecGetPermanentCodeService(req ReqGetPermanentCodeService) 
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetPermanentCodeService{}, bizErr
 	}
-
 	return resp, nil
 }

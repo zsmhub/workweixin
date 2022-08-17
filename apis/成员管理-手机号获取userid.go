@@ -22,7 +22,6 @@ func (x ReqGetuseridUser) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -56,6 +55,5 @@ func (c *ApiClient) ExecGetuseridUser(req ReqGetuseridUser) (RespGetuseridUser, 
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetuseridUser{}, bizErr
 	}
-
 	return resp, nil
 }

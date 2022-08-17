@@ -91,7 +91,6 @@ func (c *ApiClient) ExecGetAgent(req ReqGetAgent) (RespGetAgent, error) {
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetAgent{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -148,6 +147,5 @@ func (c *ApiClient) ExecListAgent(req ReqListAgent) (RespListAgent, error) {
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespListAgent{}, bizErr
 	}
-
 	return resp, nil
 }

@@ -60,6 +60,5 @@ func (c *ApiClient) ExecGetCustomizedCorpTokenService(req ReqGetCustomizedCorpTo
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetCustomizedCorpTokenService{}, bizErr
 	}
-
 	return resp, nil
 }

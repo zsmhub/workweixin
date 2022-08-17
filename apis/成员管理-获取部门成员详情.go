@@ -146,6 +146,5 @@ func (c *ApiClient) ExecListUser(req ReqListUser) (RespListUser, error) {
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespListUser{}, bizErr
 	}
-
 	return resp, nil
 }

@@ -74,6 +74,5 @@ func (c *ApiClient) ExecGetDepartment(req ReqGetDepartment) (RespGetDepartment, 
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetDepartment{}, bizErr
 	}
-
 	return resp, nil
 }

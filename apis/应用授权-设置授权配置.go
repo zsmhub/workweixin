@@ -28,7 +28,6 @@ func (x ReqSetSessionInfoService) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -60,6 +59,5 @@ func (c *ApiClient) ExecSetSessionInfoService(req ReqSetSessionInfoService) (Res
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespSetSessionInfoService{}, bizErr
 	}
-
 	return resp, nil
 }

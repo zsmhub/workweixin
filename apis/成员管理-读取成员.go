@@ -115,6 +115,5 @@ func (c *ApiClient) ExecGetUser(req ReqGetUser) (RespGetUser, error) {
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetUser{}, bizErr
 	}
-
 	return resp, nil
 }

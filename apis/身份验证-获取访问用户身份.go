@@ -66,6 +66,5 @@ func (c *ApiClient) ExecGetuserinfo3RdService(req ReqGetuserinfo3RdService) (Res
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetuserinfo3RdService{}, bizErr
 	}
-
 	return resp, nil
 }

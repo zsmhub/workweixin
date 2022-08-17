@@ -127,7 +127,6 @@ func (x ReqApplyEvent) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -160,6 +159,5 @@ func (c *ApiClient) ExecApplyEvent(req ReqApplyEvent) (RespApplyEvent, error) {
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespApplyEvent{}, bizErr
 	}
-
 	return resp, nil
 }

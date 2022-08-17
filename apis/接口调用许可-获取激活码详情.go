@@ -24,7 +24,6 @@ func (x ReqGetActiveInfoByCodeLicense) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -78,7 +77,6 @@ func (c *ApiClient) ExecGetActiveInfoByCodeLicense(req ReqGetActiveInfoByCodeLic
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetActiveInfoByCodeLicense{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -99,7 +97,6 @@ func (x ReqBatchGetActiveInfoByCodeLicense) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -154,6 +151,5 @@ func (c *ApiClient) ExecBatchGetActiveInfoByCodeLicense(req ReqBatchGetActiveInf
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespBatchGetActiveInfoByCodeLicense{}, bizErr
 	}
-
 	return resp, nil
 }

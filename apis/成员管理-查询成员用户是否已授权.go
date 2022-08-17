@@ -22,7 +22,6 @@ func (x ReqCheckMemberAuthUser) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -56,6 +55,5 @@ func (c *ApiClient) ExecCheckMemberAuthUser(req ReqCheckMemberAuthUser) (RespChe
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespCheckMemberAuthUser{}, bizErr
 	}
-
 	return resp, nil
 }

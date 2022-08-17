@@ -70,7 +70,6 @@ func (c *ApiClient) ExecAddGroupWelcomeTemplate(req ReqAddGroupWelcomeTemplate) 
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespAddGroupWelcomeTemplate{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -133,7 +132,6 @@ func (c *ApiClient) ExecEditGroupWelcomeTemplate(req ReqEditGroupWelcomeTemplate
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespEditGroupWelcomeTemplate{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -194,7 +192,6 @@ func (c *ApiClient) ExecGetGroupWelcomeTemplate(req ReqGetGroupWelcomeTemplate) 
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetGroupWelcomeTemplate{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -251,6 +248,5 @@ func (c *ApiClient) ExecDelGroupWelcomeTemplate(req ReqDelGroupWelcomeTemplate) 
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespDelGroupWelcomeTemplate{}, bizErr
 	}
-
 	return resp, nil
 }

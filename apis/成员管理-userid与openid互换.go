@@ -22,7 +22,6 @@ func (x ReqConvertToOpenidUser) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -56,7 +55,6 @@ func (c *ApiClient) ExecConvertToOpenidUser(req ReqConvertToOpenidUser) (RespCon
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespConvertToOpenidUser{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -75,7 +73,6 @@ func (x ReqConvertToUseridUser) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -109,6 +106,5 @@ func (c *ApiClient) ExecConvertToUseridUser(req ReqConvertToUseridUser) (RespCon
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespConvertToUseridUser{}, bizErr
 	}
-
 	return resp, nil
 }

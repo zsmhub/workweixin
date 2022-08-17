@@ -24,7 +24,6 @@ func (x ReqOnjobTransferGroupchat) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -65,6 +64,5 @@ func (c *ApiClient) ExecOnjobTransferGroupchat(req ReqOnjobTransferGroupchat) (R
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespOnjobTransferGroupchat{}, bizErr
 	}
-
 	return resp, nil
 }

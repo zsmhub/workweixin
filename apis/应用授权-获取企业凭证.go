@@ -26,7 +26,6 @@ func (x ReqGetCorpTokenService) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -61,6 +60,5 @@ func (c *ApiClient) ExecGetCorpTokenService(req ReqGetCorpTokenService) (RespGet
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetCorpTokenService{}, bizErr
 	}
-
 	return resp, nil
 }

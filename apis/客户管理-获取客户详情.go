@@ -143,6 +143,5 @@ func (c *ApiClient) ExecGetExternalcontact(req ReqGetExternalcontact) (RespGetEx
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }

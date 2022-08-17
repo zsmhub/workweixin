@@ -16,7 +16,6 @@ func (x ReqGetCorpQualification) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -44,6 +43,5 @@ func (c *ApiClient) GetCorpQualification(req ReqGetCorpQualification) (RespGetCo
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetCorpQualification{}, bizErr
 	}
-
 	return resp, nil
 }

@@ -60,6 +60,5 @@ func (c *ApiClient) ExecAuthsuccUser(req ReqAuthsuccUser) (RespAuthsuccUser, err
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespAuthsuccUser{}, bizErr
 	}
-
 	return resp, nil
 }

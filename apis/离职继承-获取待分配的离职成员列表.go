@@ -26,7 +26,6 @@ func (x ReqGetUnassignedListExternalcontact) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -70,6 +69,5 @@ func (c *ApiClient) ExecGetUnassignedListExternalcontact(req ReqGetUnassignedLis
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetUnassignedListExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }

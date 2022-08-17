@@ -34,7 +34,6 @@ func (x ReqCreateRenewOrderJobLicense) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -77,7 +76,6 @@ func (c *ApiClient) ExecCreateRenewOrderJobLicense(req ReqCreateRenewOrderJobLic
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespCreateRenewOrderJobLicense{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -102,7 +100,6 @@ func (x ReqSubmitOrderJobLicense) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -136,6 +133,5 @@ func (c *ApiClient) ExecSubmitOrderJobLicense(req ReqSubmitOrderJobLicense) (Res
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespSubmitOrderJobLicense{}, bizErr
 	}
-
 	return resp, nil
 }

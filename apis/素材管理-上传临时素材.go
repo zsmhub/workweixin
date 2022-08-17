@@ -67,6 +67,5 @@ func (c *ApiClient) ExecUploadMedia(req ReqUploadMedia) (RespUploadMedia, error)
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespUploadMedia{}, bizErr
 	}
-
 	return resp, nil
 }

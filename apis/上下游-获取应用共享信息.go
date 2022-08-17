@@ -30,7 +30,6 @@ func (x ReqListAppShareInfoCorp) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -74,6 +73,5 @@ func (c *ApiClient) ExecListAppShareInfoCorp(req ReqListAppShareInfoCorp) (RespL
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespListAppShareInfoCorp{}, bizErr
 	}
-
 	return resp, nil
 }

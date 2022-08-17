@@ -26,7 +26,6 @@ func (x ReqDeltagusersTag) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -58,6 +57,5 @@ func (c *ApiClient) ExecDeltagusersTag(req ReqDeltagusersTag) (RespDeltagusersTa
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespDeltagusersTag{}, bizErr
 	}
-
 	return resp, nil
 }

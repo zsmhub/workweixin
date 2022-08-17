@@ -32,7 +32,6 @@ func (x ReqBatchTransferLicenseLicense) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -71,6 +70,5 @@ func (c *ApiClient) ExecBatchTransferLicenseLicense(req ReqBatchTransferLicenseL
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespBatchTransferLicenseLicense{}, bizErr
 	}
-
 	return resp, nil
 }

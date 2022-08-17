@@ -30,7 +30,6 @@ func (x ReqGetBillListExternalpay) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -116,6 +115,5 @@ func (c *ApiClient) ExecGetBillListExternalpay(req ReqGetBillListExternalpay) (R
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetBillListExternalpay{}, bizErr
 	}
-
 	return resp, nil
 }

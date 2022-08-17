@@ -34,7 +34,6 @@ func (x ReqRemarkExternalcontact) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -66,6 +65,5 @@ func (c *ApiClient) ExecRemarkExternalcontact(req ReqRemarkExternalcontact) (Res
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespRemarkExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }

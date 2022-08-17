@@ -60,6 +60,5 @@ func (c *ApiClient) ExecDeleteTag(req ReqDeleteTag) (RespDeleteTag, error) {
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespDeleteTag{}, bizErr
 	}
-
 	return resp, nil
 }

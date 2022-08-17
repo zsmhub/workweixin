@@ -28,7 +28,6 @@ func (x ReqMarkTagExternalcontact) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -60,6 +59,5 @@ func (c *ApiClient) ExecMarkTagExternalcontact(req ReqMarkTagExternalcontact) (R
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespMarkTagExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }

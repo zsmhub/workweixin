@@ -72,6 +72,5 @@ func (c *ApiClient) ExecSimplelistUser(req ReqSimplelistUser) (RespSimplelistUse
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespSimplelistUser{}, bizErr
 	}
-
 	return resp, nil
 }

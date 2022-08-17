@@ -22,7 +22,6 @@ func (x ReqCopyTemplateApproval) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 

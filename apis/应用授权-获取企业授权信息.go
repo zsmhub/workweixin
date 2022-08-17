@@ -24,7 +24,6 @@ func (x ReqGetAuthInfoService) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -98,6 +97,5 @@ func (c *ApiClient) ExecGetAuthInfoService(req ReqGetAuthInfoService) (RespGetAu
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetAuthInfoService{}, bizErr
 	}
-
 	return resp, nil
 }

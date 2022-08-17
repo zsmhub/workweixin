@@ -22,7 +22,6 @@ func (x ReqOpengidToChatidExternalcontact) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -55,6 +54,5 @@ func (c *ApiClient) ExecOpengidToChatidExternalcontact(req ReqOpengidToChatidExt
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespOpengidToChatidExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }

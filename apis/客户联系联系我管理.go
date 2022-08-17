@@ -76,7 +76,6 @@ func (x ReqAddContactWayExternalcontact) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -110,7 +109,6 @@ func (c *ApiClient) ExecAddContactWayExternalcontact(req ReqAddContactWayExterna
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespAddContactWayExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -129,7 +127,6 @@ func (x ReqGetContactWayExternalcontact) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -197,7 +194,6 @@ func (c *ApiClient) ExecGetContactWayExternalcontact(req ReqGetContactWayExterna
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetContactWayExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -222,7 +218,6 @@ func (x ReqListContactWayExternalcontact) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -258,7 +253,6 @@ func (c *ApiClient) ExecListContactWayExternalcontact(req ReqListContactWayExter
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespListContactWayExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -296,7 +290,6 @@ func (x ReqUpdateContactWayExternalcontact) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -328,7 +321,6 @@ func (c *ApiClient) ExecUpdateContactWayExternalcontact(req ReqUpdateContactWayE
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespUpdateContactWayExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -347,7 +339,6 @@ func (x ReqDelContactWayExternalcontact) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -379,7 +370,6 @@ func (c *ApiClient) ExecDelContactWayExternalcontact(req ReqDelContactWayExterna
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespDelContactWayExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -400,7 +390,6 @@ func (x ReqCloseTempChatExternalcontact) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -432,6 +421,5 @@ func (c *ApiClient) ExecCloseTempChatExternalcontact(req ReqCloseTempChatExterna
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespCloseTempChatExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }

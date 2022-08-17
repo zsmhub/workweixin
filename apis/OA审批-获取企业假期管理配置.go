@@ -70,6 +70,5 @@ func (c *ApiClient) ExecGetcorpconfVacation(req ReqGetcorpconfVacation) (RespGet
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetcorpconfVacation{}, bizErr
 	}
-
 	return resp, nil
 }

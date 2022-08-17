@@ -24,7 +24,6 @@ func (x ReqGetProviderTokenService) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -59,6 +58,5 @@ func (c *ApiClient) ExecGetProviderTokenService(req ReqGetProviderTokenService) 
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetProviderTokenService{}, bizErr
 	}
-
 	return resp, nil
 }

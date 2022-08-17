@@ -61,6 +61,5 @@ func (c *ApiClient) ExecListExternalcontact(req ReqListExternalcontact) (RespLis
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespListExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }

@@ -26,7 +26,6 @@ func (x ReqActiveAccountLicense) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -58,7 +57,6 @@ func (c *ApiClient) ExecActiveAccountLicense(req ReqActiveAccountLicense) (RespA
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespActiveAccountLicense{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -85,7 +83,6 @@ func (x ReqBatchActiveAccountLicense) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -122,6 +119,5 @@ func (c *ApiClient) ExecBatchActiveAccountLicense(req ReqBatchActiveAccountLicen
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespBatchActiveAccountLicense{}, bizErr
 	}
-
 	return resp, nil
 }

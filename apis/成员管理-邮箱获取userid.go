@@ -24,7 +24,6 @@ func (x ReqGetUseridByEmailUser) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -58,6 +57,5 @@ func (c *ApiClient) ExecGetUseridByEmailUser(req ReqGetUseridByEmailUser) (RespG
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetUseridByEmailUser{}, bizErr
 	}
-
 	return resp, nil
 }

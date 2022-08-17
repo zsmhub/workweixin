@@ -30,7 +30,6 @@ func (x ReqListOrderLicense) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -72,6 +71,5 @@ func (c *ApiClient) ExecListOrderLicense(req ReqListOrderLicense) (RespListOrder
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespListOrderLicense{}, bizErr
 	}
-
 	return resp, nil
 }

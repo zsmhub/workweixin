@@ -24,7 +24,6 @@ func (x ReqUpdateTag) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -56,6 +55,5 @@ func (c *ApiClient) ExecUpdateTag(req ReqUpdateTag) (RespUpdateTag, error) {
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespUpdateTag{}, bizErr
 	}
-
 	return resp, nil
 }

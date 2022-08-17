@@ -22,7 +22,6 @@ func (x ReqGroupchatStatistic) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -62,6 +61,5 @@ func (c *ApiClient) ExecGroupchatStatistic(req ReqGroupchatStatistic) (RespGroup
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGroupchatStatistic{}, bizErr
 	}
-
 	return resp, nil
 }

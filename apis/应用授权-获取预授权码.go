@@ -61,6 +61,5 @@ func (c *ApiClient) ExecGetPreAuthCodeService(req ReqGetPreAuthCodeService) (Res
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetPreAuthCodeService{}, bizErr
 	}
-
 	return resp, nil
 }

@@ -30,7 +30,6 @@ func (x ReqUpdateTemplateCardMessage) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -61,6 +60,5 @@ func (c *ApiClient) ExecUpdateTemplateCardMessage(req ReqUpdateTemplateCardMessa
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespUpdateTemplateCardMessage{}, bizErr
 	}
-
 	return resp, nil
 }

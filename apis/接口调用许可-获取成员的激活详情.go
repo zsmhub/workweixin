@@ -24,7 +24,6 @@ func (x ReqGetActiveInfoByUserLicense) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -70,6 +69,5 @@ func (c *ApiClient) ExecGetActiveInfoByUserLicense(req ReqGetActiveInfoByUserLic
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetActiveInfoByUserLicense{}, bizErr
 	}
-
 	return resp, nil
 }

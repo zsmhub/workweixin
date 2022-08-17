@@ -22,7 +22,6 @@ func (x ReqGetuserdetail3RdService) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -60,6 +59,5 @@ func (c *ApiClient) ExecGetuserdetail3RdService(req ReqGetuserdetail3RdService) 
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetuserdetail3RdService{}, bizErr
 	}
-
 	return resp, nil
 }

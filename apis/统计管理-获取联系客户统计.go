@@ -20,7 +20,6 @@ func (x ReqUserBehaviorData) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -57,6 +56,5 @@ func (c *ApiClient) ExecUserBehaviorData(req ReqUserBehaviorData) (RespUserBehav
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespUserBehaviorData{}, bizErr
 	}
-
 	return resp, nil
 }

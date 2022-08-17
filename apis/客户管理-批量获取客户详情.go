@@ -26,7 +26,6 @@ func (x ReqGetByUserBatch) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -105,6 +104,5 @@ func (c *ApiClient) ExecGetByUserBatch(req ReqGetByUserBatch) (RespGetByUserBatc
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetByUserBatch{}, bizErr
 	}
-
 	return resp, nil
 }

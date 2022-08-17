@@ -24,7 +24,6 @@ func (x ReqListMemberAuthUser) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -62,6 +61,5 @@ func (c *ApiClient) ExecListMemberAuthUser(req ReqListMemberAuthUser) (RespListM
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespListMemberAuthUser{}, bizErr
 	}
-
 	return resp, nil
 }

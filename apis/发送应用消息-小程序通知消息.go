@@ -59,6 +59,5 @@ func (c *ApiClient) ExecSentMessageCardMiniNotice(req ReqSentMessageCardMiniNoti
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespSentMessageCard{}, bizErr
 	}
-
 	return resp, nil
 }

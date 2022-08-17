@@ -195,6 +195,5 @@ func (c *ApiClient) ExecSentMessageCardTemplateCard(req ReqSentMessageCardTempla
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespSentMessageCard{}, bizErr
 	}
-
 	return resp, nil
 }

@@ -22,7 +22,6 @@ func (x ReqGetPaymentInfoExternalpay) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -57,6 +56,5 @@ func (c *ApiClient) ExecGetPaymentInfoExternalpay(req ReqGetPaymentInfoExternalp
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetPaymentInfoExternalpay{}, bizErr
 	}
-
 	return resp, nil
 }

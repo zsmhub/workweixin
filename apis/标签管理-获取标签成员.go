@@ -70,6 +70,5 @@ func (c *ApiClient) ExecGetTag(req ReqGetTag) (RespGetTag, error) {
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetTag{}, bizErr
 	}
-
 	return resp, nil
 }

@@ -34,7 +34,6 @@ func (x ReqGetGroupmsgListV2Externalcontact) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -131,7 +130,6 @@ func (c *ApiClient) ExecGetGroupmsgListV2Externalcontact(req ReqGetGroupmsgListV
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetGroupmsgListV2Externalcontact{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -154,7 +152,6 @@ func (x ReqGetGroupmsgTaskExternalcontact) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -196,7 +193,6 @@ func (c *ApiClient) ExecGetGroupmsgTaskExternalcontact(req ReqGetGroupmsgTaskExt
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetGroupmsgTaskExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -217,7 +213,6 @@ func (x ReqGetGroupmsgSendResultExternalcontact) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -263,6 +258,5 @@ func (c *ApiClient) ExecGetGroupmsgSendResultExternalcontact(req ReqGetGroupmsgS
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetGroupmsgSendResultExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }

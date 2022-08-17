@@ -68,6 +68,5 @@ func (c *ApiClient) ExecSimplelistDepartment(req ReqSimplelistDepartment) (RespS
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespSimplelistDepartment{}, bizErr
 	}
-
 	return resp, nil
 }

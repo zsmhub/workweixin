@@ -22,7 +22,6 @@ func (x ReqListSelectedTicketUserUser) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -62,6 +61,5 @@ func (c *ApiClient) ExecListSelectedTicketUserUser(req ReqListSelectedTicketUser
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespListSelectedTicketUserUser{}, bizErr
 	}
-
 	return resp, nil
 }

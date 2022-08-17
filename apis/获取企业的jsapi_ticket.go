@@ -29,6 +29,5 @@ func (c *ApiClient) ExecGetJSAPITicket(req JsAPITicketReq) (JsAPITicketResp, err
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return JsAPITicketResp{}, bizErr
 	}
-
 	return resp, nil
 }

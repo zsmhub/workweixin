@@ -24,6 +24,5 @@ func (c *ApiClient) ExecGetJSAPITicketAgentConfig(req JsAPITicketAgentConfigReq)
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return JsAPITicketResp{}, bizErr
 	}
-
 	return resp, nil
 }

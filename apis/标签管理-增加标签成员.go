@@ -26,7 +26,6 @@ func (x ReqAddtagusersTag) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -58,6 +57,5 @@ func (c *ApiClient) ExecAddtagusersTag(req ReqAddtagusersTag) (RespAddtagusersTa
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespAddtagusersTag{}, bizErr
 	}
-
 	return resp, nil
 }

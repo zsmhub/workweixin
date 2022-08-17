@@ -113,7 +113,6 @@ func (p *Processor) MakeOutgoingEnvelope(msg []byte) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 

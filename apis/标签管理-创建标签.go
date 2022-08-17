@@ -24,7 +24,6 @@ func (x ReqCreateTag) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -58,6 +57,5 @@ func (c *ApiClient) ExecCreateTag(req ReqCreateTag) (RespCreateTag, error) {
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespCreateTag{}, bizErr
 	}
-
 	return resp, nil
 }

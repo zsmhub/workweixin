@@ -74,6 +74,5 @@ func (c *ApiClient) ExecListDepartment(req ReqListDepartment) (RespListDepartmen
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespListDepartment{}, bizErr
 	}
-
 	return resp, nil
 }

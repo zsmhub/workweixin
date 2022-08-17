@@ -24,7 +24,6 @@ func (x ReqGetAdminListService) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -61,6 +60,5 @@ func (c *ApiClient) ExecGetAdminListService(req ReqGetAdminListService) (RespGet
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetAdminListService{}, bizErr
 	}
-
 	return resp, nil
 }

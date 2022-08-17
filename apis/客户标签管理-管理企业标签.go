@@ -92,7 +92,6 @@ func (c *ApiClient) ExecGetCorpTagListExternalcontact(req ReqGetCorpTagListExter
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetCorpTagListExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -182,7 +181,6 @@ func (c *ApiClient) ExecAddCorpTagExternalcontact(req ReqAddCorpTagExternalconta
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespAddCorpTagExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -243,7 +241,6 @@ func (c *ApiClient) ExecEditCorpTagExternalcontact(req ReqEditCorpTagExternalcon
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespEditCorpTagExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -302,6 +299,5 @@ func (c *ApiClient) ExecDelCorpTagExternalcontact(req ReqDelCorpTagExternalconta
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespDelCorpTagExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }

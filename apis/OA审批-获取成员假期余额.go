@@ -21,7 +21,6 @@ func (x ReqGetuservacationquotaVacation) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -60,6 +59,5 @@ func (c *ApiClient) ExecGetuservacationquotaVacation(req ReqGetuservacationquota
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetuservacationquotaVacation{}, bizErr
 	}
-
 	return resp, nil
 }

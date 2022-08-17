@@ -121,6 +121,5 @@ func (c *ApiClient) ExecSendWelcomeMsgExternalcontact(req ReqSendWelcomeMsgExter
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespSendWelcomeMsgExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }

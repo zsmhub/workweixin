@@ -34,7 +34,6 @@ func (x ReqListGroupchat) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -71,6 +70,5 @@ func (c *ApiClient) ExecListGroupchat(req ReqListGroupchat) (RespListGroupchat, 
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespListGroupchat{}, bizErr
 	}
-
 	return resp, nil
 }

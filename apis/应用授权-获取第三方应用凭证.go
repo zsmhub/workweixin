@@ -26,7 +26,6 @@ func (x ReqGetSuiteTokenService) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -60,6 +59,5 @@ func (c *ApiClient) ExecGetSuiteTokenService(req ReqGetSuiteTokenService) (RespG
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetSuiteTokenService{}, bizErr
 	}
-
 	return resp, nil
 }

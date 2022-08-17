@@ -83,7 +83,6 @@ func (x ReqAddMsgTemplateExternalcontact) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -117,6 +116,5 @@ func (c *ApiClient) ExecAddMsgTemplateExternalcontact(req ReqAddMsgTemplateExter
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespAddMsgTemplateExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }

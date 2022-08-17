@@ -23,7 +23,6 @@ func (x ReqInviteBatch) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -61,6 +60,5 @@ func (c *ApiClient) ExecInviteBatch(req ReqInviteBatch) (RespInviteBatch, error)
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespInviteBatch{}, bizErr
 	}
-
 	return resp, nil
 }

@@ -22,7 +22,6 @@ func (x ReqCorpidToOpencorpidService) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -55,7 +54,6 @@ func (c *ApiClient) ExecCorpidToOpencorpidService(req ReqCorpidToOpencorpidServi
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespCorpidToOpencorpidService{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -73,7 +71,6 @@ func (x ReqUseridToOpenuseridBatch) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -109,7 +106,6 @@ func (c *ApiClient) ExecUseridToOpenuseridBatch(req ReqUseridToOpenuseridBatch) 
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespUseridToOpenuseridBatch{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -128,7 +124,6 @@ func (x ReqGetNewExternalUseridExternalcontact) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -159,7 +154,6 @@ func (c *ApiClient) ExecGetNewExternalUseridExternalcontact(req ReqGetNewExterna
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetNewExternalUseridExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -178,7 +172,6 @@ func (x ReqFinishExternalUseridMigration) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -209,7 +202,6 @@ func (c *ApiClient) ExecFinishExternalUseridMigration(req ReqFinishExternalUseri
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespFinishExternalUseridMigration{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -232,7 +224,6 @@ func (x ReqUnionidToExternalUserid3RdExternalcontact) intoBody() ([]byte, error)
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -267,7 +258,6 @@ func (c *ApiClient) ExecUnionidToExternalUserid3RdExternalcontact(req ReqUnionid
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespUnionidToExternalUserid3RdExternalcontact{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -285,7 +275,6 @@ func (x ReqExternalcontactToServiceExternalUserid) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -315,6 +304,5 @@ func (c *ApiClient) ExternalcontactToServiceExternalUserid(req ReqExternalcontac
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespExternalcontactToServiceExternalUserid{}, bizErr
 	}
-
 	return resp, nil
 }

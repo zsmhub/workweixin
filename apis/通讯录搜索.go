@@ -34,7 +34,6 @@ func (x ReqSearchContact) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -80,7 +79,6 @@ func (c *ApiClient) ExecSearchContact(req ReqSearchContact) (RespSearchContact, 
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespSearchContact{}, bizErr
 	}
-
 	return resp, nil
 }
 
@@ -113,7 +111,6 @@ func (x ReqBatchsearchContact) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -167,6 +164,5 @@ func (c *ApiClient) ExecBatchsearchContact(req ReqBatchsearchContact) (RespBatch
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespBatchsearchContact{}, bizErr
 	}
-
 	return resp, nil
 }

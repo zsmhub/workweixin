@@ -26,7 +26,6 @@ func (x ReqGetAppLicenseInfoLicense) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -66,6 +65,5 @@ func (c *ApiClient) ExecGetAppLicenseInfoLicense(req ReqGetAppLicenseInfoLicense
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetAppLicenseInfoLicense{}, bizErr
 	}
-
 	return resp, nil
 }

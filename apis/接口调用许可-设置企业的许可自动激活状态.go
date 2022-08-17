@@ -24,7 +24,6 @@ func (x ReqSetAutoActiveStatusLicense) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -56,6 +55,5 @@ func (c *ApiClient) ExecSetAutoActiveStatusLicense(req ReqSetAutoActiveStatusLic
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespSetAutoActiveStatusLicense{}, bizErr
 	}
-
 	return resp, nil
 }

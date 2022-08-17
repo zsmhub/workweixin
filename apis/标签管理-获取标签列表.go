@@ -63,6 +63,5 @@ func (c *ApiClient) ExecListTag(req ReqListTag) (RespListTag, error) {
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespListTag{}, bizErr
 	}
-
 	return resp, nil
 }

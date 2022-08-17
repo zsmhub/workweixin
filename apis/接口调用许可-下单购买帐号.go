@@ -39,7 +39,6 @@ func (x ReqCreateNewOrderLicense) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -73,6 +72,5 @@ func (c *ApiClient) ExecCreateNewOrderLicense(req ReqCreateNewOrderLicense) (Res
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespCreateNewOrderLicense{}, bizErr
 	}
-
 	return resp, nil
 }

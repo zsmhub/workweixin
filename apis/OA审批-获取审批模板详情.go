@@ -22,7 +22,6 @@ func (x ReqGetTemplateDetail) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -142,6 +141,5 @@ func (c *ApiClient) ExecGetTemplateDetail(req ReqGetTemplateDetail) (RespGetTemp
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespGetTemplateDetail{}, bizErr
 	}
-
 	return resp, nil
 }
