@@ -364,7 +364,7 @@ func generateStruct(rawJson string, structName string, subStruct bool, fields []
 }
 
 func generateCode(apis []*Api) (result []byte, err error) {
-	tpl, err := template.ParseFiles("./api_generate/api_template.tmpl")
+	tpl, err := template.ParseFiles("./api_generate/api.tmpl")
 	if err != nil {
 		err = errors.Wrap(err, "template.ParseFiles failed")
 		return

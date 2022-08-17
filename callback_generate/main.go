@@ -56,7 +56,7 @@ func main() {
 		docURL = docURL[:tag]
 	}
 
-	tpl, err := template.ParseFiles("./callback_generate/temp.tmpl")
+	tpl, err := template.ParseFiles("./callback_generate/callback.tmpl")
 	if err != nil {
 		fmt.Println("template.ParseFiles failed:", err)
 		return

@@ -34,7 +34,6 @@ func (x Req{{ .StructName }}) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 {{end}}
@@ -62,7 +61,6 @@ func (c *ApiClient) Exec{{ .StructName }}(req Req{{ .StructName }}) (Resp{{ .Str
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return Resp{{ .StructName }}{}, bizErr
 	}
-
 	return resp, nil
 }
 
