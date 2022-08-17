@@ -28,8 +28,28 @@ func (x ReqGetPermanentCodeService) intoBody() ([]byte, error) {
 // RespGetPermanentCodeService 获取企业永久授权码响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90603#获取企业永久授权码
 
-type RespGetPermanentCodeService struct {
-	AccessToken  string `json:"access_token"`
+type (
+	RespGetPermanentCodeService struct {
+		AccessToken  string       `json:"access_token"`
+		AuthCorpInfo AuthCorpInfo `json:"auth_corp_info"`
+		AuthInfo     AuthInfo     `json:"auth_info"`
+		AuthUserInfo struct {
+			Avatar     string `json:"avatar"`
+			Name       string `json:"name"`
+			OpenUserid string `json:"open_userid"`
+			Userid     string `json:"userid"`
+		} `json:"auth_user_info"`
+		DealerCorpInfo DealerCorpInfo `json:"dealer_corp_info"`
+		CommonResp
+		ExpiresIn        int    `json:"expires_in"`
+		PermanentCode    string `json:"permanent_code"`
+		RegisterCodeInfo struct {
+			RegisterCode string `json:"register_code"`
+			State        string `json:"state"`
+			TemplateID   string `json:"template_id"`
+		} `json:"register_code_info"`
+	}
+
 	AuthCorpInfo struct {
 		CorpFullName      string `json:"corp_full_name"`
 		CorpIndustry      string `json:"corp_industry"`
@@ -45,7 +65,8 @@ type RespGetPermanentCodeService struct {
 		SubjectType       int    `json:"subject_type"`
 		VerifiedEndTime   int    `json:"verified_end_time"`
 		Location          string `json:"location"`
-	} `json:"auth_corp_info"`
+	}
+
 	AuthInfo struct {
 		Agent []struct {
 			Agentid         int    `json:"agentid"`
@@ -68,26 +89,13 @@ type RespGetPermanentCodeService struct {
 			} `json:"shared_from"`
 			SquareLogoURL string `json:"square_logo_url"`
 		} `json:"agent"`
-	} `json:"auth_info"`
-	AuthUserInfo struct {
-		Avatar     string `json:"avatar"`
-		Name       string `json:"name"`
-		OpenUserid string `json:"open_userid"`
-		Userid     string `json:"userid"`
-	} `json:"auth_user_info"`
+	}
+
 	DealerCorpInfo struct {
 		CorpName string `json:"corp_name"`
 		Corpid   string `json:"corpid"`
-	} `json:"dealer_corp_info"`
-	CommonResp
-	ExpiresIn        int    `json:"expires_in"`
-	PermanentCode    string `json:"permanent_code"`
-	RegisterCodeInfo struct {
-		RegisterCode string `json:"register_code"`
-		State        string `json:"state"`
-		TemplateID   string `json:"template_id"`
-	} `json:"register_code_info"`
-}
+	}
+)
 
 var _ bodyer = RespGetPermanentCodeService{}
 

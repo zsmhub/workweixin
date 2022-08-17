@@ -31,48 +31,9 @@ func (x ReqGetAuthInfoService) intoBody() ([]byte, error) {
 // 文档：https://developer.work.weixin.qq.com/document/path/90604#获取企业授权信息
 
 type RespGetAuthInfoService struct {
-	AuthCorpInfo struct {
-		CorpFullName      string `json:"corp_full_name"`
-		CorpIndustry      string `json:"corp_industry"`
-		CorpName          string `json:"corp_name"`
-		CorpScale         string `json:"corp_scale"`
-		CorpSquareLogoURL string `json:"corp_square_logo_url"`
-		CorpSubIndustry   string `json:"corp_sub_industry"`
-		CorpType          string `json:"corp_type"`
-		CorpUserMax       int    `json:"corp_user_max"`
-		CorpWxqrcode      string `json:"corp_wxqrcode"`
-		Corpid            string `json:"corpid"`
-		SubjectType       int    `json:"subject_type"`
-		VerifiedEndTime   int    `json:"verified_end_time"`
-		Location          string `json:"location"`
-	} `json:"auth_corp_info"`
-	AuthInfo struct {
-		Agent []struct {
-			Agentid         int    `json:"agentid"`
-			Appid           int    `json:"appid"`
-			AuthMode        int    `json:"auth_mode"`
-			IsCustomizedApp bool   `json:"is_customized_app"`
-			Name            string `json:"name"`
-			Privilege       struct {
-				AllowParty []int    `json:"allow_party"`
-				AllowTag   []int    `json:"allow_tag"`
-				AllowUser  []string `json:"allow_user"`
-				ExtraParty []int    `json:"extra_party"`
-				ExtraTag   []int    `json:"extra_tag"`
-				ExtraUser  []string `json:"extra_user"`
-				Level      int      `json:"level"`
-			} `json:"privilege"`
-			RoundLogoURL string `json:"round_logo_url"`
-			SharedFrom   struct {
-				Corpid string `json:"corpid"`
-			} `json:"shared_from"`
-			SquareLogoURL string `json:"square_logo_url"`
-		} `json:"agent"`
-	} `json:"auth_info"`
-	DealerCorpInfo struct {
-		CorpName string `json:"corp_name"`
-		Corpid   string `json:"corpid"`
-	} `json:"dealer_corp_info"`
+	AuthCorpInfo   AuthCorpInfo   `json:"auth_corp_info"`
+	AuthInfo       AuthInfo       `json:"auth_info"`
+	DealerCorpInfo DealerCorpInfo `json:"dealer_corp_info"`
 	CommonResp
 }
 
