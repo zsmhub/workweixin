@@ -170,7 +170,7 @@ orderDetail, err := workweixin.Sdk.ProviderClient.ExecGetOrderLicense(apis.ReqGe
 // 应用级别API调用接口示例：获取企业永久授权码
 resp, err := workweixin.Sdk.ThirdAppClient.ExecGetPermanentCodeService(apis.ReqGetPermanentCodeService{AuthCode: authCode})
 
-// 授权企业级别AP调用接口示例：获取部门列表
+// 授权企业级别API调用接口示例：获取部门列表
 apiClient, err := workweixin.Sdk.GetThirdAuthCorpApiClient(v.CorpId)
 if err != nil {
     fmt.Println(err)
