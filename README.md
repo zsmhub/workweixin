@@ -164,13 +164,18 @@ func InitApiHandler() error {
     return nil
 }
 
+// 服务商级别API调用接口示例：获取接口调用许可订单详情
+orderDetail, err := workweixin.Sdk.ProviderClient.ExecGetOrderLicense(apis.ReqGetOrderLicense{OrderID: orderId})
+
+// 应用级别API调用接口示例：获取企业永久授权码
+resp, err := workweixin.Sdk.ThirdAppClient.ExecGetPermanentCodeService(apis.ReqGetPermanentCodeService{AuthCode: authCode})
+
+// 授权企业级别AP调用接口示例：获取部门列表
 apiClient, err := workweixin.Sdk.GetThirdAuthCorpApiClient(v.CorpId)
 if err != nil {
     fmt.Println(err)
 }
-
-// 获取企业永久授权码
-resp, err := workweixin.Sdk.ThirdAppClient.ExecGetPermanentCodeService(apis.ReqGetPermanentCodeService{AuthCode: authCode})
+department, err := apiClient.ExecListDepartment(apis.ReqListDepartment{})
 
 // 获取provider_access_token
 accessToken, err := workweixin.Sdk.ProviderClient.GetToken()
