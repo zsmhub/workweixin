@@ -91,13 +91,6 @@ func (s *sdk) NewThirdAuthCorpApiClient(corpId, companyPermanentCode string, age
 
 // 第三方应用：获取授权企业客户端
 func (s *sdk) GetThirdAuthCorpApiClient(corpId string) (*apis.ApiClient, error) {
-	s.mutex.RLock()
-	if v, ok := s.ThirdAuthCorpsClient[corpId]; ok {
-		s.mutex.RUnlock()
-		return v, nil
-	}
-	s.mutex.RUnlock()
-
 	// 从数据库或缓存读取企业数据
 	if s.GetThirdAppAuthCorpFunc != nil {
 		corp, err := s.GetThirdAppAuthCorpFunc(corpId, s.ThirdAppClient.AppSuiteId)
@@ -107,15 +100,15 @@ func (s *sdk) GetThirdAuthCorpApiClient(corpId string) (*apis.ApiClient, error) 
 			if err := s.NewThirdAuthCorpApiClient(corpId, corp.PermanentCode, corp.AgentId); err != nil {
 				return nil, err
 			}
-
-			s.mutex.RLock()
-			if v, ok := s.ThirdAuthCorpsClient[corpId]; ok {
-				s.mutex.RUnlock()
-				return v, nil
-			}
-			s.mutex.RUnlock()
 		}
 	}
+
+	s.mutex.RLock()
+	if v, ok := s.ThirdAuthCorpsClient[corpId]; ok {
+		s.mutex.RUnlock()
+		return v, nil
+	}
+	s.mutex.RUnlock()
 
 	return nil, fmt.Errorf("第三方应用：corpid不存在：%s", corpId)
 }
@@ -166,13 +159,6 @@ func (s *sdk) NewCustomizedAuthCorpApiClient(corpId, companyPermanentCode string
 
 // 自建应用代开发：获取授权企业客户端
 func (s *sdk) GetCustomizedAuthCorpApiClient(corpId string) (*apis.ApiClient, error) {
-	s.mutex.RLock()
-	if v, ok := s.CustomizedAuthCorpsClient[corpId]; ok {
-		s.mutex.RUnlock()
-		return v, nil
-	}
-	s.mutex.RUnlock()
-
 	// 从数据库或缓存读取企业数据
 	if s.GetCustomizedAppAuthCorpFunc != nil {
 		corp, err := s.GetCustomizedAppAuthCorpFunc(corpId, s.CustomizedAppClient.AppSuiteId)
@@ -182,15 +168,15 @@ func (s *sdk) GetCustomizedAuthCorpApiClient(corpId string) (*apis.ApiClient, er
 			if err := s.NewCustomizedAuthCorpApiClient(corpId, corp.PermanentCode, corp.AgentId); err != nil {
 				return nil, err
 			}
-
-			s.mutex.RLock()
-			if v, ok := s.CustomizedAuthCorpsClient[corpId]; ok {
-				s.mutex.RUnlock()
-				return v, nil
-			}
-			s.mutex.RUnlock()
 		}
 	}
+
+	s.mutex.RLock()
+	if v, ok := s.CustomizedAuthCorpsClient[corpId]; ok {
+		s.mutex.RUnlock()
+		return v, nil
+	}
+	s.mutex.RUnlock()
 
 	return nil, fmt.Errorf("自建应用代开发：corpid不存在：%s", corpId)
 }
