@@ -129,6 +129,9 @@ const EventTypeSubscribe = "subscribe"
 // 成员取消关注事件
 const EventTypeUnsubscribe = "unsubscribe"
 
+// 产生会话回调事件
+const EventTypeMsgauditNotify = "msgaudit_notify"
+
 // 推送suite_ticket
 const InfoTypeSuiteTicket EventType = "suite_ticket"
 
