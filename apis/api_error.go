@@ -18,8 +18,8 @@ var _ error = (*ClientError)(nil)
 var (
 	errPrefix  = "企微调用异常："
 	ErrCodeMap = map[ErrCode]string{
-		ErrCodeServiceUnavailable: "系统繁忙",
-		ErrCode40011:              "发送素材过大，请使用链接发送",
+		ErrCodeServiceUnavailable: errPrefix + "系统繁忙",
+		ErrCode40011:              "发送素材过大，请使用链接或其他方式发送",
 		ErrCode40029:              "登录过期，请点击按钮重新登录",
 		ErrCode40082:              errPrefix + "invalid suite_token",
 		ErrCode41022:              errPrefix + "suite_access_token missing",
@@ -40,6 +40,7 @@ var (
 		ErrCode701032:             "有订单未支付，请完成后再下单",
 		ErrCode701033:             "有订单正在生成激活码中，请稍后重试",
 		ErrCode701034:             "历史企业需迁移完成后才能购买激活码",
+		ErrCode701037:             "存在退款订单，无法购买新激活码",
 		ErrCode701082:             "该成员已激活，请在剩余时长不超过20天时再激活",
 	}
 )
