@@ -24,7 +24,6 @@ func (x ReqListIdUser) intoBody() ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-
 	return result, nil
 }
 
@@ -60,6 +59,5 @@ func (c *ApiClient) ExecListIdUser(req ReqListIdUser) (RespListIdUser, error) {
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
 		return RespListIdUser{}, bizErr
 	}
-
 	return resp, nil
 }
