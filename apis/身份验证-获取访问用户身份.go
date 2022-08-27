@@ -11,7 +11,6 @@ import (
 
 // ReqGetuserinfo3RdService 获取访问用户身份请求
 // 文档：https://developer.work.weixin.qq.com/document/path/91121#获取访问用户身份
-
 type ReqGetuserinfo3RdService struct {
 	// Code 通过成员授权获取到的code，最大为512字节。每次成员授权带上的code将不一样，code只能使用一次，5分钟未被使用自动过期。，必填
 	Code string `json:"code"`
@@ -20,12 +19,11 @@ type ReqGetuserinfo3RdService struct {
 var _ urlValuer = ReqGetuserinfo3RdService{}
 
 func (x ReqGetuserinfo3RdService) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -34,7 +32,6 @@ func (x ReqGetuserinfo3RdService) intoURLValues() url.Values {
 
 // RespGetuserinfo3RdService 获取访问用户身份响应
 // 文档：https://developer.work.weixin.qq.com/document/path/91121#获取访问用户身份
-
 type RespGetuserinfo3RdService struct {
 	CommonResp
 	CorpID     string `json:"CorpId"`
@@ -55,7 +52,7 @@ func (x RespGetuserinfo3RdService) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetuserinfo3RdService 获取访问用户身份
+// ExecGetuserinfo3RdService 获取访问用户身份
 // 文档：https://developer.work.weixin.qq.com/document/path/91121#获取访问用户身份
 func (c *ApiClient) ExecGetuserinfo3RdService(req ReqGetuserinfo3RdService) (RespGetuserinfo3RdService, error) {
 	var resp RespGetuserinfo3RdService

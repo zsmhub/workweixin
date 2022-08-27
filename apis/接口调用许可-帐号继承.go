@@ -9,7 +9,6 @@ import (
 
 // ReqBatchTransferLicenseLicense 帐号继承请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95673#帐号继承
-
 type (
 	ReqBatchTransferLicenseLicense struct {
 		// Corpid 待绑定激活的成员所属企业corpid，只支持加密的corpid，必填
@@ -37,7 +36,6 @@ func (x ReqBatchTransferLicenseLicense) intoBody() ([]byte, error) {
 
 // RespBatchTransferLicenseLicense 帐号继承响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95673#帐号继承
-
 type RespBatchTransferLicenseLicense struct {
 	CommonResp
 	TransferResult []struct {
@@ -59,7 +57,7 @@ func (x RespBatchTransferLicenseLicense) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execBatchTransferLicenseLicense 帐号继承
+// ExecBatchTransferLicenseLicense 帐号继承
 // 文档：https://developer.work.weixin.qq.com/document/path/95673#帐号继承
 func (c *ApiClient) ExecBatchTransferLicenseLicense(req ReqBatchTransferLicenseLicense) (RespBatchTransferLicenseLicense, error) {
 	var resp RespBatchTransferLicenseLicense

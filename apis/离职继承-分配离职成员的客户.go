@@ -9,7 +9,6 @@ import (
 
 // ReqTransferCustomerResigned 分配离职成员的客户请求
 // 文档：https://developer.work.weixin.qq.com/document/path/94100#分配离职成员的客户
-
 type ReqTransferCustomerResigned struct {
 	// ExternalUserid 客户的external_userid列表，最多一次转移100个客户，必填
 	ExternalUserid []string `json:"external_userid"`
@@ -31,7 +30,6 @@ func (x ReqTransferCustomerResigned) intoBody() ([]byte, error) {
 
 // RespTransferCustomerResigned 分配离职成员的客户响应
 // 文档：https://developer.work.weixin.qq.com/document/path/94100#分配离职成员的客户
-
 type RespTransferCustomerResigned struct {
 	Customer []struct {
 		// Errcode 对此客户进行分配的结果, 具体可参考<a href="#10649" rel="nofollow">全局错误码</a>, <strong>0表示开始分配流程,待24小时后自动接替,并不代表最终分配成功</strong>
@@ -53,7 +51,7 @@ func (x RespTransferCustomerResigned) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execTransferCustomerResigned 离职继承-分配离职成员的客户
+// ExecTransferCustomerResigned 离职继承-分配离职成员的客户
 // 文档：https://developer.work.weixin.qq.com/document/path/94100#分配离职成员的客户
 func (c *ApiClient) ExecTransferCustomerResigned(req ReqTransferCustomerResigned) (RespTransferCustomerResigned, error) {
 	var resp RespTransferCustomerResigned

@@ -9,7 +9,6 @@ import (
 
 // ReqOnjobTransferGroupchat 分配在职成员的客户群请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95703#分配在职成员的客户群
-
 type ReqOnjobTransferGroupchat struct {
 	// ChatIDList 需要转群主的客户群ID列表。取值范围: 1 ~ 100，必填
 	ChatIDList []string `json:"chat_id_list"`
@@ -29,7 +28,6 @@ func (x ReqOnjobTransferGroupchat) intoBody() ([]byte, error) {
 
 // RespOnjobTransferGroupchat 分配在职成员的客户群响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95703#分配在职成员的客户群
-
 type RespOnjobTransferGroupchat struct {
 	// Errcode 没能成功继承的群，错误码
 	CommonResp
@@ -53,7 +51,7 @@ func (x RespOnjobTransferGroupchat) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execOnjobTransferGroupchat 分配在职成员的客户群
+// ExecOnjobTransferGroupchat 分配在职成员的客户群
 // 文档：https://developer.work.weixin.qq.com/document/path/95703#分配在职成员的客户群
 func (c *ApiClient) ExecOnjobTransferGroupchat(req ReqOnjobTransferGroupchat) (RespOnjobTransferGroupchat, error) {
 	var resp RespOnjobTransferGroupchat

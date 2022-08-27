@@ -9,7 +9,6 @@ import (
 
 // ReqSearchContact 通讯录单个搜索请求
 // 文档：https://developer.work.weixin.qq.com/document/path/91844#通讯录单个搜索
-
 type ReqSearchContact struct {
 	// Agentid 应用id，若非0则只返回应用可见范围内的用户或者部门信息
 	Agentid int `json:"agentid,omitempty"`
@@ -39,7 +38,6 @@ func (x ReqSearchContact) intoBody() ([]byte, error) {
 
 // RespSearchContact 通讯录单个搜索响应
 // 文档：https://developer.work.weixin.qq.com/document/path/91844#通讯录单个搜索
-
 type RespSearchContact struct {
 	CommonResp
 	// IsLast 根据该字段判断是否是最后一页，若为false，开发者需要使用offset+limit继续调用
@@ -68,7 +66,7 @@ func (x RespSearchContact) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execSearchContact 通讯录单个搜索
+// ExecSearchContact 通讯录单个搜索
 // 文档：https://developer.work.weixin.qq.com/document/path/91844#通讯录单个搜索
 func (c *ApiClient) ExecSearchContact(req ReqSearchContact) (RespSearchContact, error) {
 	var resp RespSearchContact
@@ -84,7 +82,6 @@ func (c *ApiClient) ExecSearchContact(req ReqSearchContact) (RespSearchContact, 
 
 // ReqBatchsearchContact 通讯录批量搜索请求
 // 文档：https://developer.work.weixin.qq.com/document/path/91844#通讯录批量搜索
-
 type ReqBatchsearchContact struct {
 	// Agentid 应用id，若非0则只返回应用可见范围内的用户或者部门信息
 	Agentid int `json:"agentid,omitempty"`
@@ -116,7 +113,6 @@ func (x ReqBatchsearchContact) intoBody() ([]byte, error) {
 
 // RespBatchsearchContact 通讯录批量搜索响应
 // 文档：https://developer.work.weixin.qq.com/document/path/91844#通讯录批量搜索
-
 type RespBatchsearchContact struct {
 	CommonResp
 	QueryResultList []struct {
@@ -153,7 +149,7 @@ func (x RespBatchsearchContact) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execBatchsearchContact 通讯录批量搜索
+// ExecBatchsearchContact 通讯录批量搜索
 // 文档：https://developer.work.weixin.qq.com/document/path/91844#通讯录批量搜索
 func (c *ApiClient) ExecBatchsearchContact(req ReqBatchsearchContact) (RespBatchsearchContact, error) {
 	var resp RespBatchsearchContact

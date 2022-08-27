@@ -9,7 +9,6 @@ import (
 
 // ReqGetuseridUser 手机号获取userid请求
 // 文档：https://developer.work.weixin.qq.com/document/path/91693#手机号获取userid
-
 type ReqGetuseridUser struct {
 	// Mobile 用户在企业微信通讯录中的手机号码。长度为5~32个字节，必填
 	Mobile string `json:"mobile"`
@@ -27,7 +26,6 @@ func (x ReqGetuseridUser) intoBody() ([]byte, error) {
 
 // RespGetuseridUser 手机号获取userid响应
 // 文档：https://developer.work.weixin.qq.com/document/path/91693#手机号获取userid
-
 type RespGetuseridUser struct {
 	CommonResp
 	// Userid 成员UserID。对应管理端的帐号，企业内必须唯一。不区分大小写，长度为1~64个字节。注意:第三方应用获取的值是密文的userid
@@ -44,7 +42,7 @@ func (x RespGetuseridUser) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetuseridUser 手机号获取userid
+// ExecGetuseridUser 手机号获取userid
 // 文档：https://developer.work.weixin.qq.com/document/path/91693#手机号获取userid
 func (c *ApiClient) ExecGetuseridUser(req ReqGetuseridUser) (RespGetuseridUser, error) {
 	var resp RespGetuseridUser

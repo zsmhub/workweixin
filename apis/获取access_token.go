@@ -9,7 +9,6 @@ import (
 // 修改生成的文件,以满足开发需求
 
 // https://developer.work.weixin.qq.com/document/path/91039
-
 type ReqGetCustomizedCorpTokenService struct {
 	// AuthCorpid 授权方corpid，必填
 	Corpid string `json:"corpid"`
@@ -20,12 +19,11 @@ type ReqGetCustomizedCorpTokenService struct {
 var _ urlValuer = ReqGetCustomizedCorpTokenService{}
 
 func (x ReqGetCustomizedCorpTokenService) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -33,7 +31,6 @@ func (x ReqGetCustomizedCorpTokenService) intoURLValues() url.Values {
 }
 
 // https://developer.work.weixin.qq.com/document/path/91039
-
 type RespGetCustomizedCorpTokenService struct {
 	CommonResp
 	AccessToken string `json:"access_token"`

@@ -9,7 +9,6 @@ import (
 
 // ReqAddtagusersTag 增加标签成员请求
 // 文档：https://developer.work.weixin.qq.com/document/path/90350#增加标签成员
-
 type ReqAddtagusersTag struct {
 	// Partylist 企业部门ID列表，注意:userlist、partylist不能同时为空，单次请求个数不超过100
 	Partylist []int `json:"partylist,omitempty"`
@@ -31,7 +30,6 @@ func (x ReqAddtagusersTag) intoBody() ([]byte, error) {
 
 // RespAddtagusersTag 增加标签成员响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90350#增加标签成员
-
 type RespAddtagusersTag struct {
 	CommonResp
 }
@@ -46,7 +44,7 @@ func (x RespAddtagusersTag) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execAddtagusersTag 增加标签成员
+// ExecAddtagusersTag 增加标签成员
 // 文档：https://developer.work.weixin.qq.com/document/path/90350#增加标签成员
 func (c *ApiClient) ExecAddtagusersTag(req ReqAddtagusersTag) (RespAddtagusersTag, error) {
 	var resp RespAddtagusersTag

@@ -9,7 +9,6 @@ import (
 
 // ReqListMemberAuthUser 获取成员授权列表请求
 // 文档：https://developer.work.weixin.qq.com/document/path/94513#获取成员授权列表
-
 type ReqListMemberAuthUser struct {
 	// Cursor 上一次调用时返回的next_cursor，第一次拉取可以不填
 	Cursor string `json:"cursor,omitempty"`
@@ -29,7 +28,6 @@ func (x ReqListMemberAuthUser) intoBody() ([]byte, error) {
 
 // RespListMemberAuthUser 获取成员授权列表响应
 // 文档：https://developer.work.weixin.qq.com/document/path/94513#获取成员授权列表
-
 type RespListMemberAuthUser struct {
 	CommonResp
 	MemberAuthList []struct {
@@ -50,7 +48,7 @@ func (x RespListMemberAuthUser) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execListMemberAuthUser 获取成员授权列表
+// ExecListMemberAuthUser 获取成员授权列表
 // 文档：https://developer.work.weixin.qq.com/document/path/94513#获取成员授权列表
 func (c *ApiClient) ExecListMemberAuthUser(req ReqListMemberAuthUser) (RespListMemberAuthUser, error) {
 	var resp RespListMemberAuthUser

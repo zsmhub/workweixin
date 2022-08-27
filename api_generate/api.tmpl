@@ -11,17 +11,16 @@ import (
 {{ range .}}
 // Req{{ .StructName }} {{ .Name }}请求
 // 文档：{{ .DocURL }}#{{ .Name }}
-
 {{ .ReqCode }}
 {{if .IsGet }}
 var _ urlValuer = Req{{ .StructName }}{}
-func (x Req{{ .StructName }}) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
 
+func (x Req{{ .StructName }}) intoURLValues() url.Values {
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -29,6 +28,7 @@ func (x Req{{ .StructName }}) intoURLValues() url.Values {
 }
 {{else}}
 var _ bodyer = Req{{ .StructName }}{}
+
 func (x Req{{ .StructName }}) intoBody() ([]byte, error) {
 	result, err := json.Marshal(x)
 	if err != nil {
@@ -42,6 +42,7 @@ func (x Req{{ .StructName }}) intoBody() ([]byte, error) {
 // 文档：{{ .DocURL }}#{{ .Name }}
 {{ .RespCode }}
 var _ bodyer = Resp{{ .StructName }}{}
+
 func (x Resp{{ .StructName }}) intoBody() ([]byte, error) {
 	result, err := json.Marshal(x)
 	if err != nil {
@@ -50,7 +51,7 @@ func (x Resp{{ .StructName }}) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// exec{{ .StructName }} {{ .Name }}
+// Exec{{ .StructName }} {{ .Name }}
 // 文档：{{ .DocURL }}#{{ .Name }}
 func (c *ApiClient) Exec{{ .StructName }}(req Req{{ .StructName }}) (Resp{{ .StructName }}, error) {
 	var resp Resp{{ .StructName }}
@@ -63,5 +64,4 @@ func (c *ApiClient) Exec{{ .StructName }}(req Req{{ .StructName }}) (Resp{{ .Str
 	}
 	return resp, nil
 }
-
 {{end}}

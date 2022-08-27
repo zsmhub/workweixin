@@ -9,7 +9,6 @@ import (
 
 // ReqGetGroupchat 获取客户群详情请求
 // 文档：https://developer.work.weixin.qq.com/document/path/92707#获取客户群详情
-
 type ReqGetGroupchat struct {
 	// ChatID 客户群ID，必填
 	ChatID string `json:"chat_id"`
@@ -29,7 +28,6 @@ func (x ReqGetGroupchat) intoBody() ([]byte, error) {
 
 // RespGetGroupchat 获取客户群详情响应
 // 文档：https://developer.work.weixin.qq.com/document/path/92707#获取客户群详情
-
 type RespGetGroupchat struct {
 	CommonResp
 	GroupChat struct {
@@ -66,7 +64,7 @@ func (x RespGetGroupchat) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetGroupchat 获取客户群详情
+// ExecGetGroupchat 获取客户群详情
 // 文档：https://developer.work.weixin.qq.com/document/path/92707#获取客户群详情
 func (c *ApiClient) ExecGetGroupchat(req ReqGetGroupchat) (RespGetGroupchat, error) {
 	var resp RespGetGroupchat

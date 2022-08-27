@@ -11,7 +11,6 @@ import (
 
 // ReqSimplelistUser 获取部门成员请求
 // 文档：https://developer.work.weixin.qq.com/document/path/90336#获取部门成员
-
 type ReqSimplelistUser struct {
 	// DepartmentID 获取的部门id，必填
 	DepartmentID int `json:"department_id"`
@@ -22,12 +21,11 @@ type ReqSimplelistUser struct {
 var _ urlValuer = ReqSimplelistUser{}
 
 func (x ReqSimplelistUser) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -36,7 +34,6 @@ func (x ReqSimplelistUser) intoURLValues() url.Values {
 
 // RespSimplelistUser 获取部门成员响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90336#获取部门成员
-
 type RespSimplelistUser struct {
 	CommonResp
 	Userlist []struct {
@@ -61,7 +58,7 @@ func (x RespSimplelistUser) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execSimplelistUser 获取部门成员
+// ExecSimplelistUser 获取部门成员
 // 文档：https://developer.work.weixin.qq.com/document/path/90336#获取部门成员
 func (c *ApiClient) ExecSimplelistUser(req ReqSimplelistUser) (RespSimplelistUser, error) {
 	var resp RespSimplelistUser

@@ -9,7 +9,6 @@ import (
 
 // ReqGetUseridByEmailUser 邮箱获取userid请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95892#邮箱获取userid
-
 type ReqGetUseridByEmailUser struct {
 	// Email 邮箱，必填
 	Email string `json:"email"`
@@ -29,7 +28,6 @@ func (x ReqGetUseridByEmailUser) intoBody() ([]byte, error) {
 
 // RespGetUseridByEmailUser 邮箱获取userid响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95892#邮箱获取userid
-
 type RespGetUseridByEmailUser struct {
 	CommonResp
 	// Userid 成员UserID。注意:已升级openid的代开发或第三方，获取的是密文userid
@@ -46,7 +44,7 @@ func (x RespGetUseridByEmailUser) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetUseridByEmailUser 邮箱获取userid
+// ExecGetUseridByEmailUser 邮箱获取userid
 // 文档：https://developer.work.weixin.qq.com/document/path/95892#邮箱获取userid
 func (c *ApiClient) ExecGetUseridByEmailUser(req ReqGetUseridByEmailUser) (RespGetUseridByEmailUser, error) {
 	var resp RespGetUseridByEmailUser

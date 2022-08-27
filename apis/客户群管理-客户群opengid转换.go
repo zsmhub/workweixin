@@ -9,7 +9,6 @@ import (
 
 // ReqOpengidToChatidExternalcontact 客户群opengid转换请求
 // 文档：https://developer.work.weixin.qq.com/document/path/94828#客户群opengid转换
-
 type ReqOpengidToChatidExternalcontact struct {
 	// Opengid 小程序在微信获取到的群ID，参见<a href="https://developers.weixin.qq.com/miniprogram/dev/api/open-api/group/wx.getGroupEnterInfo.html" rel="nofollow">wx.getGroupEnterInfo</a>，必填
 	Opengid string `json:"opengid"`
@@ -27,7 +26,6 @@ func (x ReqOpengidToChatidExternalcontact) intoBody() ([]byte, error) {
 
 // RespOpengidToChatidExternalcontact 客户群opengid转换响应
 // 文档：https://developer.work.weixin.qq.com/document/path/94828#客户群opengid转换
-
 type RespOpengidToChatidExternalcontact struct {
 	CommonResp
 	ChatId string `json:"chat_id"`
@@ -43,7 +41,7 @@ func (x RespOpengidToChatidExternalcontact) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execOpengidToChatidExternalcontact 客户群opengid转换
+// ExecOpengidToChatidExternalcontact 客户群opengid转换
 // 文档：https://developer.work.weixin.qq.com/document/path/94828#客户群opengid转换
 func (c *ApiClient) ExecOpengidToChatidExternalcontact(req ReqOpengidToChatidExternalcontact) (RespOpengidToChatidExternalcontact, error) {
 	var resp RespOpengidToChatidExternalcontact

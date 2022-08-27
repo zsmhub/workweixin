@@ -9,7 +9,6 @@ import (
 
 // ReqGetUnassignedListExternalcontact 获取待分配的离职成员列表请求
 // 文档：https://developer.work.weixin.qq.com/document/path/92273#获取待分配的离职成员列表
-
 type ReqGetUnassignedListExternalcontact struct {
 	// Cursor 分页查询游标，字符串类型，适用于数据量较大的情况，如果使用该参数则无需填写page_id，该参数由上一次调用返回
 	Cursor string `json:"cursor"`
@@ -31,7 +30,6 @@ func (x ReqGetUnassignedListExternalcontact) intoBody() ([]byte, error) {
 
 // RespGetUnassignedListExternalcontact 获取待分配的离职成员列表响应
 // 文档：https://developer.work.weixin.qq.com/document/path/92273#获取待分配的离职成员列表
-
 type RespGetUnassignedListExternalcontact struct {
 	CommonResp
 	Info []struct {
@@ -58,7 +56,7 @@ func (x RespGetUnassignedListExternalcontact) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetUnassignedListExternalcontact 离职继承-获取待分配的离职成员列表
+// ExecGetUnassignedListExternalcontact 离职继承-获取待分配的离职成员列表
 // 文档：https://developer.work.weixin.qq.com/document/path/92273#获取待分配的离职成员列表
 func (c *ApiClient) ExecGetUnassignedListExternalcontact(req ReqGetUnassignedListExternalcontact) (RespGetUnassignedListExternalcontact, error) {
 	var resp RespGetUnassignedListExternalcontact

@@ -11,18 +11,16 @@ import (
 
 // ReqListTag 获取标签列表请求
 // 文档：https://developer.work.weixin.qq.com/document/path/90352#获取标签列表
-
 type ReqListTag struct{}
 
 var _ urlValuer = ReqListTag{}
 
 func (x ReqListTag) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -31,7 +29,6 @@ func (x ReqListTag) intoURLValues() url.Values {
 
 // RespListTag 获取标签列表响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90352#获取标签列表
-
 type RespListTag struct {
 	CommonResp
 	Taglist []struct {
@@ -52,7 +49,7 @@ func (x RespListTag) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execListTag 获取标签列表
+// ExecListTag 获取标签列表
 // 文档：https://developer.work.weixin.qq.com/document/path/90352#获取标签列表
 func (c *ApiClient) ExecListTag(req ReqListTag) (RespListTag, error) {
 	var resp RespListTag

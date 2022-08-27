@@ -9,7 +9,6 @@ import (
 
 // ReqTransferResultResigned 查询客户接替状态请求
 // 文档：https://developer.work.weixin.qq.com/document/path/94101#查询客户接替状态
-
 type ReqTransferResultResigned struct {
 	// Cursor 分页查询的cursor，每个分页返回的数据不会超过1000条；不填或为空表示获取第一个分页
 	Cursor string `json:"cursor"`
@@ -31,7 +30,6 @@ func (x ReqTransferResultResigned) intoBody() ([]byte, error) {
 
 // RespTransferResultResigned 查询客户接替状态响应
 // 文档：https://developer.work.weixin.qq.com/document/path/94101#查询客户接替状态
-
 type RespTransferResultResigned struct {
 	Customer []struct {
 		// ExternalUserid 转接客户的<code>外部联系人userid</code>
@@ -56,7 +54,7 @@ func (x RespTransferResultResigned) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execTransferResultResigned 离职继承-查询客户接替状态
+// ExecTransferResultResigned 离职继承-查询客户接替状态
 // 文档：https://developer.work.weixin.qq.com/document/path/94101#查询客户接替状态
 func (c *ApiClient) ExecTransferResultResigned(req ReqTransferResultResigned) (RespTransferResultResigned, error) {
 	var resp RespTransferResultResigned

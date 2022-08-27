@@ -11,7 +11,6 @@ import (
 
 // ReqGetExternalcontact 获取客户详情请求
 // 文档：https://developer.work.weixin.qq.com/document/path/92265#获取客户详情
-
 type ReqGetExternalcontact struct {
 	// AccessToken 调用接口凭证，必填
 	AccessToken string `json:"access_token"`
@@ -24,12 +23,11 @@ type ReqGetExternalcontact struct {
 var _ urlValuer = ReqGetExternalcontact{}
 
 func (x ReqGetExternalcontact) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -38,7 +36,6 @@ func (x ReqGetExternalcontact) intoURLValues() url.Values {
 
 // RespGetExternalcontact 获取客户详情响应
 // 文档：https://developer.work.weixin.qq.com/document/path/92265#获取客户详情
-
 type RespGetExternalcontact struct {
 	CommonResp
 	ExternalContact struct {
@@ -132,7 +129,7 @@ func (x RespGetExternalcontact) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetExternalcontact 获取客户详情
+// ExecGetExternalcontact 获取客户详情
 // 文档：https://developer.work.weixin.qq.com/document/path/92265#获取客户详情
 func (c *ApiClient) ExecGetExternalcontact(req ReqGetExternalcontact) (RespGetExternalcontact, error) {
 	var resp RespGetExternalcontact

@@ -11,18 +11,16 @@ import (
 
 // ReqGetPreAuthCodeService 获取预授权码请求
 // 文档：https://developer.work.weixin.qq.com/document/path/90601#获取预授权码
-
 type ReqGetPreAuthCodeService struct{}
 
 var _ urlValuer = ReqGetPreAuthCodeService{}
 
 func (x ReqGetPreAuthCodeService) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -31,7 +29,6 @@ func (x ReqGetPreAuthCodeService) intoURLValues() url.Values {
 
 // RespGetPreAuthCodeService 获取预授权码响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90601#获取预授权码
-
 type RespGetPreAuthCodeService struct {
 	CommonResp
 	// ExpiresIn 有效期（秒）
@@ -50,7 +47,7 @@ func (x RespGetPreAuthCodeService) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetPreAuthCodeService 获取预授权码
+// ExecGetPreAuthCodeService 获取预授权码
 // 文档：https://developer.work.weixin.qq.com/document/path/90601#获取预授权码
 func (c *ApiClient) ExecGetPreAuthCodeService(req ReqGetPreAuthCodeService) (RespGetPreAuthCodeService, error) {
 	var resp RespGetPreAuthCodeService

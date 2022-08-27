@@ -7,11 +7,10 @@ import (
 // 自动生成的文件, 生成方式: make api doc=微信文档地址url
 // 修改生成的文件,以满足开发需求
 
-// ReqGetCorpTokenService 获取企业凭证请求
-// 文档：https://developer.work.weixin.qq.com/document/path/90605#获取企业凭证
-
 const PathGetCorpToken = "/cgi-bin/service/get_corp_token"
 
+// ReqGetCorpTokenService 获取企业凭证请求
+// 文档：https://developer.work.weixin.qq.com/document/path/90605#获取企业凭证
 type ReqGetCorpTokenService struct {
 	// AuthCorpid 授权方corpid，必填
 	AuthCorpid string `json:"auth_corpid"`
@@ -31,7 +30,6 @@ func (x ReqGetCorpTokenService) intoBody() ([]byte, error) {
 
 // RespGetCorpTokenService 获取企业凭证响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90605#获取企业凭证
-
 type RespGetCorpTokenService struct {
 	AccessToken string `json:"access_token"`
 	CommonResp
@@ -48,7 +46,7 @@ func (x RespGetCorpTokenService) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetCorpTokenService 获取企业凭证
+// ExecGetCorpTokenService 获取企业凭证
 // 文档：https://developer.work.weixin.qq.com/document/path/90605#获取企业凭证
 func (c *ApiClient) ExecGetCorpTokenService(req ReqGetCorpTokenService) (RespGetCorpTokenService, error) {
 	var resp RespGetCorpTokenService

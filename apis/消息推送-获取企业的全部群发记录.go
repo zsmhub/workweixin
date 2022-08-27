@@ -9,7 +9,6 @@ import (
 
 // ReqGetGroupmsgListV2Externalcontact 获取群发记录列表请求
 // 文档：https://developer.work.weixin.qq.com/document/path/93338#获取群发记录列表
-
 type ReqGetGroupmsgListV2Externalcontact struct {
 	// ChatType 群发任务的类型，默认为single，表示发送给客户，group表示发送给客户群，必填
 	ChatType string `json:"chat_type"`
@@ -39,7 +38,6 @@ func (x ReqGetGroupmsgListV2Externalcontact) intoBody() ([]byte, error) {
 
 // RespGetGroupmsgListV2Externalcontact 获取群发记录列表响应
 // 文档：https://developer.work.weixin.qq.com/document/path/93338#获取群发记录列表
-
 type RespGetGroupmsgListV2Externalcontact struct {
 	CommonResp
 	GroupMsgList []struct {
@@ -119,7 +117,7 @@ func (x RespGetGroupmsgListV2Externalcontact) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetGroupmsgListV2Externalcontact 获取群发记录列表
+// ExecGetGroupmsgListV2Externalcontact 获取群发记录列表
 // 文档：https://developer.work.weixin.qq.com/document/path/93338#获取群发记录列表
 func (c *ApiClient) ExecGetGroupmsgListV2Externalcontact(req ReqGetGroupmsgListV2Externalcontact) (RespGetGroupmsgListV2Externalcontact, error) {
 	var resp RespGetGroupmsgListV2Externalcontact
@@ -135,7 +133,6 @@ func (c *ApiClient) ExecGetGroupmsgListV2Externalcontact(req ReqGetGroupmsgListV
 
 // ReqGetGroupmsgTaskExternalcontact 获取群发成员发送任务列表请求
 // 文档：https://developer.work.weixin.qq.com/document/path/93338#获取群发成员发送任务列表
-
 type ReqGetGroupmsgTaskExternalcontact struct {
 	// Cursor 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填
 	Cursor string `json:"cursor"`
@@ -157,7 +154,6 @@ func (x ReqGetGroupmsgTaskExternalcontact) intoBody() ([]byte, error) {
 
 // RespGetGroupmsgTaskExternalcontact 获取群发成员发送任务列表响应
 // 文档：https://developer.work.weixin.qq.com/document/path/93338#获取群发成员发送任务列表
-
 type RespGetGroupmsgTaskExternalcontact struct {
 	CommonResp
 	// NextCursor 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空
@@ -182,7 +178,7 @@ func (x RespGetGroupmsgTaskExternalcontact) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetGroupmsgTaskExternalcontact 获取群发成员发送任务列表
+// ExecGetGroupmsgTaskExternalcontact 获取群发成员发送任务列表
 // 文档：https://developer.work.weixin.qq.com/document/path/93338#获取群发成员发送任务列表
 func (c *ApiClient) ExecGetGroupmsgTaskExternalcontact(req ReqGetGroupmsgTaskExternalcontact) (RespGetGroupmsgTaskExternalcontact, error) {
 	var resp RespGetGroupmsgTaskExternalcontact
@@ -198,7 +194,6 @@ func (c *ApiClient) ExecGetGroupmsgTaskExternalcontact(req ReqGetGroupmsgTaskExt
 
 // ReqGetGroupmsgSendResultExternalcontact 获取企业群发成员执行结果请求
 // 文档：https://developer.work.weixin.qq.com/document/path/93338#获取企业群发成员执行结果
-
 type ReqGetGroupmsgSendResultExternalcontact struct {
 	Cursor string `json:"cursor"`
 	Limit  int    `json:"limit"`
@@ -218,7 +213,6 @@ func (x ReqGetGroupmsgSendResultExternalcontact) intoBody() ([]byte, error) {
 
 // RespGetGroupmsgSendResultExternalcontact 获取企业群发成员执行结果响应
 // 文档：https://developer.work.weixin.qq.com/document/path/93338#获取企业群发成员执行结果
-
 type RespGetGroupmsgSendResultExternalcontact struct {
 	CommonResp
 	// NextCursor 分页游标，再下次请求时填写以获取之后分页的记录，如果已经没有更多的数据则返回空
@@ -247,7 +241,7 @@ func (x RespGetGroupmsgSendResultExternalcontact) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetGroupmsgSendResultExternalcontact 获取企业群发成员执行结果
+// ExecGetGroupmsgSendResultExternalcontact 获取企业群发成员执行结果
 // 文档：https://developer.work.weixin.qq.com/document/path/93338#获取企业群发成员执行结果
 func (c *ApiClient) ExecGetGroupmsgSendResultExternalcontact(req ReqGetGroupmsgSendResultExternalcontact) (RespGetGroupmsgSendResultExternalcontact, error) {
 	var resp RespGetGroupmsgSendResultExternalcontact

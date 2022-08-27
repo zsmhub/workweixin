@@ -9,7 +9,6 @@ import (
 
 // ReqCheckMemberAuthUser 查询成员用户是否已授权请求
 // 文档：https://developer.work.weixin.qq.com/document/path/94514#查询成员用户是否已授权
-
 type ReqCheckMemberAuthUser struct {
 	// OpenUserid  
 	OpenUserid string `json:"open_userid,omitempty"`
@@ -27,7 +26,6 @@ func (x ReqCheckMemberAuthUser) intoBody() ([]byte, error) {
 
 // RespCheckMemberAuthUser 查询成员用户是否已授权响应
 // 文档：https://developer.work.weixin.qq.com/document/path/94514#查询成员用户是否已授权
-
 type RespCheckMemberAuthUser struct {
 	CommonResp
 	// IsMemberAuth <a href="#30245" rel="nofollow">成员授权模式</a>下，该成员已授权
@@ -44,7 +42,7 @@ func (x RespCheckMemberAuthUser) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execCheckMemberAuthUser 查询成员用户是否已授权
+// ExecCheckMemberAuthUser 查询成员用户是否已授权
 // 文档：https://developer.work.weixin.qq.com/document/path/94514#查询成员用户是否已授权
 func (c *ApiClient) ExecCheckMemberAuthUser(req ReqCheckMemberAuthUser) (RespCheckMemberAuthUser, error) {
 	var resp RespCheckMemberAuthUser

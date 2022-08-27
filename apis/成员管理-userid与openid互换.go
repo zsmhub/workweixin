@@ -9,7 +9,6 @@ import (
 
 // ReqConvertToOpenidUser userid转openid请求
 // 文档：https://developer.work.weixin.qq.com/document/path/90338#userid转openid
-
 type ReqConvertToOpenidUser struct {
 	// Userid 企业内的成员id，必填
 	Userid string `json:"userid"`
@@ -27,7 +26,6 @@ func (x ReqConvertToOpenidUser) intoBody() ([]byte, error) {
 
 // RespConvertToOpenidUser userid转openid响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90338#userid转openid
-
 type RespConvertToOpenidUser struct {
 	CommonResp
 	// Openid 企业微信成员userid对应的openid
@@ -44,7 +42,7 @@ func (x RespConvertToOpenidUser) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execConvertToOpenidUser userid转openid
+// ExecConvertToOpenidUser userid转openid
 // 文档：https://developer.work.weixin.qq.com/document/path/90338#userid转openid
 func (c *ApiClient) ExecConvertToOpenidUser(req ReqConvertToOpenidUser) (RespConvertToOpenidUser, error) {
 	var resp RespConvertToOpenidUser
@@ -60,7 +58,6 @@ func (c *ApiClient) ExecConvertToOpenidUser(req ReqConvertToOpenidUser) (RespCon
 
 // ReqConvertToUseridUser openid转userid请求
 // 文档：https://developer.work.weixin.qq.com/document/path/90338#openid转userid
-
 type ReqConvertToUseridUser struct {
 	// Openid 在使用企业支付之后，返回结果的openid，必填
 	Openid string `json:"openid"`
@@ -78,7 +75,6 @@ func (x ReqConvertToUseridUser) intoBody() ([]byte, error) {
 
 // RespConvertToUseridUser openid转userid响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90338#openid转userid
-
 type RespConvertToUseridUser struct {
 	CommonResp
 	// Userid 该openid在企业微信对应的成员userid
@@ -95,7 +91,7 @@ func (x RespConvertToUseridUser) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execConvertToUseridUser openid转userid
+// ExecConvertToUseridUser openid转userid
 // 文档：https://developer.work.weixin.qq.com/document/path/90338#openid转userid
 func (c *ApiClient) ExecConvertToUseridUser(req ReqConvertToUseridUser) (RespConvertToUseridUser, error) {
 	var resp RespConvertToUseridUser

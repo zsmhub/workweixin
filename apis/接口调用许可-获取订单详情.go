@@ -9,7 +9,6 @@ import (
 
 // ReqGetOrderLicense 获取订单详情请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95648#获取订单详情
-
 type ReqGetOrderLicense struct {
 	// OrderID 订单id，必填
 	OrderID string `json:"order_id"`
@@ -27,7 +26,6 @@ func (x ReqGetOrderLicense) intoBody() ([]byte, error) {
 
 // RespGetOrderLicense 获取订单详情响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95648#获取订单详情
-
 type RespGetOrderLicense struct {
 	CommonResp
 	Order struct {
@@ -68,7 +66,7 @@ func (x RespGetOrderLicense) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetOrderLicense 获取订单详情
+// ExecGetOrderLicense 获取订单详情
 // 文档：https://developer.work.weixin.qq.com/document/path/95648#获取订单详情
 func (c *ApiClient) ExecGetOrderLicense(req ReqGetOrderLicense) (RespGetOrderLicense, error) {
 	var resp RespGetOrderLicense

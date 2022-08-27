@@ -9,7 +9,6 @@ import (
 
 // ReqActiveAccountLicense 激活帐号请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95553#激活帐号
-
 type ReqActiveAccountLicense struct {
 	// ActiveCode 帐号激活码，必填
 	ActiveCode string `json:"active_code"`
@@ -31,7 +30,6 @@ func (x ReqActiveAccountLicense) intoBody() ([]byte, error) {
 
 // RespActiveAccountLicense 激活帐号响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95553#激活帐号
-
 type RespActiveAccountLicense struct {
 	CommonResp
 }
@@ -46,7 +44,7 @@ func (x RespActiveAccountLicense) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execActiveAccountLicense 激活帐号
+// ExecActiveAccountLicense 激活帐号
 // 文档：https://developer.work.weixin.qq.com/document/path/95553#激活帐号
 func (c *ApiClient) ExecActiveAccountLicense(req ReqActiveAccountLicense) (RespActiveAccountLicense, error) {
 	var resp RespActiveAccountLicense
@@ -62,7 +60,6 @@ func (c *ApiClient) ExecActiveAccountLicense(req ReqActiveAccountLicense) (RespA
 
 // ReqBatchActiveAccountLicense 批量激活帐号请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95553#批量激活帐号
-
 type ReqBatchActiveAccountLicense struct {
 	ActiveList []struct {
 		// ActiveCode 帐号激活码，必填
@@ -88,7 +85,6 @@ func (x ReqBatchActiveAccountLicense) intoBody() ([]byte, error) {
 
 // RespBatchActiveAccountLicense 批量激活帐号响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95553#批量激活帐号
-
 type RespBatchActiveAccountLicense struct {
 	ActiveResult []struct {
 		ActiveCode string `json:"active_code"`
@@ -108,7 +104,7 @@ func (x RespBatchActiveAccountLicense) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execBatchActiveAccountLicense 批量激活帐号
+// ExecBatchActiveAccountLicense 批量激活帐号
 // 文档：https://developer.work.weixin.qq.com/document/path/95553#批量激活帐号
 func (c *ApiClient) ExecBatchActiveAccountLicense(req ReqBatchActiveAccountLicense) (RespBatchActiveAccountLicense, error) {
 	var resp RespBatchActiveAccountLicense

@@ -9,7 +9,6 @@ import (
 
 // ReqGetApprovalDetailOa 获取审批申请详情请求
 // 文档：https://developer.work.weixin.qq.com/document/path/92634#获取审批申请详情
-
 type ReqGetApprovalDetailOa struct {
 	// SpNo 审批单编号。，必填
 	SpNo int `json:"sp_no"`
@@ -27,7 +26,6 @@ func (x ReqGetApprovalDetailOa) intoBody() ([]byte, error) {
 
 // RespGetApprovalDetailOa 获取审批申请详情响应
 // 文档：https://developer.work.weixin.qq.com/document/path/92634#获取审批申请详情
-
 type RespGetApprovalDetailOa struct {
 	CommonResp
 	Info struct {

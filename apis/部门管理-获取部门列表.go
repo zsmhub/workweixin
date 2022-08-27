@@ -11,7 +11,6 @@ import (
 
 // ReqListDepartment 获取部门列表请求
 // 文档：https://developer.work.weixin.qq.com/document/path/90344#获取部门列表
-
 type ReqListDepartment struct {
 	// ID 部门id。获取指定部门及其下的子部门（以及子部门的子部门等等，递归）。 如果不填，默认获取全量组织架构
 	ID int `json:"id"`
@@ -20,12 +19,11 @@ type ReqListDepartment struct {
 var _ urlValuer = ReqListDepartment{}
 
 func (x ReqListDepartment) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -34,7 +32,6 @@ func (x ReqListDepartment) intoURLValues() url.Values {
 
 // RespListDepartment 获取部门列表响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90344#获取部门列表
-
 type RespListDepartment struct {
 	Department []struct {
 		// DepartmentLeader 部门负责人的UserID；第三方仅通讯录应用可获取
@@ -63,7 +60,7 @@ func (x RespListDepartment) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execListDepartment 获取部门列表
+// ExecListDepartment 获取部门列表
 // 文档：https://developer.work.weixin.qq.com/document/path/90344#获取部门列表
 func (c *ApiClient) ExecListDepartment(req ReqListDepartment) (RespListDepartment, error) {
 	var resp RespListDepartment

@@ -11,7 +11,6 @@ import (
 
 // ReqDeleteTag 删除标签请求
 // 文档：https://developer.work.weixin.qq.com/document/path/90348#删除标签
-
 type ReqDeleteTag struct {
 	// Tagid 标签ID，必填
 	Tagid int `json:"tagid"`
@@ -20,12 +19,11 @@ type ReqDeleteTag struct {
 var _ urlValuer = ReqDeleteTag{}
 
 func (x ReqDeleteTag) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -34,7 +32,6 @@ func (x ReqDeleteTag) intoURLValues() url.Values {
 
 // RespDeleteTag 删除标签响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90348#删除标签
-
 type RespDeleteTag struct {
 	CommonResp
 }
@@ -49,7 +46,7 @@ func (x RespDeleteTag) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execDeleteTag 删除标签
+// ExecDeleteTag 删除标签
 // 文档：https://developer.work.weixin.qq.com/document/path/90348#删除标签
 func (c *ApiClient) ExecDeleteTag(req ReqDeleteTag) (RespDeleteTag, error) {
 	var resp RespDeleteTag

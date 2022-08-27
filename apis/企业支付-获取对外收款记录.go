@@ -9,7 +9,6 @@ import (
 
 // ReqGetBillListExternalpay 获取对外收款记录请求
 // 文档：https://developer.work.weixin.qq.com/document/path/93727#获取对外收款记录
-
 type ReqGetBillListExternalpay struct {
 	// BeginTime 收款记录开始时间，必填
 	BeginTime int `json:"begin_time"`
@@ -35,7 +34,6 @@ func (x ReqGetBillListExternalpay) intoBody() ([]byte, error) {
 
 // RespGetBillListExternalpay 获取对外收款记录响应
 // 文档：https://developer.work.weixin.qq.com/document/path/93727#获取对外收款记录
-
 type RespGetBillListExternalpay struct {
 	BillList []struct {
 		CommodityList []struct {
@@ -104,7 +102,7 @@ func (x RespGetBillListExternalpay) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetBillListExternalpay 获取对外收款记录
+// ExecGetBillListExternalpay 获取对外收款记录
 // 文档：https://developer.work.weixin.qq.com/document/path/93727#获取对外收款记录
 func (c *ApiClient) ExecGetBillListExternalpay(req ReqGetBillListExternalpay) (RespGetBillListExternalpay, error) {
 	var resp RespGetBillListExternalpay

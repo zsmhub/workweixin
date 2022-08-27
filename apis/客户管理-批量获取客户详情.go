@@ -9,7 +9,6 @@ import (
 
 // ReqGetByUserBatch 批量获取客户详情请求
 // 文档：https://developer.work.weixin.qq.com/document/path/93010#批量获取客户详情
-
 type ReqGetByUserBatch struct {
 	// Cursor 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填
 	Cursor string `json:"cursor"`
@@ -31,7 +30,6 @@ func (x ReqGetByUserBatch) intoBody() ([]byte, error) {
 
 // RespGetByUserBatch 批量获取客户详情响应
 // 文档：https://developer.work.weixin.qq.com/document/path/93010#批量获取客户详情
-
 type RespGetByUserBatch struct {
 	CommonResp
 	ExternalContactList []struct {
@@ -93,7 +91,7 @@ func (x RespGetByUserBatch) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetByUserBatch 批量获取客户详情
+// ExecGetByUserBatch 批量获取客户详情
 // 文档：https://developer.work.weixin.qq.com/document/path/93010#批量获取客户详情
 func (c *ApiClient) ExecGetByUserBatch(req ReqGetByUserBatch) (RespGetByUserBatch, error) {
 	var resp RespGetByUserBatch

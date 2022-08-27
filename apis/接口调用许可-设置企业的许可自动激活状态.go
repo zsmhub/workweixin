@@ -9,7 +9,6 @@ import (
 
 // ReqSetAutoActiveStatusLicense 设置企业的许可自动激活状态请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95873#设置企业的许可自动激活状态
-
 type ReqSetAutoActiveStatusLicense struct {
 	// AutoActiveStatus 许可自动激活状态。0:关闭，1:打开，必填
 	AutoActiveStatus int `json:"auto_active_status"`
@@ -29,7 +28,6 @@ func (x ReqSetAutoActiveStatusLicense) intoBody() ([]byte, error) {
 
 // RespSetAutoActiveStatusLicense 设置企业的许可自动激活状态响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95873#设置企业的许可自动激活状态
-
 type RespSetAutoActiveStatusLicense struct {
 	CommonResp
 }
@@ -44,7 +42,7 @@ func (x RespSetAutoActiveStatusLicense) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execSetAutoActiveStatusLicense 设置企业的许可自动激活状态
+// ExecSetAutoActiveStatusLicense 设置企业的许可自动激活状态
 // 文档：https://developer.work.weixin.qq.com/document/path/95873#设置企业的许可自动激活状态
 func (c *ApiClient) ExecSetAutoActiveStatusLicense(req ReqSetAutoActiveStatusLicense) (RespSetAutoActiveStatusLicense, error) {
 	var resp RespSetAutoActiveStatusLicense

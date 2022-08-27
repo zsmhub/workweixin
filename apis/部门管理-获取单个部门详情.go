@@ -11,7 +11,6 @@ import (
 
 // ReqGetDepartment 获取单个部门详情请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95407#获取单个部门详情
-
 type ReqGetDepartment struct {
 	// ID 部门id，必填
 	ID int `json:"id"`
@@ -20,12 +19,11 @@ type ReqGetDepartment struct {
 var _ urlValuer = ReqGetDepartment{}
 
 func (x ReqGetDepartment) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -34,7 +32,6 @@ func (x ReqGetDepartment) intoURLValues() url.Values {
 
 // RespGetDepartment 获取单个部门详情响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95407#获取单个部门详情
-
 type RespGetDepartment struct {
 	Department struct {
 		// DepartmentLeader 部门负责人的UserID，返回在应用可见范围内的部门负责人列表；第三方仅通讯录应用或者授权了“组织架构信息-应用可获取企业的部门组织架构信息-部门负责人”的第三方应用可获取
@@ -63,7 +60,7 @@ func (x RespGetDepartment) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetDepartment 获取单个部门详情
+// ExecGetDepartment 获取单个部门详情
 // 文档：https://developer.work.weixin.qq.com/document/path/95407#获取单个部门详情
 func (c *ApiClient) ExecGetDepartment(req ReqGetDepartment) (RespGetDepartment, error) {
 	var resp RespGetDepartment

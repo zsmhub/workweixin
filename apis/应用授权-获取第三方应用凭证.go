@@ -9,7 +9,6 @@ import (
 
 // ReqGetSuiteTokenService 获取第三方应用凭证请求
 // 文档：https://developer.work.weixin.qq.com/document/path/90600#获取第三方应用凭证
-
 type ReqGetSuiteTokenService struct {
 	// SuiteID 以ww或wx开头应用id（对应于旧的以tj开头的套件id），必填
 	SuiteID string `json:"suite_id"`
@@ -31,7 +30,6 @@ func (x ReqGetSuiteTokenService) intoBody() ([]byte, error) {
 
 // RespGetSuiteTokenService 获取第三方应用凭证响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90600#获取第三方应用凭证
-
 type RespGetSuiteTokenService struct {
 	CommonResp
 	ExpiresIn        int    `json:"expires_in"`
@@ -48,7 +46,7 @@ func (x RespGetSuiteTokenService) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetSuiteTokenService 获取第三方应用凭证
+// ExecGetSuiteTokenService 获取第三方应用凭证
 // 文档：https://developer.work.weixin.qq.com/document/path/90600#获取第三方应用凭证
 func (c *ApiClient) ExecGetSuiteTokenService(req ReqGetSuiteTokenService) (RespGetSuiteTokenService, error) {
 	var resp RespGetSuiteTokenService

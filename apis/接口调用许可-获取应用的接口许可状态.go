@@ -9,7 +9,6 @@ import (
 
 // ReqGetAppLicenseInfoLicense 获取应用的接口许可状态请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95844#获取应用的接口许可状态
-
 type ReqGetAppLicenseInfoLicense struct {
 	// Appid 旧的多应用套件中的应用id，新开发者请忽略
 	Appid int `json:"appid,omitempty"`
@@ -31,7 +30,6 @@ func (x ReqGetAppLicenseInfoLicense) intoBody() ([]byte, error) {
 
 // RespGetAppLicenseInfoLicense 获取应用的接口许可状态响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95844#获取应用的接口许可状态
-
 type RespGetAppLicenseInfoLicense struct {
 	CommonResp
 	// LicenseStatus license检查开启状态。<br/>0:未开启license检查状态（<a href="#38519" rel="nofollow">未迁移的历史授权应用</a>一般是这种状态） <br/>1:已开启license检查状态。若开启且已过试用期，则需要为企业购买license帐号才可以使用
@@ -54,7 +52,7 @@ func (x RespGetAppLicenseInfoLicense) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetAppLicenseInfoLicense 获取应用的接口许可状态
+// ExecGetAppLicenseInfoLicense 获取应用的接口许可状态
 // 文档：https://developer.work.weixin.qq.com/document/path/95844#获取应用的接口许可状态
 func (c *ApiClient) ExecGetAppLicenseInfoLicense(req ReqGetAppLicenseInfoLicense) (RespGetAppLicenseInfoLicense, error) {
 	var resp RespGetAppLicenseInfoLicense

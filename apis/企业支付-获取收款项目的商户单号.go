@@ -9,7 +9,6 @@ import (
 
 // ReqGetPaymentInfoExternalpay 获取收款项目的商户单号请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95936#获取收款项目的商户单号
-
 type ReqGetPaymentInfoExternalpay struct {
 	// PaymentID 收款项目单号。在<a href="#39955" rel="nofollow">发起对外收款</a>中返回。，必填
 	PaymentID string `json:"payment_id"`
@@ -27,7 +26,6 @@ func (x ReqGetPaymentInfoExternalpay) intoBody() ([]byte, error) {
 
 // RespGetPaymentInfoExternalpay 获取收款项目的商户单号响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95936#获取收款项目的商户单号
-
 type RespGetPaymentInfoExternalpay struct {
 	BillList []struct {
 		OutTradeNo string `json:"out_trade_no"`
@@ -45,7 +43,7 @@ func (x RespGetPaymentInfoExternalpay) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetPaymentInfoExternalpay 获取收款项目的商户单号
+// ExecGetPaymentInfoExternalpay 获取收款项目的商户单号
 // 文档：https://developer.work.weixin.qq.com/document/path/95936#获取收款项目的商户单号
 func (c *ApiClient) ExecGetPaymentInfoExternalpay(req ReqGetPaymentInfoExternalpay) (RespGetPaymentInfoExternalpay, error) {
 	var resp RespGetPaymentInfoExternalpay

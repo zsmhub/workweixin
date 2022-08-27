@@ -11,7 +11,6 @@ import (
 
 // ReqAddGroupWelcomeTemplate 添加入群欢迎语素材请求
 // 文档：https://developer.work.weixin.qq.com/document/path/93438#添加入群欢迎语素材
-
 type ReqAddGroupWelcomeTemplate struct {
 	// Agentid 授权方安装的应用agentid。<strong>仅旧的第三方多应用套件需要填此参数</strong>
 	Agentid     int                                         `json:"agentid,omitempty"`
@@ -28,12 +27,11 @@ type ReqAddGroupWelcomeTemplate struct {
 var _ urlValuer = ReqAddGroupWelcomeTemplate{}
 
 func (x ReqAddGroupWelcomeTemplate) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -42,7 +40,6 @@ func (x ReqAddGroupWelcomeTemplate) intoURLValues() url.Values {
 
 // RespAddGroupWelcomeTemplate 添加入群欢迎语素材响应
 // 文档：https://developer.work.weixin.qq.com/document/path/93438#添加入群欢迎语素材
-
 type RespAddGroupWelcomeTemplate struct {
 	CommonResp
 	// TemplateID 欢迎语素材id
@@ -59,7 +56,7 @@ func (x RespAddGroupWelcomeTemplate) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execAddGroupWelcomeTemplate 添加入群欢迎语素材
+// ExecAddGroupWelcomeTemplate 添加入群欢迎语素材
 // 文档：https://developer.work.weixin.qq.com/document/path/93438#添加入群欢迎语素材
 func (c *ApiClient) ExecAddGroupWelcomeTemplate(req ReqAddGroupWelcomeTemplate) (RespAddGroupWelcomeTemplate, error) {
 	var resp RespAddGroupWelcomeTemplate
@@ -75,7 +72,6 @@ func (c *ApiClient) ExecAddGroupWelcomeTemplate(req ReqAddGroupWelcomeTemplate) 
 
 // ReqEditGroupWelcomeTemplate 编辑入群欢迎语素材请求
 // 文档：https://developer.work.weixin.qq.com/document/path/93438#编辑入群欢迎语素材
-
 type ReqEditGroupWelcomeTemplate struct {
 	// Agentid 授权方安装的应用agentid。<strong>仅旧的第三方多应用套件需要填此参数</strong>
 	Agentid     int                                         `json:"agentid,omitempty"`
@@ -92,12 +88,11 @@ type ReqEditGroupWelcomeTemplate struct {
 var _ urlValuer = ReqEditGroupWelcomeTemplate{}
 
 func (x ReqEditGroupWelcomeTemplate) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -106,7 +101,6 @@ func (x ReqEditGroupWelcomeTemplate) intoURLValues() url.Values {
 
 // RespEditGroupWelcomeTemplate 编辑入群欢迎语素材响应
 // 文档：https://developer.work.weixin.qq.com/document/path/93438#编辑入群欢迎语素材
-
 type RespEditGroupWelcomeTemplate struct {
 	CommonResp
 }
@@ -121,7 +115,7 @@ func (x RespEditGroupWelcomeTemplate) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execEditGroupWelcomeTemplate 编辑入群欢迎语素材
+// ExecEditGroupWelcomeTemplate 编辑入群欢迎语素材
 // 文档：https://developer.work.weixin.qq.com/document/path/93438#编辑入群欢迎语素材
 func (c *ApiClient) ExecEditGroupWelcomeTemplate(req ReqEditGroupWelcomeTemplate) (RespEditGroupWelcomeTemplate, error) {
 	var resp RespEditGroupWelcomeTemplate
@@ -137,7 +131,6 @@ func (c *ApiClient) ExecEditGroupWelcomeTemplate(req ReqEditGroupWelcomeTemplate
 
 // ReqGetGroupWelcomeTemplate 获取入群欢迎语素材请求
 // 文档：https://developer.work.weixin.qq.com/document/path/93438#获取入群欢迎语素材
-
 type ReqGetGroupWelcomeTemplate struct {
 	// TemplateID 群欢迎语的素材id，必填
 	TemplateID string `json:"template_id"`
@@ -146,12 +139,11 @@ type ReqGetGroupWelcomeTemplate struct {
 var _ urlValuer = ReqGetGroupWelcomeTemplate{}
 
 func (x ReqGetGroupWelcomeTemplate) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -160,7 +152,6 @@ func (x ReqGetGroupWelcomeTemplate) intoURLValues() url.Values {
 
 // RespGetGroupWelcomeTemplate 获取入群欢迎语素材响应
 // 文档：https://developer.work.weixin.qq.com/document/path/93438#获取入群欢迎语素材
-
 type RespGetGroupWelcomeTemplate struct {
 	CommonResp
 	File        ReqSendWelcomeMsgExternalcontactFile        `json:"file"`
@@ -181,7 +172,7 @@ func (x RespGetGroupWelcomeTemplate) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetGroupWelcomeTemplate 获取入群欢迎语素材
+// ExecGetGroupWelcomeTemplate 获取入群欢迎语素材
 // 文档：https://developer.work.weixin.qq.com/document/path/93438#获取入群欢迎语素材
 func (c *ApiClient) ExecGetGroupWelcomeTemplate(req ReqGetGroupWelcomeTemplate) (RespGetGroupWelcomeTemplate, error) {
 	var resp RespGetGroupWelcomeTemplate
@@ -197,7 +188,6 @@ func (c *ApiClient) ExecGetGroupWelcomeTemplate(req ReqGetGroupWelcomeTemplate) 
 
 // ReqDelGroupWelcomeTemplate 删除入群欢迎语素材请求
 // 文档：https://developer.work.weixin.qq.com/document/path/93438#删除入群欢迎语素材
-
 type ReqDelGroupWelcomeTemplate struct {
 	// Agentid 授权方安装的应用agentid。<strong>仅旧的第三方多应用套件需要填此参数</strong>
 	Agentid int `json:"agentid,omitempty"`
@@ -208,12 +198,11 @@ type ReqDelGroupWelcomeTemplate struct {
 var _ urlValuer = ReqDelGroupWelcomeTemplate{}
 
 func (x ReqDelGroupWelcomeTemplate) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -222,7 +211,6 @@ func (x ReqDelGroupWelcomeTemplate) intoURLValues() url.Values {
 
 // RespDelGroupWelcomeTemplate 删除入群欢迎语素材响应
 // 文档：https://developer.work.weixin.qq.com/document/path/93438#删除入群欢迎语素材
-
 type RespDelGroupWelcomeTemplate struct {
 	CommonResp
 }
@@ -237,7 +225,7 @@ func (x RespDelGroupWelcomeTemplate) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execDelGroupWelcomeTemplate 删除入群欢迎语素材
+// ExecDelGroupWelcomeTemplate 删除入群欢迎语素材
 // 文档：https://developer.work.weixin.qq.com/document/path/93438#删除入群欢迎语素材
 func (c *ApiClient) ExecDelGroupWelcomeTemplate(req ReqDelGroupWelcomeTemplate) (RespDelGroupWelcomeTemplate, error) {
 	var resp RespDelGroupWelcomeTemplate

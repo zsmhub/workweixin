@@ -9,7 +9,6 @@ import (
 
 // ReqListSelectedTicketUserUser 成获取选人ticket对应的用户请求
 // 文档：https://developer.work.weixin.qq.com/document/path/94894#成获取选人ticket对应的用户
-
 type ReqListSelectedTicketUserUser struct {
 	// SelectedTicket <a href="#30288" rel="nofollow">选人jsapi返回的selectedTicket</a>，必填
 	SelectedTicket string `json:"selected_ticket"`
@@ -27,7 +26,6 @@ func (x ReqListSelectedTicketUserUser) intoBody() ([]byte, error) {
 
 // RespListSelectedTicketUserUser 成获取选人ticket对应的用户响应
 // 文档：https://developer.work.weixin.qq.com/document/path/94894#成获取选人ticket对应的用户
-
 type RespListSelectedTicketUserUser struct {
 	CommonResp
 	// OpenUseridList 此次选人操作中，在应用可见范围内的open_userid列表
@@ -50,7 +48,7 @@ func (x RespListSelectedTicketUserUser) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execListSelectedTicketUserUser 成获取选人ticket对应的用户
+// ExecListSelectedTicketUserUser 成获取选人ticket对应的用户
 // 文档：https://developer.work.weixin.qq.com/document/path/94894#成获取选人ticket对应的用户
 func (c *ApiClient) ExecListSelectedTicketUserUser(req ReqListSelectedTicketUserUser) (RespListSelectedTicketUserUser, error) {
 	var resp RespListSelectedTicketUserUser

@@ -110,7 +110,6 @@ func (x ReqSentMessageCard) intoBody() ([]byte, error) {
 
 // RespSentMessage 接口定义响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90372#接口定义
-
 type RespSentMessageCard struct {
 	CommonResp
 	InvalidUser  string `json:"invaliduser"`   // 不合法的userid

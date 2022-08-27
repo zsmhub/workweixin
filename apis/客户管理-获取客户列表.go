@@ -11,7 +11,6 @@ import (
 
 // ReqListExternalcontact 获取客户列表请求
 // 文档：https://developer.work.weixin.qq.com/document/path/92264#获取客户列表
-
 type ReqListExternalcontact struct {
 	// Userid 企业成员的userid，必填
 	Userid string `json:"userid"`
@@ -20,12 +19,11 @@ type ReqListExternalcontact struct {
 var _ urlValuer = ReqListExternalcontact{}
 
 func (x ReqListExternalcontact) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -34,7 +32,6 @@ func (x ReqListExternalcontact) intoURLValues() url.Values {
 
 // RespListExternalcontact 获取客户列表响应
 // 文档：https://developer.work.weixin.qq.com/document/path/92264#获取客户列表
-
 type RespListExternalcontact struct {
 	CommonResp
 	ExternalUserid []string `json:"external_userid"`
@@ -50,7 +47,7 @@ func (x RespListExternalcontact) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execListExternalcontact 获取客户列表
+// ExecListExternalcontact 获取客户列表
 // 文档：https://developer.work.weixin.qq.com/document/path/92264#获取客户列表
 func (c *ApiClient) ExecListExternalcontact(req ReqListExternalcontact) (RespListExternalcontact, error) {
 	var resp RespListExternalcontact

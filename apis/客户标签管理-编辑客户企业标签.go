@@ -9,7 +9,6 @@ import (
 
 // ReqMarkTagExternalcontact 编辑客户企业标签请求
 // 文档：https://developer.work.weixin.qq.com/document/path/92697#编辑客户企业标签
-
 type ReqMarkTagExternalcontact struct {
 	// AddTag 要标记的标签列表
 	AddTag []string `json:"add_tag,omitempty"`
@@ -33,7 +32,6 @@ func (x ReqMarkTagExternalcontact) intoBody() ([]byte, error) {
 
 // RespMarkTagExternalcontact 编辑客户企业标签响应
 // 文档：https://developer.work.weixin.qq.com/document/path/92697#编辑客户企业标签
-
 type RespMarkTagExternalcontact struct {
 	CommonResp
 }
@@ -48,7 +46,7 @@ func (x RespMarkTagExternalcontact) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execMarkTagExternalcontact 编辑客户企业标签
+// ExecMarkTagExternalcontact 编辑客户企业标签
 // 文档：https://developer.work.weixin.qq.com/document/path/92697#编辑客户企业标签
 func (c *ApiClient) ExecMarkTagExternalcontact(req ReqMarkTagExternalcontact) (RespMarkTagExternalcontact, error) {
 	var resp RespMarkTagExternalcontact

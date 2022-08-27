@@ -9,7 +9,6 @@ import (
 
 // ReqListOrderLicense 获取订单列表请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95647#获取订单列表
-
 type ReqListOrderLicense struct {
 	// Corpid 企业id，只支持加密的corpid。若指定corpid且corpid为服务商测试企业，则返回的订单列表为测试订单列表。否则只返回正式订单列表
 	Corpid string `json:"corpid,omitempty"`
@@ -35,7 +34,6 @@ func (x ReqListOrderLicense) intoBody() ([]byte, error) {
 
 // RespListOrderLicense 获取订单列表响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95647#获取订单列表
-
 type RespListOrderLicense struct {
 	CommonResp
 	// HasMore 是否结束
@@ -60,7 +58,7 @@ func (x RespListOrderLicense) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execListOrderLicense 获取订单列表
+// ExecListOrderLicense 获取订单列表
 // 文档：https://developer.work.weixin.qq.com/document/path/95647#获取订单列表
 func (c *ApiClient) ExecListOrderLicense(req ReqListOrderLicense) (RespListOrderLicense, error) {
 	var resp RespListOrderLicense

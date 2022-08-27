@@ -9,7 +9,6 @@ import (
 
 // ReqCorpidToOpencorpidService 1.4 corpid转换请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95327#1.4 corpid转换
-
 type ReqCorpidToOpencorpidService struct {
 	// Corpid 待获取的企业ID，必填
 	Corpid string `json:"corpid"`
@@ -27,7 +26,6 @@ func (x ReqCorpidToOpencorpidService) intoBody() ([]byte, error) {
 
 // RespCorpidToOpencorpidService 1.4 corpid转换响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95327#1.4 corpid转换
-
 type RespCorpidToOpencorpidService struct {
 	CommonResp
 	OpenCorpid string `json:"open_corpid"`
@@ -43,7 +41,7 @@ func (x RespCorpidToOpencorpidService) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execCorpidToOpencorpidService 1.4 corpid转换
+// ExecCorpidToOpencorpidService 1.4 corpid转换
 // 文档：https://developer.work.weixin.qq.com/document/path/95327#1.4 corpid转换
 func (c *ApiClient) ExecCorpidToOpencorpidService(req ReqCorpidToOpencorpidService) (RespCorpidToOpencorpidService, error) {
 	var resp RespCorpidToOpencorpidService
@@ -95,7 +93,7 @@ func (x RespUseridToOpenuseridBatch) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execUseridToOpenuseridBatch 2.4 userid的转换
+// ExecUseridToOpenuseridBatch 2.4 userid的转换
 // 文档：https://developer.work.weixin.qq.com/document/path/95327#2.4 userid的转换
 func (c *ApiClient) ExecUseridToOpenuseridBatch(req ReqUseridToOpenuseridBatch) (RespUseridToOpenuseridBatch, error) {
 	var resp RespUseridToOpenuseridBatch
@@ -111,7 +109,6 @@ func (c *ApiClient) ExecUseridToOpenuseridBatch(req ReqUseridToOpenuseridBatch) 
 
 // 3.3 转换external_userid
 // 文档：https://developer.work.weixin.qq.com/document/path/95327
-
 type ReqGetNewExternalUseridExternalcontact struct {
 	// 旧外部联系人id列表，最多不超过1000个，必填
 	ExternalUseridList []string `json:"external_userid_list"`
@@ -159,7 +156,6 @@ func (c *ApiClient) ExecGetNewExternalUseridExternalcontact(req ReqGetNewExterna
 
 // 3.3 设置迁移完成
 // 文档：https://developer.work.weixin.qq.com/document/path/95327
-
 type ReqFinishExternalUseridMigration struct {
 	// 企业corpid，必填
 	Corpid string `json:"corpid"`
@@ -207,7 +203,6 @@ func (c *ApiClient) ExecFinishExternalUseridMigration(req ReqFinishExternalUseri
 
 // ReqUnionidToExternalUserid3RdExternalcontact 4.2 unionid查询external_userid请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95327#4.2 unionid查询external_userid
-
 type ReqUnionidToExternalUserid3RdExternalcontact struct {
 	// 微信用户的unionid，必填
 	Unionid string `json:"unionid"`
@@ -247,7 +242,7 @@ func (x RespUnionidToExternalUserid3RdExternalcontact) intoBody() ([]byte, error
 	return result, nil
 }
 
-// execUnionidToExternalUserid3RdExternalcontact 4.2 unionid查询external_userid
+// ExecUnionidToExternalUserid3RdExternalcontact 4.2 unionid查询external_userid
 // 文档：https://developer.work.weixin.qq.com/document/path/95327#4.2 unionid查询external_userid
 func (c *ApiClient) ExecUnionidToExternalUserid3RdExternalcontact(req ReqUnionidToExternalUserid3RdExternalcontact) (RespUnionidToExternalUserid3RdExternalcontact, error) {
 	var resp RespUnionidToExternalUserid3RdExternalcontact

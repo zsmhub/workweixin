@@ -7,7 +7,6 @@ import (
 
 // ReqUploadMedia 上传临时素材请求
 // 文档：https://developer.work.weixin.qq.com/document/path/90389#上传临时素材
-
 type ReqUploadMedia struct {
 	// 媒体文件类型，分别有图片（image）、语音（voice）、视频（video），普通文件（file）
 	Type  string `json:"type"`
@@ -18,12 +17,11 @@ var _ mediaUploader = ReqUploadMedia{}
 var _ urlValuer = ReqUploadMedia{}
 
 func (x ReqUploadMedia) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		if v == nil {
 			continue
@@ -56,7 +54,7 @@ func (x RespUploadMedia) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execUploadMedia 上传临时素材
+// ExecUploadMedia 上传临时素材
 // 文档：https://developer.work.weixin.qq.com/document/path/90389#上传临时素材
 func (c *ApiClient) ExecUploadMedia(req ReqUploadMedia) (RespUploadMedia, error) {
 	var resp RespUploadMedia

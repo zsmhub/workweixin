@@ -11,7 +11,6 @@ import (
 
 // ReqSendWelcomeMsgExternalcontact 发送新客户欢迎语请求
 // 文档：https://developer.work.weixin.qq.com/document/path/92599#发送新客户欢迎语
-
 type (
 	ReqSendWelcomeMsgExternalcontactFile struct {
 		// MediaID 图片的media_id，可以通过素材管理接口获得
@@ -81,12 +80,11 @@ type ReqSendWelcomeMsgExternalcontact struct {
 var _ urlValuer = ReqSendWelcomeMsgExternalcontact{}
 
 func (x ReqSendWelcomeMsgExternalcontact) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -95,7 +93,6 @@ func (x ReqSendWelcomeMsgExternalcontact) intoURLValues() url.Values {
 
 // RespSendWelcomeMsgExternalcontact 发送新客户欢迎语响应
 // 文档：https://developer.work.weixin.qq.com/document/path/92599#发送新客户欢迎语
-
 type RespSendWelcomeMsgExternalcontact struct {
 	CommonResp
 }
@@ -110,7 +107,7 @@ func (x RespSendWelcomeMsgExternalcontact) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execSendWelcomeMsgExternalcontact 发送新客户欢迎语
+// ExecSendWelcomeMsgExternalcontact 发送新客户欢迎语
 // 文档：https://developer.work.weixin.qq.com/document/path/92599#发送新客户欢迎语
 func (c *ApiClient) ExecSendWelcomeMsgExternalcontact(req ReqSendWelcomeMsgExternalcontact) (RespSendWelcomeMsgExternalcontact, error) {
 	var resp RespSendWelcomeMsgExternalcontact

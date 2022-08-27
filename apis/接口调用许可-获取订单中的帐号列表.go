@@ -9,7 +9,6 @@ import (
 
 // ReqListOrderAccountLicense 获取订单中的帐号列表请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95649#获取订单中的帐号列表
-
 type ReqListOrderAccountLicense struct {
 	// Cursor 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填
 	Cursor string `json:"cursor,omitempty"`
@@ -31,7 +30,6 @@ func (x ReqListOrderAccountLicense) intoBody() ([]byte, error) {
 
 // RespListOrderAccountLicense 获取订单中的帐号列表响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95649#获取订单中的帐号列表
-
 type RespListOrderAccountLicense struct {
 	AccountList []struct {
 		// ActiveCode 帐号码，订单类型为购买帐号时，返回该字段
@@ -58,7 +56,7 @@ func (x RespListOrderAccountLicense) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execListOrderAccountLicense 获取订单中的帐号列表
+// ExecListOrderAccountLicense 获取订单中的帐号列表
 // 文档：https://developer.work.weixin.qq.com/document/path/95649#获取订单中的帐号列表
 func (c *ApiClient) ExecListOrderAccountLicense(req ReqListOrderAccountLicense) (RespListOrderAccountLicense, error) {
 	var resp RespListOrderAccountLicense

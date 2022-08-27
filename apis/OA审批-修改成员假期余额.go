@@ -9,7 +9,6 @@ import (
 
 // ReqSetoneuserquotaVacation 修改成员假期余额请求
 // 文档：https://developer.work.weixin.qq.com/document/path/94213#修改成员假期余额
-
 type ReqSetoneuserquotaVacation struct {
 	Leftduration int    `json:"leftduration"`
 	Remarks      string `json:"remarks"`
@@ -30,7 +29,6 @@ func (x ReqSetoneuserquotaVacation) intoBody() ([]byte, error) {
 
 // RespSetoneuserquotaVacation 修改成员假期余额响应
 // 文档：https://developer.work.weixin.qq.com/document/path/94213#修改成员假期余额
-
 type RespSetoneuserquotaVacation struct {
 	CommonResp
 }
@@ -45,7 +43,7 @@ func (x RespSetoneuserquotaVacation) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execSetoneuserquotaVacation 修改成员假期余额
+// ExecSetoneuserquotaVacation 修改成员假期余额
 // 文档：https://developer.work.weixin.qq.com/document/path/94213#修改成员假期余额
 func (c *ApiClient) ExecSetoneuserquotaVacation(req ReqSetoneuserquotaVacation) (RespSetoneuserquotaVacation, error) {
 	var resp RespSetoneuserquotaVacation

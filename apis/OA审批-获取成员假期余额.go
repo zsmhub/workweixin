@@ -9,7 +9,6 @@ import (
 
 // ReqGetuservacationquotaVacation 获取成员假期余额请求
 // 文档：https://developer.work.weixin.qq.com/document/path/94212#获取成员假期余额
-
 type ReqGetuservacationquotaVacation struct {
 	Userid string `json:"userid"`
 }
@@ -26,7 +25,6 @@ func (x ReqGetuservacationquotaVacation) intoBody() ([]byte, error) {
 
 // RespGetuservacationquotaVacation 获取成员假期余额响应
 // 文档：https://developer.work.weixin.qq.com/document/path/94212#获取成员假期余额
-
 type RespGetuservacationquotaVacation struct {
 	CommonResp
 	Lists []struct {
@@ -48,7 +46,7 @@ func (x RespGetuservacationquotaVacation) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetuservacationquotaVacation 获取成员假期余额
+// ExecGetuservacationquotaVacation 获取成员假期余额
 // 文档：https://developer.work.weixin.qq.com/document/path/94212#获取成员假期余额
 func (c *ApiClient) ExecGetuservacationquotaVacation(req ReqGetuservacationquotaVacation) (RespGetuservacationquotaVacation, error) {
 	var resp RespGetuservacationquotaVacation

@@ -11,7 +11,6 @@ import (
 
 // ReqGetTag 获取标签成员请求
 // 文档：https://developer.work.weixin.qq.com/document/path/90349#获取标签成员
-
 type ReqGetTag struct {
 	// Tagid 标签ID，必填
 	Tagid int `json:"tagid"`
@@ -20,12 +19,11 @@ type ReqGetTag struct {
 var _ urlValuer = ReqGetTag{}
 
 func (x ReqGetTag) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -34,7 +32,6 @@ func (x ReqGetTag) intoURLValues() url.Values {
 
 // RespGetTag 获取标签成员响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90349#获取标签成员
-
 type RespGetTag struct {
 	CommonResp
 	// Partylist 标签中包含的部门id列表
@@ -59,7 +56,7 @@ func (x RespGetTag) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetTag 获取标签成员
+// ExecGetTag 获取标签成员
 // 文档：https://developer.work.weixin.qq.com/document/path/90349#获取标签成员
 func (c *ApiClient) ExecGetTag(req ReqGetTag) (RespGetTag, error) {
 	var resp RespGetTag

@@ -9,7 +9,6 @@ import (
 
 // ReqGetAuthInfoService 获取企业授权信息请求
 // 文档：https://developer.work.weixin.qq.com/document/path/90604#获取企业授权信息
-
 type ReqGetAuthInfoService struct {
 	// AuthCorpid 授权方corpid，必填
 	AuthCorpid string `json:"auth_corpid"`
@@ -29,7 +28,6 @@ func (x ReqGetAuthInfoService) intoBody() ([]byte, error) {
 
 // RespGetAuthInfoService 获取企业授权信息响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90604#获取企业授权信息
-
 type RespGetAuthInfoService struct {
 	AuthCorpInfo   AuthCorpInfo   `json:"auth_corp_info"`
 	AuthInfo       AuthInfo       `json:"auth_info"`
@@ -47,7 +45,7 @@ func (x RespGetAuthInfoService) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetAuthInfoService 获取企业授权信息
+// ExecGetAuthInfoService 获取企业授权信息
 // 文档：https://developer.work.weixin.qq.com/document/path/90604#获取企业授权信息
 func (c *ApiClient) ExecGetAuthInfoService(req ReqGetAuthInfoService) (RespGetAuthInfoService, error) {
 	var resp RespGetAuthInfoService

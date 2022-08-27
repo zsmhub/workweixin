@@ -9,7 +9,6 @@ import (
 
 // ReqGetProviderTokenService 获取服务商凭证请求
 // 文档：https://developer.work.weixin.qq.com/document/path/91200#获取服务商凭证
-
 type ReqGetProviderTokenService struct {
 	// Corpid 服务商的corpid，必填
 	Corpid string `json:"corpid"`
@@ -29,7 +28,6 @@ func (x ReqGetProviderTokenService) intoBody() ([]byte, error) {
 
 // RespGetProviderTokenService 获取服务商凭证响应
 // 文档：https://developer.work.weixin.qq.com/document/path/91200#获取服务商凭证
-
 type RespGetProviderTokenService struct {
 	CommonResp
 
@@ -47,7 +45,7 @@ func (x RespGetProviderTokenService) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetProviderTokenService 获取服务商凭证
+// ExecGetProviderTokenService 获取服务商凭证
 // 文档：https://developer.work.weixin.qq.com/document/path/91200#获取服务商凭证
 func (c *ApiClient) ExecGetProviderTokenService(req ReqGetProviderTokenService) (RespGetProviderTokenService, error) {
 	var resp RespGetProviderTokenService

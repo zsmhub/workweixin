@@ -6,8 +6,7 @@ import (
 
 // 文档：https://developer.work.weixin.qq.com/document/path/95153
 
-type ReqGetCorpQualification struct {
-}
+type ReqGetCorpQualification struct{}
 
 var _ bodyer = ReqGetCorpQualification{}
 
@@ -21,7 +20,7 @@ func (x ReqGetCorpQualification) intoBody() ([]byte, error) {
 
 type RespGetCorpQualification struct {
 	CommonResp
-	WechatChannelsBinding bool `json:"wechat_channels_binding"`
+	WechatChannelsBinding bool `json:"wechat_channels_binding"` // 当企业具有绑定成功的视频号时，返回true，否则返回false。
 }
 
 var _ bodyer = RespGetCorpQualification{}

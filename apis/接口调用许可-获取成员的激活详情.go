@@ -9,7 +9,6 @@ import (
 
 // ReqGetActiveInfoByUserLicense 获取成员的激活详情请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95555#获取成员的激活详情
-
 type ReqGetActiveInfoByUserLicense struct {
 	// Corpid 企业corpid，只支持加密的corpid，必填
 	Corpid string `json:"corpid"`
@@ -29,7 +28,6 @@ func (x ReqGetActiveInfoByUserLicense) intoBody() ([]byte, error) {
 
 // RespGetActiveInfoByUserLicense 获取成员的激活详情响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95555#获取成员的激活详情
-
 type RespGetActiveInfoByUserLicense struct {
 	ActiveInfoList []struct {
 		// ActiveCode 帐号激活码
@@ -58,7 +56,7 @@ func (x RespGetActiveInfoByUserLicense) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetActiveInfoByUserLicense 获取成员的激活详情
+// ExecGetActiveInfoByUserLicense 获取成员的激活详情
 // 文档：https://developer.work.weixin.qq.com/document/path/95555#获取成员的激活详情
 func (c *ApiClient) ExecGetActiveInfoByUserLicense(req ReqGetActiveInfoByUserLicense) (RespGetActiveInfoByUserLicense, error) {
 	var resp RespGetActiveInfoByUserLicense

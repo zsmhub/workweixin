@@ -11,7 +11,6 @@ import (
 
 // ReqSimplelistDepartment 获取子部门ID列表请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95406#获取子部门ID列表
-
 type ReqSimplelistDepartment struct {
 	// ID 部门id。获取指定部门及其下的子部门（以及子部门的子部门等等，递归）。 如果不填，默认获取全量组织架构
 	ID int `json:"id"`
@@ -20,12 +19,11 @@ type ReqSimplelistDepartment struct {
 var _ urlValuer = ReqSimplelistDepartment{}
 
 func (x ReqSimplelistDepartment) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -34,7 +32,6 @@ func (x ReqSimplelistDepartment) intoURLValues() url.Values {
 
 // RespSimplelistDepartment 获取子部门ID列表响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95406#获取子部门ID列表
-
 type RespSimplelistDepartment struct {
 	DepartmentID []struct {
 		// ID 创建的部门id
@@ -57,7 +54,7 @@ func (x RespSimplelistDepartment) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execSimplelistDepartment 获取子部门ID列表
+// ExecSimplelistDepartment 获取子部门ID列表
 // 文档：https://developer.work.weixin.qq.com/document/path/95406#获取子部门ID列表
 func (c *ApiClient) ExecSimplelistDepartment(req ReqSimplelistDepartment) (RespSimplelistDepartment, error) {
 	var resp RespSimplelistDepartment

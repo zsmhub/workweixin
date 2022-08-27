@@ -11,7 +11,6 @@ import (
 
 // ReqGetUser 读取成员请求
 // 文档：https://developer.work.weixin.qq.com/document/path/90332#读取成员
-
 type ReqGetUser struct {
 	// Userid 成员UserID。对应管理端的帐号，企业内必须唯一。不区分大小写，长度为1~64个字节，必填
 	Userid string `json:"userid"`
@@ -20,12 +19,11 @@ type ReqGetUser struct {
 var _ urlValuer = ReqGetUser{}
 
 func (x ReqGetUser) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -34,7 +32,6 @@ func (x ReqGetUser) intoURLValues() url.Values {
 
 // RespGetUser 读取成员响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90332#读取成员
-
 type RespGetUser struct {
 	Address    string `json:"address"`
 	Alias      string `json:"alias"`
@@ -104,7 +101,7 @@ func (x RespGetUser) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetUser 读取成员
+// ExecGetUser 读取成员
 // 文档：https://developer.work.weixin.qq.com/document/path/90332#读取成员
 func (c *ApiClient) ExecGetUser(req ReqGetUser) (RespGetUser, error) {
 	var resp RespGetUser

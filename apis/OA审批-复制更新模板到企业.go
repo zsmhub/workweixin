@@ -9,7 +9,6 @@ import (
 
 // ReqCopyTemplateApproval 复制/更新模板到企业请求
 // 文档：https://developer.work.weixin.qq.com/document/path/92630#复制/更新模板到企业
-
 type ReqCopyTemplateApproval struct {
 	// 服务商审批模板的唯一标识id。可在“获取审批单据详情”、“审批状态变化回调通知”中获得，也可在服务商后台-应用管理-审批模板的模板编辑页面中获得。
 	OpenTemplateId string `json:"open_template_id"`
@@ -27,7 +26,6 @@ func (x ReqCopyTemplateApproval) intoBody() ([]byte, error) {
 
 // RespCopyTemplateApproval 复制/更新模板到企业响应
 // 文档：https://developer.work.weixin.qq.com/document/path/92630#复制/更新模板到企业
-
 type RespCopyTemplateApproval struct {
 	CommonResp
 	// 服务商审批模板的唯一标识id。可在“获取审批单据详情”、“审批状态变化回调通知”中获得，也可在服务商后台-应用管理-审批模板的模板编辑页面中获得。

@@ -11,7 +11,6 @@ import (
 
 // ReqGetAgent 获取指定的应用详情请求
 // 文档：https://developer.work.weixin.qq.com/document/path/90363#获取指定的应用详情
-
 type ReqGetAgent struct {
 	// Agentid 应用id，必填
 	Agentid int `json:"agentid"`
@@ -20,12 +19,11 @@ type ReqGetAgent struct {
 var _ urlValuer = ReqGetAgent{}
 
 func (x ReqGetAgent) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -34,7 +32,6 @@ func (x ReqGetAgent) intoURLValues() url.Values {
 
 // RespGetAgent 获取指定的应用详情响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90363#获取指定的应用详情
-
 type RespGetAgent struct {
 	// Agentid 企业应用id
 	Agentid     int `json:"agentid"`
@@ -80,7 +77,7 @@ func (x RespGetAgent) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetAgent 获取指定的应用详情
+// ExecGetAgent 获取指定的应用详情
 // 文档：https://developer.work.weixin.qq.com/document/path/90363#获取指定的应用详情
 func (c *ApiClient) ExecGetAgent(req ReqGetAgent) (RespGetAgent, error) {
 	var resp RespGetAgent
@@ -96,18 +93,16 @@ func (c *ApiClient) ExecGetAgent(req ReqGetAgent) (RespGetAgent, error) {
 
 // ReqListAgent 获取access_token对应的应用列表请求
 // 文档：https://developer.work.weixin.qq.com/document/path/90363#获取access_token对应的应用列表
-
 type ReqListAgent struct{}
 
 var _ urlValuer = ReqListAgent{}
 
 func (x ReqListAgent) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -116,7 +111,6 @@ func (x ReqListAgent) intoURLValues() url.Values {
 
 // RespListAgent 获取access_token对应的应用列表响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90363#获取access_token对应的应用列表
-
 type RespListAgent struct {
 	Agentlist []struct {
 		Agentid       int    `json:"agentid"`
@@ -136,7 +130,7 @@ func (x RespListAgent) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execListAgent 获取access_token对应的应用列表
+// ExecListAgent 获取access_token对应的应用列表
 // 文档：https://developer.work.weixin.qq.com/document/path/90363#获取access_token对应的应用列表
 func (c *ApiClient) ExecListAgent(req ReqListAgent) (RespListAgent, error) {
 	var resp RespListAgent

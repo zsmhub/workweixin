@@ -9,7 +9,6 @@ import (
 
 // ReqSetSessionInfoService 设置授权配置请求
 // 文档：https://developer.work.weixin.qq.com/document/path/90602#设置授权配置
-
 type ReqSetSessionInfoService struct {
 	// PreAuthCode 预授权码，必填
 	PreAuthCode string `json:"pre_auth_code"`
@@ -33,7 +32,6 @@ func (x ReqSetSessionInfoService) intoBody() ([]byte, error) {
 
 // RespSetSessionInfoService 设置授权配置响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90602#设置授权配置
-
 type RespSetSessionInfoService struct {
 	CommonResp
 }
@@ -48,7 +46,7 @@ func (x RespSetSessionInfoService) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execSetSessionInfoService 设置授权配置
+// ExecSetSessionInfoService 设置授权配置
 // 文档：https://developer.work.weixin.qq.com/document/path/90602#设置授权配置
 func (c *ApiClient) ExecSetSessionInfoService(req ReqSetSessionInfoService) (RespSetSessionInfoService, error) {
 	var resp RespSetSessionInfoService

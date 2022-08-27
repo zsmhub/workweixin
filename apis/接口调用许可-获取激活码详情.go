@@ -9,7 +9,6 @@ import (
 
 // ReqGetActiveInfoByCodeLicense 获取激活码详情请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95552#获取激活码详情
-
 type ReqGetActiveInfoByCodeLicense struct {
 	// ActiveCode 激活码，必填
 	ActiveCode string `json:"active_code"`
@@ -29,7 +28,6 @@ func (x ReqGetActiveInfoByCodeLicense) intoBody() ([]byte, error) {
 
 // RespGetActiveInfoByCodeLicense 获取激活码详情响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95552#获取激活码详情
-
 type RespGetActiveInfoByCodeLicense struct {
 	ActiveInfo struct {
 		// ActiveCode 帐号激活码
@@ -66,7 +64,7 @@ func (x RespGetActiveInfoByCodeLicense) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetActiveInfoByCodeLicense 获取激活码详情
+// ExecGetActiveInfoByCodeLicense 获取激活码详情
 // 文档：https://developer.work.weixin.qq.com/document/path/95552#获取激活码详情
 func (c *ApiClient) ExecGetActiveInfoByCodeLicense(req ReqGetActiveInfoByCodeLicense) (RespGetActiveInfoByCodeLicense, error) {
 	var resp RespGetActiveInfoByCodeLicense
@@ -82,7 +80,6 @@ func (c *ApiClient) ExecGetActiveInfoByCodeLicense(req ReqGetActiveInfoByCodeLic
 
 // ReqBatchGetActiveInfoByCodeLicense 批量获取激活码详情请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95552#批量获取激活码详情
-
 type ReqBatchGetActiveInfoByCodeLicense struct {
 	// ActiveCodeList 激活码列表，最多不超过1000个，必填
 	ActiveCodeList []string `json:"active_code_list"`
@@ -102,7 +99,6 @@ func (x ReqBatchGetActiveInfoByCodeLicense) intoBody() ([]byte, error) {
 
 // RespBatchGetActiveInfoByCodeLicense 批量获取激活码详情响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95552#批量获取激活码详情
-
 type RespBatchGetActiveInfoByCodeLicense struct {
 	ActiveInfoList []struct {
 		// ActiveCode 帐号激活码
@@ -140,7 +136,7 @@ func (x RespBatchGetActiveInfoByCodeLicense) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execBatchGetActiveInfoByCodeLicense 批量获取激活码详情
+// ExecBatchGetActiveInfoByCodeLicense 批量获取激活码详情
 // 文档：https://developer.work.weixin.qq.com/document/path/95552#批量获取激活码详情
 func (c *ApiClient) ExecBatchGetActiveInfoByCodeLicense(req ReqBatchGetActiveInfoByCodeLicense) (RespBatchGetActiveInfoByCodeLicense, error) {
 	var resp RespBatchGetActiveInfoByCodeLicense

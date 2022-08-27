@@ -132,7 +132,6 @@ func (x ReqApplyEvent) intoBody() ([]byte, error) {
 
 // RespApplyEvent 提交审批申请
 // 文档：https://developer.work.weixin.qq.com/document/path/92632#提交审批申请
-
 type RespApplyEvent struct {
 	CommonResp
 	SpNo string `json:"sp_no"` // 表单提交成功后，返回的表单编号

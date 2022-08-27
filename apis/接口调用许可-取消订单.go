@@ -9,7 +9,6 @@ import (
 
 // ReqCancelOrderLicense 取消订单请求
 // 文档：https://developer.work.weixin.qq.com/document/path/96106#取消订单
-
 type ReqCancelOrderLicense struct {
 	Corpid  string `json:"corpid"`
 	OrderID string `json:"order_id"`
@@ -27,7 +26,6 @@ func (x ReqCancelOrderLicense) intoBody() ([]byte, error) {
 
 // RespCancelOrderLicense 取消订单响应
 // 文档：https://developer.work.weixin.qq.com/document/path/96106#取消订单
-
 type RespCancelOrderLicense struct {
 	CommonResp
 }
@@ -42,7 +40,7 @@ func (x RespCancelOrderLicense) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execCancelOrderLicense 取消订单
+// ExecCancelOrderLicense 取消订单
 // 文档：https://developer.work.weixin.qq.com/document/path/96106#取消订单
 func (c *ApiClient) ExecCancelOrderLicense(req ReqCancelOrderLicense) (RespCancelOrderLicense, error) {
 	var resp RespCancelOrderLicense

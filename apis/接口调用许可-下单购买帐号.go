@@ -44,7 +44,6 @@ func (x ReqCreateNewOrderLicense) intoBody() ([]byte, error) {
 
 // RespCreateNewOrderLicense 下单购买帐号响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95644#下单购买帐号
-
 type RespCreateNewOrderLicense struct {
 	CommonResp
 	// OrderID 订单号
@@ -61,7 +60,7 @@ func (x RespCreateNewOrderLicense) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execCreateNewOrderLicense 下单购买帐号
+// ExecCreateNewOrderLicense 下单购买帐号
 // 文档：https://developer.work.weixin.qq.com/document/path/95644#下单购买帐号
 func (c *ApiClient) ExecCreateNewOrderLicense(req ReqCreateNewOrderLicense) (RespCreateNewOrderLicense, error) {
 	var resp RespCreateNewOrderLicense

@@ -9,7 +9,6 @@ import (
 
 // ReqUpdateTag 更新标签名字请求
 // 文档：https://developer.work.weixin.qq.com/document/path/90347#更新标签名字
-
 type ReqUpdateTag struct {
 	// Tagid 标签ID，必填
 	Tagid int `json:"tagid"`
@@ -29,7 +28,6 @@ func (x ReqUpdateTag) intoBody() ([]byte, error) {
 
 // RespUpdateTag 更新标签名字响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90347#更新标签名字
-
 type RespUpdateTag struct {
 	CommonResp
 }
@@ -44,7 +42,7 @@ func (x RespUpdateTag) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execUpdateTag 更新标签名字
+// ExecUpdateTag 更新标签名字
 // 文档：https://developer.work.weixin.qq.com/document/path/90347#更新标签名字
 func (c *ApiClient) ExecUpdateTag(req ReqUpdateTag) (RespUpdateTag, error) {
 	var resp RespUpdateTag

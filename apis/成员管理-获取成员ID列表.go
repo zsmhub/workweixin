@@ -9,7 +9,6 @@ import (
 
 // ReqListIdUser 获取成员ID列表请求
 // 文档：https://developer.work.weixin.qq.com/document/path/96021#获取成员ID列表
-
 type ReqListIdUser struct {
 	// Cursor 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用不填
 	Cursor string `json:"cursor,omitempty"`
@@ -48,7 +47,7 @@ func (x RespListIdUser) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execListIdUser 获取成员ID列表
+// ExecListIdUser 获取成员ID列表
 // 文档：https://developer.work.weixin.qq.com/document/path/96021#获取成员ID列表
 func (c *ApiClient) ExecListIdUser(req ReqListIdUser) (RespListIdUser, error) {
 	var resp RespListIdUser

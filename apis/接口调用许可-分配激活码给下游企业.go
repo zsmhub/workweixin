@@ -9,7 +9,6 @@ import (
 
 // ReqBatchShareActiveCodeLicense 分配激活码给下游企业请求
 // 文档：https://developer.work.weixin.qq.com/document/path/96059#分配激活码给下游企业
-
 type ReqBatchShareActiveCodeLicense struct {
 	// FromCorpid 上游企业corpid。支持明文或者密文的corpid，必填
 	FromCorpid string `json:"from_corpid"`
@@ -33,7 +32,6 @@ func (x ReqBatchShareActiveCodeLicense) intoBody() ([]byte, error) {
 
 // RespBatchShareActiveCodeLicense 分配激活码给下游企业响应
 // 文档：https://developer.work.weixin.qq.com/document/path/96059#分配激活码给下游企业
-
 type RespBatchShareActiveCodeLicense struct {
 	// Errcode 错误码说明
 	CommonResp
@@ -57,7 +55,7 @@ func (x RespBatchShareActiveCodeLicense) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execBatchShareActiveCodeLicense 分配激活码给下游企业
+// ExecBatchShareActiveCodeLicense 分配激活码给下游企业
 // 文档：https://developer.work.weixin.qq.com/document/path/96059#分配激活码给下游企业
 func (c *ApiClient) ExecBatchShareActiveCodeLicense(req ReqBatchShareActiveCodeLicense) (RespBatchShareActiveCodeLicense, error) {
 	var resp RespBatchShareActiveCodeLicense

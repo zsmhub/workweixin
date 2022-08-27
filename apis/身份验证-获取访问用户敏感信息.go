@@ -9,7 +9,6 @@ import (
 
 // ReqGetuserdetail3RdService 获取访问用户敏感信息请求
 // 文档：https://developer.work.weixin.qq.com/document/path/91122#获取访问用户敏感信息
-
 type ReqGetuserdetail3RdService struct {
 	// UserTicket 成员票据，必填
 	UserTicket string `json:"user_ticket"`
@@ -27,7 +26,6 @@ func (x ReqGetuserdetail3RdService) intoBody() ([]byte, error) {
 
 // RespGetuserdetail3RdService 获取访问用户敏感信息响应
 // 文档：https://developer.work.weixin.qq.com/document/path/91122#获取访问用户敏感信息
-
 type RespGetuserdetail3RdService struct {
 	Avatar string `json:"avatar"`
 	Corpid string `json:"corpid"`
@@ -48,7 +46,7 @@ func (x RespGetuserdetail3RdService) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetuserdetail3RdService 获取访问用户敏感信息
+// ExecGetuserdetail3RdService 获取访问用户敏感信息
 // 文档：https://developer.work.weixin.qq.com/document/path/91122#获取访问用户敏感信息
 func (c *ApiClient) ExecGetuserdetail3RdService(req ReqGetuserdetail3RdService) (RespGetuserdetail3RdService, error) {
 	var resp RespGetuserdetail3RdService

@@ -11,7 +11,6 @@ import (
 
 // ReqAuthsuccUser 成二次验证请求
 // 文档：https://developer.work.weixin.qq.com/document/path/90339#二次验证
-
 type ReqAuthsuccUser struct {
 	// Userid 成员UserID。对应管理端的帐号，必填
 	Userid string `json:"userid"`
@@ -20,12 +19,11 @@ type ReqAuthsuccUser struct {
 var _ urlValuer = ReqAuthsuccUser{}
 
 func (x ReqAuthsuccUser) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -34,7 +32,6 @@ func (x ReqAuthsuccUser) intoURLValues() url.Values {
 
 // RespAuthsuccUser 成二次验证响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90339#成二次验证
-
 type RespAuthsuccUser struct {
 	CommonResp
 }
@@ -49,7 +46,7 @@ func (x RespAuthsuccUser) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execAuthsuccUser 成二次验证
+// ExecAuthsuccUser 成二次验证
 // 文档：https://developer.work.weixin.qq.com/document/path/90339#成二次验证
 func (c *ApiClient) ExecAuthsuccUser(req ReqAuthsuccUser) (RespAuthsuccUser, error) {
 	var resp RespAuthsuccUser

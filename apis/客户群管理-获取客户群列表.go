@@ -9,7 +9,6 @@ import (
 
 // ReqListGroupchat 获取客户群列表请求
 // 文档：https://developer.work.weixin.qq.com/document/path/93414#获取客户群列表
-
 type (
 	GroupchatOwnerFilter struct {
 		// UseridList 用户ID列表。最多100个
@@ -39,7 +38,6 @@ func (x ReqListGroupchat) intoBody() ([]byte, error) {
 
 // RespListGroupchat 获取客户群列表响应
 // 文档：https://developer.work.weixin.qq.com/document/path/93414#获取客户群列表
-
 type RespListGroupchat struct {
 	CommonResp
 	GroupChatList []struct {
@@ -59,7 +57,7 @@ func (x RespListGroupchat) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execListGroupchat 获取客户群列表
+// ExecListGroupchat 获取客户群列表
 // 文档：https://developer.work.weixin.qq.com/document/path/93414#获取客户群列表
 func (c *ApiClient) ExecListGroupchat(req ReqListGroupchat) (RespListGroupchat, error) {
 	var resp RespListGroupchat

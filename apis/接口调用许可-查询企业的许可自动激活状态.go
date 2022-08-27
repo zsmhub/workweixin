@@ -9,7 +9,6 @@ import (
 
 // ReqGetAutoActiveStatusLicense 查询企业的许可自动激活状态请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95874#查询企业的许可自动激活状态
-
 type ReqGetAutoActiveStatusLicense struct {
 	// Corpid 查询的企业corpid。要求服务商为企业购买过接口许可才有查询结果。，必填
 	Corpid string `json:"corpid"`
@@ -27,7 +26,6 @@ func (x ReqGetAutoActiveStatusLicense) intoBody() ([]byte, error) {
 
 // RespGetAutoActiveStatusLicense 查询企业的许可自动激活状态响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95874#查询企业的许可自动激活状态
-
 type RespGetAutoActiveStatusLicense struct {
 	// AutoActiveStatus 许可自动激活状态。0:关闭，1:打开
 	AutoActiveStatus int `json:"auto_active_status"`
@@ -44,7 +42,7 @@ func (x RespGetAutoActiveStatusLicense) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetAutoActiveStatusLicense 查询企业的许可自动激活状态
+// ExecGetAutoActiveStatusLicense 查询企业的许可自动激活状态
 // 文档：https://developer.work.weixin.qq.com/document/path/95874#查询企业的许可自动激活状态
 func (c *ApiClient) ExecGetAutoActiveStatusLicense(req ReqGetAutoActiveStatusLicense) (RespGetAutoActiveStatusLicense, error) {
 	var resp RespGetAutoActiveStatusLicense

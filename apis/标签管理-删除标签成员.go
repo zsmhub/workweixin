@@ -9,7 +9,6 @@ import (
 
 // ReqDeltagusersTag 删除标签成员请求
 // 文档：https://developer.work.weixin.qq.com/document/path/90351#删除标签成员
-
 type ReqDeltagusersTag struct {
 	// Partylist 企业部门ID列表，注意:userlist、partylist不能同时为空，单次请求长度不超过100
 	Partylist []int `json:"partylist,omitempty"`
@@ -31,7 +30,6 @@ func (x ReqDeltagusersTag) intoBody() ([]byte, error) {
 
 // RespDeltagusersTag 删除标签成员响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90351#删除标签成员
-
 type RespDeltagusersTag struct {
 	CommonResp
 }
@@ -46,7 +44,7 @@ func (x RespDeltagusersTag) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execDeltagusersTag 删除标签成员
+// ExecDeltagusersTag 删除标签成员
 // 文档：https://developer.work.weixin.qq.com/document/path/90351#删除标签成员
 func (c *ApiClient) ExecDeltagusersTag(req ReqDeltagusersTag) (RespDeltagusersTag, error) {
 	var resp RespDeltagusersTag

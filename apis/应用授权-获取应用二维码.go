@@ -9,7 +9,6 @@ import (
 
 // ReqGetAppQrcodeService 获取应用二维码请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95430#获取应用二维码
-
 type ReqGetAppQrcodeService struct {
 	// Appid 第三方应用id，单应用不需要该参数，多应用旧套件才需要传该参数。若不传默认为1
 	Appid int `json:"appid,omitempty"`
@@ -35,7 +34,6 @@ func (x ReqGetAppQrcodeService) intoBody() ([]byte, error) {
 
 // RespGetAppQrcodeService 获取应用二维码响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95430#获取应用二维码
-
 type RespGetAppQrcodeService struct {
 	CommonResp
 	Qrcode string `json:"qrcode"`
@@ -51,7 +49,7 @@ func (x RespGetAppQrcodeService) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetAppQrcodeService 获取应用二维码
+// ExecGetAppQrcodeService 获取应用二维码
 // 文档：https://developer.work.weixin.qq.com/document/path/95430#获取应用二维码
 func (c *ApiClient) ExecGetAppQrcodeService(req ReqGetAppQrcodeService) (RespGetAppQrcodeService, error) {
 	req.ResultType = 2 // 结果返回方式，固定传2，返回二维码图片url

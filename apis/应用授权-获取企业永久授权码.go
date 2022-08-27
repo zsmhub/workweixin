@@ -9,7 +9,6 @@ import (
 
 // ReqGetPermanentCodeService 获取企业永久授权码请求
 // 文档：https://developer.work.weixin.qq.com/document/path/90603#获取企业永久授权码
-
 type ReqGetPermanentCodeService struct {
 	// AuthCode <a href="#10974">临时授权码</a>，会在授权成功时附加在redirect_uri中跳转回第三方服务商网站，或通过<a href="#14951">授权成功通知</a>回调推送给服务商。长度为64至512个字节，必填
 	AuthCode string `json:"auth_code"`
@@ -27,7 +26,6 @@ func (x ReqGetPermanentCodeService) intoBody() ([]byte, error) {
 
 // RespGetPermanentCodeService 获取企业永久授权码响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90603#获取企业永久授权码
-
 type (
 	RespGetPermanentCodeService struct {
 		AccessToken  string       `json:"access_token"`
@@ -107,7 +105,7 @@ func (x RespGetPermanentCodeService) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetPermanentCodeService 获取企业永久授权码
+// ExecGetPermanentCodeService 获取企业永久授权码
 // 文档：https://developer.work.weixin.qq.com/document/path/90603#获取企业永久授权码
 func (c *ApiClient) ExecGetPermanentCodeService(req ReqGetPermanentCodeService) (RespGetPermanentCodeService, error) {
 	var resp RespGetPermanentCodeService

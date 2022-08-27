@@ -9,7 +9,6 @@ import (
 
 // ReqCreateRenewOrderJobLicense 创建续期任务请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95646#创建续期任务
-
 type (
 	ReqCreateRenewOrderJobLicense struct {
 		AccountList []ReqCreateRenewOrderJobLicenseAccountListItem `json:"account_list"` // 续期的帐号列表，每次最多1000个。同一个jobid最多关联1000000个基础账号跟1000000个互通账号，必填
@@ -39,7 +38,6 @@ func (x ReqCreateRenewOrderJobLicense) intoBody() ([]byte, error) {
 
 // RespCreateRenewOrderJobLicense 创建续期任务响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95646#创建续期任务
-
 type RespCreateRenewOrderJobLicense struct {
 	// Errcode 账号不合法相关错误码
 	CommonResp
@@ -65,7 +63,7 @@ func (x RespCreateRenewOrderJobLicense) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execCreateRenewOrderJobLicense 创建续期任务
+// ExecCreateRenewOrderJobLicense 创建续期任务
 // 文档：https://developer.work.weixin.qq.com/document/path/95646#创建续期任务
 func (c *ApiClient) ExecCreateRenewOrderJobLicense(req ReqCreateRenewOrderJobLicense) (RespCreateRenewOrderJobLicense, error) {
 	var resp RespCreateRenewOrderJobLicense
@@ -81,7 +79,6 @@ func (c *ApiClient) ExecCreateRenewOrderJobLicense(req ReqCreateRenewOrderJobLic
 
 // ReqSubmitOrderJobLicense 提交续期订单请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95646#提交续期订单
-
 type ReqSubmitOrderJobLicense struct {
 	AccountDuration struct {
 		// Months 购买的月数，每个月按照31天计算。最多购买36个月。(若企业为服务商测试企业，每次续期只能续期1个月)，必填
@@ -105,7 +102,6 @@ func (x ReqSubmitOrderJobLicense) intoBody() ([]byte, error) {
 
 // RespSubmitOrderJobLicense 提交续期订单响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95646#提交续期订单
-
 type RespSubmitOrderJobLicense struct {
 	CommonResp
 	// OrderID 订单号
@@ -122,7 +118,7 @@ func (x RespSubmitOrderJobLicense) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execSubmitOrderJobLicense 提交续期订单
+// ExecSubmitOrderJobLicense 提交续期订单
 // 文档：https://developer.work.weixin.qq.com/document/path/95646#提交续期订单
 func (c *ApiClient) ExecSubmitOrderJobLicense(req ReqSubmitOrderJobLicense) (RespSubmitOrderJobLicense, error) {
 	var resp RespSubmitOrderJobLicense

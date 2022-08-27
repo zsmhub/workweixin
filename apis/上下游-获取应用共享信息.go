@@ -9,7 +9,6 @@ import (
 
 // ReqListAppShareInfoCorp 获取应用共享信息请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95324#获取应用共享信息
-
 type ReqListAppShareInfoCorp struct {
 	// Agentid 上级/上游企业应用agentid，必填
 	Agentid int `json:"agentid"`
@@ -35,7 +34,6 @@ func (x ReqListAppShareInfoCorp) intoBody() ([]byte, error) {
 
 // RespListAppShareInfoCorp 获取应用共享信息响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95324#获取应用共享信息
-
 type RespListAppShareInfoCorp struct {
 	CorpList []struct {
 		// Agentid 下级/下游企业应用id
@@ -62,7 +60,7 @@ func (x RespListAppShareInfoCorp) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execListAppShareInfoCorp 获取应用共享信息
+// ExecListAppShareInfoCorp 获取应用共享信息
 // 文档：https://developer.work.weixin.qq.com/document/path/95324#获取应用共享信息
 func (c *ApiClient) ExecListAppShareInfoCorp(req ReqListAppShareInfoCorp) (RespListAppShareInfoCorp, error) {
 	var resp RespListAppShareInfoCorp

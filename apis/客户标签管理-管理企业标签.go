@@ -11,7 +11,6 @@ import (
 
 // ReqGetCorpTagListExternalcontact 获取企业标签库请求
 // 文档：https://developer.work.weixin.qq.com/document/path/92696#获取企业标签库
-
 type ReqGetCorpTagListExternalcontact struct {
 	// GroupID 要查询的标签组id，返回该标签组以及其下的所有标签信息
 	GroupID []string `json:"group_id,omitempty"`
@@ -22,21 +21,20 @@ type ReqGetCorpTagListExternalcontact struct {
 var _ urlValuer = ReqGetCorpTagListExternalcontact{}
 
 func (x ReqGetCorpTagListExternalcontact) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
+
 	return ret
 }
 
 // RespGetCorpTagListExternalcontact 获取企业标签库响应
 // 文档：https://developer.work.weixin.qq.com/document/path/92696#获取企业标签库
-
 type RespGetCorpTagListExternalcontact struct {
 	CommonResp
 	TagGroup []struct {
@@ -81,7 +79,7 @@ func (x RespGetCorpTagListExternalcontact) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetCorpTagListExternalcontact 获取企业标签库
+// ExecGetCorpTagListExternalcontact 获取企业标签库
 // 文档：https://developer.work.weixin.qq.com/document/path/92696#获取企业标签库
 func (c *ApiClient) ExecGetCorpTagListExternalcontact(req ReqGetCorpTagListExternalcontact) (RespGetCorpTagListExternalcontact, error) {
 	var resp RespGetCorpTagListExternalcontact
@@ -117,15 +115,15 @@ type ReqAddCorpTagExternalcontact struct {
 var _ urlValuer = ReqAddCorpTagExternalcontact{}
 
 func (x ReqAddCorpTagExternalcontact) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
+
 	return ret
 }
 
@@ -170,7 +168,7 @@ func (x RespAddCorpTagExternalcontact) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execAddCorpTagExternalcontact 添加企业客户标签
+// ExecAddCorpTagExternalcontact 添加企业客户标签
 // 文档：https://developer.work.weixin.qq.com/document/path/92696#添加企业客户标签
 func (c *ApiClient) ExecAddCorpTagExternalcontact(req ReqAddCorpTagExternalcontact) (RespAddCorpTagExternalcontact, error) {
 	var resp RespAddCorpTagExternalcontact
@@ -201,15 +199,15 @@ type ReqEditCorpTagExternalcontact struct {
 var _ urlValuer = ReqEditCorpTagExternalcontact{}
 
 func (x ReqEditCorpTagExternalcontact) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
+
 	return ret
 }
 
@@ -230,7 +228,7 @@ func (x RespEditCorpTagExternalcontact) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execEditCorpTagExternalcontact 编辑企业客户标签
+// ExecEditCorpTagExternalcontact 编辑企业客户标签
 // 文档：https://developer.work.weixin.qq.com/document/path/92696#编辑企业客户标签
 func (c *ApiClient) ExecEditCorpTagExternalcontact(req ReqEditCorpTagExternalcontact) (RespEditCorpTagExternalcontact, error) {
 	var resp RespEditCorpTagExternalcontact
@@ -259,12 +257,11 @@ type ReqDelCorpTagExternalcontact struct {
 var _ urlValuer = ReqDelCorpTagExternalcontact{}
 
 func (x ReqDelCorpTagExternalcontact) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -288,7 +285,7 @@ func (x RespDelCorpTagExternalcontact) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execDelCorpTagExternalcontact 删除企业客户标签
+// ExecDelCorpTagExternalcontact 删除企业客户标签
 // 文档：https://developer.work.weixin.qq.com/document/path/92696#删除企业客户标签
 func (c *ApiClient) ExecDelCorpTagExternalcontact(req ReqDelCorpTagExternalcontact) (RespDelCorpTagExternalcontact, error) {
 	var resp RespDelCorpTagExternalcontact

@@ -9,7 +9,6 @@ import (
 
 // ReqInviteBatch 成邀请成员请求
 // 文档：https://developer.work.weixin.qq.com/document/path/91127#成邀请成员
-
 type ReqInviteBatch struct {
 	User  []string `json:"user"`
 	Party []int    `json:"party"`
@@ -28,7 +27,6 @@ func (x ReqInviteBatch) intoBody() ([]byte, error) {
 
 // RespInviteBatch 成邀请成员响应
 // 文档：https://developer.work.weixin.qq.com/document/path/91127#成邀请成员
-
 type RespInviteBatch struct {
 	CommonResp
 	// 非法成员列表
@@ -49,7 +47,7 @@ func (x RespInviteBatch) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execInviteBatch 成邀请成员
+// ExecInviteBatch 成邀请成员
 // 文档：https://developer.work.weixin.qq.com/document/path/91127#成邀请成员
 func (c *ApiClient) ExecInviteBatch(req ReqInviteBatch) (RespInviteBatch, error) {
 	var resp RespInviteBatch

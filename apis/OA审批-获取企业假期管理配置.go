@@ -11,19 +11,17 @@ import (
 
 // ReqGetcorpconfVacation 获取企业假期管理配置请求
 // 文档：https://developer.work.weixin.qq.com/document/path/94211#获取企业假期管理配置
-
 type ReqGetcorpconfVacation struct {
 }
 
 var _ urlValuer = ReqGetcorpconfVacation{}
 
 func (x ReqGetcorpconfVacation) intoURLValues() url.Values {
-	var ret url.Values = make(map[string][]string)
-
 	var vals map[string]interface{}
 	jsonBytes, _ := json.Marshal(x)
 	_ = json.Unmarshal(jsonBytes, &vals)
 
+	var ret url.Values = make(map[string][]string)
 	for k, v := range vals {
 		ret.Add(k, StrVal(v))
 	}
@@ -32,7 +30,6 @@ func (x ReqGetcorpconfVacation) intoURLValues() url.Values {
 
 // RespGetcorpconfVacation 获取企业假期管理配置响应
 // 文档：https://developer.work.weixin.qq.com/document/path/94211#获取企业假期管理配置
-
 type RespGetcorpconfVacation struct {
 	CommonResp
 	Lists []struct {
@@ -59,7 +56,7 @@ func (x RespGetcorpconfVacation) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetcorpconfVacation 获取企业假期管理配置
+// ExecGetcorpconfVacation 获取企业假期管理配置
 // 文档：https://developer.work.weixin.qq.com/document/path/94211#获取企业假期管理配置
 func (c *ApiClient) ExecGetcorpconfVacation(req ReqGetcorpconfVacation) (RespGetcorpconfVacation, error) {
 	var resp RespGetcorpconfVacation

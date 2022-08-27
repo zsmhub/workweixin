@@ -9,7 +9,6 @@ import (
 
 // ReqGetLoginInfoService 获取登录用户信息请求
 // 文档：https://developer.work.weixin.qq.com/document/path/91125#获取登录用户信息
-
 type ReqGetLoginInfoService struct {
 	// AuthCode oauth2.0授权企业微信管理员登录产生的code，最长为512字节。只能使用一次，5分钟未被使用自动过期，必填
 	AuthCode string `json:"auth_code"`
@@ -27,7 +26,6 @@ func (x ReqGetLoginInfoService) intoBody() ([]byte, error) {
 
 // RespGetLoginInfoService 获取登录用户信息响应
 // 文档：https://developer.work.weixin.qq.com/document/path/91125#获取登录用户信息
-
 type RespGetLoginInfoService struct {
 	CommonResp
 	Usertype int `json:"usertype"`
@@ -62,7 +60,7 @@ func (x RespGetLoginInfoService) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execGetLoginInfoService 获取登录用户信息
+// ExecGetLoginInfoService 获取登录用户信息
 // 文档：https://developer.work.weixin.qq.com/document/path/91125#获取登录用户信息
 func (c *ApiClient) ExecGetLoginInfoService(req ReqGetLoginInfoService) (RespGetLoginInfoService, error) {
 	var resp RespGetLoginInfoService

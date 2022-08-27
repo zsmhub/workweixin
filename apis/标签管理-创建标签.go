@@ -9,7 +9,6 @@ import (
 
 // ReqCreateTag 创建标签请求
 // 文档：https://developer.work.weixin.qq.com/document/path/90346#创建标签
-
 type ReqCreateTag struct {
 	// Tagid 标签id，非负整型，指定此参数时新增的标签会生成对应的标签id，不指定时则以目前最大的id自增。
 	Tagid int `json:"tagid,omitempty"`
@@ -29,7 +28,6 @@ func (x ReqCreateTag) intoBody() ([]byte, error) {
 
 // RespCreateTag 创建标签响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90346#创建标签
-
 type RespCreateTag struct {
 	CommonResp
 	// Tagid 标签id
@@ -46,7 +44,7 @@ func (x RespCreateTag) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execCreateTag 创建标签
+// ExecCreateTag 创建标签
 // 文档：https://developer.work.weixin.qq.com/document/path/90346#创建标签
 func (c *ApiClient) ExecCreateTag(req ReqCreateTag) (RespCreateTag, error) {
 	var resp RespCreateTag

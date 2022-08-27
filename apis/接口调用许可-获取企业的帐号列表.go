@@ -9,7 +9,6 @@ import (
 
 // ReqListActivedAccountLicense 获取企业的帐号列表请求
 // 文档：https://developer.work.weixin.qq.com/document/path/95544#获取企业的帐号列表
-
 type ReqListActivedAccountLicense struct {
 	// Corpid 企业corpid ，只支持加密的corpid，必填
 	Corpid string `json:"corpid"`
@@ -31,7 +30,6 @@ func (x ReqListActivedAccountLicense) intoBody() ([]byte, error) {
 
 // RespListActivedAccountLicense 获取企业的帐号列表响应
 // 文档：https://developer.work.weixin.qq.com/document/path/95544#获取企业的帐号列表
-
 type RespListActivedAccountLicense struct {
 	AccountList []struct {
 		// ActiveTime 激活时间
@@ -60,7 +58,7 @@ func (x RespListActivedAccountLicense) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execListActivedAccountLicense 获取企业的帐号列表
+// ExecListActivedAccountLicense 获取企业的帐号列表
 // 文档：https://developer.work.weixin.qq.com/document/path/95544#获取企业的帐号列表
 func (c *ApiClient) ExecListActivedAccountLicense(req ReqListActivedAccountLicense) (RespListActivedAccountLicense, error) {
 	var resp RespListActivedAccountLicense

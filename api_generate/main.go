@@ -297,7 +297,7 @@ func generateStruct(rawJson string, structName string, subStruct bool, fields []
 	rawCode, err = gojson.Generate(strings.NewReader(rawJson),
 		gojson.ParseJson,
 		structName,
-		"workwx",
+		"apis",
 		[]string{"json"}, subStruct, true,
 	)
 	if err != nil {
@@ -309,7 +309,7 @@ func generateStruct(rawJson string, structName string, subStruct bool, fields []
 	code = string(rawCode)
 	structFieldRegexp := regexp.MustCompile("(\\w+?)([ ]+?)([\\w\\[\\]]+?)([ ]+?)`json:\"(.+?)\"`")
 	allMatches := structFieldRegexp.FindAllStringSubmatch(code, -1)
-	code = strings.Replace(code, "package workwx\n", "", 1)
+	code = strings.Replace(code, "package apis\n\n", "", 1)
 	replacedFields := make(map[string]Field)
 	for _, matches := range allMatches {
 		for _, field := range fields {

@@ -9,7 +9,6 @@ import (
 
 // ReqTransferCustomerExternalcontact 分配在职成员的客户请求
 // 文档：https://developer.work.weixin.qq.com/document/path/94096#分配在职成员的客户
-
 type ReqTransferCustomerExternalcontact struct {
 	// ExternalUserid 客户的external_userid列表，每次最多分配100个客户，必填
 	ExternalUserid []string `json:"external_userid"`
@@ -33,7 +32,6 @@ func (x ReqTransferCustomerExternalcontact) intoBody() ([]byte, error) {
 
 // RespTransferCustomerExternalcontact 分配在职成员的客户响应
 // 文档：https://developer.work.weixin.qq.com/document/path/94096#分配在职成员的客户
-
 type RespTransferCustomerExternalcontact struct {
 	Customer []struct {
 		// Errcode 对此客户进行分配的结果, 具体可参考<a href="#10649" rel="nofollow">全局错误码</a>, <strong>0表示成功发起接替,待24小时后自动接替,并不代表最终接替成功</strong>
@@ -55,7 +53,7 @@ func (x RespTransferCustomerExternalcontact) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execTransferCustomerExternalcontact 在职继承-分配在职成员的客户
+// ExecTransferCustomerExternalcontact 在职继承-分配在职成员的客户
 // 文档：https://developer.work.weixin.qq.com/document/path/94096#分配在职成员的客户
 func (c *ApiClient) ExecTransferCustomerExternalcontact(req ReqTransferCustomerExternalcontact) (RespTransferCustomerExternalcontact, error) {
 	var resp RespTransferCustomerExternalcontact

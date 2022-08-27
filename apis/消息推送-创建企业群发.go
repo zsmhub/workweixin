@@ -9,7 +9,6 @@ import (
 
 // ReqAddMsgTemplateExternalcontact 创建企业群发请求
 // 文档：https://developer.work.weixin.qq.com/document/path/92698#创建企业群发
-
 type (
 	AddMsgTemplateText struct {
 		// Content 消息文本内容，最多4000个<strong>字节</strong>
@@ -88,7 +87,6 @@ func (x ReqAddMsgTemplateExternalcontact) intoBody() ([]byte, error) {
 
 // RespAddMsgTemplateExternalcontact 创建企业群发响应
 // 文档：https://developer.work.weixin.qq.com/document/path/92698#创建企业群发
-
 type RespAddMsgTemplateExternalcontact struct {
 	CommonResp
 	FailList []string `json:"fail_list"`
@@ -105,7 +103,7 @@ func (x RespAddMsgTemplateExternalcontact) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// execAddMsgTemplateExternalcontact 创建企业群发
+// ExecAddMsgTemplateExternalcontact 创建企业群发
 // 文档：https://developer.work.weixin.qq.com/document/path/92698#创建企业群发
 func (c *ApiClient) ExecAddMsgTemplateExternalcontact(req ReqAddMsgTemplateExternalcontact) (RespAddMsgTemplateExternalcontact, error) {
 	var resp RespAddMsgTemplateExternalcontact
