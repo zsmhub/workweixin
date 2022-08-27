@@ -194,7 +194,6 @@ oauthUrl := workweixin.Sdk.ThirdAppClient.GetThirdOauthUrl(apis.GetThirdOauthUrl
 })
 
 // 企微 error code 类型强制转换
-// 企微 error code 类型强制转换
 if err != nil {
     if apiError, ok := err.(*apis.ClientError); ok {
         if apiError.Code == apis.ErrCode60011 {
@@ -264,7 +263,7 @@ func (qyapiRepo) GetJssdkConfig(req form.QyapiGetJssdkConfigReq) (*QyapiGetJssdk
 │   └── api.error.go         全局错误码
 ├── callback_generate        一键生成企微回调事件代码
 ├── callbacks                企业微信回调事件整合
-│   └── callback_constant.go 回调事件定义
+│   └── callback_constant.go 回调事件常量定义
 ├── demo                     sdk调用示例
 ├── docs                     企业微信相关文档
 ├── internal                 第三方库
