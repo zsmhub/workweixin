@@ -24,11 +24,9 @@ func ({{ .StructName }}) GetChangeType() string {
 	return "{{ .ChangeType }}"
 }
 
-
 func (m {{ .StructName }}) GetTypeKey() string {
 	return m.GetMessageType() + ":" + m.GetEventType() + ":" +m.GetChangeType()
 }
-
 
 func ({{ .StructName }}) ParseFromXml(data []byte) (CallBackExtraInfoInterface,error) {
 	var temp {{ .StructName }}
