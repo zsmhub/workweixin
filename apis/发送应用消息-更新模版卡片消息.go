@@ -35,7 +35,6 @@ func (x ReqUpdateTemplateCardMessage) intoBody() ([]byte, error) {
 
 // RespUpdateTemplateCardMessage 接口定义响应
 // 文档：https://developer.work.weixin.qq.com/document/path/94945#更新按钮为不可点击状态
-
 type RespUpdateTemplateCardMessage struct {
 	CommonResp
 }

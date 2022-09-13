@@ -108,7 +108,7 @@ func (x ReqSentMessageCard) intoBody() ([]byte, error) {
 	return byteBuf.Bytes(), nil
 }
 
-// RespSentMessage 接口定义响应
+// RespSentMessageCard 接口定义响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90372#接口定义
 type RespSentMessageCard struct {
 	CommonResp
