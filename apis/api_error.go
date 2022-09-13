@@ -641,8 +641,8 @@ const ErrCode42009 ErrCode = 42009
 // 排查方法: 如果是agentConfig使用，请特别注意是否是使用”[获取应用身份的ticket](https://developer.work.weixin.qq.com/document/path/90313#10029/获取应用的jsapi_ticket)“来获取jsapi_ticket
 const ErrCode42012 ErrCode = 42012
 
-// ErrCode42013 小程序未登陆或登录态已经过期
-// 排查方法: 需要重新走登陆流程
+// ErrCode42013 小程序未登录或登录态已经过期
+// 排查方法: 需要重新走登录流程
 const ErrCode42013 ErrCode = 42013
 
 // ErrCode42014 任务卡片消息的task_id不合法
