@@ -63,10 +63,10 @@ func (c *ApiClient) ExecBatchTransferLicenseLicense(req ReqBatchTransferLicenseL
 	var resp RespBatchTransferLicenseLicense
 	err := c.executeWXApiPost("/cgi-bin/license/batch_transfer_license", req, &resp, true)
 	if err != nil {
-		return RespBatchTransferLicenseLicense{}, err
+		return resp, err
 	}
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
-		return RespBatchTransferLicenseLicense{}, bizErr
+		return resp, bizErr
 	}
 	return resp, nil
 }

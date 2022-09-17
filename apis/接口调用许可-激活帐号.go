@@ -110,10 +110,10 @@ func (c *ApiClient) ExecBatchActiveAccountLicense(req ReqBatchActiveAccountLicen
 	var resp RespBatchActiveAccountLicense
 	err := c.executeWXApiPost("/cgi-bin/license/batch_active_account", req, &resp, true)
 	if err != nil {
-		return RespBatchActiveAccountLicense{}, err
+		return resp, err
 	}
 	if bizErr := resp.TryIntoErr(); bizErr != nil {
-		return RespBatchActiveAccountLicense{}, bizErr
+		return resp, bizErr
 	}
 	return resp, nil
 }
