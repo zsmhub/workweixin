@@ -195,6 +195,7 @@ func (c *ApiClient) getCustomizedAuthCorpToken() (TokenInfo, error) {
 func (c *ApiClient) getJSAPITicket() (TokenInfo, error) {
 	get, err := c.ExecGetJSAPITicket(JsAPITicketReq{})
 	if err != nil {
+		c.logger.Errorf(c.accessTokenName+": corp_id=%s, err=%+v\n", c.CorpId, err)
 		return TokenInfo{}, err
 	}
 	return TokenInfo{Token: get.Ticket, ExpiresIn: time.Duration(get.ExpiresInSecs) * time.Second}, nil
@@ -204,6 +205,7 @@ func (c *ApiClient) getJSAPITicket() (TokenInfo, error) {
 func (c *ApiClient) getJSAPITicketAgentConfig() (TokenInfo, error) {
 	get, err := c.ExecGetJSAPITicketAgentConfig(JsAPITicketAgentConfigReq{})
 	if err != nil {
+		c.logger.Errorf(c.accessTokenName+": corp_id=%s, err=%+v\n", c.CorpId, err)
 		return TokenInfo{}, err
 	}
 	return TokenInfo{Token: get.Ticket, ExpiresIn: time.Duration(get.ExpiresInSecs) * time.Second}, nil
