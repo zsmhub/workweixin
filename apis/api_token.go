@@ -73,9 +73,9 @@ func (c *ApiClient) RemoveToken() {
 	}
 }
 
-func (c *ApiClient) RemoveTokenByHttpClient(httpBody string) {
+func (c *ApiClient) RemoveTokenByHttpClient(httpBody []byte) {
 	var commonResp CommonResp
-	_ = json.Unmarshal([]byte(httpBody), &commonResp)
+	_ = json.Unmarshal(httpBody, &commonResp)
 	if commonResp.IsOK() {
 		return
 	}

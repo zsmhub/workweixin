@@ -3,6 +3,7 @@ package apis
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/valyala/fasthttp"
 	"io"
@@ -250,26 +251,29 @@ func (c *ApiClient) executeWXApiGet(path string, req urlValuer, objResp interfac
 		return err
 	}
 
-	httpBody := httpResp.Body()
-	httpBodyStr := string(httpBody)
+	respBody := httpResp.Body()
+	if len(respBody) == 0 { // 避免 json.Unmarshal 出现 unexpected end of JSON input 错误
+		c.logger.Errorf("请求企微路由=%s, resp=%s, err=返回空响应体", urlStr, string(respBody))
+		return errors.New("http resp body is nil")
+	}
 
 	go func() {
 		defer func() {
 			if err := recover(); err != nil {
-				c.logger.Errorf("path=%s, body=%s, err=%v", path, httpBodyStr, err)
+				c.logger.Errorf("请求企微路由=%s, resp=%s, err=%+v", path, string(respBody), err)
 			}
 		}()
-		c.RemoveTokenByHttpClient(httpBodyStr)
+		c.RemoveTokenByHttpClient(respBody)
 	}()
 
-	return json.Unmarshal(httpBody, &objResp)
+	return json.Unmarshal(respBody, &objResp)
 }
 
 func (c *ApiClient) executeWXApiPost(path string, req bodyer, objResp interface{}, withAccessToken bool) error {
 	wxUrlWithToken := c.composeWXURLWithToken(path, req, withAccessToken)
 	urlStr := wxUrlWithToken.String()
 
-	body, err := req.intoBody()
+	reqBody, err := req.intoBody()
 	if err != nil {
 		return err
 	}
@@ -282,26 +286,29 @@ func (c *ApiClient) executeWXApiPost(path string, req bodyer, objResp interface{
 
 	httpReq.SetRequestURI(urlStr)
 	httpReq.Header.SetContentType("application/json")
-	httpReq.SetBody(body)
+	httpReq.SetBody(reqBody)
 	httpReq.Header.SetMethod(http.MethodPost)
 
 	if err := FastClient.DoTimeout(httpReq, httpResp, HttpTTL); err != nil {
 		return err
 	}
 
-	httpBody := httpResp.Body()
-	httpBodyStr := string(httpBody)
+	respBody := httpResp.Body()
+	if len(respBody) == 0 { // 避免 json.Unmarshal 出现 unexpected end of JSON input 错误
+		c.logger.Errorf("请求企微路由=%s, req=%s, resp=%s, err=返回空响应体", path, string(reqBody), respBody)
+		return errors.New("http resp body is nil")
+	}
 
 	go func() {
 		defer func() {
 			if err := recover(); err != nil {
-				c.logger.Errorf("path=%s, body=%s, err=%v", path, httpBodyStr, err)
+				c.logger.Errorf("请求企微路由=%s, resp=%s, err=%+v", path, string(respBody), err)
 			}
 		}()
-		c.RemoveTokenByHttpClient(httpBodyStr)
+		c.RemoveTokenByHttpClient(respBody)
 	}()
 
-	return json.Unmarshal(httpBody, &objResp)
+	return json.Unmarshal(respBody, &objResp)
 }
 
 func (c *ApiClient) executeWXApiMediaUpload(path string, req mediaUploader, objResp interface{}, withAccessToken bool) error {
@@ -345,17 +352,20 @@ func (c *ApiClient) executeWXApiMediaUpload(path string, req mediaUploader, objR
 		return err
 	}
 
-	httpBody := httpResp.Body()
-	httpBodyStr := string(httpBody)
+	respBody := httpResp.Body()
+	if len(respBody) == 0 { // 避免 json.Unmarshal 出现 unexpected end of JSON input 错误
+		c.logger.Errorf("请求企微路由=%s, resp=%s, err=返回空响应体", urlStr, string(respBody))
+		return errors.New("http resp body is nil")
+	}
 
 	go func() {
 		defer func() {
 			if err := recover(); err != nil {
-				c.logger.Errorf("path=%s, body=%s, err=%v", path, httpBodyStr, err)
+				c.logger.Errorf("请求企微路由=%s, resp=%s, err=%+v", urlStr, string(respBody), err)
 			}
 		}()
-		c.RemoveTokenByHttpClient(httpBodyStr)
+		c.RemoveTokenByHttpClient(respBody)
 	}()
 
-	return json.Unmarshal(httpBody, &objResp)
+	return json.Unmarshal(respBody, &objResp)
 }
