@@ -253,7 +253,7 @@ func (c *ApiClient) executeWXApiGet(path string, req urlValuer, objResp interfac
 
 	respBody := httpResp.Body()
 	if len(respBody) == 0 { // 避免 json.Unmarshal 出现 unexpected end of JSON input 错误
-		c.logger.Errorf("请求企微路由=%s, resp=%s, err=返回空响应体", urlStr, string(respBody))
+		c.logger.Errorf("请求企微路由=%s, resp=%s, err=返回空响应体，建议降低并发数试试", urlStr, string(respBody))
 		return errors.New("http resp body is nil")
 	}
 
@@ -295,7 +295,7 @@ func (c *ApiClient) executeWXApiPost(path string, req bodyer, objResp interface{
 
 	respBody := httpResp.Body()
 	if len(respBody) == 0 { // 避免 json.Unmarshal 出现 unexpected end of JSON input 错误
-		c.logger.Errorf("请求企微路由=%s, req=%s, resp=%s, err=返回空响应体", path, string(reqBody), respBody)
+		c.logger.Errorf("请求企微路由=%s, req=%s, resp=%s, err=返回空响应体，建议降低并发数试试", path, string(reqBody), respBody)
 		return errors.New("http resp body is nil")
 	}
 
@@ -354,7 +354,7 @@ func (c *ApiClient) executeWXApiMediaUpload(path string, req mediaUploader, objR
 
 	respBody := httpResp.Body()
 	if len(respBody) == 0 { // 避免 json.Unmarshal 出现 unexpected end of JSON input 错误
-		c.logger.Errorf("请求企微路由=%s, resp=%s, err=返回空响应体", urlStr, string(respBody))
+		c.logger.Errorf("请求企微路由=%s, resp=%s, err=返回空响应体，建议降低并发数试试", urlStr, string(respBody))
 		return errors.New("http resp body is nil")
 	}
 
