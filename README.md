@@ -18,21 +18,27 @@ Go语言实现企业微信sdk，a sensible Work Weixin SDK for Go。
 
 ## 安装命令
 
-```go
+```sh
 go get github.com/zsmhub/workweixin
 ```
 
 ### 一键生成sdk代码命令(`需手动格式化代码`)
 
-> 注意：部分复杂的页面需要手动整理下sdk，如消息推送>发送应用消息接口。
+- 生成企微回调事件代码
 
-- 生成企微api代码（`tip: 生成GET方式的接口，请求参数的数据类型需要手动调整下`）
+    `make callback doc=https://developer.work.weixin.qq.com/document/path/92277 [prefix=生成文件名前缀]`
 
-    `make api doc=https://developer.work.weixin.qq.com/document/path/90600 [prefix=生成的文件名前缀]`
+    > 注意：如果发现callbacks/callback_constant.go没有这个回调事件的常量定义，则需手动补上
 
-- 生成企微回调事件代码（`如果发现callbacks/callback_constant.go没有这个回调事件的常量定义，则需手动补上`）
+- 生成企微api代码
 
-    `make callback doc=https://developer.work.weixin.qq.com/document/path/92277 [prefix=生成的文件名前缀]`
+    `make api doc=https://developer.work.weixin.qq.com/document/path/90600 [prefix=生成文件名前缀]`
+
+    > 注意：
+    >
+    > 1. 生成GET方式的接口，请求参数的数据类型需要手动调整下
+    >
+    > 2. 部分复杂的页面需要手动整理下sdk，如消息推送>发送应用消息接口。
 
 ### sdk调用示例
 
