@@ -35,8 +35,8 @@ go get github.com/zsmhub/workweixin
     `make api doc=https://developer.work.weixin.qq.com/document/path/90600 [prefix=生成文件名前缀]`
 
     > 注意：
-    > 1.生成GET方式的接口，请求参数的数据类型需要手动调整下
-    > 2.部分复杂的页面需要手动整理下sdk，如消息推送>发送应用消息接口。
+    > 1. 生成GET方式的接口，请求参数的数据类型需要手动调整下
+    > 2. 部分复杂的页面需要手动整理下sdk，如消息推送>发送应用消息接口。
 
 ### sdk调用示例
 
