@@ -24,6 +24,10 @@ type ReqSearchContact struct {
 	QueryType int `json:"query_type,omitempty"`
 	// QueryWord 搜索关键词。当查询用户时应为用户名称、名称拼音或者英文名；当查询部门时应为部门名称或者部门名称拼音，必填
 	QueryWord string `json:"query_word"`
+	// QueryRange 查询范围，仅查询类型包含用户时有效。 0：只查询在职用户 1：同时查询在职和离职用户
+	QueryRange int `json:"query_range"`
+	// Cursor 用于分页查询的游标，字符串类型，由上一次调用返回，首次调用可不填
+	Cursor string `json:"cursor,omitempty"`
 }
 
 var _ bodyer = ReqSearchContact{}

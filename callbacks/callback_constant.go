@@ -132,6 +132,12 @@ const EventTypeUnsubscribe = "unsubscribe"
 // 产生会话回调事件
 const EventTypeMsgauditNotify = "msgaudit_notify"
 
+// 设备数据授权变更回调
+const EventTypeDeviceDataAuthChange = "device_data_auth_change"
+
+// 异步上传临时素材-回调异步任务结果
+const EventTypeUploadMediaJobFinish = "upload_media_job_finish"
+
 // 推送suite_ticket
 const InfoTypeSuiteTicket EventType = "suite_ticket"
 

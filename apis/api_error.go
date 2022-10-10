@@ -2266,6 +2266,9 @@ const ErrCode301016 ErrCode = 301016
 // 排查方法: 语音文件的系统限制，参考[上传的媒体文件限制](https://developer.work.weixin.qq.com/document/path/90313#10112/上传的媒体文件限制)
 const ErrCode301017 ErrCode = 301017
 
+// 文件MD5不匹配
+const ErrCode301019 ErrCode = 301019
+
 // ErrCode301021 参数 userid 无效
 // 排查方法: 至少有一个userid不存在于通讯录中
 const ErrCode301021 ErrCode = 301021
@@ -2849,6 +2852,12 @@ const ErrCode701082 = 701082
 
 // 非法的open_corpid
 const ErrCode710000 = 710000
+
+// url非法
+const ErrCode830001 = 830001
+
+// url下载数据失败
+const ErrCode830003 = 830003
 
 // 代开发应用模版未上线
 const ErrCode842002 = 842002

@@ -215,6 +215,13 @@ func main() {
 			die("parse document failed: %+v\n", err)
 		}
 		// 传入参数和响应参数处理
+		var isContainDataType bool // 新文档的参数说明多了一列：数据类型
+		tableTmp.Find(".cherry-table-container .cherry-table").Find("thead").Find("tr").Find("th").Each(func(i int, s *goquery.Selection) {
+			filed, _ := s.Html()
+			if filed == "类型" {
+				isContainDataType = true
+			}
+		})
 		tableTmp.Find(".cherry-table-container .cherry-table").Find("tbody").Each(func(i int, s *goquery.Selection) {
 			s.Find("tr").Each(func(i int, ss *goquery.Selection) {
 				var matches []string
@@ -223,29 +230,51 @@ func main() {
 					matches = append(matches, content)
 				})
 
-				// 传入参数，每行有3个字段，利用字段数量来提取
-				if len(matches) == 3 {
+				// 传入参数，每行有3或4个字段，利用字段数量来提取
+				var (
+					reqColumnNum  = 4 // 说明的字段数量
+					reqNameColumn = 0 // 参数列
+					// reqTypeColumn     = 1 // 类型列
+					reqRequiredColumn = 2 // 是否必须列
+					reqDesColumn      = 3 // 说明列
+				)
+				if !isContainDataType {
+					reqColumnNum = 3
+					reqRequiredColumn = 1
+					reqDesColumn = 2
+				}
+				if len(matches) == reqColumnNum {
 					// 忽略access_token请求字段
-					if inSlice(pickSubMatchString(matches, 3, 0), ignoreAccessTokenFields) {
+					if inSlice(pickSubMatchString(matches, reqColumnNum, reqNameColumn), ignoreAccessTokenFields) {
 						return
 					}
 
 					var isRequired bool
-					if pickSubMatchString(matches, 3, 1) == "是" {
+					if pickSubMatchString(matches, reqColumnNum, reqRequiredColumn) == "是" {
 						isRequired = true
 					}
 					api.ReqFields = append(api.ReqFields, Field{
-						Name:       pickSubMatchString(matches, 3, 0),
-						Desc:       pickSubMatchString(matches, 3, 2),
+						Name:       pickSubMatchString(matches, reqColumnNum, reqNameColumn),
+						Desc:       pickSubMatchString(matches, reqColumnNum, reqDesColumn),
 						IsRequired: isRequired,
 					})
 				}
 
-				// 响应参数，每行有2个字段，利用字段数量来提取
-				if len(matches) == 2 {
+				// 响应参数，每行有2或3个字段，利用字段数量来提取
+				var (
+					respColumnNum  = 3 // 字段数量
+					respNameColumn = 0 // 参数列
+					// respTypeColumn     = 1 // 类型列
+					respDesColumn = 2 // 说明列
+				)
+				if !isContainDataType {
+					respColumnNum = 2
+					respDesColumn = 1
+				}
+				if len(matches) == respColumnNum {
 					api.RespFields = append(api.RespFields, Field{
-						Name: pickSubMatchString(matches, 2, 0),
-						Desc: pickSubMatchString(matches, 2, 1),
+						Name: pickSubMatchString(matches, respColumnNum, respNameColumn),
+						Desc: pickSubMatchString(matches, respColumnNum, respDesColumn),
 					})
 				}
 			})
