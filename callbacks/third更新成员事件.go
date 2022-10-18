@@ -31,75 +31,27 @@ type ThirdChangeContactUpdateUser struct {
 	UserID struct {
 		Text string `xml:",chardata"`
 	} `xml:"UserID"`
+	Name struct {
+		Text string `xml:",chardata"`
+	} `xml:"Name"`
 	OpenUserID struct {
 		Text string `xml:",chardata"`
 	} `xml:"OpenUserID"`
 	NewUserID struct {
 		Text string `xml:",chardata"`
 	} `xml:"NewUserID"`
-	Name struct {
-		Text string `xml:",chardata"`
-	} `xml:"Name"`
 	Department struct {
 		Text string `xml:",chardata"`
 	} `xml:"Department"`
-	MainDepartment struct {
-		Text string `xml:",chardata"`
-	} `xml:"MainDepartment"`
-	IsLeaderInDept struct {
-		Text string `xml:",chardata"`
-	} `xml:"IsLeaderInDept"`
-	Mobile struct {
-		Text string `xml:",chardata"`
-	} `xml:"Mobile"`
-	Position struct {
-		Text string `xml:",chardata"`
-	} `xml:"Position"`
-	Gender struct {
-		Text string `xml:",chardata"`
-	} `xml:"Gender"`
-	Email struct {
-		Text string `xml:",chardata"`
-	} `xml:"Email"`
 	Status struct {
 		Text string `xml:",chardata"`
 	} `xml:"Status"`
-	Avatar struct {
+	IsLeaderInDept struct {
 		Text string `xml:",chardata"`
-	} `xml:"Avatar"`
-	Alias struct {
+	} `xml:"IsLeaderInDept"`
+	MainDepartment struct {
 		Text string `xml:",chardata"`
-	} `xml:"Alias"`
-	Telephone struct {
-		Text string `xml:",chardata"`
-	} `xml:"Telephone"`
-	ExtAttr struct {
-		Text string `xml:",chardata"`
-		Item []struct {
-			Chardata string `xml:",chardata"`
-			Name     struct {
-				Text string `xml:",chardata"`
-			} `xml:"Name"`
-			Type struct {
-				Text string `xml:",chardata"`
-			} `xml:"Type"`
-			Text struct {
-				Text  string `xml:",chardata"`
-				Value struct {
-					Text string `xml:",chardata"`
-				} `xml:"Value"`
-			} `xml:"Text"`
-			Web struct {
-				Text  string `xml:",chardata"`
-				Title struct {
-					Text string `xml:",chardata"`
-				} `xml:"Title"`
-				URL struct {
-					Text string `xml:",chardata"`
-				} `xml:"Url"`
-			} `xml:"Web"`
-		} `xml:"Item"`
-	} `xml:"ExtAttr"`
+	} `xml:"MainDepartment"`
 }
 
 func (ThirdChangeContactUpdateUser) GetMessageType() string {
