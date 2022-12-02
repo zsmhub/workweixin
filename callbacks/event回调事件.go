@@ -28,6 +28,9 @@ type EventKfMsgOrEvent struct {
 	Token struct {
 		Text string `xml:",chardata"`
 	} `xml:"Token"`
+	OpenKfId struct {
+		Text string `xml:",chardata"`
+	} `xml:"OpenKfId"`
 }
 
 func (EventKfMsgOrEvent) GetMessageType() string {

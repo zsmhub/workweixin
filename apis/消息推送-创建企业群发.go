@@ -73,6 +73,8 @@ type ReqAddMsgTemplateExternalcontact struct {
 	// Sender 发送企业群发消息的成员userid，当类型为发送给客户群时必填
 	Sender string             `json:"sender"`
 	Text   AddMsgTemplateText `json:"text"`
+	// 是否允许成员在待发送客户列表中重新进行选择，默认为false
+	AllowSelect bool `json:"allow_select"`
 }
 
 var _ bodyer = ReqAddMsgTemplateExternalcontact{}
