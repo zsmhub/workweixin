@@ -29,10 +29,12 @@ func (x ReqGetAuthInfoService) intoBody() ([]byte, error) {
 // RespGetAuthInfoService 获取企业授权信息响应
 // 文档：https://developer.work.weixin.qq.com/document/path/90604#获取企业授权信息
 type RespGetAuthInfoService struct {
+	CommonResp
 	AuthCorpInfo   AuthCorpInfo   `json:"auth_corp_info"`
 	AuthInfo       AuthInfo       `json:"auth_info"`
 	DealerCorpInfo DealerCorpInfo `json:"dealer_corp_info"`
-	CommonResp
+	// 收银台获取企业授权信息额外返回字段：https://developer.work.weixin.qq.com/document/path/91912
+	EditionInfo EditionInfo `json:"edition_info"`
 }
 
 var _ bodyer = RespGetAuthInfoService{}

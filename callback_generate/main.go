@@ -154,6 +154,7 @@ func main() {
 		api.XmlStr = strings.ReplaceAll(api.XmlStr, "&lt;", "<")
 		api.XmlStr = strings.ReplaceAll(api.XmlStr, "&gt;", ">")
 		api.XmlStr = strings.ReplaceAll(api.XmlStr, "]]</", "]]></") // 修复官方xml错误
+		api.XmlStr = strings.ReplaceAll(api.XmlStr, "</ ", "</")     // 修复官方xml错误
 
 		api.Msg, _ = callbacks.CallbackMessage{}.ParseMessageFromXml([]byte(api.XmlStr))
 

@@ -46,6 +46,8 @@ type (
 			State        string `json:"state"`
 			TemplateID   string `json:"template_id"`
 		} `json:"register_code_info"`
+		// 收银台获取企业永久授权码额外返回字段：https://developer.work.weixin.qq.com/document/path/91911
+		EditionInfo EditionInfo `json:"edition_info"`
 	}
 
 	AuthCorpInfo struct {
@@ -92,6 +94,21 @@ type (
 	DealerCorpInfo struct {
 		CorpName string `json:"corp_name"`
 		Corpid   string `json:"corpid"`
+	}
+
+	EditionInfo struct {
+		Agent []EditionInfoAgent `json:"agent"`
+	}
+
+	EditionInfoAgent struct {
+		Agentid               int    `json:"agentid"`
+		EditionId             string `json:"edition_id"`
+		EditionName           string `json:"edition_name"`
+		AppStatus             int    `json:"app_status"`
+		UserLimit             int    `json:"user_limit"`
+		ExpiredTime           int    `json:"expired_time"`
+		IsVirtualVersion      bool   `json:"is_virtual_version"`
+		IsSharedFromOtherCorp bool   `json:"is_shared_from_other_corp"`
 	}
 )
 

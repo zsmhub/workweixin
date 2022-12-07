@@ -180,6 +180,21 @@ const InfoTypeChangeSchoolContact EventType = "change_school_contact"
 // 重置永久授权码通知
 const InfoTypeRestPermanentCode EventType = "reset_permanent_code"
 
+// 收银台-下单成功通知
+const InfoTypeOpenOrder EventType = "open_order"
+
+// 收银台-应用版本变更通知
+const InfoTypeChangeEdtion EventType = "change_editon"
+
+// 收银台-支付成功通知
+const InfoTypePayForAppSuccess EventType = "pay_for_app_success"
+
+// 收银台-改单通知
+const InfoTypeChangeOrder EventType = "change_order"
+
+// 收银台-退款通知
+const InfoTypeRefund EventType = "refund"
+
 // ChangeType 变更类型
 type ChangeType string
 
