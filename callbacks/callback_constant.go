@@ -144,6 +144,9 @@ const EventTypeCloseInactiveAgent = "close_inactive_agent"
 // 长期未使用应用重新启用事件
 const EventTypeReopenInactiveAgent = "reopen_inactive_agent"
 
+// 扫描推广二维码事件
+const EventTypeEnterRegisterPackage = "enter_register_package"
+
 // 推送suite_ticket
 const InfoTypeSuiteTicket EventType = "suite_ticket"
 
