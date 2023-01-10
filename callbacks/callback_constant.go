@@ -138,6 +138,12 @@ const EventTypeDeviceDataAuthChange = "device_data_auth_change"
 // 异步上传临时素材-回调异步任务结果
 const EventTypeUploadMediaJobFinish = "upload_media_job_finish"
 
+// 长期未使用应用临时停用事件
+const EventTypeCloseInactiveAgent = "close_inactive_agent"
+
+// 长期未使用应用重新启用事件
+const EventTypeReopenInactiveAgent = "reopen_inactive_agent"
+
 // 推送suite_ticket
 const InfoTypeSuiteTicket EventType = "suite_ticket"
 
