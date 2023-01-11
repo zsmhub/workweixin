@@ -155,7 +155,9 @@ func (c *ApiClient) getAuthCorpToken() (TokenInfo, error) {
 	if err != nil {
 		apiError, ok := err.(*ClientError)
 		if ok {
-			if apiError.Code == ErrCode2000002 || apiError.Code == ErrCode301007 || apiError.Code == ErrCode40084 { // 企业已注销，但要等15天后才会收到企业取消授权事件
+			// 企业已注销，但要等15天后才会收到企业取消授权事件
+			if apiError.Code == ErrCode2000002 || apiError.Code == ErrCode301007 || apiError.Code == ErrCode40084 {
+				c.logger.Infof("corp_access_token3: corp_id=%s, permanent_code=%s, err=%+v\n", c.CorpId, c.CompanyPermanentCode, apiError)
 				return TokenInfo{}, nil
 			}
 			c.logger.Errorf("corp_access_token1: corp_id=%s, permanent_code=%s, err=%+v\n", c.CorpId, c.CompanyPermanentCode, apiError)
