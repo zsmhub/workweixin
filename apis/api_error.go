@@ -2239,7 +2239,7 @@ const ErrCode301002 ErrCode = 301002
 // 排查方法: 创建者不允许从通讯录中删除。如果需要删除该成员，需要先在WEB管理端转移创建者身份。
 const ErrCode301005 ErrCode = 301005
 
-// ErrCode301007 授权企业被解散
+// ErrCode301007 企业不可用，可能已经被解散或者被禁封
 const ErrCode301007 ErrCode = 301007
 
 // ErrCode301012 参数 position 不合法
