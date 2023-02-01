@@ -64,18 +64,10 @@ func (m CallbackMessage) ParseMessageFromXml(body []byte) (CallbackMessage, erro
 	if ok {
 		m.Extras, err = extraParser.ParseFromXml(body)
 	} else {
-		err = errors.New("回调事件解析失败，去SDK生成对应的回调事件：" + m.GetTypeKey() + "，xml: " + string(body))
+		err = errors.New("回调事件解析失败，去SDK生成对应的回调事件：" + m.GetTypeKey() + "，xml: " + m.OriginalMessage)
 	}
 	return m, err
 }
-
-//
-// func (m CallbackMessage) IsFromThirdPartyApp() bool {
-//    if m.SuiteId != "" && m.ToUserName == "" { //第三方应用回调,第一个字段是SuiteId; 自建应用第一个字段是ToUserName
-//        return true
-//    }
-//    return false
-// }
 
 func (m CallbackMessage) GetTypeKey() string {
 	return string(m.MsgType) + ":" + string(m.EventType) + ":" + string(m.ChangeType)
