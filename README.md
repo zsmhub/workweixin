@@ -1,4 +1,4 @@
-## 企业微信第三方服务商 Go SDK
+## 企业微信 Go SDK
 
 Go语言实现企业微信sdk，a sensible Work Weixin SDK for Go。
 
