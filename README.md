@@ -280,7 +280,7 @@ func (qyapiRepo) GetJssdkConfig(req form.QyapiGetJssdkConfigReq) (*QyapiGetJssdk
 │   └── callback_constant.go 回调事件常量定义
 ├── demo                     sdk调用示例
 ├── docs                     企业微信相关文档
-├── internal                 第三方库
+├── internal                 消息加解密库
 └── main.go                  入口文件
 ```
 
