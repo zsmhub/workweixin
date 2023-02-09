@@ -91,7 +91,7 @@ func main() {
 		die("failed to get html: %+v\n", err)
 	}
 
-	fmt.Println("开始抓取和生成API代码，文档地址:", docURL)
+	fmt.Println("开始抓取和生成回调事件代码，文档地址:", docURL)
 
 	rawHtml = regexp.MustCompile(`<h2 id="([0-9a-zA-Z\-%]+)" data-sign="\w+" data-lines="\w+">`).ReplaceAllString(rawHtml, `<h2 class="rawHtmlSection">`)
 	rawHtml = regexp.MustCompile(`<h2 data-sign="\w+" data-lines="\w+" id="([0-9a-zA-Z\-%]+)">`).ReplaceAllString(rawHtml, `<h2 class="rawHtmlSection">`)
