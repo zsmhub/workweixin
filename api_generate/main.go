@@ -42,7 +42,7 @@ type Api struct {
 
 var ignoreAccessTokenFields = []string{"access_token", "suite_access_token"}
 
-var docVar = flag.String("doc", "", "[必填]微信文档地址")
+var docVar = flag.String("doc", "", "[必填]企微文档地址")
 var prefixVar = flag.String("prefix", "", "[选填]生成的文件名前缀")
 
 func main() {
