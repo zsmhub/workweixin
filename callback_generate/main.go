@@ -28,7 +28,7 @@ type Api struct {
 	Msg        callbacks.CallbackMessage
 }
 
-var docVar = flag.String("doc", "", "[必填]微信文档地址")
+var docVar = flag.String("doc", "", "[必填]企微文档地址")
 var prefixVar = flag.String("prefix", "", "[选填]生成的文件名前缀")
 
 func main() {
@@ -40,7 +40,7 @@ func main() {
 		docURL = *docVar
 	}
 	if docURL == "" {
-		fmt.Println("请输入参数doc(企业微信开发文档地址):")
+		fmt.Println("请输入参数doc(企微文档地址):")
 		_, _ = fmt.Scanf("%s", &docURL)
 	}
 	if docURL == "" {

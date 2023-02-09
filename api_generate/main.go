@@ -54,7 +54,7 @@ func main() {
 		docURL = *docVar
 	}
 	if docURL == "" {
-		fmt.Println("请输入参数doc(企业微信开发文档地址):")
+		fmt.Println("请输入参数doc(企微文档地址):")
 		_, _ = fmt.Scanf("%s", &docURL)
 	}
 	if docURL == "" {
