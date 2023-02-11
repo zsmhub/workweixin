@@ -288,6 +288,10 @@ func (qyapiRepo) GetJssdkConfig(req form.QyapiGetJssdkConfigReq) (*QyapiGetJssdk
 
 - 如果你发现了sdk中，没有某个回调事件或某个api，可以使用一键生成sdk代码命令生成，然后提交下pr
 
+### 推荐开源项目
+
+- [微信视频号 GO SDK](https://github.com/zsmhub/wx-channels-sdk)
+
 ### 参考开源项目
 
 - [OpenSCRM](https://github.com/openscrm/api-server)
