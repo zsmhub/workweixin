@@ -2,7 +2,7 @@
 
 Go语言实现企业微信sdk，a sensible Work Weixin SDK for Go。
 
-以第三方服务商角度整理的sdk，集成了第三方应用sdk和自建应用代开发的sdk，支持一键生成新sdk代码，使用简单，扩展灵活。
+以第三方服务商维度整理的sdk，集成了第三方应用sdk和自建应用代开发的sdk，支持一键生成新sdk代码，使用简单，扩展灵活。
 
 - 支持一键生成sdk代码，包括api和回调事件
 - 用缓存方案实现分布式 access_token/jsapi_ticket，保证在多个服务中只有一个服务能成功调用企微API请求 access_token/jsapi_ticket，减少API调用次数和服务重启需要重新获取的情况
