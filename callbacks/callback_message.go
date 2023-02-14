@@ -38,12 +38,12 @@ type CallbackMessage struct {
 }
 
 func (m CallbackMessage) ParseMessageFromXml(body []byte) (CallbackMessage, error) {
-	m.OriginalMessage = string(body)
-
 	err := xml.Unmarshal(body, &m)
 	if err != nil {
 		return m, err
 	}
+
+	m.OriginalMessage = string(body)
 
 	if m.MsgType == "" {
 		m.MsgType = MessageTypeThird
