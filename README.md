@@ -291,6 +291,7 @@ func (qyapiRepo) GetJssdkConfig(req form.QyapiGetJssdkConfigReq) (*QyapiGetJssdk
 ### 推荐开源项目
 
 - [微信视频号 GO SDK](https://github.com/zsmhub/wx-channels-sdk)
+- [抖店开放平台GO SDK](https://github.com/zsmhub/doudian-sdk)
 
 ### 参考开源项目
 
