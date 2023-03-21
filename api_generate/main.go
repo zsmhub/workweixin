@@ -142,6 +142,8 @@ func main() {
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `GET(<strong>HTTPS</strong>)`, `GET<strong>HTTPS</strong>`)
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求方式</strong>:<strong>POST</strong>(<strong>HTTPS</strong>)`, `<strong>请求方式</strong>POST<strong>HTTPS</strong>`)
 		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求方式</strong>:<strong>GET</strong>(<strong>HTTPS</strong>)`, `<strong>请求方式</strong>GET<strong>HTTPS</strong>`)
+		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求方式</strong>:POST<strong>HTTPS</strong>`, `<strong>请求方式</strong>POST<strong>HTTPS</strong>`)
+		rawHtmlSection = strings.ReplaceAll(rawHtmlSection, `<strong>请求方式</strong>:GET<strong>HTTPS</strong>`, `<strong>请求方式</strong>GET<strong>HTTPS</strong>`)
 		// 过滤掉不是接口的节点
 		if !strings.Contains(rawHtmlSection, `<strong>请求方式</strong>`) {
 			fmt.Println("没有请求方式，跳过处理")
