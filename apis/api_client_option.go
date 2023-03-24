@@ -15,7 +15,7 @@ const HttpTTL = 1 * time.Minute
 var FastClient = CreateFastHttpClient()
 
 func CreateFastHttpClient() fasthttp.Client {
-	var defaultDialer = &fasthttp.TCPDialer{Concurrency: 300} // tcp 并发200
+	var defaultDialer = &fasthttp.TCPDialer{Concurrency: 300}
 
 	return fasthttp.Client{
 		Dial: func(addr string) (net.Conn, error) {
