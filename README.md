@@ -210,10 +210,8 @@ oauthUrl := workweixin.Sdk.ThirdAppClient.GetThirdOauthUrl(apis.GetThirdOauthUrl
 
 // 企微 error code 类型强制转换
 if err != nil {
-    if apiError, ok := err.(*apis.ClientError); ok {
-        if apiError.Code == apis.ErrCode60011 {
-            return errors.New("无权限访问")
-        }
+    if apiError, ok := err.(*apis.ClientError); ok && apiError.Code == apis.ErrCode60011 {
+        return errors.New("无权限访问")
     }
     return nil, err
 }
