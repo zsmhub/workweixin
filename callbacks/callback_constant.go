@@ -147,6 +147,12 @@ const EventTypeReopenInactiveAgent = "reopen_inactive_agent"
 // 扫描推广二维码事件
 const EventTypeEnterRegisterPackage = "enter_register_package"
 
+// 获客助手权限确认事件
+const EventTypeApproveSpecialAuth = "approve_special_auth"
+
+// 获客助手权限取消事件
+const EventTypeCancelSpecialAuth = "cancel_special_auth"
+
 // 推送suite_ticket
 const InfoTypeSuiteTicket EventType = "suite_ticket"
 
