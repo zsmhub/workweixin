@@ -1,5 +1,7 @@
 ## 企业微信 Go SDK
 
+[官方接口文档](https://developer.work.weixin.qq.com/document/)
+
 Go语言实现企业微信sdk，a sensible Work Weixin SDK for Go。
 
 以第三方服务商维度整理的sdk，集成了第三方应用sdk和自建应用代开发的sdk，支持一键生成新sdk代码，使用简单，扩展灵活。
