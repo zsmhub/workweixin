@@ -2850,6 +2850,75 @@ const ErrCode701081 = 701081
 // 该用户已经激活的情况下，使用新码重新激活的场景，旧码剩余的时长不能超过20天
 const ErrCode701082 = 701082
 
+// 订单未支付
+const ErrCode701083 = 701083
+
+// 订单不是未支付
+const ErrCode701084 = 701084
+
+// 订单无法操作，请稍后再试
+const ErrCode701085 = 701085
+
+// 订单不属于该企业
+const ErrCode701086 = 701086
+
+// 授权企业没有安装任何互通权限应用（「客户联系」或「微信客服」权限）
+const ErrCode701087 = 701087
+
+// 用户不在服务商应用的可见范围内
+const ErrCode701088 = 701088
+
+// 用户不在服务商互通权限（「客户联系」或「微信客服」权限）应用的可见范围内
+const ErrCode701089 = 701089
+
+// 续期订单中全部账号的续期天数都等于0
+const ErrCode701090 = 701090
+
+// 用户没有有效的接口许可
+const ErrCode701099 = 701099
+
+// 该接口不支持传父订单id
+const ErrCode701120 = 701120
+
+// 测试企业不允许调用多企业下单接口
+const ErrCode701121 = 701121
+
+// 多企业下单接口全部企业无效
+const ErrCode701122 = 701122
+
+// 多企业下单接口每个jobid最多关联10万个企业
+const ErrCode701123 = 701123
+
+// corpid重复
+const ErrCode701124 = 701124
+
+// jobid未提交
+const ErrCode701125 = 701125
+
+// jobid已提交
+const ErrCode701126 = 701126
+
+// 客户非测试企业，不能添加测试订单
+const ErrCode701127 = 701127
+
+// 客户是测试企业，不能添加非测试订单
+const ErrCode701128 = 701128
+
+// 企业下无服务商的应用订单
+const ErrCode701129 = 701129
+
+// 企业下服务商应用订单均已过期
+const ErrCode701130 = 701130
+
+// 无应用订单，处于免费试用状态，但购买账号码数超过免费试用的人数上限
+const ErrCode701131 = 701131
+
+// 购买时长不大于3个月，购买账号数不允许超过通讯录人数的2倍
+const ErrCode701132 = 701132
+
+// 	无应用订单，处于免费试用状态，购买时长不允许超过3个月（93天）
+const ErrCode701133 = 701133
+
 // 非法的open_corpid
 const ErrCode710000 = 710000
 
@@ -2886,3 +2955,36 @@ const ErrCode845002 ErrCode = 845002
 
 // unionid认证主体和企业认证主体不一致
 const ErrCode845003 ErrCode = 845003
+
+// 请求参数错误
+const ErrCode2400001 ErrCode = 2400001
+
+// 访问的资源不存在
+const ErrCode2400003 ErrCode = 2400003
+
+// 创建的资源已存在
+const ErrCode2400004 ErrCode = 2400004
+
+// 不允许访问该资源
+const ErrCode2400005 ErrCode = 2400005
+
+// 资源操作未授权
+const ErrCode2400006 ErrCode = 2400006
+
+// 请求数超过限制
+const ErrCode2400007 ErrCode = 2400007
+
+// 访问了超过范围的资源
+const ErrCode2400008 ErrCode = 2400008
+
+// block_hint非法
+const ErrCode400010 ErrCode = 400010
+
+// block_hint对应的拦截已过期
+const ErrCode400011 ErrCode = 400011
+
+// 不允许通过该block_hint解除拦截
+const ErrCode400012 ErrCode = 400012
+
+// 解拦截次数超过限制
+const ErrCode400013 ErrCode = 400013
