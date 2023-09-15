@@ -34,6 +34,11 @@ type RespCustomerAcquisitionQuotaExternalcontact struct {
 	CommonResp
 	// Total 历史累计使用量
 	Total int `json:"total"`
+	// QuotaList 过期额度
+	QuotaList []struct {
+		ExpireDate int `json:"expire_date"`
+		Balance    int `json:"balance"`
+	} `json:"quota_list"`
 }
 
 var _ bodyer = RespCustomerAcquisitionQuotaExternalcontact{}

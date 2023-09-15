@@ -9,12 +9,15 @@ import (
 
 type (
 	ReqOpenOrderPaytool struct {
-		BusinessType int                `json:"business_type"`
-		CustomCorpid string             `json:"custom_corpid,omitempty"`
-		ProductList  PaytoolProductList `json:"product_list"`
-		NonceStr     string             `json:"nonce_str"`
-		Ts           int                `json:"ts"`
-		Sig          string             `json:"sig"`
+		BusinessType       int                `json:"business_type"`
+		PayType            int                `json:"pay_type"`
+		BankReceiptMediaId string             `json:"bank_receipt_media_id,omitempty"`
+		Creator            string             `json:"creator,omitempty"`
+		CustomCorpid       string             `json:"custom_corpid,omitempty"`
+		ProductList        PaytoolProductList `json:"product_list"`
+		NonceStr           string             `json:"nonce_str"`
+		Ts                 int                `json:"ts"`
+		Sig                string             `json:"sig"`
 	}
 
 	PaytoolProductList struct {
