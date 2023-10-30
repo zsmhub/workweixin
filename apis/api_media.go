@@ -5,7 +5,9 @@ import (
 	"github.com/google/uuid"
 	"io"
 	"mime/multipart"
+	"net/url"
 	"os"
+	"path"
 )
 
 const mediaFieldName = "media"
@@ -88,8 +90,16 @@ func (c *ApiClient) UploadTempMedia(req UploadMediaReq) (UploadMediaResult, erro
 		return result, err
 	}
 
+	urlInfo, err := url.Parse(req.URL)
+	if err != nil {
+		return result, err
+	}
+
 	// 发现带上.gif后缀会导致前端无法引用到聊天窗口，故直接去掉后缀
 	filename := uuid.New().String()
+	if req.Type == "file" {
+		filename = path.Base(urlInfo.Path)
+	}
 
 	media, err := NewMediaFromBuffer(filename, body)
 	if err != nil {
