@@ -2,12 +2,13 @@ package apis
 
 import (
 	"bytes"
-	"github.com/google/uuid"
 	"io"
 	"mime/multipart"
 	"net/url"
 	"os"
 	"path"
+
+	"github.com/google/uuid"
 )
 
 const mediaFieldName = "media"
@@ -65,6 +66,8 @@ func NewMediaFromBuffer(filename string, buf []byte) (*Media, error) {
 }
 
 type UploadMediaReq struct {
+	// 调用方法：ExecUploadMedia, ExecUploadImg
+	Method string `json:"method"`
 	// 文件类型
 	Type string `json:"type"`
 	// 文件链接
@@ -78,6 +81,8 @@ type UploadMediaResult struct {
 	MediaId string `json:"media_id"`
 	// CreatedAt 媒体文件上传时间戳
 	CreatedAt string `json:"created_at"`
+	// 返回的图片链接
+	URL string `json:"url"`
 }
 
 // UploadMedia 上传临时素材
@@ -106,17 +111,26 @@ func (c *ApiClient) UploadTempMedia(req UploadMediaReq) (UploadMediaResult, erro
 		return result, err
 	}
 
-	uploadRes, err := c.ExecUploadMedia(ReqUploadMedia{
-		Type:  req.Type,
-		Media: media,
-	})
-	if err != nil {
-		return result, err
+	if req.Method == "ExecUploadImg" {
+		uploadRes, err := c.ExecUploadImg(ReqUploadImg{
+			Media: media,
+		})
+		if err != nil {
+			return result, err
+		}
+		result.URL = uploadRes.URL
+	} else {
+		uploadRes, err := c.ExecUploadMedia(ReqUploadMedia{
+			Type:  req.Type,
+			Media: media,
+		})
+		if err != nil {
+			return result, err
+		}
+		result.MediaId = uploadRes.MediaId
+		result.CreatedAt = uploadRes.CreatedAt
+		result.Type = uploadRes.Type
 	}
-
-	result.MediaId = uploadRes.MediaId
-	result.CreatedAt = uploadRes.CreatedAt
-	result.Type = uploadRes.Type
 
 	return result, nil
 }

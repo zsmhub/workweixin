@@ -50,7 +50,7 @@ func (x RespUploadImg) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// ExecUploadImg 上传图片
+// ExecUploadImg 上传图片[可直接调用封装的接口：UploadTempMedia]
 // 文档：https://developer.work.weixin.qq.com/document/path/90392
 func (c *ApiClient) ExecUploadImg(req ReqUploadImg) (RespUploadImg, error) {
 	var resp RespUploadImg

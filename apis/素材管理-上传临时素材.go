@@ -54,7 +54,7 @@ func (x RespUploadMedia) intoBody() ([]byte, error) {
 	return result, nil
 }
 
-// ExecUploadMedia 上传临时素材
+// ExecUploadMedia 上传临时素材[可直接调用封装的接口：UploadTempMedia]
 // 文档：https://developer.work.weixin.qq.com/document/path/90389#上传临时素材
 func (c *ApiClient) ExecUploadMedia(req ReqUploadMedia) (RespUploadMedia, error) {
 	var resp RespUploadMedia
