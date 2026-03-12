@@ -58,21 +58,21 @@ type (
 		// Content 消息文本内容,最长为4000字节
 		Content string `json:"content,omitempty"`
 	}
+
+	ReqSendWelcomeMsgExternalcontactAttachment struct {
+		Msgtype     string                                       `json:"msgtype"` // 附件类型，可选image、link、miniprogram或者video
+		File        *ReqSendWelcomeMsgExternalcontactFile        `json:"file,omitempty"`
+		Image       *ReqSendWelcomeMsgExternalcontactImage       `json:"image,omitempty"`
+		Link        *ReqSendWelcomeMsgExternalcontactLink        `json:"link,omitempty"`
+		Miniprogram *ReqSendWelcomeMsgExternalcontactMiniprogram `json:"miniprogram,omitempty"`
+		Video       *ReqSendWelcomeMsgExternalcontactVideo       `json:"video,omitempty"`
+	}
 )
 
 type ReqSendWelcomeMsgExternalcontact struct {
-	Attachments []struct {
-		File        ReqSendWelcomeMsgExternalcontactFile        `json:"file"`
-		Image       ReqSendWelcomeMsgExternalcontactImage       `json:"image"`
-		Link        ReqSendWelcomeMsgExternalcontactLink        `json:"link"`
-		Miniprogram ReqSendWelcomeMsgExternalcontactMiniprogram `json:"miniprogram"`
-		// Msgtype 附件类型，可选image、link、miniprogram或者video，必填
-		Msgtype string                                `json:"msgtype"`
-		Video   ReqSendWelcomeMsgExternalcontactVideo `json:"video"`
-	} `json:"attachments,omitempty"` // 附件，最多可添加9个附件
-	Text ReqSendWelcomeMsgExternalcontactText `json:"text"`
-	// WelcomeCode 通过<a href="#15260/%E6%B7%BB%E5%8A%A0%E5%A4%96%E9%83%A8%E8%81%94%E7%B3%BB%E4%BA%BA%E4%BA%8B%E4%BB%B6" rel="nofollow">添加外部联系人事件</a>推送给企业的发送欢迎语的凭证，有效期为<strong>20秒</strong>，必填
-	WelcomeCode string `json:"welcome_code"`
+	Attachments []ReqSendWelcomeMsgExternalcontactAttachment `json:"attachments,omitempty"` // 附件，最多可添加9个附件
+	Text        ReqSendWelcomeMsgExternalcontactText         `json:"text"`
+	WelcomeCode string                                       `json:"welcome_code"`
 }
 
 var _ bodyer = ReqSendWelcomeMsgExternalcontact{}

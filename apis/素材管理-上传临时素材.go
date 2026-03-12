@@ -40,7 +40,7 @@ func (x ReqUploadMedia) getMedia() *Media {
 type RespUploadMedia struct {
 	CommonResp
 	Type      string `json:"type"`
-	MediaId   string `json:"media_id"`
+	MediaId   string `json:"media_id"` // media_id仅三天内有效，media_id在同一企业内所有应用之间可以共享。
 	CreatedAt string `json:"created_at"`
 }
 
