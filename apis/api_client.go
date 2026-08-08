@@ -5,13 +5,14 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"github.com/valyala/fasthttp"
 	"io"
 	"mime/multipart"
 	"net/http"
 	"net/url"
 	"sync"
 	"time"
+
+	"github.com/valyala/fasthttp"
 )
 
 // 标识
@@ -257,13 +258,17 @@ func (c *ApiClient) executeWXApiGet(path string, req urlValuer, objResp interfac
 		return errors.New("http resp body is nil")
 	}
 
+	// respBody 是 fasthttp 连接池返回的缓冲，函数返回时 ReleaseResponse 会把它归还并可能被其他请求复用，
+	// 直接传给异步协程存在数据竞争（协程可能读到被截断/复用的数据导致 json 解析 panic），先拷贝一份
+	respBodyCopy := make([]byte, len(respBody))
+	copy(respBodyCopy, respBody)
 	go func() {
 		defer func() {
 			if err := recover(); err != nil {
-				c.logger.Errorf("请求企微路由=%s, resp=%s, err=%+v", path, string(respBody), err)
+				c.logger.Errorf("请求企微路由=%s, resp=%s, err=%+v", path, string(respBodyCopy), err)
 			}
 		}()
-		c.RemoveTokenByHttpClient(respBody)
+		c.RemoveTokenByHttpClient(respBodyCopy)
 	}()
 
 	return json.Unmarshal(respBody, &objResp)
@@ -299,13 +304,17 @@ func (c *ApiClient) executeWXApiPost(path string, req bodyer, objResp interface{
 		return errors.New("http resp body is nil")
 	}
 
+	// respBody 是 fasthttp 连接池返回的缓冲，函数返回时 ReleaseResponse 会把它归还并可能被其他请求复用，
+	// 直接传给异步协程存在数据竞争（协程可能读到被截断/复用的数据导致 json 解析 panic），先拷贝一份
+	respBodyCopy := make([]byte, len(respBody))
+	copy(respBodyCopy, respBody)
 	go func() {
 		defer func() {
 			if err := recover(); err != nil {
-				c.logger.Errorf("请求企微路由=%s, resp=%s, err=%+v", path, string(respBody), err)
+				c.logger.Errorf("请求企微路由=%s, resp=%s, err=%+v", path, string(respBodyCopy), err)
 			}
 		}()
-		c.RemoveTokenByHttpClient(respBody)
+		c.RemoveTokenByHttpClient(respBodyCopy)
 	}()
 
 	return json.Unmarshal(respBody, &objResp)
@@ -358,13 +367,17 @@ func (c *ApiClient) executeWXApiMediaUpload(path string, req mediaUploader, objR
 		return errors.New("http resp body is nil")
 	}
 
+	// respBody 是 fasthttp 连接池返回的缓冲，函数返回时 ReleaseResponse 会把它归还并可能被其他请求复用，
+	// 直接传给异步协程存在数据竞争（协程可能读到被截断/复用的数据导致 json 解析 panic），先拷贝一份
+	respBodyCopy := make([]byte, len(respBody))
+	copy(respBodyCopy, respBody)
 	go func() {
 		defer func() {
 			if err := recover(); err != nil {
-				c.logger.Errorf("请求企微路由=%s, resp=%s, err=%+v", urlStr, string(respBody), err)
+				c.logger.Errorf("请求企微路由=%s, resp=%s, err=%+v", urlStr, string(respBodyCopy), err)
 			}
 		}()
-		c.RemoveTokenByHttpClient(respBody)
+		c.RemoveTokenByHttpClient(respBodyCopy)
 	}()
 
 	return json.Unmarshal(respBody, &objResp)

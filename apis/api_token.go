@@ -4,10 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"github.com/cenkalti/backoff/v4"
 	"log"
 	"sync"
 	"time"
+
+	"github.com/cenkalti/backoff/v4"
 )
 
 // 分布式access_token：获取和设置access_token的值，自行实现该接口的具体逻辑，比如使用redis方案
@@ -74,6 +75,12 @@ func (c *ApiClient) RemoveToken() {
 }
 
 func (c *ApiClient) RemoveTokenByHttpClient(httpBody []byte) {
+	// 响应体可能被截断/非法（如连接池复用、网络异常），旧版本 Go 的 encoding/json
+	// 对这类输入会在 skip 时 panic（index out of range）而不是返回错误，这里兜底避免 panic
+	defer func() {
+		_ = recover()
+	}()
+
 	var commonResp CommonResp
 	_ = json.Unmarshal(httpBody, &commonResp)
 	if commonResp.IsOK() {
