@@ -1,4 +1,4 @@
-module github.com/zsmhub/workweixin
+module github.com/lovego/workweixin
 
 go 1.18
 

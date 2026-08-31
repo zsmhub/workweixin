@@ -301,3 +301,52 @@ func (c *ApiClient) ExternalcontactToServiceExternalUserid(req ReqExternalcontac
 	}
 	return resp, nil
 }
+
+// 3.3 转换群成员external_userid
+// 文档：https://developer.work.weixin.qq.com/document/path/95327
+type ReqGetNewGroupchatExternalUseridExternalcontact struct {
+	// 客户群ID，必填
+	ChatID string `json:"chat_id"`
+	// 旧外部联系人id列表，最多不超过1000个，必填
+	ExternalUseridList []string `json:"external_userid_list"`
+}
+
+var _ bodyer = ReqGetNewGroupchatExternalUseridExternalcontact{}
+
+func (x ReqGetNewGroupchatExternalUseridExternalcontact) intoBody() ([]byte, error) {
+	result, err := json.Marshal(x)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+type RespGetNewGroupchatExternalUseridExternalcontact struct {
+	CommonResp
+	Items []struct {
+		ExternalUserid    string `json:"external_userid"`
+		NewExternalUserid string `json:"new_external_userid"`
+	} `json:"items"`
+}
+
+var _ bodyer = RespGetNewGroupchatExternalUseridExternalcontact{}
+
+func (x RespGetNewGroupchatExternalUseridExternalcontact) intoBody() ([]byte, error) {
+	result, err := json.Marshal(x)
+	if err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+func (c *ApiClient) ExecGetNewGroupchatExternalUseridExternalcontact(req ReqGetNewGroupchatExternalUseridExternalcontact) (RespGetNewGroupchatExternalUseridExternalcontact, error) {
+	var resp RespGetNewGroupchatExternalUseridExternalcontact
+	err := c.executeWXApiPost("/cgi-bin/externalcontact/groupchat/get_new_external_userid", req, &resp, true)
+	if err != nil {
+		return RespGetNewGroupchatExternalUseridExternalcontact{}, err
+	}
+	if bizErr := resp.TryIntoErr(); bizErr != nil {
+		return RespGetNewGroupchatExternalUseridExternalcontact{}, bizErr
+	}
+	return resp, nil
+}

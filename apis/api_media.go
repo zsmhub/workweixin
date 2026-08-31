@@ -90,7 +90,7 @@ func (c *ApiClient) UploadTempMedia(req UploadMediaReq) (UploadMediaResult, erro
 	var result UploadMediaResult
 
 	// 下载文件
-	_, body, err := FastClient.Get(nil, req.URL)
+	_, body, err := c.fasthttpClient().Get(nil, req.URL)
 	if err != nil {
 		return result, err
 	}

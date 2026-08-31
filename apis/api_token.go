@@ -200,6 +200,30 @@ func (c *ApiClient) getCustomizedAuthCorpToken() (TokenInfo, error) {
 	return TokenInfo{Token: get.AccessToken, ExpiresIn: time.Duration(get.ExpiresIn) * time.Second}, nil
 }
 
+// 获取自建应用access_token
+func (c *ApiClient) getCorpToken() (TokenInfo, error) {
+	if c.CorpProviderSecret == "" {
+		return TokenInfo{}, errors.New("企业应用secret不存在，corp_id:" + c.CorpId)
+	}
+	get, err := c.ExecGetCustomizedCorpTokenService(ReqGetCustomizedCorpTokenService{
+		Corpid:     c.CorpId,
+		Corpsecret: c.CorpProviderSecret,
+	})
+	if err != nil {
+		apiError, ok := err.(*ClientError)
+		if ok {
+			if apiError.Code == ErrCode2000002 || apiError.Code == ErrCode301007 || apiError.Code == ErrCode40084 { // 企业已注销，但要等15天后才会收到企业取消授权事件
+				return TokenInfo{}, nil
+			}
+			c.logger.Errorf("customized_corp_access_token1: corp_id=%s, permanent_code=%s, err=%+v\n", c.CorpId, c.CompanyPermanentCode, apiError)
+		} else {
+			c.logger.Errorf("customized_corp_access_token2: corp_id=%s, permanent_code=%s, err=%+v\n", c.CorpId, c.CompanyPermanentCode, err)
+		}
+		return TokenInfo{}, err
+	}
+	return TokenInfo{Token: get.AccessToken, ExpiresIn: time.Duration(get.ExpiresIn) * time.Second}, nil
+}
+
 // getJSAPITicket 获取 JSAPI_ticket
 func (c *ApiClient) getJSAPITicket() (TokenInfo, error) {
 	get, err := c.ExecGetJSAPITicket(JsAPITicketReq{})

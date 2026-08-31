@@ -3,9 +3,10 @@ package workweixin
 import (
 	"errors"
 	"fmt"
-	"github.com/zsmhub/workweixin/apis"
-	"github.com/zsmhub/workweixin/callbacks"
 	"sync"
+
+	"github.com/lovego/workweixin/apis"
+	"github.com/lovego/workweixin/callbacks"
 )
 
 // sdk 调用入口
@@ -13,6 +14,7 @@ var Sdk = &sdk{
 	mutex:                     sync.RWMutex{},
 	ThirdAuthCorpsClient:      make(map[string]*apis.ApiClient),
 	CustomizedAuthCorpsClient: make(map[string]*apis.ApiClient),
+	SelfAuthCorpsClient:       make(map[string]*apis.ApiClient),
 }
 
 type sdk struct {
@@ -31,6 +33,9 @@ type sdk struct {
 	CustomizedTemplateCallback *callbacks.CallBackHandler // 自建应用代开发模板回调解析
 	CustomizedAppClient        *apis.ApiClient            // 自建应用代开发客户端，用于获取第三方应用的预授权码，获取授权企业信息等
 	CustomizedAuthCorpsClient  map[string]*apis.ApiClient // 代发开应用授权企业客户端，用于操作授权企业相关接口，如通讯录管理，消息推送等
+
+	// 自建应用API客户端
+	SelfAuthCorpsClient map[string]*apis.ApiClient // 自建应用客户端，用于操作企业相关接口，如通讯录管理，消息推送等
 
 	// 第三方小程序的回调处理
 	ThirdMiniCallback *callbacks.CallBackHandler // 第三方小程序回调解析，如果第三方应用需要使用发微信小程序功能，需要先配置一个第三方小程序绑定微信小程序
@@ -193,6 +198,40 @@ func (s *sdk) RemoveCustomizedAuthCorp(corpId string) {
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
 	delete(s.CustomizedAuthCorpsClient, corpId)
+}
+
+// 自建应用：API客户端初始化
+func (s *sdk) NewSelfApiClient(corpId string, agentId int, secret string) {
+	apiClient := apis.NewSelfApiClient(corpId, agentId, secret, s.Options)
+	s.mutex.Lock()
+	defer s.mutex.Unlock()
+	s.SelfAuthCorpsClient[corpId] = apiClient
+}
+
+// 自建应用：获取企业客户端
+func (s *sdk) GetSelfAuthCorpApiClient(corpId string) (*apis.ApiClient, error) {
+	s.mutex.RLock()
+	if v, ok := s.SelfAuthCorpsClient[corpId]; ok {
+		s.mutex.RUnlock()
+		return v, nil
+	}
+	s.mutex.RUnlock()
+
+	return nil, fmt.Errorf("自建应用：corpid不存在：%s", corpId)
+}
+
+// 自建应用：移除授权企业
+func (s *sdk) RemoveSelfAuthCorp(corpId string) {
+	apiClient, err := s.GetSelfAuthCorpApiClient(corpId)
+	if err != nil {
+		return
+	}
+
+	apiClient.RemoveToken()
+
+	s.mutex.Lock()
+	defer s.mutex.Unlock()
+	delete(s.SelfAuthCorpsClient, corpId)
 }
 
 // 第三方小程序：设置第三方小程序回调token和加密key (如果要处理微信回调, 这一步是必须的)

@@ -4,15 +4,16 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
-	"github.com/PuerkitoBio/goquery"
-	"github.com/miku/zek"
-	"github.com/zsmhub/workweixin/callbacks"
 	"html/template"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"regexp"
 	"strings"
+
+	"github.com/PuerkitoBio/goquery"
+	"github.com/lovego/workweixin/callbacks"
+	"github.com/miku/zek"
 )
 
 // 生成企微回调事件代码

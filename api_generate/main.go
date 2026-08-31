@@ -4,17 +4,19 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
-	"github.com/ChimeraCoder/gojson"
-	"github.com/PuerkitoBio/goquery"
-	"github.com/iancoleman/strcase"
-	"github.com/pkg/errors"
 	"io/ioutil"
 	"net/http"
 	"net/url"
 	"os"
+	"os/exec"
 	"regexp"
 	"strings"
 	"text/template"
+
+	"github.com/ChimeraCoder/gojson"
+	"github.com/PuerkitoBio/goquery"
+	"github.com/iancoleman/strcase"
+	"github.com/pkg/errors"
 )
 
 // 生成企微api代码
@@ -95,7 +97,7 @@ func main() {
 	}
 	fmt.Printf("开始抓取和生成API代码，文档地址:%s，代码保存路径:%s\n", docURL, savePath)
 
-	rawHtml, err := doc.Find(".frame_cntHtml").Html()
+	rawHtml, err := doc.Find(".ep-layout-cnt").Html()
 	if err != nil {
 		die("failed to get html: %+v\n", err)
 	}
@@ -297,6 +299,10 @@ func main() {
 	err = ioutil.WriteFile(savePath, result, os.ModePerm)
 	if err != nil {
 		die("ioutil.WriteFile failed: %+v\n", err)
+	}
+	err = exec.Command("gofmt", "-w", savePath).Run()
+	if err != nil {
+		die("exec gofmt failed: %+v\n", err)
 	}
 	fmt.Printf("保存文件成功:%s\n", savePath)
 }

@@ -2,10 +2,11 @@ package demo
 
 import (
 	"fmt"
-	"github.com/labstack/echo/v4"
-	"github.com/zsmhub/workweixin"
-	"github.com/zsmhub/workweixin/callbacks"
 	"time"
+
+	"github.com/labstack/echo/v4"
+	"github.com/lovego/workweixin"
+	"github.com/lovego/workweixin/callbacks"
 )
 
 // 企微回调事件示例

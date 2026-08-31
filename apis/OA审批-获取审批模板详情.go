@@ -27,8 +27,8 @@ func (x ReqGetTemplateDetail) intoBody() ([]byte, error) {
 // RespGetTemplateDetail 获取审批模板详情
 // 文档：https://developer.work.weixin.qq.com/document/path/92631#获取审批模板详情
 type Property struct { // 模板控件属性，包含了模板内控件的各种属性信息
-	Control string `json:"control"` // 控件类型：Text-文本；Textarea-多行文本；Number-数字；Money-金额；Date-日期/日期+时间；Selector-单选/多选；Contact-成员/部门；Tips-说明文字；File-附件；Table-明细；Attendance-假勤控件；Vacation-请假控件
-	Id      string `json:"id"`      // 控件id
+	Control string     `json:"control"` // 控件类型：Text-文本；Textarea-多行文本；Number-数字；Money-金额；Date-日期/日期+时间；Selector-单选/多选；Contact-成员/部门；Tips-说明文字；File-附件；Table-明细；Attendance-假勤控件；Vacation-请假控件
+	Id      string     `json:"id"`      // 控件id
 	Title   []struct { // 控件名称，若配置了多语言则会包含中英文的控件名称，默认为zh_CN中文
 		Text string `json:"text"`
 		Lang string `json:"lang"`

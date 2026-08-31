@@ -20,6 +20,7 @@ const (
 	Provider      = "provider"       // 第三方服务商
 	ThirdApp      = "third_app"      // 第三方应用
 	CustomizedApp = "customized_app" // 自建应用代开发
+	SelfApp       = "self_app"       // 自建应用
 )
 
 // 分布式app_suite_ticket：获取和设置suite_ticket的值，自行实现该接口的具体逻辑，比如使用redis方案【企微服务器每十分钟推送一次suite_ticket】
@@ -50,7 +51,8 @@ type ApiClient struct {
 	dcsSuiteTicketCacheKey string            // suite_ticket 缓存key，企微每十分钟更新一次
 	dcsAppSuiteTicket      DcsAppSuiteTicket // 分布式app_suite_ticket
 
-	ThirdAppClient *ApiClient // 第三方应用client，用于授权企业API客户端获取suite_access_token，目前用于第三方应用获取企业凭证接口
+	ThirdAppClient *ApiClient       // 第三方应用client，用于授权企业API客户端获取suite_access_token，目前用于第三方应用获取企业凭证接口
+	FasthttpClient *fasthttp.Client // 支持当前Client调用企业微信接口的自定义fasthttp.Client
 
 	logger Logger
 }
@@ -200,6 +202,31 @@ func NewCustomizedAuthCorpApiClient(corpId, companyPermanentCode string, AgentId
 	return &c
 }
 
+// 自建应用API客户端初始化
+func NewSelfApiClient(corpId string, agentId int, secret string, opts Options) *ApiClient {
+	accessTokenName := "access_token"
+	c := ApiClient{
+		CorpId:             corpId,
+		CorpProviderSecret: secret,
+		AgentId:            agentId,
+		accessTokenName:    accessTokenName,
+		accessToken: &token{
+			mutex:         &sync.RWMutex{},
+			dcsToken:      opts.DcsToken,
+			tokenCacheKey: fmt.Sprintf("%s#%s#%s#%d", SelfApp, accessTokenName, corpId, agentId),
+		},
+		logger: opts.Logger,
+	}
+
+	if c.logger == nil {
+		c.logger = loggerPrint{}
+	}
+
+	c.accessToken.setGetTokenFunc(c.getCorpToken)
+
+	return &c
+}
+
 func (c *ApiClient) composeWXApiURL(path string, req interface{}) *url.URL {
 	values := url.Values{}
 	if valuer, ok := req.(urlValuer); ok {
@@ -248,7 +275,7 @@ func (c *ApiClient) executeWXApiGet(path string, req urlValuer, objResp interfac
 	httpReq.SetRequestURI(urlStr)
 	httpReq.Header.SetMethod(http.MethodGet)
 
-	if err := FastClient.DoTimeout(httpReq, httpResp, HttpTTL); err != nil {
+	if err := c.fasthttpClient().DoTimeout(httpReq, httpResp, HttpTTL); err != nil {
 		return err
 	}
 
@@ -294,7 +321,7 @@ func (c *ApiClient) executeWXApiPost(path string, req bodyer, objResp interface{
 	httpReq.SetBody(reqBody)
 	httpReq.Header.SetMethod(http.MethodPost)
 
-	if err := FastClient.DoTimeout(httpReq, httpResp, HttpTTL); err != nil {
+	if err := c.fasthttpClient().DoTimeout(httpReq, httpResp, HttpTTL); err != nil {
 		return err
 	}
 
@@ -357,7 +384,7 @@ func (c *ApiClient) executeWXApiMediaUpload(path string, req mediaUploader, objR
 	httpReq.SetBody(bodyBufer.Bytes())
 	httpReq.Header.SetMethod(http.MethodPost)
 
-	if err := FastClient.DoTimeout(httpReq, httpResp, HttpTTL); err != nil {
+	if err := c.fasthttpClient().DoTimeout(httpReq, httpResp, HttpTTL); err != nil {
 		return err
 	}
 
@@ -381,4 +408,11 @@ func (c *ApiClient) executeWXApiMediaUpload(path string, req mediaUploader, objR
 	}()
 
 	return json.Unmarshal(respBody, &objResp)
+}
+
+func (c *ApiClient) fasthttpClient() *fasthttp.Client {
+	if c.FasthttpClient != nil {
+		return c.FasthttpClient
+	}
+	return FastClient
 }

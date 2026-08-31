@@ -1,9 +1,10 @@
 package demo
 
 import (
-    "fmt"
-    "github.com/zsmhub/workweixin"
-    "github.com/zsmhub/workweixin/apis"
+	"fmt"
+
+	"github.com/lovego/workweixin"
+	"github.com/lovego/workweixin/apis"
 )
 
 // 调用企微sdk示例
@@ -28,11 +29,11 @@ func ApiMain() {
 func initApiHandler() error {
 	// 初始化企微sdk参数
 	workweixin.Sdk.InitOptions(apis.Options{
-		DcsToken:                     DcsTokenByRedis{},
-		DcsAppSuiteTicket:            DcsAppSuiteTicketByRedis{},
+		DcsToken:          DcsTokenByRedis{},
+		DcsAppSuiteTicket: DcsAppSuiteTicketByRedis{},
 		// GetThirdAppAuthCorpFunc:      GetThirdAppAuthCorpToSdk,
 		// GetCustomizedAppAuthCorpFunc: GetCustomizedAppAuthCorpToSdk,
-		Logger:                       Logger{},
+		Logger: Logger{},
 	})
 
 	// 服务商API客户端初始化

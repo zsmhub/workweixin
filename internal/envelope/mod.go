@@ -4,12 +4,13 @@ import (
 	"crypto/rand"
 	"encoding/xml"
 	"errors"
-	"github.com/zsmhub/workweixin/internal/encryptor"
-	"github.com/zsmhub/workweixin/internal/signature"
 	"io"
 	"math/big"
 	"net/url"
 	"strconv"
+
+	"github.com/lovego/workweixin/internal/encryptor"
+	"github.com/lovego/workweixin/internal/signature"
 )
 
 type Processor struct {

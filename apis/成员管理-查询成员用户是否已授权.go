@@ -10,7 +10,7 @@ import (
 // ReqCheckMemberAuthUser 查询成员用户是否已授权请求
 // 文档：https://developer.work.weixin.qq.com/document/path/94514#查询成员用户是否已授权
 type ReqCheckMemberAuthUser struct {
-	// OpenUserid  
+	// OpenUserid
 	OpenUserid string `json:"open_userid,omitempty"`
 }
 

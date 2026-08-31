@@ -1,10 +1,11 @@
 package apis
 
 import (
-	"github.com/valyala/fasthttp"
 	"log"
 	"net"
 	"time"
+
+	"github.com/valyala/fasthttp"
 )
 
 // DefaultQYAPIHost 默认企业微信 API Host
@@ -14,10 +15,10 @@ const HttpTTL = 1 * time.Minute
 
 var FastClient = CreateFastHttpClient()
 
-func CreateFastHttpClient() fasthttp.Client {
+func CreateFastHttpClient() *fasthttp.Client {
 	var defaultDialer = &fasthttp.TCPDialer{Concurrency: 300}
 
-	return fasthttp.Client{
+	return &fasthttp.Client{
 		Dial: func(addr string) (net.Conn, error) {
 			idx := 3 // 重试三次
 			for {

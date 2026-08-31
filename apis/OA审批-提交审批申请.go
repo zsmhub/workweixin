@@ -12,7 +12,7 @@ type DateValue struct { // 日期/日期+时间控件（control参数为Date）
 	STimestamp string `json:"s_timestamp"` // 时间戳-字符串类型，在此填写日期/日期+时间控件的选择值，以此为准
 }
 type SelectorValue struct { // 单选/多选控件（control参数为Selector）
-	Type    string `json:"type"` // 选择方式：single-单选；multi-多选
+	Type    string     `json:"type"` // 选择方式：single-单选；multi-多选
 	Options []struct { // 多选选项，多选属性的选择控件允许输入多个
 		Key string `json:"key"` // 选项key，可通过“获取审批模板详情”接口获得
 	} `json:"options"`
@@ -43,9 +43,9 @@ type TableValueList struct { // 子明细列表，在此填写子明细的所有
 }
 type VacationValue struct { // 假勤组件-请假组件（control参数为Vacation）
 	Selector struct { // 请假类型，所选选项与假期管理关联，为假期管理中的假期类型
-		Type    string `json:"type"` // 选择方式：single-单选；multi-多选，在假勤控件中固定为单选
+		Type    string     `json:"type"` // 选择方式：single-单选；multi-多选，在假勤控件中固定为单选
 		Options []struct { // 用户所选选项
-			Key   string `json:"key"` // 选项key，选项的唯一id，可通过“获取审批模板详情”接口获得vacation_list中item的id值
+			Key   string     `json:"key"` // 选项key，选项的唯一id，可通过“获取审批模板详情”接口获得vacation_list中item的id值
 			Value []struct { // 选项值，若配置了多语言则会包含中英文的选项值
 				Text string `json:"text"`
 				Lang string `json:"lang"`

@@ -7,8 +7,9 @@ import (
 	"encoding/base64"
 	"encoding/binary"
 	"errors"
-	"github.com/zsmhub/workweixin/internal/encryptor/pkcs7"
 	"io"
+
+	"github.com/lovego/workweixin/internal/encryptor/pkcs7"
 )
 
 type WorkWXPayload struct {
